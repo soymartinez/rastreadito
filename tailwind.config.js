@@ -10,6 +10,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        _primary: '#00E99E',
+        _primaryLight: '#DDFCF2',
+        _white: '#FFFFFF',
+        _dark: '#1B1B1B',
+        _darkText: '#333333',
+        _gray: '#F0F0F0',
+        _grayText: '#8D8D8D',
+        _grayTextLight: '#B3B3B3',
+        _grayTextDisabled: '#E0E0E0',
+        _grayBorder: '#C5C5C5',
+      },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
