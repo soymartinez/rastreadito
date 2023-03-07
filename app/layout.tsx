@@ -1,4 +1,11 @@
 import './globals.css'
+import { Poppins as Font } from 'next/font/google'
+
+const font = Font({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-sans',
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body className={`${font.variable} font-sans`}>{children}</body>
     </html>
   )
 }
