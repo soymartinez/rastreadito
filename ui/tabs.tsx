@@ -43,8 +43,7 @@ const TabsContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Content
         className={clsx(
-            'mt-9',
-            className
+            className,
         )}
         {...props}
         ref={ref}
