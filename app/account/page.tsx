@@ -40,7 +40,7 @@ export default function Account() {
                     <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
                 </button>
             </div>
-            <Button className='w-16 absolute right-4 bottom-8'>
+            <Button className='w-16 fixed right-4 bottom-8'>
                 <Save />
             </Button>
         </div>
