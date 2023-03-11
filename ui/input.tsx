@@ -8,6 +8,7 @@ import { Label } from './label'
 interface InputPropsExtended {
     icon?: 'email',
     labelText?: string,
+    variant?: 'normal' | 'porcentage',
 }
 
 export interface IconProps
@@ -27,7 +28,7 @@ const Icons = React.forwardRef<HTMLDivElement, IconProps>(
 )
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, labelText, icon, ...props }, ref) => {
+    ({ className, variant = 'normal', labelText, icon, ...props }, ref) => {
         const id = React.useId()
         return (
             <div
@@ -38,25 +39,47 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ref={ref}
                 {...props}
             >
-                {icon &&
-                    <>
-                        <Icons icon={icon} className={'text-_dark mx-2'} />
-                        <div className='bg-_primary w-px h-10 rounded-full' />
-                    </>
-                }
-                <div className='flex flex-col w-full'>
-                    <Label htmlFor={`input-${id}`} className='text-_primary text-xs'>{labelText}</Label>
-                    <input
-                        id={`input-${id}`}
-                        className={clsx(
-                            'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-                            className
-                        )}
-                        autoComplete='off'
-                        ref={ref}
-                        {...props}
-                    />
-                </div>
+                {variant === 'normal' && <>
+                    {icon &&
+                        <>
+                            <Icons icon={icon} className={'text-_dark mx-2'} />
+                            <div className='bg-_primary w-px h-10 rounded-full' />
+                        </>
+                    }
+                    <div className='flex flex-col w-full'>
+                        <Label htmlFor={`input-${id}`} className='text-_primary text-xs'>{labelText}</Label>
+                        <input
+                            id={`input-${id}`}
+                            className={clsx(
+                                'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                                className
+                            )}
+                            autoComplete='off'
+                            ref={ref}
+                            {...props}
+                        />
+                    </div>
+                </>}
+                {variant === 'porcentage' &&
+                    <div className='flex items-center gap-2 w-full'>
+                        <Label htmlFor={`input-${id}`} className='text-_darkText text-[17px] font-semibold'>{labelText}</Label>
+                        <div className='flex items-center justify-end gap-2 w-full'>
+                            <input
+                                id={`input-${id}`}
+                                className={clsx(
+                                    'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                                    className
+                                )}
+                                type='number'
+                                step={0.1}
+                                min={0.0}
+                                autoComplete='off'
+                                ref={ref}
+                                {...props}
+                            />
+                            <span className='text-_primary text-lg font-medium'>%</span>
+                        </div>
+                    </div>}
             </div>
         )
     }
