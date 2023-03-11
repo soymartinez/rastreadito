@@ -9,3 +9,12 @@ body {
   box-sizing: border-box;
   color: #1B1B1B;
 }
+
+@layer base {
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
