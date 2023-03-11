@@ -7,10 +7,6 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 import clsx from 'clsx'
 import { Label } from './label'
 
-interface SelectProps {
-    labelText: string,
-}
-
 const Select = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
