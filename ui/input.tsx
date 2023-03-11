@@ -32,7 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         return (
             <div
                 className={clsx(
-                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-_dark dark:text-_dark dark:focus:ring-_primary dark:focus:ring-offset-_primary',
+                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
                     className
                 )}
                 ref={ref}
@@ -52,6 +52,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                             'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                             className
                         )}
+                        autoComplete='off'
                         ref={ref}
                         {...props}
                     />
