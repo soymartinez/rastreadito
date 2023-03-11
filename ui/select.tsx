@@ -17,10 +17,14 @@ const SelectGroup = SelectPrimitive.Group
 
 const SelectValue = SelectPrimitive.Value
 
+interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
+    labelText?: string,
+}
+
 const SelectTrigger = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Trigger>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+    SelectTriggerProps
+>(({ labelText, className, children, ...props }, ref) => (
     <SelectPrimitive.Trigger
         ref={ref}
         className={clsx(
@@ -29,8 +33,8 @@ const SelectTrigger = React.forwardRef<
         )}
         {...props}
     >
-        <div className='flex flex-col w-full'>
-            {/* <Label className='text-_primary text-xs'>{labelText}</Label> */}
+        <div className='flex flex-col items-start w-full'>
+            <Label className='text-_primary text-xs'>{labelText}</Label>
             {children}
         </div>
         <ChevronsUpDown className='h-4 w-4' />
@@ -46,7 +50,7 @@ const SelectContent = React.forwardRef<
         <SelectPrimitive.Content
             ref={ref}
             className={clsx(
-                'animate-in fade-in-80 relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white text-slate-700 shadow-md dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400',
+                'animate-in fade-in-80 relative z-50 min-w-[8rem] overflow-hidden rounded-2xl border border-slate-100 bg-white text-_darkText shadow-md',
                 className
             )}
             {...props}
