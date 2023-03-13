@@ -1,6 +1,12 @@
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Iniciar sesión | QR',
+    description: 'Iniciar sesión para etiquetar productos cannábicos.',
+}
 
 export default function Auth() {
     return (
