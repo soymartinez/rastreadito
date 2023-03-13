@@ -7,7 +7,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/ui/dropdown-menu'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+    title: 'BeeHealthy | QR',
+    description: 'BeeHealthy es una marca de productos cannábicos que busca ofrecer una experiencia de consumo saludable y segura.',
+}
 
 export default function Account() {
     return (
