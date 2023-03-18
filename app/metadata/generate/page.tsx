@@ -4,6 +4,7 @@ import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
 import { QrCode } from 'lucide-react'
 import React, { useState } from 'react'
+import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
 
 import Modal from '@/components/modal'
@@ -34,7 +35,9 @@ export default function Generate() {
             {modal && (
                 <Modal onClose={() => setModal(false)}>
                     <div className='flex flex-col items-center py-16 px-2'>
-                        <div className='w-20 h-20 bg-[#00DB94] rounded-lg'></div>
+                        <div className='w-20 h-20 bg-[#00DB94] rounded-lg flex justify-center items-center object-contain'>
+                            <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
+                        </div>
                         <div className='flex flex-col justify-center items-center w-full text-_darkText font-medium pt-8 pb-10'>
                             <h1 className='font-semibold text-4xl text-center'>Purple Kush</h1>
                             <Balancer className='text-center'>
