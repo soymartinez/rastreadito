@@ -14,13 +14,13 @@ export default function ScannedProduct() {
     const steps = [
         <Balancer className='space-y-3 text-center'>
             <h1 className='text-_dark font-bold text-4xl uppercase'>CART 96% Mango</h1>
-            <p className='font-semibold text-base'>
+            <p className='font-semibold text-base max-w-2xl'>
                 Destilado del 96% total cannabinoides con terpeno orgánico
             </p>
         </Balancer>,
         <Balancer className='space-y-3 text-center'>
             <h1 className='text-_dark font-bold text-4xl uppercase'>Dulce y Tropical</h1>
-            <p className='font-semibold text-base'>
+            <p className='font-semibold text-base max-w-2xl'>
                 El sabor dulce y tropical del mango se combina con el relajante efecto de la Kush
                 en este cartucho de vapeo de alta potencia. Perfecto para una experiencia de vapeo premium.
             </p>
