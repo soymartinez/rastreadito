@@ -34,11 +34,11 @@ export default function Scan() {
                     </Balancer>
                     <div className='flex flex-col items-center gap-4'>
                         <SwitchCamera className='text-_white cursor-pointer' size={28} onClick={handleSelect} />
-                        <Balancer ratio={0} className='text-_grayTextLight font-bold text-lg truncate'>
-                            <a href={data} target='_blank' rel='noreferrer' className='hover:underline decoration-_primary'>
+                        <a href={data} target='_blank' rel='noreferrer' className='hover:underline decoration-_primary'>
+                            <Balancer ratio={0} className='text-_grayTextLight font-bold text-lg truncate'>
                                 {data}
-                            </a>
-                        </Balancer>
+                            </Balancer>
+                        </a>
                     </div>
                 </div>
                 <QrReader
