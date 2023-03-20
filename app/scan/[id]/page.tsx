@@ -52,11 +52,12 @@ export default function ScannedProduct() {
                     <button onClick={() => goStep(2)} className={clsx('h-2 hover:opacity-80 rounded-full', { 'bg-_primary w-1/2': step === 2, 'w-1/4 bg-_grayBorder': step !== 2 })} />
                 </div>
 
-                <button
-                    onClick={() => setStep(2)}
-                    className='font-semibold text-sm underline underline-offset-2 hover:opacity-80'>
-                    Omitir
-                </button>
+                {step !== 2 &&
+                    <button
+                        onClick={() => setStep(2)}
+                        className='font-semibold text-sm underline underline-offset-2 hover:opacity-80'>
+                        Omitir
+                    </button>}
             </div>
         </main>
     )
