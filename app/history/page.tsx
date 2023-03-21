@@ -5,6 +5,61 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Check, Tag, X } from 'lucide-react'
 
 export default function History() {
+    const data = [
+        {
+            id: 1,
+            invoice: '#cart 86',
+            client: 'Bee',
+            date: '12/12/2021',
+            status: 'active',
+        },
+        {
+            id: 2,
+            invoice: '#flower 67',
+            client: 'Bee',
+            date: '12/12/2021',
+            status: 'destroy',
+        },
+        {
+            id: 3,
+            invoice: '#oil 12',
+            client: 'Bee',
+            date: '12/12/2021',
+            status: 'active',
+        },
+        {
+            id: 4,
+            invoice: '#cart 86',
+            client: 'Bee',
+            date: '12/12/2021',
+            status: 'active',
+        },
+        {
+            id: 5,
+            invoice: '#flower 67',
+            client: 'Bee',
+            date: '12/12/2021',
+            status: 'use',
+        },
+    ]
+
+    const activeButton = () => (
+        <div className='bg-_primary/[15%] text-_primary flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
+            <Check size={18} /> Activo
+        </div>
+    )
+
+    const useButton = () => (
+        <div className='bg-[#00d0ff]/[15%] text-[#00d0ff] flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
+            <Tag size={18} /> Uso
+        </div>
+    )
+
+    const destroyButton = () => (
+        <div className='bg-_darkText/[15%] text-_darkText flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
+            <X size={18} /> Destruído
+        </div>
+    )
     return (
         <div className='px-4 min-h-screen relative'>
             <div className='flex justify-center items-center py-8 relative'>
@@ -44,51 +99,30 @@ export default function History() {
                                 </tr>
                             </thead>
                             <tbody className='text-_grayText text-base overflow-hidden'>
-                                <tr className='bg-_white hover:bg-_gray/50 overflow-x-auto'>
-                                    <td className='px-3 py-2'>
-                                        <div className='flex items-center justify-center'>
-                                            <input type='checkbox' name='data-1' id='data-1' className='w-4 h-4 m-auto accent-_primary rounded-full' />
-                                        </div>
-                                    </td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>#cart 86 </td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap'>Bee</td>
-                                    <td className='px-3 py-2 font-semibold'>12/12/2021</td>
-                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                        <div className='bg-_primary/[15%] text-_primary flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-                                            <Check size={18} /> Activo
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr className='bg-_white hover:bg-_gray/50'>
-                                    <td className='px-3 py-2'>
-                                        <div className='flex items-center justify-center'>
-                                            <input type='checkbox' name='data-2' id='data-2' className='w-4 h-4 m-auto accent-_primary rounded-full' />
-                                        </div>
-                                    </td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>#flower 67</td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap'>Bee</td>
-                                    <td className='px-3 py-2 font-semibold'>12/12/2021</td>
-                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                        <div className='bg-_darkText/[15%] text-_darkText flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-                                            <X size={18} /> Destruído
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr className='bg-_white hover:bg-_gray/50'>
-                                    <td className='px-3 py-2'>
-                                        <div className='flex items-center justify-center'>
-                                            <input type='checkbox' name='data-3' id='data-3' className='w-4 h-4 m-auto accent-_primary rounded-full' />
-                                        </div>
-                                    </td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>#oil 12</td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap'>Bee</td>
-                                    <td className='px-3 py-2 font-semibold'>12/12/2021</td>
-                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                        <div className='bg-[#00d0ff]/[15%] text-[#00d0ff] flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-                                            <Tag size={18} /> Uso
-                                        </div>
-                                    </td>
-                                </tr>
+                                {data.map((item) => (
+                                    <tr
+                                        key={item.id}
+                                        className='bg-_white hover:bg-_gray/50 overflow-x-auto'
+                                    >
+                                        <td className='px-3 py-2'>
+                                            <div className='flex items-center justify-center'>
+                                                <input
+                                                    type='checkbox'
+                                                    name={`${item.id}`}
+                                                    id={`${item.id}`}
+                                                    className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                            </div>
+                                        </td>
+                                        <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>{item.invoice}</td>
+                                        <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
+                                        <td className='px-3 py-2 font-semibold'>{item.date}</td>
+                                        <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
+                                            {item.status === 'active' && activeButton()}
+                                            {item.status === 'use' && useButton()}
+                                            {item.status === 'destroy' && destroyButton()}
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </TabsContent>
