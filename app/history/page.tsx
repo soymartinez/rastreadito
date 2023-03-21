@@ -32,8 +32,10 @@ export default function History() {
                         <table className='table-auto text-xs w-full border-separate border-spacing-0 mt-6'>
                             <thead className='text-_grayText uppercase sticky top-0 z-30'>
                                 <tr className='text-left'>
-                                    <th className='px-3 py-2 font-medium'>
-                                        <input type='checkbox' name='select-all' id='select-all' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                    <th className='px-3 py-2'>
+                                        <div className='flex items-center justify-center'>
+                                            <input type='checkbox' name='select-all' id='select-all' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                        </div>
                                     </th>
                                     <th className='px-3 py-2 font-medium'>Factura</th>
                                     <th className='px-3 py-2 font-medium'>Cliente</th>
@@ -44,7 +46,9 @@ export default function History() {
                             <tbody className='text-_grayText text-base overflow-hidden'>
                                 <tr className='bg-_white hover:bg-_gray/50 overflow-x-auto'>
                                     <td className='px-3 py-2'>
-                                        <input type='checkbox' name='data-1' id='data-1' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                        <div className='flex items-center justify-center'>
+                                            <input type='checkbox' name='data-1' id='data-1' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                        </div>
                                     </td>
                                     <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>#cart 86 </td>
                                     <td className='px-3 py-2 font-semibold whitespace-nowrap'>Bee</td>
@@ -57,7 +61,9 @@ export default function History() {
                                 </tr>
                                 <tr className='bg-_white hover:bg-_gray/50'>
                                     <td className='px-3 py-2'>
-                                        <input type='checkbox' name='data-2' id='data-2' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                        <div className='flex items-center justify-center'>
+                                            <input type='checkbox' name='data-2' id='data-2' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                        </div>
                                     </td>
                                     <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>#flower 67</td>
                                     <td className='px-3 py-2 font-semibold whitespace-nowrap'>Bee</td>
