@@ -12,7 +12,7 @@ export default function History() {
                 <h1 className='font-bold text-xl'>Historial</h1>
             </div>
             <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
-            <div className='flex flex-col gap-4 font-semibold text-lg mt-4'>
+            <div className='flex flex-col gap-4 font-semibold text-lg py-4'>
                 <Tabs defaultValue='all' className='w-full'>
                     <TabsList className='w-fulll p-0 bg-inherit shadow-none'>
                         <TabsTrigger
@@ -28,8 +28,8 @@ export default function History() {
                             Fecha
                         </TabsTrigger>
                     </TabsList>
-                    <TabsContent value='all' className='overflow-hidden'>
-                        <table className='table-auto text-xs w-full border-separate border-spacing-0 py-6'>
+                    <TabsContent value='all' className='overflow-auto w-full'>
+                        <table className='table-auto text-xs w-full border-separate border-spacing-0 mt-6'>
                             <thead className='text-_grayText uppercase sticky top-0 z-30'>
                                 <tr className='text-left'>
                                     <th className='px-3 py-2 font-medium'>
