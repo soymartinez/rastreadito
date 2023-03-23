@@ -10,7 +10,9 @@ export default function Home() {
           <div className='w-11 h-11 border-2 border-_gray rounded-full flex items-center justify-center'>
             <Bell />
           </div>
-          <div className='w-11 h-11 border-2 border-_gray bg-_primary rounded-full' />
+          <Link href={'/account'}>
+            <div className='w-11 h-11 border-2 border-_gray bg-_primary rounded-full' />
+          </Link>
         </div>
       </div>
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
