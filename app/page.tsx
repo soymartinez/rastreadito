@@ -1,7 +1,19 @@
-import { Bell, LayoutGrid, Package, PackageOpen, QrCode } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
+import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
+import Card from '@/components/card'
 
 export default function Home() {
+  const [layoutGrid, setLayoutGrid] = useState<'layout-list' | 'layout-grid'>('layout-list')
+  const handleLayoutGrid = () => {
+    layoutGrid === 'layout-list'
+      ? setLayoutGrid('layout-grid')
+      : setLayoutGrid('layout-list')
+  }
+
   return (
     <main className='px-4 min-h-screen relative'>
       <div className='flex justify-between items-center py-6 relative'>
@@ -31,41 +43,44 @@ export default function Home() {
       <section>
         <div className='flex justify-between items-center pt-6 pb-3'>
           <h1 className='font-semibold text-xl'>General</h1>
-          <button className='p-2 border-2 border-_gray rounded-full'>
-            <LayoutGrid />
+          <button onClick={handleLayoutGrid}
+            className='p-2 border-2 border-_gray rounded-full'>
+            {layoutGrid === 'layout-list'
+              ? <LayoutGrid />
+              : <LayoutList />}
           </button>
         </div>
-        <div className='grid gap-3'>
-          <div className='grid grid-flow-col-dense auto-cols-auto mx-auto gap-4 justify-start items-center bg-_dark p-4 rounded-2xl'>
-            <QrCode size={56} className='text-_primary' />
-            <div>
-              <h1 className='text-xl font-semibold text-_white'>Activo</h1>
-              <p className='text-xs font-medium text-_grayText'>
-                El código aún no ha sido escaneado y utilizado para su propósito previsto.
-              </p>
-            </div>
-            <h1 className='text-5xl font-semibold text-_white'>86</h1>
-          </div>
-          <div className='grid grid-flow-col-dense auto-cols-auto mx-auto gap-4 justify-start items-center bg-_dark p-4 rounded-2xl'>
-            <Package size={56} className='text-_primary' />
-            <div>
-              <h1 className='text-xl font-semibold text-_white'>Uso</h1>
-              <p className='text-xs font-medium text-_grayText'>
-                El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.
-              </p>
-            </div>
-            <h1 className='text-5xl font-semibold text-_white'>62</h1>
-          </div>
-          <div className='grid grid-flow-col-dense auto-cols-auto mx-auto gap-4 justify-start items-center bg-_dark p-4 rounded-2xl'>
-            <PackageOpen size={56} className='text-_primary' />
-            <div>
-              <h1 className='text-xl font-semibold text-_white'>Destruido</h1>
-              <p className='text-xs font-medium text-_grayText'>
-                Un ticket destruido no puede ser utilizado y su estado indica que ha sido anulado.
-              </p>
-            </div>
-            <h1 className='text-5xl font-semibold text-_white'>24</h1>
-          </div>
+        <div className={clsx('grid gap-3', {
+          'grid-cols-1': layoutGrid === 'layout-list',
+          'grid-cols-2': layoutGrid === 'layout-grid',
+        })}>
+          <Card
+            layoutGrid={layoutGrid}
+            props={{
+              title: 'Activo',
+              description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
+              number: 86,
+              icon: 'active',
+            }}
+          />
+          <Card
+            layoutGrid={layoutGrid}
+            props={{
+              title: 'Uso',
+              description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
+              number: 62,
+              icon: 'use',
+            }}
+          />
+          <Card
+            layoutGrid={layoutGrid}
+            props={{
+              title: 'Destruido',
+              description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
+              number: 24,
+              icon: 'destroy',
+            }}
+          />
         </div>
       </section>
     </main>
