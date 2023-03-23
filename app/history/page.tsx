@@ -1,6 +1,4 @@
 import { Back } from '@/ui/back'
-import { Button } from '@/ui/button'
-import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Check, Tag, X } from 'lucide-react'
 
@@ -127,12 +125,7 @@ export default function History() {
                         </table>
                     </TabsContent>
                     <TabsContent value='date'>
-                        <form className='grid gap-4 mt-8'>
-                            <Input placeholder='bee' labelText='Nombre' autoComplete='off' required />
-                            <Input placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
-                            <Input placeholder='••••••••' type={'password'} labelText='Contraseña' required />
-                            <Button>Continuar</Button>
-                        </form>
+                        
                     </TabsContent>
                 </Tabs>
             </div>
