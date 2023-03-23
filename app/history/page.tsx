@@ -41,19 +41,19 @@ export default function History() {
         },
     ]
 
-    const activeButton = () => (
+    const ActiveButton = () => (
         <div className='bg-_primary/[15%] text-_primary flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <Check size={18} /> Activo
         </div>
     )
 
-    const useButton = () => (
+    const UseButton = () => (
         <div className='bg-[#00d0ff]/[15%] text-[#00d0ff] flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <Tag size={18} /> Uso
         </div>
     )
 
-    const destroyButton = () => (
+    const DestroyButton = () => (
         <div className='bg-_darkText/[15%] text-_darkText flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <X size={18} /> Destruído
         </div>
@@ -115,9 +115,9 @@ export default function History() {
                                         <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
                                         <td className='px-3 py-2 font-semibold'>{item.date}</td>
                                         <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                            {item.status === 'active' && activeButton()}
-                                            {item.status === 'use' && useButton()}
-                                            {item.status === 'destroy' && destroyButton()}
+                                            {item.status === 'active' && <ActiveButton />}
+                                            {item.status === 'use' && <UseButton />}
+                                            {item.status === 'destroy' && <DestroyButton />}
                                         </td>
                                     </tr>
                                 ))}
