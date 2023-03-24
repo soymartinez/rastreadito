@@ -29,9 +29,9 @@ export default function Account() {
                     <Mode />
                 </div>
                 <div className='h-px rounded-full bg-_grayTextDisabled' />
-                <button className='flex items-center gap-3 self-end hover:text-_darkText/80'>
+                <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
                     <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
-                </button>
+                </Button>
             </div>
             <Button className='w-16 fixed right-4 bottom-8'>
                 <Save />
