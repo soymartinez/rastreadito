@@ -36,7 +36,7 @@ export default function Home() {
           <div className='flex gap-2 w-min'>
             <TabsTrigger
               value='general'
-              className={`w-28 h-12 px-0 py-0
+              className={`w-28 h-12
             flex justify-center items-center transition-all
             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
@@ -45,7 +45,7 @@ export default function Home() {
             </TabsTrigger>
             <TabsTrigger
               value='categories'
-              className={`w-28 h-12 px-0 py-0
+              className={`w-28 h-12
             flex justify-center items-center transition-all
             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
@@ -53,7 +53,7 @@ export default function Home() {
               Categoría
             </TabsTrigger>
             <Link href={'/history'}>
-              <div className={`w-28 h-12 px-0 py-0
+              <div className={`w-28 h-12
             flex justify-center items-center transition-all
             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
               >
