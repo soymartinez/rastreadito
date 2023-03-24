@@ -7,6 +7,7 @@ import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
 import Card from '@/components/card'
 import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { TabsTrigger } from '@radix-ui/react-tabs'
+import Image from 'next/image'
 
 export default function Home() {
   const [layoutGrid, setLayoutGrid] = useState<'layout-list' | 'layout-grid'>('layout-list')
@@ -116,20 +117,25 @@ export default function Home() {
             'grid-cols-1': layoutGrid === 'layout-list',
             'grid-cols-2': layoutGrid === 'layout-grid',
           })}>
-            <div className='bg-_dark p-4 rounded-2xl flex flex-col justify-center items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
               <h1 className='text-xl font-semibold text-_white'>Goteo</h1>
+              <Image src={'/categories/dropper.png'} alt={'dropper'} width={44} height={44} />
             </div>
-            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
               <h1 className='text-xl font-semibold text-_white'>Ungüento</h1>
+              <Image src={'/categories/bottle.png'} alt={'bottle'} width={44} height={44} />
             </div>
-            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
               <h1 className='text-xl font-semibold text-_white'>Edible</h1>
+              <Image src={'/categories/mortar.png'} alt={'mortar'} width={44} height={44} />
             </div>
-            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
               <h1 className='text-xl font-semibold text-_white'>Cartucho</h1>
+              <Image src={'/categories/cart.png'} alt={'cart'} width={44} height={44} />
             </div>
-            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
               <h1 className='text-xl font-semibold text-_white'>Aceite</h1>
+              <Image src={'/categories/blood-drop.png'} alt={'blood-drop'} width={44} height={44} />
             </div>
           </div>
         </TabsContent>
