@@ -1,12 +1,7 @@
+import Mode from '@/components/mode'
 import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
-import { Sun, Moon, Laptop, LogOut, Save } from 'lucide-react'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/ui/dropdown-menu'
+import { LogOut, Save } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -31,14 +26,7 @@ export default function Account() {
                 <div className='h-px rounded-full bg-_grayTextDisabled' />
                 <div className='flex justify-between'>
                     <span>Tema</span>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger className='text-_darkText focus:outline-none'>Sistema</DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuItem className='flex gap-3'><Sun size={18} /> Claro</DropdownMenuItem>
-                            <DropdownMenuItem className='flex gap-3'><Moon size={18} /> Oscuro</DropdownMenuItem>
-                            <DropdownMenuItem className='flex gap-3'><Laptop size={18} /> Sistema</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <Mode />
                 </div>
                 <div className='h-px rounded-full bg-_grayTextDisabled' />
                 <button className='flex items-center gap-3 self-end hover:text-_darkText/80'>
