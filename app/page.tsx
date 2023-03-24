@@ -5,6 +5,8 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
 import Card from '@/components/card'
+import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
+import { TabsTrigger } from '@radix-ui/react-tabs'
 
 export default function Home() {
   const [layoutGrid, setLayoutGrid] = useState<'layout-list' | 'layout-grid'>('layout-list')
@@ -28,61 +30,110 @@ export default function Home() {
         </div>
       </div>
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
-      <div className='py-2 flex gap-2 w-full overflow-x-auto'>
-        <Link href={'/'}>
-          <div className='w-28 h-12 flex justify-center items-center bg-_dark text-_white font-medium rounded-full'>
+      <Tabs defaultValue='general'>
+        <TabsList className='py-2 px-0 gap-2 flex justify-start items-center w-min overflow-x-auto bg-_white'>
+          <TabsTrigger
+            value='general'
+            className={`w-28 h-12 px-0 py-0
+            flex justify-center items-center transition-all
+            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+          >
             Inicio
+          </TabsTrigger>
+          <TabsTrigger
+            value='categories'
+            className={`w-28 h-12 px-0 py-0
+            flex justify-center items-center transition-all
+            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+          >
+            Categoría
+          </TabsTrigger>
+          <Link href={'/history'}>
+            <div className={`w-28 h-12 px-0 py-0
+            flex justify-center items-center transition-all
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+            >
+              Historial
+            </div>
+          </Link>
+        </TabsList>
+        <TabsContent value='general'>
+          <div className='flex justify-between items-center pt-6 pb-3'>
+            <h1 className='font-semibold text-xl'>General</h1>
+            <button onClick={handleLayoutGrid}
+              className='p-2 border-2 border-_gray rounded-full'>
+              {layoutGrid === 'layout-list'
+                ? <LayoutGrid />
+                : <LayoutList />}
+            </button>
           </div>
-        </Link>
-        <Link href={'/history'}>
-          <div className='w-28 h-12 flex justify-center items-center hover:bg-_dark hover:text-_white hover:border-none border-2 border-_gray font-medium rounded-full'>
-            Historial
+          <div className={clsx('grid gap-3', {
+            'grid-cols-1': layoutGrid === 'layout-list',
+            'grid-cols-2': layoutGrid === 'layout-grid',
+          })}>
+            <Card
+              layoutGrid={layoutGrid}
+              props={{
+                title: 'Activo',
+                description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
+                number: 86,
+                icon: 'active',
+              }}
+            />
+            <Card
+              layoutGrid={layoutGrid}
+              props={{
+                title: 'Uso',
+                description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
+                number: 62,
+                icon: 'use',
+              }}
+            />
+            <Card
+              layoutGrid={layoutGrid}
+              props={{
+                title: 'Destruido',
+                description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
+                number: 24,
+                icon: 'destroy',
+              }}
+            />
           </div>
-        </Link>
-      </div>
-      <section>
-        <div className='flex justify-between items-center pt-6 pb-3'>
-          <h1 className='font-semibold text-xl'>General</h1>
-          <button onClick={handleLayoutGrid}
-            className='p-2 border-2 border-_gray rounded-full'>
-            {layoutGrid === 'layout-list'
-              ? <LayoutGrid />
-              : <LayoutList />}
-          </button>
-        </div>
-        <div className={clsx('grid gap-3', {
-          'grid-cols-1': layoutGrid === 'layout-list',
-          'grid-cols-2': layoutGrid === 'layout-grid',
-        })}>
-          <Card
-            layoutGrid={layoutGrid}
-            props={{
-              title: 'Activo',
-              description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
-              number: 86,
-              icon: 'active',
-            }}
-          />
-          <Card
-            layoutGrid={layoutGrid}
-            props={{
-              title: 'Uso',
-              description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
-              number: 62,
-              icon: 'use',
-            }}
-          />
-          <Card
-            layoutGrid={layoutGrid}
-            props={{
-              title: 'Destruido',
-              description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
-              number: 24,
-              icon: 'destroy',
-            }}
-          />
-        </div>
-      </section>
-    </main>
+        </TabsContent>
+        <TabsContent value='categories'>
+          <div className='flex justify-between items-center pt-6 pb-3'>
+            <h1 className='font-semibold text-xl'>Categoria</h1>
+            <button onClick={handleLayoutGrid}
+              className='p-2 border-2 border-_gray rounded-full'>
+              {layoutGrid === 'layout-list'
+                ? <LayoutGrid />
+                : <LayoutList />}
+            </button>
+          </div>
+          <div className={clsx('grid gap-3', {
+            'grid-cols-1': layoutGrid === 'layout-list',
+            'grid-cols-2': layoutGrid === 'layout-grid',
+          })}>
+            <div className='bg-_dark p-4 rounded-2xl flex flex-col justify-center items-center'>
+              <h1 className='text-xl font-semibold text-_white'>Goteo</h1>
+            </div>
+            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+              <h1 className='text-xl font-semibold text-_white'>Ungüento</h1>
+            </div>
+            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+              <h1 className='text-xl font-semibold text-_white'>Edible</h1>
+            </div>
+            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+              <h1 className='text-xl font-semibold text-_white'>Cartucho</h1>
+            </div>
+            <div className='bg-_dark p-4 rounded-2xl flex justify-center items-center'>
+              <h1 className='text-xl font-semibold text-_white'>Aceite</h1>
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </main >
   )
 }
