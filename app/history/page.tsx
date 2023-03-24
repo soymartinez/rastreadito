@@ -1,6 +1,4 @@
 import { Back } from '@/ui/back'
-import { Button } from '@/ui/button'
-import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Check, Tag, X } from 'lucide-react'
 
@@ -43,19 +41,19 @@ export default function History() {
         },
     ]
 
-    const activeButton = () => (
+    const ActiveButton = () => (
         <div className='bg-_primary/[15%] text-_primary flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <Check size={18} /> Activo
         </div>
     )
 
-    const useButton = () => (
+    const UseButton = () => (
         <div className='bg-[#00d0ff]/[15%] text-[#00d0ff] flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <Tag size={18} /> Uso
         </div>
     )
 
-    const destroyButton = () => (
+    const DestroyButton = () => (
         <div className='bg-_darkText/[15%] text-_darkText flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <X size={18} /> Destruído
         </div>
@@ -117,9 +115,9 @@ export default function History() {
                                         <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
                                         <td className='px-3 py-2 font-semibold'>{item.date}</td>
                                         <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                            {item.status === 'active' && activeButton()}
-                                            {item.status === 'use' && useButton()}
-                                            {item.status === 'destroy' && destroyButton()}
+                                            {item.status === 'active' && <ActiveButton />}
+                                            {item.status === 'use' && <UseButton />}
+                                            {item.status === 'destroy' && <DestroyButton />}
                                         </td>
                                     </tr>
                                 ))}
@@ -127,12 +125,7 @@ export default function History() {
                         </table>
                     </TabsContent>
                     <TabsContent value='date'>
-                        <form className='grid gap-4 mt-8'>
-                            <Input placeholder='bee' labelText='Nombre' autoComplete='off' required />
-                            <Input placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
-                            <Input placeholder='••••••••' type={'password'} labelText='Contraseña' required />
-                            <Button>Continuar</Button>
-                        </form>
+                        
                     </TabsContent>
                 </Tabs>
             </div>
