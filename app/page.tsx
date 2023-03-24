@@ -5,8 +5,8 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
 import Card from '@/components/card'
-import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
-import { TabsTrigger } from '@radix-ui/react-tabs'
+import { Tabs, TabsContent } from '@/ui/tabs'
+import { TabsList, TabsTrigger } from '@radix-ui/react-tabs'
 import Image from 'next/image'
 
 export default function Home() {
@@ -32,33 +32,35 @@ export default function Home() {
       </div>
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
       <Tabs defaultValue='general'>
-        <TabsList className='py-2 px-0 gap-2 flex justify-start items-center w-min overflow-x-auto bg-_white'>
-          <TabsTrigger
-            value='general'
-            className={`w-28 h-12 px-0 py-0
+        <TabsList className='py-2 bg-_white overflow-x-auto'>
+          <div className='flex gap-2 w-min'>
+            <TabsTrigger
+              value='general'
+              className={`w-28 h-12 px-0 py-0
             flex justify-center items-center transition-all
             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
-          >
-            Inicio
-          </TabsTrigger>
-          <TabsTrigger
-            value='categories'
-            className={`w-28 h-12 px-0 py-0
-            flex justify-center items-center transition-all
-            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
-          >
-            Categoría
-          </TabsTrigger>
-          <Link href={'/history'}>
-            <div className={`w-28 h-12 px-0 py-0
-            flex justify-center items-center transition-all
             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
             >
-              Historial
-            </div>
-          </Link>
+              Inicio
+            </TabsTrigger>
+            <TabsTrigger
+              value='categories'
+              className={`w-28 h-12 px-0 py-0
+            flex justify-center items-center transition-all
+            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+            >
+              Categoría
+            </TabsTrigger>
+            <Link href={'/history'}>
+              <div className={`w-28 h-12 px-0 py-0
+            flex justify-center items-center transition-all
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+              >
+                Historial
+              </div>
+            </Link>
+          </div>
         </TabsList>
         <TabsContent value='general'>
           <div className='flex justify-between items-center pt-6 pb-3'>
