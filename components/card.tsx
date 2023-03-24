@@ -13,7 +13,7 @@ export default function Card({ props, layoutGrid }: {
     layoutGrid: 'layout-list' | 'layout-grid',
 }) {
     return (
-        <div className={clsx('grid mx-auto gap-4 justify-start items-center bg-_dark p-4 rounded-2xl', {
+        <div className={clsx('grid mx-auto gap-4 justify-start items-center bg-_dark hover:bg-_dark/95 transition-all cursor-pointer p-4 rounded-2xl', {
             'grid-flow-col': layoutGrid === 'layout-list',
             'grid-cols-2': layoutGrid === 'layout-grid',
         })}>
