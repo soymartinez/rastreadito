@@ -22,11 +22,11 @@ export default function Home() {
       <div className='flex justify-between items-center py-6 relative'>
         <h1 className='font-black text-2xl uppercase italic'>weedtrace</h1>
         <div className='flex gap-2'>
-          <div className='w-11 h-11 border-2 border-_gray rounded-full flex items-center justify-center'>
+          <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText rounded-full flex items-center justify-center'>
             <Bell />
           </div>
           <Link href={'/account'}>
-            <div className='w-11 h-11 border-2 border-_gray bg-_primary rounded-full' />
+            <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText bg-_primary rounded-full' />
           </Link>
         </div>
       </div>
