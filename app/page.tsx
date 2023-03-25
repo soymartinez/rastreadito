@@ -32,14 +32,16 @@ export default function Home() {
       </div>
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
       <Tabs defaultValue='general'>
-        <TabsList className='py-2 bg-_white overflow-x-auto'>
+        <TabsList className='py-2 overflow-x-auto'>
           <div className='flex gap-2 w-min'>
             <TabsTrigger
               value='general'
               className={`w-28 h-12
             flex justify-center items-center transition-all
             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+            dark:data-[state=active]:bg-_white dark:data-[state=active]:text-_dark 
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
+            dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
             >
               Inicio
             </TabsTrigger>
@@ -48,14 +50,17 @@ export default function Home() {
               className={`w-28 h-12
             flex justify-center items-center transition-all
             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+            dark:data-[state=active]:bg-_white dark:data-[state=active]:text-_dark 
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
+            dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
             >
               Categoría
             </TabsTrigger>
             <Link href={'/history'}>
               <div className={`w-28 h-12
             flex justify-center items-center transition-all
-            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full`}
+            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
+            dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
               >
                 Historial
               </div>
@@ -66,7 +71,7 @@ export default function Home() {
           <div className='flex justify-between items-center pt-6 pb-3'>
             <h1 className='font-semibold text-xl'>General</h1>
             <button onClick={handleLayoutGrid}
-              className='p-2 border-2 border-_gray rounded-full'>
+              className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
               {layoutGrid === 'layout-list'
                 ? <LayoutGrid />
                 : <LayoutList />}
@@ -109,7 +114,7 @@ export default function Home() {
           <div className='flex justify-between items-center pt-6 pb-3'>
             <h1 className='font-semibold text-xl'>Categoria</h1>
             <button onClick={handleLayoutGrid}
-              className='p-2 border-2 border-_gray rounded-full'>
+              className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
               {layoutGrid === 'layout-list'
                 ? <LayoutGrid />
                 : <LayoutList />}
@@ -119,23 +124,23 @@ export default function Home() {
             'grid-cols-1': layoutGrid === 'layout-list',
             'grid-cols-2': layoutGrid === 'layout-grid',
           })}>
-            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
               <h1 className='text-xl font-semibold text-_white'>Goteo</h1>
               <Image src={'/categories/dropper.png'} alt={'dropper'} width={44} height={44} />
             </div>
-            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
               <h1 className='text-xl font-semibold text-_white'>Ungüento</h1>
               <Image src={'/categories/bottle.png'} alt={'bottle'} width={44} height={44} />
             </div>
-            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
               <h1 className='text-xl font-semibold text-_white'>Edible</h1>
               <Image src={'/categories/mortar.png'} alt={'mortar'} width={44} height={44} />
             </div>
-            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
               <h1 className='text-xl font-semibold text-_white'>Cartucho</h1>
               <Image src={'/categories/cart.png'} alt={'cart'} width={44} height={44} />
             </div>
-            <div className='bg-_dark hover:bg-_dark/95 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center'>
+            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
               <h1 className='text-xl font-semibold text-_white'>Aceite</h1>
               <Image src={'/categories/blood-drop.png'} alt={'blood-drop'} width={44} height={44} />
             </div>
