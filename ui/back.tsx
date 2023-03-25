@@ -11,7 +11,7 @@ const Back = React.forwardRef<SVGSVGElement, LucideProps>(
         const router = useRouter()
         return <ChevronLeft
             ref={ref}
-            className={clsx('text-_dark mx-3 cursor-pointer', className)}
+            className={clsx('text-_dark dark:text-_white mx-3 cursor-pointer', className)}
             size={32}
             strokeWidth={3}
             onClick={() => router.back()}
