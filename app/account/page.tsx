@@ -21,14 +21,14 @@ export default function Account() {
                 <span>Organización</span>
                 <div className='flex justify-between'>
                     <span>Posición</span>
-                    <span className='text-_darkText'>Usuario</span>
+                    <span className='text-_darkText dark:text-_primary'>Usuario</span>
                 </div>
-                <div className='h-px rounded-full bg-_grayTextDisabled' />
+                <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
                 <div className='flex justify-between'>
                     <span>Tema</span>
                     <Mode />
                 </div>
-                <div className='h-px rounded-full bg-_grayTextDisabled' />
+                <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
                 <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
                     <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
                 </Button>
