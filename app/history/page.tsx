@@ -54,7 +54,7 @@ export default function History() {
     )
 
     const DestroyButton = () => (
-        <div className='bg-_darkText/[15%] text-_darkText flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
+        <div className='bg-_darkText/[15%] text-_darkText dark:bg-_darkText dark:text-_white/70 flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
             <X size={18} /> Destruído
         </div>
     )
@@ -104,14 +104,14 @@ export default function History() {
                                 <th className='px-3 py-2 font-medium'>Factura</th>
                                 <th className='px-3 py-2 font-medium'>Cliente</th>
                                 <th className='px-3 py-2 font-medium'>Fecha</th>
-                                <th className='px-3 py-2 font-medium sticky right-0 bg-_white border-l-4 border-_gray'>Estado</th>
+                                <th className='px-3 py-2 font-medium sticky right-0 bg-_white dark:bg-_dark border-l-4 border-_gray dark:border-_darkText'>Estado</th>
                             </tr>
                         </thead>
                         <tbody className='text-_grayText text-base overflow-hidden'>
                             {data.map((item) => (
                                 <tr
                                     key={item.id}
-                                    className='bg-_white hover:bg-_gray/50 overflow-x-auto'
+                                    className='bg-_white hover:bg-_gray/50 dark:bg-_dark overflow-x-auto'
                                 >
                                     <td className='px-3 py-2'>
                                         <div className='flex items-center justify-center'>
@@ -122,10 +122,10 @@ export default function History() {
                                                 className='w-4 h-4 m-auto accent-_primary rounded-full' />
                                         </div>
                                     </td>
-                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>{item.invoice}</td>
+                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark dark:text-_white uppercase'>{item.invoice}</td>
                                     <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
                                     <td className='px-3 py-2 font-semibold'>{item.date}</td>
-                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
+                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
                                         {item.status === 'active' && <ActiveButton />}
                                         {item.status === 'use' && <UseButton />}
                                         {item.status === 'destroy' && <DestroyButton />}
