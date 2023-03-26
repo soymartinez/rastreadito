@@ -33,7 +33,7 @@ export default function Home() {
       </div>
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
       <Tabs defaultValue='general'>
-        <TabsList className='py-2 overflow-x-auto'>
+        <TabsList className='flex py-2 overflow-x-auto'>
           <div className='flex gap-2 w-min'>
             <TabsTrigger
               value='general'
