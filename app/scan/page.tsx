@@ -1,5 +1,6 @@
 'use client'
 
+import { Back } from '@/ui/back'
 import { SwitchCamera } from 'lucide-react'
 import { useState } from 'react'
 import { QrReader } from 'react-qr-reader'
@@ -20,7 +21,13 @@ export default function Scan() {
 
     return (
         <>
-            <main className='overflow-hidden h-screen relative'>
+            <main className='px-4 overflow-hidden h-screen relative'>
+                <div className='absolute inset-x-4'>
+                    <div className='flex justify-center items-center py-8 relative'>
+                        <Back className='absolute left-0' />
+                        <h1 className='font-bold text-xl'>Escanear</h1>
+                    </div>
+                </div>
                 <div id='clip-path' className='absolute inset-0 -z-20 bg-_dark/50 backdrop-blur-sm' />
                 <div className='absolute inset-0 -z-10 flex items-center justify-center'>
                     <div className='border-corner relative w-60 h-60'>
