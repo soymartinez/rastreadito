@@ -63,11 +63,11 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
                 dragElastic={0.8}
                 onDragEnd={handleDragEnd}
             >
-                <div className='w-24 h-[10px] bg-_white rounded-full mx-auto my-2' />
+                <div className='w-24 h-[10px] bg-_white dark:bg-_darkText rounded-full mx-auto my-2' />
                 <motion.div
                     ref={constraintsRef}
                     style={{ height: 'calc(100% - 26px)' }}
-                    className='bg-_white rounded-t-[50px] overflow-hidden relative'>
+                    className='bg-_white dark:bg-_darkText rounded-t-[50px] overflow-hidden relative'>
                     <motion.div
                         className='absolute inset-x-0 rounded-t-[50px]'
                         drag='y'
