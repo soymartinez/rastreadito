@@ -71,7 +71,7 @@ export default function Scan() {
                     }}
                     constraints={{
                         facingMode: {
-                            ideal: selected,
+                            exact: selected,
                         }
                     }}
                 />
