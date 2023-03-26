@@ -8,7 +8,7 @@ import Balancer from 'react-wrap-balancer'
 
 export default function Scan() {
     const [data, setData] = useState('')
-    const [selected, setSelected] = useState('environment')
+    const [selected, setSelected] = useState('user')
 
     const handleSelect = () => {
         if (selected === 'environment') {
