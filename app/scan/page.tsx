@@ -1,22 +1,12 @@
 'use client'
 
 import { Back } from '@/ui/back'
-import { SwitchCamera } from 'lucide-react'
 import { useState } from 'react'
 import { QrReader } from 'react-qr-reader'
 import Balancer from 'react-wrap-balancer'
 
 export default function Scan() {
     const [data, setData] = useState('')
-    const [selected, setSelected] = useState('user')
-
-    const handleSelect = () => {
-        if (selected === 'environment') {
-            setSelected('user')
-        } else {
-            setSelected('environment')
-        }
-    }
 
     const corner = {
         start: 'calc((100% - 230px) / 2)',
@@ -44,7 +34,6 @@ export default function Scan() {
                         <p className='text-_grayTextLight text font-medium'>Encuéntralo en la parte inferior de tu producto</p>
                     </Balancer>
                     <div className='flex flex-col items-center gap-4'>
-                        <SwitchCamera className='text-_white cursor-pointer' size={28} onClick={handleSelect} />
                         <a href={data} target='_blank' rel='noreferrer' className='hover:underline decoration-_primary'>
                             <Balancer ratio={0} className='text-_grayTextLight font-bold text-lg truncate'>
                                 {data}
@@ -74,7 +63,7 @@ export default function Scan() {
                         objectFit: 'cover',
                     }}
                     constraints={{
-                        facingMode: selected,
+                        facingMode: 'environment',
                     }}
                 />
 
