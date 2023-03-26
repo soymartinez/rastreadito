@@ -14,7 +14,7 @@ const TabsList = React.forwardRef<
     <TabsPrimitive.List
         ref={ref}
         className={clsx(
-            'inline-flex items-center justify-center rounded-2xl bg-_primary p-1 dark:bg-transparent',
+            'inline-flex items-center justify-center rounded-2xl',
             className
         )}
         {...props}
@@ -28,7 +28,7 @@ const TabsTrigger = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Trigger
         className={clsx(
-            'inline-flex min-w-[100px] items-center justify-center rounded-[14px] px-3 py-3 text-base font-semibold text-_dark/50 transition-all disabled:pointer-events-none disabled:opacity-50',
+            'inline-flex min-w-[100px] items-center justify-center rounded-[14px] px-3 py-3 text-base text-_dark transition-all disabled:pointer-events-none disabled:opacity-50',
             className
         )}
         {...props}
