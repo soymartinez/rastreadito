@@ -19,13 +19,13 @@ export default function Generate() {
                     <h1 className='font-bold text-xl'>QR generado</h1>
                 </div>
                 <div className='flex justify-center items-center mt-2'>
-                    <Balancer className='font-semibold text-xl'>
+                    <Balancer className='font-semibold text-xl text-_darkText dark:text-_grayText'>
                         Ahora puedes asignar el identificador al producto
                     </Balancer>
                 </div>
                 <div className='flex flex-col justify-center items-center py-40 h-full'>
-                    <h3 className='font-semibold text-4xl text-_darkText'>Orden</h3>
-                    <h1 className='font-semibold text-[110px] text-_dark'>#89</h1>
+                    <h3 className='font-semibold text-4xl text-_darkText dark:text-_grayText'>Orden</h3>
+                    <h1 className='font-semibold text-[110px] text-_dark dark:text-_primary'>#89</h1>
                 </div>
                 <Button onClick={() => setModal(true)} className='w-16 fixed right-4 bottom-8'>
                     <QrCode />
@@ -38,16 +38,16 @@ export default function Generate() {
                         <div className='w-20 h-20 bg-[#00DB94] rounded-lg flex justify-center items-center object-contain'>
                             <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
                         </div>
-                        <div className='flex flex-col justify-center items-center w-full text-_darkText font-medium pt-8 pb-10'>
+                        <div className='flex flex-col justify-center items-center w-full text-_darkText dark:text-_white font-medium pt-8 pb-10'>
                             <h1 className='font-semibold text-4xl text-center'>Purple Kush</h1>
-                            <Balancer className='text-center'>
+                            <Balancer className='text-center dark:text-_grayText'>
                                 Una cepa híbrida de cannabis, conocida por su aroma a tierra y sus efectos relajantes.
                                 <p>
                                     Fecha: <span className='font-semibold'>03/03/2023</span>
                                 </p>
                             </Balancer>
                         </div>
-                        <QrCode size={250} />
+                        <QrCode className='text-_dark dark:text-_primary' size={250} />
                     </div>
                 </Modal>
             )}
