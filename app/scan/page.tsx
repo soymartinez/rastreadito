@@ -70,7 +70,9 @@ export default function Scan() {
                         objectFit: 'cover',
                     }}
                     constraints={{
-                        facingMode: selected,
+                        facingMode: {
+                            ideal: selected,
+                        }
                     }}
                 />
 
