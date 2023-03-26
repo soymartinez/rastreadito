@@ -42,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 {variant === 'normal' && <>
                     {icon &&
                         <>
-                            <Icons icon={icon} className={'text-_dark mx-2'} />
+                            <Icons icon={icon} className={'text-_dark dark:text-_white mx-2'} />
                             <div className='bg-_primary w-px h-10 rounded-full' />
                         </>
                     }
@@ -62,7 +62,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 </>}
                 {variant === 'porcentage' &&
                     <div className='flex items-center gap-2 w-full'>
-                        <Label htmlFor={`input-${id}`} className='text-_darkText text-[17px] font-semibold'>{labelText}</Label>
+                        <Label htmlFor={`input-${id}`} className='text-_darkText dark:text-_white text-[17px] font-semibold'>{labelText}</Label>
                         <div className='flex items-center justify-end gap-2 w-full'>
                             <input
                                 id={`input-${id}`}
