@@ -5,8 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
 import Card from '@/components/card'
-import { Tabs, TabsContent } from '@/ui/tabs'
-import { TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import Image from 'next/image'
 
 export default function Home() {
