@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { Bell, LayoutGrid, LayoutList } from 'lucide-react'
+import { LayoutGrid, LayoutList, Scan } from 'lucide-react'
 import Card from '@/components/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import Image from 'next/image'
@@ -21,10 +21,12 @@ export default function Home() {
       <div className='flex justify-between items-center py-6 relative'>
         <h1 className='font-black text-2xl uppercase italic'>weedtrace</h1>
         <div className='flex gap-2'>
-          <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText rounded-full flex items-center justify-center'>
-            <Bell />
-          </div>
-          <Link href={'/account'}>
+          <Link href={'/scan'} className='rounded-full'>
+            <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText rounded-full flex items-center justify-center'>
+              <Scan />
+            </div>
+          </Link>
+          <Link href={'/account'} className='rounded-full'>
             <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText bg-_primary rounded-full' />
           </Link>
         </div>
