@@ -20,7 +20,7 @@ export default function Auth() {
                     <h1 className='text-3xl leading-normal font-semibold text-center'>Crear una cuenta</h1>
                     <h3 className='text-_grayText font-semibold text-center'>Por favor ingrese sus datos</h3>
                 </TabsContent>
-                <TabsList className='w-full mt-7 bg-_primary p-1'>
+                <TabsList className='inline-flex w-full mt-7 bg-_primary p-1'>
                     <TabsTrigger
                         value='login'
                         className='w-full data-[state=active]:bg-_white dark:data-[state=active]:bg-_dark font-semibold data-[state=active]:text-_dark dark:data-[state=active]:text-_white text-_dark/50 dark:text-_dark/70'>
