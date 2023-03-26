@@ -14,7 +14,7 @@ const TabsList = React.forwardRef<
     <TabsPrimitive.List
         ref={ref}
         className={clsx(
-            'inline-flex items-center justify-center rounded-2xl',
+            'rounded-2xl',
             className
         )}
         {...props}
