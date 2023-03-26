@@ -65,70 +65,80 @@ export default function History() {
                 <h1 className='font-bold text-xl'>Historial</h1>
             </div>
             <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
-            <div className='flex flex-col gap-4 font-semibold text-lg py-4'>
-                <Tabs defaultValue='all' className='w-full'>
-                    <TabsList className='w-fulll p-0 bg-inherit shadow-none'>
+            <Tabs defaultValue='all'>
+                <TabsList className='py-2 overflow-x-auto'>
+                    <div className='flex gap-2 w-min'>
                         <TabsTrigger
                             value='all'
-                            className='w-full whitespace-nowrap data-[state=active]:shadow-none data-[state=active]:border-_dark border-b-2 border-transparent rounded-none'
+                            className={`w-28 h-12
+                                flex justify-center items-center transition-all
+                                data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
+                                dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
+                                bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
+                                dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
                         >
                             Ver todo
                         </TabsTrigger>
                         <TabsTrigger
                             value='date'
-                            className='w-full whitespace-nowrap data-[state=active]:shadow-none data-[state=active]:border-_dark border-b-2 border-transparent rounded-none'
+                            className={`w-28 h-12
+                                flex justify-center items-center transition-all
+                                data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
+                                dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
+                                bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
+                                dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
                         >
                             Fecha
                         </TabsTrigger>
-                    </TabsList>
-                    <TabsContent value='all' className='overflow-auto w-full'>
-                        <table className='table-auto text-xs w-full border-separate border-spacing-0 mt-6'>
-                            <thead className='text-_grayText uppercase sticky top-0 z-30'>
-                                <tr className='text-left'>
-                                    <th className='px-3 py-2'>
+                    </div>
+                </TabsList>
+                <TabsContent value='all' className='overflow-auto w-full'>
+                    <table className='table-auto text-xs w-full border-separate border-spacing-0 mt-6'>
+                        <thead className='text-_grayText uppercase sticky top-0 z-30'>
+                            <tr className='text-left'>
+                                <th className='px-3 py-2'>
+                                    <div className='flex items-center justify-center'>
+                                        <input type='checkbox' name='select-all' id='select-all' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                    </div>
+                                </th>
+                                <th className='px-3 py-2 font-medium'>Factura</th>
+                                <th className='px-3 py-2 font-medium'>Cliente</th>
+                                <th className='px-3 py-2 font-medium'>Fecha</th>
+                                <th className='px-3 py-2 font-medium sticky right-0 bg-_white border-l-4 border-_gray'>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody className='text-_grayText text-base overflow-hidden'>
+                            {data.map((item) => (
+                                <tr
+                                    key={item.id}
+                                    className='bg-_white hover:bg-_gray/50 overflow-x-auto'
+                                >
+                                    <td className='px-3 py-2'>
                                         <div className='flex items-center justify-center'>
-                                            <input type='checkbox' name='select-all' id='select-all' className='w-4 h-4 m-auto accent-_primary rounded-full' />
+                                            <input
+                                                type='checkbox'
+                                                name={`${item.id}`}
+                                                id={`${item.id}`}
+                                                className='w-4 h-4 m-auto accent-_primary rounded-full' />
                                         </div>
-                                    </th>
-                                    <th className='px-3 py-2 font-medium'>Factura</th>
-                                    <th className='px-3 py-2 font-medium'>Cliente</th>
-                                    <th className='px-3 py-2 font-medium'>Fecha</th>
-                                    <th className='px-3 py-2 font-medium sticky right-0 bg-_white border-l-4 border-_gray'>Estado</th>
+                                    </td>
+                                    <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>{item.invoice}</td>
+                                    <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
+                                    <td className='px-3 py-2 font-semibold'>{item.date}</td>
+                                    <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
+                                        {item.status === 'active' && <ActiveButton />}
+                                        {item.status === 'use' && <UseButton />}
+                                        {item.status === 'destroy' && <DestroyButton />}
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody className='text-_grayText text-base overflow-hidden'>
-                                {data.map((item) => (
-                                    <tr
-                                        key={item.id}
-                                        className='bg-_white hover:bg-_gray/50 overflow-x-auto'
-                                    >
-                                        <td className='px-3 py-2'>
-                                            <div className='flex items-center justify-center'>
-                                                <input
-                                                    type='checkbox'
-                                                    name={`${item.id}`}
-                                                    id={`${item.id}`}
-                                                    className='w-4 h-4 m-auto accent-_primary rounded-full' />
-                                            </div>
-                                        </td>
-                                        <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark uppercase'>{item.invoice}</td>
-                                        <td className='px-3 py-2 font-semibold whitespace-nowrap'>{item.client}</td>
-                                        <td className='px-3 py-2 font-semibold'>{item.date}</td>
-                                        <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray'>
-                                            {item.status === 'active' && <ActiveButton />}
-                                            {item.status === 'use' && <UseButton />}
-                                            {item.status === 'destroy' && <DestroyButton />}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </TabsContent>
-                    <TabsContent value='date'>
-                        
-                    </TabsContent>
-                </Tabs>
-            </div>
+                            ))}
+                        </tbody>
+                    </table>
+                </TabsContent>
+                <TabsContent value='date'>
+
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }
