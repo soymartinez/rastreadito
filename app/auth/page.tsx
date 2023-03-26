@@ -13,16 +13,24 @@ export default function Auth() {
         <section className='flex items-center justify-center min-h-screen px-2 py-16'>
             <Tabs defaultValue='login' className='w-full max-w-md'>
                 <TabsContent value='login'>
-                    <h1 className='text-_dark text-3xl leading-normal font-semibold text-center'>Bienvenido</h1>
+                    <h1 className='text-3xl leading-normal font-semibold text-center'>Bienvenido</h1>
                     <h3 className='text-_grayText font-semibold text-center'>Por favor ingrese sus datos</h3>
                 </TabsContent>
                 <TabsContent value='signup'>
-                    <h1 className='text-_dark text-3xl leading-normal font-semibold text-center'>Crear una cuenta</h1>
+                    <h1 className='text-3xl leading-normal font-semibold text-center'>Crear una cuenta</h1>
                     <h3 className='text-_grayText font-semibold text-center'>Por favor ingrese sus datos</h3>
                 </TabsContent>
-                <TabsList className='w-full mt-7'>
-                    <TabsTrigger value='login' className='w-full'>Iniciar sesión</TabsTrigger>
-                    <TabsTrigger value='signup' className='w-full'>Registrarse</TabsTrigger>
+                <TabsList className='w-full mt-7 bg-_primary p-1'>
+                    <TabsTrigger
+                        value='login'
+                        className='w-full data-[state=active]:bg-_white dark:data-[state=active]:bg-_dark font-semibold data-[state=active]:text-_dark dark:data-[state=active]:text-_white text-_dark/50 dark:text-_dark/70'>
+                        Iniciar sesión
+                    </TabsTrigger>
+                    <TabsTrigger
+                        value='signup'
+                        className='w-full data-[state=active]:bg-_white dark:data-[state=active]:bg-_dark font-semibold data-[state=active]:text-_dark dark:data-[state=active]:text-_white text-_dark/50 dark:text-_dark/70'>
+                        Registrarse
+                    </TabsTrigger>
                 </TabsList>
                 <TabsContent value='login'>
                     <form className='grid gap-4 mt-10'>
@@ -45,7 +53,7 @@ export default function Auth() {
                         <div className='bg-_primary w-full h-px rounded-full' />
                     </div>
                     <div className='flex justify-center items-center gap-4'>
-                        <button className='flex justify-center items-center w-12 h-12 rounded-full bg-_gray'>
+                        <button className='flex justify-center items-center w-12 h-12 rounded-full bg-_gray hover:opacity-80 dark:hover:opacity-90 transition-all'>
                             <svg width={16} height={17} viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                 <mask id='mask0_42_69' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='17'>
                                     <path d='M15.9034 0H0V17H15.9034V0Z' fill='white' />
@@ -58,7 +66,7 @@ export default function Auth() {
                                 </g>
                             </svg>
                         </button>
-                        <button className='flex justify-center items-center w-12 h-12 rounded-full bg-_dark'>
+                        <button className='flex justify-center items-center w-12 h-12 rounded-full bg-_dark dark:bg-_darkText hover:opacity-95 dark:hover:opacity-80 transition-all'>
                             <svg width={16} height={18} viewBox='0 0 16 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                 <mask id='mask0_42_67' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='18'>
                                     <path d='M15.3335 0H0V18H15.3335V0Z' fill='white' />
