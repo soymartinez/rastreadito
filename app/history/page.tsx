@@ -59,7 +59,7 @@ export default function History() {
         </div>
     )
     return (
-        <div className='px-4 min-h-screen relative'>
+        <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Historial</h1>
