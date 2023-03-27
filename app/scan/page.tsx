@@ -53,6 +53,7 @@ export default function Scan() {
                     }}
                     className='absolute inset-0 -z-30'
                     videoContainerStyle={{
+                        padding: 0,
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
