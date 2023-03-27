@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { LayoutGrid, LayoutList } from 'lucide-react'
+import { LayoutGrid, LayoutList, QrCode } from 'lucide-react'
 import Card from '@/components/card'
 import Navbar from '@/components/navbar'
+import { Button } from '@/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import Image from 'next/image'
 
@@ -18,7 +19,7 @@ export default function Home() {
   }
 
   return (
-    <main className='px-4 min-h-screen relative'>
+    <main className='px-4 min-h-screen relative max-w-7xl mx-auto'>
       <Navbar />
       <h1 className='text-5xl font-bold leading-loose truncate'>BeeHealthy</h1>
       <Tabs defaultValue='general'>
@@ -137,6 +138,11 @@ export default function Home() {
           </div>
         </TabsContent>
       </Tabs>
+      <Link href={'/metadata'} className='rounded-2xl'>
+        <Button className='w-16 fixed xl:absolute right-4 bottom-8'>
+          <QrCode />
+        </Button>
+      </Link>
     </main >
   )
 }
