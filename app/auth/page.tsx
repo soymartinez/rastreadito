@@ -2,6 +2,7 @@ import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
     title: 'Iniciar sesión | QR',
@@ -35,7 +36,9 @@ export default function Auth() {
                 <TabsContent value='login'>
                     <form className='grid gap-4 mt-10'>
                         <Input placeholder='bee@example.com' type={'email'} icon={'email'} labelText='Correo electrónico' autoComplete='off' required />
-                        <Button>Continuar</Button>
+                        <Link href={'/'} className='rounded-2xl'>
+                            <Button className='w-full'>Continuar</Button>
+                        </Link>
                     </form>
                 </TabsContent>
                 <TabsContent value='signup'>
@@ -43,7 +46,9 @@ export default function Auth() {
                         <Input placeholder='bee' labelText='Nombre' autoComplete='off' required />
                         <Input placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
                         <Input placeholder='••••••••' type={'password'} labelText='Contraseña' required />
-                        <Button>Continuar</Button>
+                        <Link href={'/'} className='rounded-2xl'>
+                            <Button className='w-full'>Continuar</Button>
+                        </Link>
                     </form>
                 </TabsContent>
                 <section>
