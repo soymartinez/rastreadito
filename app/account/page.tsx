@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Account() {
     return (
-        <div className='px-4 min-h-screen relative'>
+        <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Perfil</h1>
@@ -36,7 +36,7 @@ export default function Account() {
                     </Button>
                 </Link>
             </div>
-            <Button className='w-16 fixed right-4 bottom-8'>
+            <Button className='w-16 fixed xl:absolute right-4 bottom-8'>
                 <Save />
             </Button>
         </div>
