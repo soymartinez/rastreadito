@@ -18,7 +18,7 @@ export default function Scan() {
             <main className='px-4 overflow-hidden h-screen relative'>
                 <div className='absolute inset-x-4'>
                     <div className='flex justify-center items-center py-8 relative text-_white'>
-                        <Back className='absolute left-0' />
+                        <Back className='absolute left-0 text-_white' />
                         <h1 className='font-bold text-xl'>Escanear</h1>
                     </div>
                 </div>
