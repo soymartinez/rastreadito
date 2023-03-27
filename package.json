@@ -1,5 +1,6 @@
 {
-  "name": "trace",
+  "name": "rastreadito",
+  "description": "Rastreadito is a web application that allows you to track the origin and quality of your cannabis products.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
