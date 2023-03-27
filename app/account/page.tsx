@@ -3,6 +3,7 @@ import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
 import { LogOut, Save } from 'lucide-react'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
     title: 'BeeHealthy | QR',
@@ -29,9 +30,11 @@ export default function Account() {
                     <Mode />
                 </div>
                 <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
-                <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
-                    <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
-                </Button>
+                <Link href={'/auth'} className='self-end rounded-2xl'>
+                    <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
+                        <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
+                    </Button>
+                </Link>
             </div>
             <Button className='w-16 fixed right-4 bottom-8'>
                 <Save />
