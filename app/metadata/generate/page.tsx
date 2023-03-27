@@ -12,7 +12,7 @@ import Modal from '@/components/modal'
 export default function Generate() {
     const [modal, setModal] = useState(false)
     return (
-        <div className='min-h-screen relative'>
+        <main className='min-h-screen relative max-w-7xl mx-auto'>
             <div className='px-4 '>
                 <div className='flex justify-center items-center py-8 relative'>
                     <Back className='absolute left-0' />
@@ -27,7 +27,7 @@ export default function Generate() {
                     <h3 className='font-semibold text-4xl text-_darkText dark:text-_grayText'>Orden</h3>
                     <h1 className='font-semibold text-[110px] text-_dark dark:text-_primary'>#89</h1>
                 </div>
-                <Button onClick={() => setModal(true)} className='w-16 fixed right-4 bottom-8'>
+                <Button onClick={() => setModal(true)} className='w-16 fixed xl:absolute right-4 bottom-8'>
                     <QrCode />
                 </Button>
             </div>
@@ -51,6 +51,6 @@ export default function Generate() {
                     </div>
                 </Modal>
             )}
-        </div>
+        </main>
     )
 }
