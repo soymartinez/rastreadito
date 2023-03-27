@@ -1,5 +1,3 @@
-'use client'
-
 import { Back } from '@/ui/back'
 import { Input } from '@/ui/input'
 import { Textarea } from '@/ui/textarea'
@@ -13,7 +11,7 @@ import {
     SelectValue,
 } from '@/ui/select'
 import { Button } from '@/ui/button'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const productTypes = {
     flower: 'Flor de cannabis',
@@ -25,9 +23,8 @@ const productTypes = {
 }
 
 export default function Metadata() {
-    const { push } = useRouter()
     return (
-        <div className='px-4 min-h-screen relative'>
+        <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Metadata</h1>
@@ -68,9 +65,11 @@ export default function Metadata() {
                         <Input labelText='Efectos' placeholder='Relajante, calmante, eufórico' required />
                     </div>
                 </div>
-                <Button onClick={() => push('/metadata/generate')} className='w-16 fixed right-4 bottom-8'>
-                    <Save />
-                </Button>
+                <Link href={'/metadata/generate'} className='rounded-2xl'>
+                    <Button className='w-16 fixed xl:absolute right-4 bottom-8'>
+                        <Save />
+                    </Button>
+                </Link>
             </form>
         </div>
     )
