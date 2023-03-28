@@ -1,9 +1,15 @@
 'use client'
 
+import { Metadata } from 'next'
 import { Back } from '@/ui/back'
 import { useState } from 'react'
 import { QrReader } from 'react-qr-reader'
 import Balancer from 'react-wrap-balancer'
+
+export const metadata: Metadata = {
+    title: 'Escanear',
+    description: 'Puede escanear el código QR de su producto para obtener más información sobre él',
+}
 
 export default function Scan() {
     const [data, setData] = useState('')
