@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: 'BeeHealthy | QR',
+    title: 'BeeHealthy',
     description: 'BeeHealthy es una marca de productos cannábicos que busca ofrecer una experiencia de consumo saludable y segura.',
 }
 
