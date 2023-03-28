@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { LayoutGrid, LayoutList, QrCode } from 'lucide-react'
-import Card from '@/components/card'
+import { GeneralCard } from '@/components/card'
 import Navbar from '@/components/navbar'
 import { Button } from '@/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
@@ -72,7 +72,7 @@ export default function Home() {
             'grid-cols-1': layoutGrid === 'layout-list',
             'grid-cols-2': layoutGrid === 'layout-grid',
           })}>
-            <Card
+            <GeneralCard
               layoutGrid={layoutGrid}
               props={{
                 title: 'Activo',
@@ -81,7 +81,7 @@ export default function Home() {
                 icon: 'active',
               }}
             />
-            <Card
+            <GeneralCard
               layoutGrid={layoutGrid}
               props={{
                 title: 'Uso',
@@ -90,7 +90,7 @@ export default function Home() {
                 icon: 'use',
               }}
             />
-            <Card
+            <GeneralCard
               layoutGrid={layoutGrid}
               props={{
                 title: 'Destruido',
