@@ -18,18 +18,28 @@ export default function Account() {
                 <h1 className='font-bold text-xl'>Perfil</h1>
             </div>
             <h1 className='text-5xl font-bold leading-loose'>BeeHealthy</h1>
-            <div className='flex flex-col gap-4 font-semibold text-lg mt-4'>
+            <div className='flex flex-col gap-5 font-semibold text-lg mt-4'>
                 <span>Organización</span>
+                <div className='flex justify-between'>
+                    <span>Plan</span>
+                    <Link href={'/pricing'}>
+                        <span className='text-_darkText dark:text-_primary hover:text-_primary underline underline-offset-4'>
+                            Comunidad
+                        </span>
+                    </Link>
+                </div>
                 <div className='flex justify-between'>
                     <span>Posición</span>
                     <span className='text-_darkText dark:text-_primary'>Usuario</span>
                 </div>
-                <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
-                <div className='flex justify-between'>
-                    <span>Tema</span>
-                    <Mode />
+                <div className='flex flex-col gap-2'>
+                    <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
+                    <div className='flex justify-between items-center'>
+                        <span>Tema</span>
+                        <Mode />
+                    </div>
+                    <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
                 </div>
-                <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
                 <Link href={'/auth'} className='self-end rounded-2xl'>
                     <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
                         <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
