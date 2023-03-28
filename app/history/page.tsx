@@ -1,6 +1,12 @@
+import { Metadata } from 'next'
 import { Back } from '@/ui/back'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Check, Tag, X } from 'lucide-react'
+
+export const metadata: Metadata = {
+    title: 'Historial',
+    description: 'Administra el historial de tus productos.',
+}
 
 export default function History() {
     const data = [
