@@ -33,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         return (
             <div
                 className={clsx(
-                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
                     className
                 )}
                 ref={ref}
@@ -43,7 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     {icon &&
                         <>
                             <Icons icon={icon} className={'text-_dark dark:text-_white mx-2'} />
-                            <div className='bg-_primary w-px h-10 rounded-full' />
+                            <div className='bg-_primary dark:bg-_darkText w-px h-10 rounded-full' />
                         </>
                     }
                     <div className='flex flex-col w-full'>
