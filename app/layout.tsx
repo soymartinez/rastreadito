@@ -1,4 +1,5 @@
 import './globals.css'
+import { Metadata } from 'next'
 import { Poppins as Font } from 'next/font/google'
 import { ThemeProvider } from '@/components/provider'
 
@@ -8,9 +9,12 @@ const font = Font({
   variable: '--font-sans',
 })
 
-export const metadata = {
-  title: 'QR Code Generator',
-  description: 'Generate QR codes for cannabis products',
+export const metadata: Metadata = {
+  title: {
+    default: 'Rastreadito',
+    template: '%s | Rastreadito',
+  },
+  description: 'Rastreadito te permite seguir el rastro de tus productos cannábicos desde su origen hasta tu mano. Descubre su metadata y conoce toda su historia con esta app.',
 }
 
 export default function RootLayout({
