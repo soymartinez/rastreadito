@@ -2,7 +2,7 @@
 
 import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
-import { QrCode } from 'lucide-react'
+import { Download, Printer, QrCode, Send } from 'lucide-react'
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
@@ -48,6 +48,20 @@ export default function Generate() {
                             </Balancer>
                         </div>
                         <QrCode className='text-_dark dark:text-_primary' size={250} />
+                        <div className='flex gap-4 mt-8'>
+                            <Button variant={'outline'}
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                <Printer />
+                            </Button>
+                            <Button variant={'outline'}
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                <Download />
+                            </Button>
+                            <Button variant={'outline'}
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                <Send />
+                            </Button>
+                        </div>
                     </div>
                 </Modal>
             )}
