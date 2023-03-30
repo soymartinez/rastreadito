@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { LayoutGrid, LayoutList, QrCode } from 'lucide-react'
-import { GeneralCard } from '@/components/card'
+import { CategoryCard, GeneralCard } from '@/components/card'
 import Navbar from '@/components/navbar'
 import { Button } from '@/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
@@ -115,26 +115,11 @@ export default function Home() {
             'grid-cols-1': layoutGrid === 'layout-list',
             'grid-cols-2': layoutGrid === 'layout-grid',
           })}>
-            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
-              <h1 className='text-xl font-semibold text-_white'>Goteo</h1>
-              <Image src={'/categories/dropper.png'} alt={'dropper'} width={44} height={44} />
-            </div>
-            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
-              <h1 className='text-xl font-semibold text-_white'>Ungüento</h1>
-              <Image src={'/categories/bottle.png'} alt={'bottle'} width={44} height={44} />
-            </div>
-            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
-              <h1 className='text-xl font-semibold text-_white'>Edible</h1>
-              <Image src={'/categories/mortar.png'} alt={'mortar'} width={44} height={44} />
-            </div>
-            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
-              <h1 className='text-xl font-semibold text-_white'>Cartucho</h1>
-              <Image src={'/categories/cart.png'} alt={'cart'} width={44} height={44} />
-            </div>
-            <div className='bg-_dark hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 transition-all p-4 overflow-auto rounded-2xl flex gap-4 justify-between items-center cursor-pointer'>
-              <h1 className='text-xl font-semibold text-_white'>Aceite</h1>
-              <Image src={'/categories/blood-drop.png'} alt={'blood-drop'} width={44} height={44} />
-            </div>
+            <CategoryCard name='Goteo' icon='dropper' />
+            <CategoryCard name='Ungüento' icon='bottle' />
+            <CategoryCard name='Edible' icon='mortar' />
+            <CategoryCard name='Cartucho' icon='cart' />
+            <CategoryCard name='Aceite' icon='blood-drop' />
           </div>
         </TabsContent>
       </Tabs>
