@@ -4,7 +4,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 import clsx from 'clsx'
 
 const buttonVariants = cva(
-    'active:scale-95 inline-flex items-center justify-center rounded-2xl text-xl font-semibold backdrop-blur-sm transition-colors focus:outline-none focus:ring-2 focus:ring-_primary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-_primary',
+    'active:scale-95 inline-flex items-center justify-center rounded-2xl text-xl font-semibold backdrop-blur-sm transition-colors focus:outline-none focus:ring-2 focus:ring-_primary disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-_primary',
     {
         variants: {
             variant: {
