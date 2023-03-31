@@ -50,15 +50,15 @@ export default function Generate() {
                         <QrCode className='text-_dark dark:text-_primary' size={250} />
                         <div className='flex gap-4 mt-8'>
                             <Button variant={'outline'}
-                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
                                 <Printer />
                             </Button>
                             <Button variant={'outline'}
-                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
                                 <Download />
                             </Button>
                             <Button variant={'outline'}
-                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary hover:text-_dark duration-75'>
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
                                 <Send />
                             </Button>
                         </div>
