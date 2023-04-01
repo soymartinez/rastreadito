@@ -1,15 +1,41 @@
+'use client'
+
+import { supabase } from '@/lib/supabase'
+import { redirect } from 'next/navigation'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
-import { Metadata } from 'next'
 import Link from 'next/link'
 
-export const metadata: Metadata = {
-    title: 'Iniciar sesión | QR',
-    description: 'Iniciar sesión para etiquetar productos cannábicos.',
+interface Props {
+    name?: string
+    email: string
+    password: string
 }
 
 export default function Auth() {
+    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.target as HTMLFormElement)
+        const form = Object.fromEntries(formData.entries()) as object as Props
+
+        const { data, error } = await supabase.auth.signUp(
+            {
+                email: form.email,
+                password: form.password,
+                options: {
+                    data: {
+                        name: form.name,
+                    }
+                }
+            }
+        )
+
+        if (!data) return console.log(error?.message)
+
+        console.log(data)
+    }
+
     return (
         <section className='flex items-center justify-center min-h-screen px-2 py-16'>
             <Tabs defaultValue='login' className='w-full max-w-md'>
@@ -42,13 +68,11 @@ export default function Auth() {
                     </form>
                 </TabsContent>
                 <TabsContent value='signup'>
-                    <form className='grid gap-4 mt-10'>
-                        <Input placeholder='bee' labelText='Nombre' autoComplete='off' required />
-                        <Input placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
-                        <Input placeholder='••••••••' type={'password'} labelText='Contraseña' required />
-                        <Link href={'/'} className='rounded-2xl'>
-                            <Button className='w-full'>Continuar</Button>
-                        </Link>
+                    <form onSubmit={handleSignUp} className='grid gap-4 mt-10'>
+                        <Input name='name' placeholder='bee' labelText='Nombre' autoComplete='off' required />
+                        <Input name='email' placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
+                        <Input name='password' placeholder='••••••••' type={'password'} labelText='Contraseña' required />
+                        <Button type='submit' className='w-full'>Continuar</Button>
                     </form>
                 </TabsContent>
                 <section>
