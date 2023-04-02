@@ -1,9 +1,10 @@
 import Mode from '@/components/mode'
 import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
-import { LogOut, Save } from 'lucide-react'
+import { Save } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { SignOut } from '@/components/auth'
 
 export const metadata: Metadata = {
     title: 'BeeHealthy',
@@ -40,11 +41,7 @@ export default function Account() {
                     </div>
                     <div className='h-px rounded-full bg-_grayTextDisabled dark:bg-_darkText' />
                 </div>
-                <Link href={'/auth'} className='self-end rounded-2xl'>
-                    <Button variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
-                        <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
-                    </Button>
-                </Link>
+                <SignOut />
             </div>
             <Button className='w-16 fixed xl:absolute right-4 bottom-8'>
                 <Save />
