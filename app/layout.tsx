@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Poppins as Font } from 'next/font/google'
 import { ThemeProvider } from '@/components/provider'
 import SupabaseProvider from '@/components/supabase-provider'
+import Toast from '@/components/toast'
 
 const font = Font({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -25,6 +26,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
         <ThemeProvider>
           <SupabaseProvider>{children}</SupabaseProvider>
         </ThemeProvider>
+        <Toast />
       </body>
     </html>
   )
