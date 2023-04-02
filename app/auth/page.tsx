@@ -1,8 +1,5 @@
-import { SignUp } from '@/components/auth'
-import { Button } from '@/ui/button'
-import { Input } from '@/ui/input'
+import { SignIn, SignUp } from '@/components/auth'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
-import Link from 'next/link'
 
 export default function Auth() {
     return (
@@ -29,12 +26,7 @@ export default function Auth() {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value='login'>
-                    <form className='grid gap-4 mt-10'>
-                        <Input placeholder='bee@example.com' type={'email'} icon={'email'} labelText='Correo electrónico' autoComplete='off' required />
-                        <Link href={'/'} className='rounded-2xl'>
-                            <Button className='w-full'>Continuar</Button>
-                        </Link>
-                    </form>
+                    <SignIn />
                 </TabsContent>
                 <TabsContent value='signup'>
                     <SignUp />
