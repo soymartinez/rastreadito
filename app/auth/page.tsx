@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Auth() {
     return (
-        <section className='flex items-center justify-center min-h-screen px-2 py-16'>
+        <section className='flex items-center justify-center min-h-screen px-4 py-16'>
             <Tabs defaultValue='login' className='w-full max-w-md'>
                 <TabsContent value='login'>
                     <h1 className='text-3xl leading-normal font-semibold text-center'>Bienvenido</h1>
