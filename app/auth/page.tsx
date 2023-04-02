@@ -1,11 +1,11 @@
 'use client'
 
-import { supabase } from '@/lib/supabase'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import Link from 'next/link'
+import { useSupabase } from '@/components/supabase-provider'
 
 interface Props {
     name?: string
@@ -14,12 +14,15 @@ interface Props {
 }
 
 export default function Auth() {
+    const { supabase } = useSupabase()
+    const { push } = useRouter()
+
     const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
         const form = Object.fromEntries(formData.entries()) as object as Props
 
-        const { data, error } = await supabase.auth.signUp(
+        const { error } = await supabase.auth.signUp(
             {
                 email: form.email,
                 password: form.password,
@@ -31,11 +34,10 @@ export default function Auth() {
             }
         )
 
-        if (!data) return console.log(error?.message)
+        if (error) console.log(error)
 
-        console.log(data)
+        push('/')
     }
-
     return (
         <section className='flex items-center justify-center min-h-screen px-2 py-16'>
             <Tabs defaultValue='login' className='w-full max-w-md'>
