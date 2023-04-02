@@ -6,6 +6,7 @@ specifiers:
   '@radix-ui/react-label': ^2.0.0
   '@radix-ui/react-select': ^1.2.1
   '@radix-ui/react-tabs': ^1.0.2
+  '@supabase/auth-helpers-nextjs': ^0.5.6
   '@supabase/supabase-js': ^2.13.1
   '@types/node': 18.14.6
   '@types/react': 18.0.28
@@ -37,6 +38,7 @@ dependencies:
   '@radix-ui/react-label': 2.0.0_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-select': 1.2.1_zula6vjvt3wdocc4mwcxqa6nzi
   '@radix-ui/react-tabs': 1.0.2_biqbaboplfbrettd7655fr4n2y
+  '@supabase/auth-helpers-nextjs': 0.5.6_b2inm4ni2pv5tie2fs43temlva
   '@supabase/supabase-js': 2.13.1
   '@types/node': 18.14.6
   '@types/react': 18.0.28
@@ -787,6 +789,23 @@ packages:
 
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
+    dev: false
+
+  /@supabase/auth-helpers-nextjs/0.5.6_b2inm4ni2pv5tie2fs43temlva:
+    resolution: {integrity: sha512-NiUGGnO9vRycMDnl/DzFbHCJhNV9DdH1vH61T1Fzgp2aRW8LfLRVlBQeGCg2AzyvAe0MiLbbRsGNcJmAmJPs9A==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.0.4
+    dependencies:
+      '@supabase/auth-helpers-shared': 0.3.0_b2inm4ni2pv5tie2fs43temlva
+      '@supabase/supabase-js': 2.13.1
+    dev: false
+
+  /@supabase/auth-helpers-shared/0.3.0_b2inm4ni2pv5tie2fs43temlva:
+    resolution: {integrity: sha512-6lKhVMBZnGdFelpZyvQDBQSOY+pglS6a5U4ieAqfKQ/rx3rSjRASR3UGh7V+el1re3xYe3ddVBWXw16rdVAzrQ==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.0.4
+    dependencies:
+      '@supabase/supabase-js': 2.13.1
     dev: false
 
   /@supabase/functions-js/2.1.0:
