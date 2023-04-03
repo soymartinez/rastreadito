@@ -12,6 +12,36 @@ interface Props {
     password: string
 }
 
+function SignIn() {
+    const { supabase } = useSupabase()
+
+    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.target as HTMLFormElement)
+        const form = Object.fromEntries(formData.entries()) as object as Props
+
+        const { error: errorOtp } = await supabase.auth.signInWithOtp({
+            email: form.email,
+        })
+
+        toast.promise(() => {
+            if (errorOtp) return Promise.reject(errorOtp)
+            return Promise.resolve()
+        }, {
+            loading: 'Enviando código de verificación...',
+            success: 'Código de verificación enviado, revisa tu correo',
+            error: (error) => error.message,
+        })
+    }
+
+    return (
+        <form onSubmit={handleSignIn} className='grid gap-4 mt-10'>
+            <Input name='email' placeholder='bee@example.com' type={'email'} icon={'email'} labelText='Correo electrónico' autoComplete='off' required />
+            <Button type='submit' className='w-full'>Continuar</Button>
+        </form>
+    )
+}
+
 function SignUp() {
     const { supabase } = useSupabase()
 
@@ -65,6 +95,7 @@ function SignOut() {
 }
 
 export {
+    SignIn,
     SignUp,
     SignOut,
 }
