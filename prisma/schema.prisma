@@ -19,7 +19,7 @@ model Productos {
   fecha       DateTime   @default(now())
   categoriaId Int
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  qr          QRs[]
+  qr          Qr[]
   Pedidos     Pedidos[]
 }
 
@@ -48,7 +48,7 @@ model Pedidos {
   usuario    Usuarios  @relation(fields: [usuarioId], references: [id])
 }
 
-model QRs {
+model Qr {
   id         Int       @id @default(autoincrement())
   productoId Int
   producto   Productos @relation(fields: [productoId], references: [id])
