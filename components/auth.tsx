@@ -5,6 +5,7 @@ import { Input } from '@/ui/input'
 import { LogOut } from 'lucide-react'
 import { useSupabase } from './supabase-provider'
 import { toast } from 'sonner'
+import { useState } from 'react'
 
 interface Props {
     name?: string
@@ -14,30 +15,72 @@ interface Props {
 
 function SignIn() {
     const { supabase } = useSupabase()
+    const [form, setForm] = useState<Props>({} as Props)
 
     const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
         const form = Object.fromEntries(formData.entries()) as object as Props
 
-        const { error: errorOtp } = await supabase.auth.signInWithOtp({
-            email: form.email,
-        })
+        const magicLink = async () => {
+            const { error } = await supabase.auth.signInWithOtp({
+                email: form.email,
+            })
 
-        toast.promise(() => {
-            if (errorOtp) return Promise.reject(errorOtp)
-            return Promise.resolve()
-        }, {
-            loading: 'Enviando código de verificación...',
-            success: 'Código de verificación enviado, revisa tu correo',
-            error: (error) => error.message,
-        })
+            toast.promise(() => {
+                if (error) return Promise.reject(error)
+                return Promise.resolve()
+            }, {
+                loading: 'Enviando código de verificación...',
+                success: 'Código de verificación enviado, revisa tu correo',
+                error: (error) => error.message,
+            })
+        }
+
+        const signIn = async () => {
+            const { error } = await supabase.auth.signInWithPassword({
+                email: form.email,
+                password: form.password,
+            })
+
+            toast.promise(() => {
+                if (error) return Promise.reject(error)
+                return Promise.resolve()
+            }, {
+                loading: 'Iniciando sesión...',
+                success: 'Sesión iniciada',
+                error: (error) => error.message,
+            })
+        }
+
+        form.email && form.password
+            ? signIn()
+            : magicLink()
     }
 
     return (
         <form onSubmit={handleSignIn} className='grid gap-4 mt-10'>
-            <Input name='email' placeholder='bee@example.com' type={'email'} icon={'email'} labelText='Correo electrónico' autoComplete='off' required />
-            <Button type='submit' className='w-full'>Continuar</Button>
+            <Input
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                name='email'
+                placeholder='bee@example.com'
+                type={'email'}
+                icon={'email'}
+                labelText='Correo electrónico'
+                autoComplete='off'
+                required
+            />
+            <Input
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                name='password'
+                placeholder='••••••••'
+                type={'password'}
+                icon={'password'}
+                labelText='Contraseña'
+            />
+            <Button type='submit' className='w-full'>
+                {form.email && form.password ? 'Iniciar sesión' : 'Link mágico'}
+            </Button>
         </form>
     )
 }
