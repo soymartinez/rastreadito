@@ -23,10 +23,9 @@ model Usuarios {
 }
 
 model Qr {
-  id         Int     @id @default(autoincrement())
-  productoId Int
-  codigo     String
-  status     Estatus
+  id     Int     @id @default(autoincrement())
+  codigo String
+  status Estatus
 }
 
 enum Estatus {
