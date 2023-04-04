@@ -25,6 +25,9 @@ function SignIn() {
         const magicLink = async () => {
             const { error } = await supabase.auth.signInWithOtp({
                 email: form.email,
+                options: {
+                    shouldCreateUser: false,
+                }
             })
 
             toast.promise(() => {
