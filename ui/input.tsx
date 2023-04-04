@@ -2,11 +2,11 @@ import * as React from 'react'
 
 import clsx from 'clsx'
 
-import { Mail } from 'lucide-react'
+import { Lock, Mail } from 'lucide-react'
 import { Label } from './label'
 
 interface InputPropsExtended {
-    icon?: 'email',
+    icon?: 'email' | 'password',
     labelText?: string,
     variant?: 'normal' | 'porcentage',
 }
@@ -22,6 +22,7 @@ const Icons = React.forwardRef<HTMLDivElement, IconProps>(
         return (
             <>
                 {icon === 'email' && <Mail {...props} />}
+                {icon === 'password' && <Lock {...props} />}
             </>
         )
     }
