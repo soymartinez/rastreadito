@@ -10,48 +10,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Productos {
-  id          Int        @id @default(autoincrement())
-  nombre      String
-  descripcion String
-  precio      Float
-  imagen      String
-  fecha       DateTime   @default(now())
-  categoriaId Int
-  categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  qr          Qr[]
-  Pedidos     Pedidos[]
-}
-
 model Categorias {
-  id       Int         @id @default(autoincrement())
-  nombre   String
-  producto Productos[]
+  id     Int    @id @default(autoincrement())
+  nombre String
 }
 
 model Usuarios {
-  id       Int       @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   nombre   String
-  email    String    @unique
+  email    String @unique
   password String
-  pedido   Pedidos[]
-}
-
-model Pedidos {
-  id         Int       @id @default(autoincrement())
-  productoId Int
-  producto   Productos @relation(fields: [productoId], references: [id])
-  cantidad   Int
-  precio     Float
-  direccion  String
-  usuarioId  Int
-  usuario    Usuarios  @relation(fields: [usuarioId], references: [id])
 }
 
 model Qr {
-  id         Int       @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   productoId Int
-  producto   Productos @relation(fields: [productoId], references: [id])
   codigo     String
-  status     String
+  status     Estatus
+}
+
+enum Estatus {
+  ACTIVO
+  USADO
+  DESTRUIDO
 }
