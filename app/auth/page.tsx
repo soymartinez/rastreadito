@@ -7,7 +7,7 @@ import { getCurrentUser } from '@/hooks/auth'
 
 export default async function Auth() {
     const user = await getCurrentUser()
-    if (user) redirect('/')
+    if (user?.email) redirect('/')
     return (
         <section className='flex items-center justify-center min-h-screen px-4 py-16'>
             <Tabs defaultValue='login' className='w-full max-w-md'>
