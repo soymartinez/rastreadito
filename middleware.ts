@@ -15,15 +15,14 @@ export async function middleware(req: NextRequest) {
         '/account',
         '/metadata',
     ]
+    const url = new URL(req.url)
 
     if (!session && protectedRoutes.includes(req.nextUrl.pathname)) {
-        const url = new URL(req.url)
         url.pathname = '/auth'
         return NextResponse.redirect(url)
     }
 
     if (session && req.nextUrl.pathname === '/auth') {
-        const url = new URL(req.url)
         url.pathname = '/'
         return NextResponse.redirect(url)
     }
