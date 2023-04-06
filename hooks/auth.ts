@@ -1,4 +1,4 @@
-import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentSupabaseClient, User } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
 
 export const useSupabaseServer = async () => {
@@ -12,5 +12,26 @@ export const useSupabaseServer = async () => {
     return {
         supabase,
         user,
+    }
+}
+
+interface UserMetadata {
+    name: string
+}
+
+export async function useCurrentUser() {
+    try {
+        const { user } = await useSupabaseServer()
+
+        if (!user) return null
+
+        const currentUser = {
+            ...user,
+            user_metadata: user?.user_metadata as UserMetadata,
+        } as User
+
+        return currentUser
+    } catch (error: any) {
+        return null
     }
 }
