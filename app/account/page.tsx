@@ -1,24 +1,36 @@
-import Mode from '@/components/mode'
-import { Back } from '@/ui/back'
-import { Button } from '@/ui/button'
-import { Save } from 'lucide-react'
-import { Metadata } from 'next'
 import Link from 'next/link'
-import { SignOut } from '@/components/auth'
+import { redirect } from 'next/navigation'
 
-export const metadata: Metadata = {
-    title: 'BeeHealthy',
-    description: 'BeeHealthy es una marca de productos cannábicos que busca ofrecer una experiencia de consumo saludable y segura.',
+import { Save } from 'lucide-react'
+
+import Mode from '@/components/mode'
+import { SignOut } from '@/components/auth'
+import { Button } from '@/ui/button'
+import { Back } from '@/ui/back'
+
+import { useCurrentUser } from '@/hooks/auth'
+
+export async function generateMetadata() {
+    const user = await useCurrentUser()
+
+    return {
+        title: user?.user_metadata.name,
+        description: `${user?.user_metadata.name} es una marca de productos cannábicos que busca ofrecer una experiencia de consumo saludable y segura.`,
+    }
 }
 
-export default function Account() {
+export const revalidate = 0
+
+export default async function Account() {
+    const user = await useCurrentUser()
+    if (!user) return redirect('/auth')
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Perfil</h1>
             </div>
-            <h1 className='text-5xl font-bold leading-loose'>BeeHealthy</h1>
+            <h1 className='text-5xl font-bold leading-loose'>{user?.user_metadata.name}</h1>
             <div className='flex flex-col gap-5 font-semibold text-lg mt-4'>
                 <span>Organización</span>
                 <div className='flex justify-between'>
