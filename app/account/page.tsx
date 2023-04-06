@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 
 import { Save } from 'lucide-react'
 
@@ -23,7 +22,6 @@ export const revalidate = 0
 
 export default async function Account() {
     const user = await getCurrentUser()
-    if (!user) return redirect('/auth')
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
