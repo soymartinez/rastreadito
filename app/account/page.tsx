@@ -8,10 +8,10 @@ import { SignOut } from '@/components/auth'
 import { Button } from '@/ui/button'
 import { Back } from '@/ui/back'
 
-import { useCurrentUser } from '@/hooks/auth'
+import { getCurrentUser } from '@/hooks/auth'
 
 export async function generateMetadata() {
-    const user = await useCurrentUser()
+    const user = await getCurrentUser()
 
     return {
         title: user?.user_metadata.name,
@@ -22,7 +22,7 @@ export async function generateMetadata() {
 export const revalidate = 0
 
 export default async function Account() {
-    const user = await useCurrentUser()
+    const user = await getCurrentUser()
     if (!user) return redirect('/auth')
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>

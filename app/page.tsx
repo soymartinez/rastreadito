@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { QrCode } from 'lucide-react'
 
-import { useCurrentUser } from '@/hooks/auth'
+import { getCurrentUser } from '@/hooks/auth'
 
 import Navbar from '@/components/navbar'
 import MainTabs from '@/components/main-tabs'
@@ -12,7 +12,7 @@ import { Button } from '@/ui/button'
 export const revalidate = 0
 
 export default async function Home() {
-  const user = await useCurrentUser()
+  const user = await getCurrentUser()
   if (!user) redirect('/auth')
   return (
     <main className='px-4 min-h-screen relative max-w-7xl mx-auto'>

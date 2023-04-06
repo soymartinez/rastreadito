@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation'
 import { SignIn, SignUp } from '@/components/auth'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 
-import { useCurrentUser } from '@/hooks/auth'
+import { getCurrentUser } from '@/hooks/auth'
 
 export default async function Auth() {
-    const user = await useCurrentUser()
+    const user = await getCurrentUser()
     if (user) redirect('/')
     return (
         <section className='flex items-center justify-center min-h-screen px-4 py-16'>
