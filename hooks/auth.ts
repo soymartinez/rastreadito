@@ -1,5 +1,6 @@
 import { createServerComponentSupabaseClient, User } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export const useSupabaseServer = async () => {
     const supabase = createServerComponentSupabaseClient({
@@ -19,7 +20,7 @@ interface UserMetadata {
     name: string
 }
 
-export async function useCurrentUser() {
+export async function getCurrentUser() {
     try {
         const { user } = await useSupabaseServer()
 
