@@ -1,8 +1,8 @@
 'use client'
 
-import { Back } from '@/ui/back'
-import { Input } from '@/ui/input'
-import { Textarea } from '@/ui/textarea'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { Info, Save } from 'lucide-react'
 
 import {
@@ -12,9 +12,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/ui/select'
+import { Back } from '@/ui/back'
+import { Input } from '@/ui/input'
+import { Textarea } from '@/ui/textarea'
 import { Button } from '@/ui/button'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 const productTypes = {
     flower: 'Flor de cannabis',
@@ -52,7 +53,7 @@ export default function Metadata() {
         if (value) {
             push('/metadata/generate')
         }
-    }, [value])
+    }, [value, push])
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
