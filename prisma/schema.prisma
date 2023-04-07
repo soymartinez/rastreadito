@@ -23,13 +23,34 @@ model Usuarios {
 }
 
 model Qr {
-  id     Int     @id @default(autoincrement())
-  codigo String
-  status Estatus
+  id        Int         @id @default(autoincrement())
+  codigo    String
+  status    Estatus
+  Productos Productos[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Estatus {
   ACTIVO
   USADO
   DESTRUIDO
+}
+
+model Productos {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  tipo        String
+  cepa        String
+  thc         Float
+  cbd         Float
+  aroma       String
+  efecto      String
+  qr          Qr?    @relation(fields: [qrId], references: [id])
+  qrId        Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
