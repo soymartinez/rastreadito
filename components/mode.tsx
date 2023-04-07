@@ -12,7 +12,7 @@ import {
 } from '@/ui/dropdown-menu'
 
 export default function Mode() {
-    const { setTheme } = useTheme()
+    const { setTheme, theme } = useTheme()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild className='focus:outline-none'>
@@ -23,13 +23,22 @@ export default function Mode() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setTheme('light')} className='flex gap-3 text-_darkText dark:text-_white'>
+                <DropdownMenuItem
+                    onClick={() => setTheme('light')}
+                    className={`flex gap-3 text-_darkText dark:text-_white ${theme === 'light' && 'bg-[#f1f5f9] dark:bg-_dark'}`}
+                >
                     <Sun size={18} /> Claro
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('dark')} className='flex gap-3 text-_darkText dark:text-_white'>
+                <DropdownMenuItem
+                    onClick={() => setTheme('dark')}
+                    className={`flex gap-3 text-_darkText dark:text-_white ${theme === 'dark' && 'bg-[#f1f5f9] dark:bg-_dark'}`}
+                >
                     <Moon size={18} /> Oscuro
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('system')} className='flex gap-3 text-_darkText dark:text-_white'>
+                <DropdownMenuItem
+                    onClick={() => setTheme('system')}
+                    className={`flex gap-3 text-_darkText dark:text-_white ${theme === 'system' && 'bg-[#f1f5f9] dark:bg-_dark'}`}
+                >
                     <Laptop size={18} /> Sistema
                 </DropdownMenuItem>
             </DropdownMenuContent>
