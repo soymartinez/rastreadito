@@ -39,18 +39,27 @@ enum Estatus {
 }
 
 model Productos {
-  id          Int    @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   nombre      String
   descripcion String
-  tipo        String
+  tipo        TipoProducto
   cepa        String
   thc         Float
   cbd         Float
   aroma       String
   efecto      String
-  qr          Qr?    @relation(fields: [qrId], references: [id])
+  qr          Qr?          @relation(fields: [qrId], references: [id])
   qrId        Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum TipoProducto {
+  FLOR
+  GOTEO
+  UNGUENTO
+  EDIBLES
+  CARTUCHO
+  ACEITE
 }
