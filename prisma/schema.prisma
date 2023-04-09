@@ -10,12 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Categorias {
+model Categoria {
   id     Int    @id @default(autoincrement())
   nombre String
 }
 
-model Usuarios {
+model Usuario {
   id       Int    @id @default(autoincrement())
   nombre   String
   email    String @unique
@@ -23,11 +23,11 @@ model Usuarios {
 }
 
 model Qr {
-  id          Int       @id @default(autoincrement())
-  codigo      String
-  status      Estatus
-  producto    Productos @relation(fields: [productosId], references: [id], onDelete: Cascade)
-  productosId Int       @unique
+  id         Int      @id @default(autoincrement())
+  codigo     String
+  status     Estatus
+  producto   Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
+  productoId Int      @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -39,7 +39,7 @@ enum Estatus {
   DESTRUIDO
 }
 
-model Productos {
+model Producto {
   id          Int          @id @default(autoincrement())
   nombre      String
   descripcion String
