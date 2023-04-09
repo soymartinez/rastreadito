@@ -24,7 +24,7 @@ model Usuario {
 
 model Qr {
   id         Int      @id @default(autoincrement())
-  codigo     String
+  codigo     String   @unique
   status     Estatus
   producto   Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
   productoId Int      @unique
