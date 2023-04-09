@@ -1,6 +1,6 @@
 import { QRCode } from 'react-qrcode-logo'
 
-function Qr({
+export default function GenerateQr({
     value,
     size,
     logoImage,
@@ -25,8 +25,4 @@ function Qr({
             logoOpacity={logoOpacity}
         />
     )
-}
-
-export {
-    Qr,
 }
