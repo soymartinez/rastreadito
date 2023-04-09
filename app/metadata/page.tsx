@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Productos, Qr } from '@prisma/client'
 import { toast } from 'sonner'
 import qs from 'query-string'
@@ -31,7 +31,6 @@ const productTypes = {
 
 export default function Metadata() {
     const router = useRouter()
-    const params = useSearchParams()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -97,7 +96,7 @@ export default function Metadata() {
         }, { skipNull: true })
 
         return url
-    }, [router, params])
+    }, [])
 
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
