@@ -23,10 +23,11 @@ model Usuarios {
 }
 
 model Qr {
-  id        Int         @id @default(autoincrement())
-  codigo    String
-  status    Estatus
-  Productos Productos[]
+  id          Int       @id @default(autoincrement())
+  codigo      String
+  status      Estatus
+  producto    Productos @relation(fields: [productosId], references: [id], onDelete: Cascade)
+  productosId Int       @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -48,8 +49,7 @@ model Productos {
   cbd         Float
   aroma       String
   efecto      String
-  qr          Qr?          @relation(fields: [qrId], references: [id])
-  qrId        Int?
+  qr          Qr?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
