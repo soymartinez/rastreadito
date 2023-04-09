@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { Productos, Qr } from '@prisma/client'
+import { Producto, Qr } from '@prisma/client'
 import { toast } from 'sonner'
 import qs from 'query-string'
 
@@ -35,7 +35,7 @@ export default function Metadata() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
-        const data = Object.fromEntries(formData.entries()) as object as Productos
+        const data = Object.fromEntries(formData.entries()) as object as Producto
 
         const res = async () => {
             const create = await fetch('/api/metadata', {
@@ -50,7 +50,7 @@ export default function Metadata() {
             return await create.json()
         }
 
-        const qr = async (data: Productos) => {
+        const qr = async (data: Producto) => {
             const codigo = generateQuery(data)
 
             if (!codigo) {
@@ -67,7 +67,7 @@ export default function Metadata() {
 
         toast.promise(res, {
             loading: 'Guardando...',
-            success: (producto: Productos) => {
+            success: (producto: Producto) => {
                 toast.promise(qr(producto), {
                     loading: 'Generando código QR...',
                     success: (qr: Qr) => {
@@ -82,7 +82,7 @@ export default function Metadata() {
         })
     }
 
-    const generateQuery = useCallback((data: Productos) => {
+    const generateQuery = useCallback((data: Producto) => {
         const updatedQuery: any = {
             fecha: data.createdAt,
             id: data.id,
