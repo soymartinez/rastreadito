@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { prisma } from '@/lib/prisma'
-import { Productos } from '@prisma/client'
+import { Producto } from '@prisma/client'
 
 export async function POST(req: Request) {
     const {
@@ -13,9 +13,9 @@ export async function POST(req: Request) {
         cbd,
         aroma,
         efecto,
-    }: Productos = await req.json()
+    }: Producto = await req.json()
 
-    const res = await prisma.productos.create({
+    const res = await prisma.producto.create({
         data: {
             nombre,
             descripcion,
