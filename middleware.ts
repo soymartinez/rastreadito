@@ -4,15 +4,20 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
-    const res = NextResponse.next()
+    const requestHeaders = new Headers(req.headers)
+    requestHeaders.set('x-search', req.nextUrl.search)
+    requestHeaders.set('x-origin', req.nextUrl.origin)
+
+    const res = NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    })
+
     const supabase = createMiddlewareSupabaseClient({ req, res })
     const {
         data: { session },
     } = await supabase.auth.getSession()
-
-    const requestHeaders = new Headers(req.headers)
-    requestHeaders.set('x-search', req.nextUrl.search)
-    requestHeaders.set('x-origin', req.nextUrl.origin)
 
     const protectedRoutes = [
         '/',
@@ -31,9 +36,5 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(url)
     }
 
-    return NextResponse.next({
-        request: {
-            headers: requestHeaders,
-        }
-    })
+    return res
 }
