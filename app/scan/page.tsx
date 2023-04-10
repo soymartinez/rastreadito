@@ -1,12 +1,26 @@
 'use client'
 
 import { Back } from '@/ui/back'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { QrReader } from 'react-qr-reader'
 import Balancer from 'react-wrap-balancer'
+import { toast } from 'sonner'
 
 export default function Scan() {
-    const [data, setData] = useState('')
+    const router = useRouter()
+
+    const handleScan = (result: string | null) => {
+        if (!result?.startsWith('/?fecha=')) {
+            toast.error('QR no válido', {
+                style: {
+                    background: '#F87171',
+                }
+            })
+            return
+        }
+
+        router.push(`/scan/product${result}`)
+    }
 
     const corner = {
         start: 'calc((100% - 230px) / 2)',
@@ -28,23 +42,17 @@ export default function Scan() {
                         <span className='border_bottom' />
                     </div>
                 </div>
-                <div className='flex flex-col justify-center items-center h-full space-y-[350px]'>
+                <div className='flex flex-col justify-center items-center h-full space-y-[380px]'>
                     <Balancer className='text-center'>
                         <h1 className='text-_white font-bold text-4xl'>Escanea</h1>
                         <p className='text-_grayTextLight text font-medium'>Encuéntralo en la parte inferior de tu producto</p>
                     </Balancer>
-                    <div className='flex flex-col items-center gap-4'>
-                        <a href={data} target='_blank' rel='noreferrer' className='hover:underline decoration-_primary'>
-                            <Balancer ratio={0} className='text-_grayTextLight font-bold text-lg truncate'>
-                                {data}
-                            </Balancer>
-                        </a>
-                    </div>
+                    <div />
                 </div>
                 <QrReader
                     onResult={(result, error) => {
                         if (!!result) {
-                            setData(result?.getText())
+                            handleScan(result?.getText())
                         }
 
                         if (!!error) {
