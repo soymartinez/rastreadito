@@ -10,6 +10,10 @@ export async function middleware(req: NextRequest) {
         data: { session },
     } = await supabase.auth.getSession()
 
+    const requestHeaders = new Headers(req.headers)
+    requestHeaders.set('x-search', req.nextUrl.search)
+    requestHeaders.set('x-origin', req.nextUrl.origin)
+
     const protectedRoutes = [
         '/',
         '/account',
@@ -27,5 +31,9 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(url)
     }
 
-    return res
+    return NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        }
+    })
 }
