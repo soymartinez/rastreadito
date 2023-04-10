@@ -1,13 +1,45 @@
 import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
-import { Download, Printer, QrCode, Send } from 'lucide-react'
+import { Download, Printer, Send } from 'lucide-react'
 
 import { Back } from '@/ui/back'
 import { Button } from '@/ui/button'
 
 import ModalButton from '@/components/modal/modal-button'
+import GenerateQr from '@/components/generateQr'
+import { Producto, Qr } from '@prisma/client'
+import { headers } from 'next/headers'
+
+type GetDataType = Qr & {
+    producto: Producto
+}
+
+interface Params {
+    origin: string,
+    search: string,
+}
+
+async function getData({ origin, search }: Params): Promise<GetDataType> {
+    const res = await fetch(`${origin}/api/qr${search}`)
+
+    if (!res.ok) {
+        throw new Error('Error al obtener el QR')
+    }
+
+    return res.json()
+}
 
 export default async function Generate() {
+    const headersList = headers()
+    const search = headersList.get('x-search') || ''
+    const origin = headersList.get('x-origin') || ''
+
+    const {
+        id,
+        codigo,
+        producto: { nombre, descripcion, createdAt },
+
+    } = await getData({ origin, search })
     return (
         <main className='min-h-screen relative max-w-7xl mx-auto'>
             <div className='px-4'>
@@ -22,7 +54,7 @@ export default async function Generate() {
                 </div>
                 <div className='flex flex-col justify-center items-center py-40 h-full'>
                     <h3 className='font-semibold text-4xl text-_darkText dark:text-_grayText'>Orden</h3>
-                    <h1 className='font-semibold text-[110px] text-_dark dark:text-_primary'>#89</h1>
+                    <h1 className='font-semibold text-[120px] text-_dark dark:text-_primary'>#{id}</h1>
                 </div>
             </div>
 
@@ -32,15 +64,17 @@ export default async function Generate() {
                         <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
                     </div>
                     <div className='flex flex-col justify-center items-center w-full text-_darkText dark:text-_white font-medium pt-8 pb-10'>
-                        <h1 className='font-semibold text-4xl text-center'>Purple Kush</h1>
+                        <h1 className='font-semibold text-4xl text-center'>{nombre}</h1>
                         <Balancer className='text-center dark:text-_grayText'>
-                            Una cepa híbrida de cannabis, conocida por su aroma a tierra y sus efectos relajantes.
+                            {descripcion}
                             <p>
-                                Fecha: <span className='font-semibold'>03/03/2023</span>
+                                Fecha: <span className='font-semibold'>{new Date(createdAt).toLocaleString(undefined, { hour12: true })}</span>
                             </p>
                         </Balancer>
                     </div>
-                    <QrCode className='text-_dark dark:text-_primary' size={250} />
+                    <div className='rounded-2xl overflow-hidden'>
+                        <GenerateQr value={codigo} />
+                    </div>
                     <div className='flex gap-4 mt-8'>
                         <Button variant={'outline'}
                             className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
