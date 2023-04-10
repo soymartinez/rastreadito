@@ -1,28 +1,17 @@
-import { QRCode } from 'react-qrcode-logo'
+'use client'
 
-export default function GenerateQr({
-    value,
-    size,
-    logoImage,
-    logoWidth,
-    logoHeight,
-    logoOpacity,
-}: {
-    value: string
-    size: number
-    logoImage?: string
-    logoWidth?: number
-    logoHeight?: number
-    logoOpacity?: number
-}) {
+import { QRCode, IProps } from 'react-qrcode-logo'
+
+export default function GenerateQr(props: IProps) {
     return (
         <QRCode
-            value={value}
-            size={size}
-            logoImage={logoImage}
-            logoWidth={logoWidth}
-            logoHeight={logoHeight}
-            logoOpacity={logoOpacity}
+            {...props}
+            size={200}
+            quietZone={20}
+            bgColor={'#00e99e'}
+            fgColor={'#1b1b1b'}
+            qrStyle={'squares'}
+            ecLevel={'L'}
         />
     )
 }
