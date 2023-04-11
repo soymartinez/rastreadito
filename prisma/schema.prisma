@@ -66,7 +66,7 @@ model Producto {
   id             Int       @id @default(autoincrement())
   nombre         String
   descripcion    String
-  categoria      Categoria @relation(fields: [categoriaId], references: [id], onDelete: Cascade)
+  categoria      String
   cepa           String
   thc            Float
   cbd            Float
@@ -85,10 +85,10 @@ model Producto {
   certificado    String?
   notas          String?
   qr             Qr?
-  usuario        Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId      Int
 
-  categoriaId Int
-  usuarioId   Int
+  usuario_   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  categoria_ Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
