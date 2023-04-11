@@ -8,7 +8,7 @@ import { Label } from './label'
 interface InputPropsExtended {
     icon?: 'email' | 'password',
     labelText?: string,
-    variant?: 'normal' | 'porcentage',
+    variant?: 'normal' | 'porcentage' | 'currency',
 }
 
 export interface IconProps
@@ -79,6 +79,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 {...props}
                             />
                             <span className='text-_primary text-lg font-medium'>%</span>
+                        </div>
+                    </div>}
+                {variant === 'currency' &&
+                    <div className='flex items-center gap-2 w-full'>
+                        <Label htmlFor={`input-${id}`} className='text-_darkText dark:text-_white text-[17px] font-semibold'>{labelText}</Label>
+                        <div className='flex items-center justify-end gap-2 w-full'>
+                            <input
+                                id={`input-${id}`}
+                                className={clsx(
+                                    'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                                    className
+                                )}
+                                type='number'
+                                min={0.0}
+                                autoComplete='off'
+                                ref={ref}
+                                {...props}
+                            />
+                            <span className='text-_primary text-lg font-medium'>$</span>
                         </div>
                     </div>}
             </div>
