@@ -1,8 +1,8 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Producto, Qr } from '@prisma/client'
+import { Categoria, Producto, Qr } from '@prisma/client'
 import { toast } from 'sonner'
 import qs from 'query-string'
 
@@ -20,17 +20,19 @@ import { Input } from '@/ui/input'
 import { Textarea } from '@/ui/textarea'
 import { Button } from '@/ui/button'
 
-const productTypes = {
-    FLOR: 'Flor de cannabis',
-    GOTEO: 'Goteros de cannabis',
-    UNGUENTO: 'Ungüento de cannabis',
-    EDIBLES: 'Edibles de cannabis',
-    CARTUCHO: 'Carts de cannabis',
-    ACEITE: 'Aceite de cannabis',
-}
-
 export default function Metadata() {
     const router = useRouter()
+    const [categorias, setCategorias] = useState<Categoria[]>([])
+
+    const getCategorias = async () => {
+        const res = await fetch('/api/categorias')
+        const data = await res.json()
+        return data
+    }
+
+    useEffect(() => {
+        getCategorias().then(setCategorias)
+    }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -84,10 +86,10 @@ export default function Metadata() {
 
     const generateQuery = useCallback((data: Producto) => {
         const updatedQuery: any = {
-            fecha: data.createdAt,
+            fecha: data.fechaRegistro,
             id: data.id,
             nombre: data.nombre,
-            tipo: data.tipo,
+            categoria: data.categoria,
         }
 
         const url = qs.stringifyUrl({
@@ -104,7 +106,7 @@ export default function Metadata() {
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Metadata</h1>
             </div>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-7'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-7 my-8'>
                 <div className='flex flex-col gap-4'>
                     <div className='flex justify-between'>
                         <h3 className='font-semibold'>Información</h3>
@@ -113,18 +115,23 @@ export default function Metadata() {
                     <div className='flex flex-col gap-3'>
                         <Input name='nombre' labelText='Nombre' placeholder='Purple Kush' required />
                         <Textarea name='descripcion' labelText='Descripción' placeholder='Purple Kush' required />
-                        <Select name='tipo' required>
+                        <Select name='categoria' required>
                             <SelectTrigger labelText='Tipo de producto'>
                                 <SelectValue placeholder='Selecciona un tipo de producto' />
                             </SelectTrigger>
                             <SelectContent>
-                                {Object.entries(productTypes).map(([key, value]) => (
-                                    <SelectItem className='first:rounded-t-xl last:rounded-b-xl placeholder:text-_primary' key={key} value={key}>
-                                        {value}
+                                {categorias.map(({ nombre, acronimo }) => (
+                                    <SelectItem
+                                        className='first:rounded-t-xl last:rounded-b-xl placeholder:text-_primary'
+                                        key={acronimo}
+                                        value={acronimo}
+                                    >
+                                        {nombre}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
+                        <Input name='imagen' labelText='URL' placeholder='purpleKush.png' required />
                     </div>
                 </div>
                 <div className='flex flex-col gap-4'>
@@ -138,6 +145,25 @@ export default function Metadata() {
                         <Input name='cbd' labelText='CBD' placeholder='0.0' required variant='porcentage' />
                         <Input name='aroma' labelText='Aroma' placeholder='Tierra, pino, dulce' required />
                         <Input name='efecto' labelText='Efectos' placeholder='Relajante, calmante, eufórico' required />
+                    </div>
+                </div>
+                <div className='flex flex-col gap-4'>
+                    <div className='flex justify-between'>
+                        <h3 className='font-semibold'>Fabricación</h3>
+                        <Info />
+                    </div>
+                    <div className='flex flex-col gap-3'>
+                        <Input name='fabricante' labelText='Fabricante' placeholder='Rastreadito' required />
+                        <Input name='pais' labelText='País' placeholder='México' required />
+                        <Input name='proveedor' labelText='Proveedor' placeholder='Rastreadito Co.' required />
+                        <Input name='precio' labelText='PRECIO' placeholder='0' variant='currency' />
+                        <Input name='peso' labelText='PESO' placeholder='0' variant='weight' />
+                        <Input name='fechaCosecha' labelText='Cosecha' variant='date' />
+                        <Input name='fechaEnvasado' labelText='Envasado' variant='date' />
+                        <Input name='fechaCaducidad' labelText='Caducidad' variant='date' />
+                        <Input name='lote' labelText='Lote' placeholder='RD-2023-01-01' />
+                        <Input name='certificado' labelText='Certificado' placeholder='URL de analisis de laboratorio' />
+                        <Textarea name='notas' labelText='Notas' placeholder='Este producto se cosecho 4:20am' />
                     </div>
                 </div>
                 <Button type='submit' className='w-16 fixed xl:absolute right-4 bottom-8'>
