@@ -85,9 +85,9 @@ model Producto {
   certificado    String?
   notas          String?
   qr             Qr?
-  usuarioId      Int
+  usuarioEmail   String
 
-  usuario_   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario_   Usuario   @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
   categoria_ Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
 
   fechaRegistro      DateTime @default(now())
