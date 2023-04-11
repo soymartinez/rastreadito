@@ -10,27 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Categoria {
-  id     Int    @id @default(autoincrement())
-  nombre String
-}
-
-model Usuario {
-  id       Int    @id @default(autoincrement())
-  nombre   String
-  email    String @unique
-  password String
-}
-
-model Qr {
-  id         Int      @id @default(autoincrement())
-  codigo     String   @unique
-  status     Estatus
-  producto   Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
-  productoId Int      @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum Rol {
+  ADMIN
+  USUARIO
 }
 
 enum Estatus {
@@ -39,27 +21,75 @@ enum Estatus {
   DESTRUIDO
 }
 
-model Producto {
-  id          Int          @id @default(autoincrement())
+model Categoria {
+  id          Int        @id @default(autoincrement())
   nombre      String
-  descripcion String
-  tipo        TipoProducto
-  cepa        String
-  thc         Float
-  cbd         Float
-  aroma       String
-  efecto      String
-  qr          Qr?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  acronimo    String     @unique
+  descripcion String?
+  productos   Producto[]
 }
 
-enum TipoProducto {
-  FLOR
-  GOTEO
-  UNGUENTO
-  EDIBLES
-  CARTUCHO
-  ACEITE
+model Equipo {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  descripcion String?
+  usuarios    Usuario[]
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+}
+
+model Usuario {
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  email     String     @unique
+  rol       Rol        @default(USUARIO)
+  equipos   Equipo[]
+  productos Producto[]
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+}
+
+model Qr {
+  id         Int      @id @default(autoincrement())
+  codigo     String   @unique
+  estatus    Estatus  @default(ACTIVO)
+  producto   Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
+  productoId Int      @unique
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
+}
+
+model Producto {
+  id             Int       @id @default(autoincrement())
+  nombre         String
+  descripcion    String
+  categoria      Categoria @relation(fields: [categoriaId], references: [id], onDelete: Cascade)
+  cepa           String
+  thc            Float
+  cbd            Float
+  imagen         String[]
+  aroma          String
+  efecto         String
+  fabricante     String
+  pais           String
+  proveedor      String
+  precio         Float?
+  peso           Float?
+  fechaCosecha   DateTime?
+  fechaEnvasado  DateTime?
+  fechaCaducidad DateTime?
+  lote           String?
+  certificado    String?
+  notas          String?
+  qr             Qr?
+  usuario        Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  categoriaId Int
+  usuarioId   Int
+
+  fechaRegistro      DateTime @default(now())
+  fechaActualizacion DateTime @updatedAt
 }
