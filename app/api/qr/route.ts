@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     data: {
       producto: { connect: { id: idProducto } },
       codigo,
-      status: 'ACTIVO',
+      estatus: 'ACTIVO',
     },
   })
   return NextResponse.json(res)
