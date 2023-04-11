@@ -37,8 +37,7 @@ export default async function Generate() {
     const {
         id,
         codigo,
-        producto: { nombre, descripcion, createdAt },
-
+        producto: { nombre, descripcion, fechaRegistro },
     } = await getData({ origin, search })
     return (
         <main className='min-h-screen relative max-w-7xl mx-auto'>
@@ -68,7 +67,7 @@ export default async function Generate() {
                         <Balancer className='text-center dark:text-_grayText'>
                             {descripcion}
                             <p>
-                                Fecha: <span className='font-semibold'>{new Date(createdAt).toLocaleString(undefined, { hour12: true })}</span>
+                                Fecha: <span className='font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</span>
                             </p>
                         </Balancer>
                     </div>
