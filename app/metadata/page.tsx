@@ -166,9 +166,11 @@ export default function Metadata() {
                         <Textarea name='notas' labelText='Notas' placeholder='Este producto se cosecho 4:20am' />
                     </div>
                 </div>
-                <Button type='submit' className='w-16 fixed xl:absolute right-4 bottom-8'>
-                    <Save />
-                </Button>
+                <div className='absolute w-16 right-4'>
+                    <Button type='submit' className='w-16 fixed bottom-8'>
+                        <Save />
+                    </Button>
+                </div>
             </form>
         </div>
     )
