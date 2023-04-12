@@ -6,6 +6,7 @@ import { LogOut } from 'lucide-react'
 import { useSupabase } from './supabase-provider'
 import { toast } from 'sonner'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface Props {
     name?: string
@@ -14,6 +15,7 @@ interface Props {
 }
 
 function SignIn() {
+    const router = useRouter()
     const { supabase } = useSupabase()
     const [form, setForm] = useState<Props>({} as Props)
 
@@ -51,7 +53,10 @@ function SignIn() {
                 return Promise.resolve()
             }, {
                 loading: 'Iniciando sesión...',
-                success: 'Sesión iniciada',
+                success: () => {
+                    router.push('/')
+                    return 'Sesión iniciada'
+                },
                 error: (error) => error.message,
             })
         }
