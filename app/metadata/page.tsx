@@ -73,7 +73,7 @@ export default function Metadata() {
                 toast.promise(qr(producto), {
                     loading: 'Generando código QR...',
                     success: (qr: Qr) => {
-                        router.push(`/metadata/generate${qr.codigo}`)
+                        router.push(qr.codigo)
                         return <div>Código QR <strong>#{qr.id}</strong> generado</div>
                     },
                     error: 'Error al generar código QR',
@@ -93,7 +93,7 @@ export default function Metadata() {
         }
 
         const url = qs.stringifyUrl({
-            url: '/',
+            url: '',
             query: updatedQuery
         }, { skipNull: true })
 
