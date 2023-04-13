@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["multiSchema"]
@@ -9,22 +6,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["public", "auth"]
-}
-
-enum Rol {
-  ADMIN
-  USUARIO
-
-  @@schema("public")
-}
-
-enum Estatus {
-  ACTIVO
-  USADO
-  DESTRUIDO
-
-  @@schema("public")
+  schemas  = ["auth", "public"]
 }
 
 model Categoria {
@@ -34,78 +16,95 @@ model Categoria {
   descripcion String?
   productos   Producto[]
 
+  @@map("categoria")
   @@schema("public")
 }
 
 model Equipo {
-  id          Int     @id @default(autoincrement())
-  nombre      String
-  descripcion String?
-  usuarios    users[]
-
+  id                 Int      @id @default(autoincrement())
+  nombre             String
+  descripcion        String?
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+  usuarios           Users[]  @relation("EquipoTousers")
 
+  @@map("equipo")
   @@schema("public")
 }
 
-model users {
-  id        Int        @id @default(autoincrement())
-  name      String
-  email     String     @unique
-  rol       Rol        @default(USUARIO)
-  equipos   Equipo[]
-  productos Producto[]
+model Users {
+  id                 Int        @id @default(autoincrement())
+  name               String
+  email              String     @unique
+  rol                Rol        @default(USUARIO)
+  fechaRegistro      DateTime   @default(now())
+  fechaActualizacion DateTime   @updatedAt
+  productos          Producto[]
+  equipos            Equipo[]   @relation("EquipoTousers")
 
-  fechaRegistro      DateTime @default(now())
-  fechaActualizacion DateTime @updatedAt
-
+  @@map("users")
   @@schema("auth")
 }
 
 model Qr {
-  id         Int      @id @default(autoincrement())
-  codigo     String   @unique
-  estatus    Estatus  @default(ACTIVO)
-  producto   Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
-  productoId Int      @unique
-
+  id                 Int      @id @default(autoincrement())
+  codigo             String   @unique
+  estatus            Estatus  @default(ACTIVO)
+  productoId         Int      @unique
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+  producto           Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
 
+  @@map("qr")
   @@schema("public")
 }
 
 model Producto {
-  id             Int       @id @default(autoincrement())
-  nombre         String
-  descripcion    String
-  categoria      String
-  cepa           String
-  thc            Float
-  cbd            Float
-  imagen         String[]
-  aroma          String
-  efecto         String
-  fabricante     String
-  pais           String
-  proveedor      String
-  precio         Float?
-  peso           Float?
-  fechaCosecha   DateTime?
-  fechaEnvasado  DateTime?
-  fechaCaducidad DateTime?
-  lote           String?
-  certificado    String?
-  notas          String?
-  qr             Qr?
-  usuarioEmail   String
+  id                 Int       @id @default(autoincrement())
+  nombre             String
+  descripcion        String
+  categoria          String
+  cepa               String
+  thc                Float
+  cbd                Float
+  imagen             String[]
+  aroma              String
+  efecto             String
+  fabricante         String
+  pais               String
+  proveedor          String
+  precio             Float?
+  peso               Float?
+  fechaCosecha       DateTime?
+  fechaEnvasado      DateTime?
+  fechaCaducidad     DateTime?
+  lote               String?
+  certificado        String?
+  notas              String?
+  usuarioEmail       String
+  fechaRegistro      DateTime  @default(now())
+  fechaActualizacion DateTime  @updatedAt
+  categoria_         Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
+  usuario_           Users     @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
+  qr                 Qr?
 
-  usuario_   users     @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
-  categoria_ Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
+  @@map("producto")
+  @@schema("public")
+}
 
-  fechaRegistro      DateTime @default(now())
-  fechaActualizacion DateTime @updatedAt
+enum Rol {
+  ADMIN
+  USUARIO
 
+  @@map("rol")
+  @@schema("public")
+}
+
+enum Estatus {
+  ACTIVO
+  USADO
+  DESTRUIDO
+
+  @@map("estatus")
   @@schema("public")
 }
