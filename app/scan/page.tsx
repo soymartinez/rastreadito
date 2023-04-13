@@ -10,7 +10,7 @@ export default function Scan() {
     const router = useRouter()
 
     const handleScan = (result: string | null) => {
-        if (!result?.startsWith(process.env.VERCEL_URL as string)) {
+        if (!result?.startsWith('https://rastreadito.vercel.app')) {
             toast.error('QR no válido', {
                 style: {
                     background: '#F87171',

@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   const res = await prisma.qr.create({
     data: {
       producto: { connect: { id: idProducto } },
-      codigo: process.env.VERCEL_URL + '/scan/product' + codigo,
+      codigo: 'https://rastreadito.vercel.app/scan/product' + codigo,
       estatus: 'ACTIVO',
     },
   })
