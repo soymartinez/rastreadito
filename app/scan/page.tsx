@@ -10,7 +10,7 @@ export default function Scan() {
     const router = useRouter()
 
     const handleScan = (result: string | null) => {
-        if (!result?.startsWith('/?categoria=')) {
+        if (!result?.startsWith(process.env.VERCEL_URL as string)) {
             toast.error('QR no válido', {
                 style: {
                     background: '#F87171',
@@ -19,7 +19,7 @@ export default function Scan() {
             return
         }
 
-        router.push(`/scan/product${result}`)
+        router.push(result)
     }
 
     const corner = {
