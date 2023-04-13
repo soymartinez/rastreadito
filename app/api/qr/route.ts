@@ -4,10 +4,9 @@ import qs from 'query-string'
 
 export async function GET(request: Request) {
   const searchParams = qs.parseUrl(request.url).query
-  const codigo = qs.stringify(searchParams)
   const qr = await prisma.qr.findUnique({
     where: {
-      codigo: '/?' + codigo
+      productoId: Number(searchParams.id),
     },
     include: {
       producto: true,
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
   const res = await prisma.qr.create({
     data: {
       producto: { connect: { id: idProducto } },
-      codigo,
+      codigo: process.env.VERCEL_URL + '/scan/product' + codigo,
       estatus: 'ACTIVO',
     },
   })
