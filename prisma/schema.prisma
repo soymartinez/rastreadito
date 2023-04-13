@@ -23,21 +23,8 @@ model Equipo {
   descripcion        String?
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
-  usuarios           Users[]  @relation("equipo_to_users")
 
   @@map("equipo")
-}
-
-model Users {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
-  rol   Rol    @default(USUARIO)
-
-  productos Producto[]
-  equipos   Equipo[]   @relation("equipo_to_users")
-
-  @@map("users")
 }
 
 model Qr {
@@ -74,11 +61,10 @@ model Producto {
   lote               String?
   certificado        String?
   notas              String?
-  usuarioEmail       String
+  usuario            String
   fechaRegistro      DateTime  @default(now())
   fechaActualizacion DateTime  @updatedAt
   categoria_         Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
-  usuario_           Users     @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
   qr                 Qr?
 
   @@map("producto")
