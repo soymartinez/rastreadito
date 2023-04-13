@@ -2,8 +2,11 @@ import { NextResponse } from 'next/server'
 
 import { prisma } from '@/lib/prisma'
 import { Producto } from '@prisma/client'
+import { useSupabaseServer } from '@/hooks/auth'
 
 export async function POST(req: Request) {
+    const { user } = await useSupabaseServer()
+
     const {
         nombre,
         descripcion,
@@ -25,10 +28,7 @@ export async function POST(req: Request) {
         lote,
         certificado,
         notas,
-        usuarioEmail,
     }: Producto = await req.json()
-
-    console.log(await req.json())
 
     const res = await prisma.producto.create({
         data: {
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
             lote,
             certificado,
             notas,
-            usuarioEmail: 'martnzomg@gmail.com',
+            usuario: user?.email || '',
         },
     })
 
