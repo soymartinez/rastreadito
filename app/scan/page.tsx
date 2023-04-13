@@ -10,7 +10,7 @@ export default function Scan() {
     const router = useRouter()
 
     const handleScan = (result: string | null) => {
-        if (!result?.startsWith('/?fecha=')) {
+        if (!result?.startsWith('/?categoria=')) {
             toast.error('QR no válido', {
                 style: {
                     background: '#F87171',
