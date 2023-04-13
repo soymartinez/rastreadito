@@ -1,12 +1,10 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["multiSchema"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["auth", "public"]
 }
 
 model Categoria {
@@ -17,7 +15,6 @@ model Categoria {
   productos   Producto[]
 
   @@map("categoria")
-  @@schema("public")
 }
 
 model Equipo {
@@ -26,24 +23,21 @@ model Equipo {
   descripcion        String?
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
-  usuarios           Users[]  @relation("EquipoTousers")
+  usuarios           Users[]  @relation("equipo_to_users")
 
   @@map("equipo")
-  @@schema("public")
 }
 
 model Users {
-  id                 Int        @id @default(autoincrement())
-  name               String
-  email              String     @unique
-  rol                Rol        @default(USUARIO)
-  fechaRegistro      DateTime   @default(now())
-  fechaActualizacion DateTime   @updatedAt
-  productos          Producto[]
-  equipos            Equipo[]   @relation("EquipoTousers")
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
+  rol   Rol    @default(USUARIO)
+
+  productos Producto[]
+  equipos   Equipo[]   @relation("equipo_to_users")
 
   @@map("users")
-  @@schema("auth")
 }
 
 model Qr {
@@ -56,7 +50,6 @@ model Qr {
   producto           Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
 
   @@map("qr")
-  @@schema("public")
 }
 
 model Producto {
@@ -89,7 +82,6 @@ model Producto {
   qr                 Qr?
 
   @@map("producto")
-  @@schema("public")
 }
 
 enum Rol {
@@ -97,7 +89,6 @@ enum Rol {
   USUARIO
 
   @@map("rol")
-  @@schema("public")
 }
 
 enum Estatus {
@@ -106,5 +97,4 @@ enum Estatus {
   DESTRUIDO
 
   @@map("estatus")
-  @@schema("public")
 }
