@@ -2,23 +2,29 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas  = ["public", "auth"]
 }
 
 enum Rol {
   ADMIN
   USUARIO
+
+  @@schema("public")
 }
 
 enum Estatus {
   ACTIVO
   USADO
   DESTRUIDO
+
+  @@schema("public")
 }
 
 model Categoria {
@@ -27,21 +33,25 @@ model Categoria {
   acronimo    String     @unique
   descripcion String?
   productos   Producto[]
+
+  @@schema("public")
 }
 
 model Equipo {
-  id          Int       @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   nombre      String
   descripcion String?
-  usuarios    Usuario[]
+  usuarios    users[]
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+
+  @@schema("public")
 }
 
-model Usuario {
+model users {
   id        Int        @id @default(autoincrement())
-  nombre    String
+  name      String
   email     String     @unique
   rol       Rol        @default(USUARIO)
   equipos   Equipo[]
@@ -49,6 +59,8 @@ model Usuario {
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+
+  @@schema("auth")
 }
 
 model Qr {
@@ -60,6 +72,8 @@ model Qr {
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+
+  @@schema("public")
 }
 
 model Producto {
@@ -87,9 +101,11 @@ model Producto {
   qr             Qr?
   usuarioEmail   String
 
-  usuario_   Usuario   @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
+  usuario_   users     @relation(fields: [usuarioEmail], references: [email], onDelete: Cascade)
   categoria_ Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
 
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
+
+  @@schema("public")
 }
