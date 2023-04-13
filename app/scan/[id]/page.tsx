@@ -30,10 +30,9 @@ export default async function ScannedProduct() {
     const qr = await getData({ origin, search })
     return (
         <main className='min-h-screen relative max-w-7xl mx-auto'>
-            <div className='px-4'>
-                <div className='flex justify-center items-center py-8 relative'>
+            <div className='px-4 py-8 absolute inset-x-0 top-0'>
+                <div className='relative h-7 flex items-center'>
                     <Back className='absolute left-0' />
-                    {/* <h1 className='font-bold text-xl'>QR generado</h1> */}
                 </div>
             </div>
             <Scanned {...qr} />
