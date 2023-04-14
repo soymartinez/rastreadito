@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     data: {
       producto: { connect: { id: idProducto } },
       codigo: 'https://rastreadito.vercel.app/scan/product' + codigo,
-      estatus: 'ACTIVO',
+      estatus: 'USADO',
     },
   })
   return NextResponse.json(res)
