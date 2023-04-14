@@ -6,9 +6,20 @@ import clsx from 'clsx'
 import { LayoutGrid, LayoutList } from 'lucide-react'
 import { CategoryCard, GeneralCard } from '@/components/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
+import { Categoria, Qr } from '@prisma/client'
 
-export default function MainTabs() {
+interface MainTabsProps {
+    qr?: Qr[],
+    categories?: Categoria[],
+}
+
+export default function MainTabs({ qr, categories }: MainTabsProps) {
     const [layoutGrid, setLayoutGrid] = useState<'layout-list' | 'layout-grid'>('layout-list')
+    const [qrList] = useState({
+        active: qr?.filter(qr => qr.estatus === 'ACTIVO'),
+        use: qr?.filter(qr => qr.estatus === 'USADO'),
+        destroyed: qr?.filter(qr => qr.estatus === 'DESTRUIDO'),
+    })
 
     const handleLayoutGrid = () => {
         layoutGrid === 'layout-list'
@@ -72,7 +83,7 @@ export default function MainTabs() {
                         props={{
                             title: 'Activo',
                             description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
-                            number: 0,
+                            number: qrList.active?.length || 0,
                             icon: 'active',
                         }}
                     />
@@ -81,7 +92,7 @@ export default function MainTabs() {
                         props={{
                             title: 'Uso',
                             description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
-                            number: 0,
+                            number: qrList.use?.length || 0,
                             icon: 'use',
                         }}
                     />
@@ -90,7 +101,7 @@ export default function MainTabs() {
                         props={{
                             title: 'Destruido',
                             description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
-                            number: 0,
+                            number: qrList.destroyed?.length || 0,
                             icon: 'destroy',
                         }}
                     />
