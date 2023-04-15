@@ -9,10 +9,12 @@ import MainTabs from '@/components/main-tabs'
 import { Button } from '@/ui/button'
 import { headers } from 'next/headers'
 
-export const revalidate = 0
-
 async function getQr(origin: string, email: string,) {
-  const res = await fetch(origin + '/api/qr/' + email)
+  const res = await fetch(origin + '/api/qr/' + email, {
+    next: {
+      revalidate: 10,
+    },
+  })
   if (!res.ok) {
     throw new Error('Failed to fetch qr')
   }
