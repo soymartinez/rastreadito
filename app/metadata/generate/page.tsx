@@ -7,19 +7,15 @@ import { Button } from '@/ui/button'
 
 import ModalButton from '@/components/modal/modal-button'
 import GenerateQr from '@/components/generateQr'
-import { Producto, Qr } from '@prisma/client'
 import { headers } from 'next/headers'
-
-type GetDataType = Qr & {
-    producto: Producto
-}
+import { QrProductType } from '@/types'
 
 interface Params {
     origin: string,
     search: string,
 }
 
-async function getData({ origin, search }: Params): Promise<GetDataType> {
+async function getData({ origin, search }: Params): Promise<QrProductType> {
     const res = await fetch(`${origin}/api/qr${search}`)
 
     if (!res.ok) {
