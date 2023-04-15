@@ -40,7 +40,7 @@ model Qr {
 }
 
 model Producto {
-  id                 Int        @id @default(autoincrement())
+  id                 Int       @id @default(autoincrement())
   nombre             String
   descripcion        String
   categoria          String
@@ -62,26 +62,12 @@ model Producto {
   certificado        String?
   notas              String?
   usuario            String
-  fechaRegistro      DateTime   @default(now())
-  fechaActualizacion DateTime   @updatedAt
-  categoria_         Categoria  @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
+  fechaRegistro      DateTime  @default(now())
+  fechaActualizacion DateTime  @updatedAt
+  categoria_         Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
   qr                 Qr?
-  historial          Historial?
 
   @@map("producto")
-}
-
-model Historial {
-  id                 Int      @id @default(autoincrement())
-  factura            String
-  usuario            String
-  estatus            Estatus
-  productoId         Int      @unique
-  producto           Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
-  fechaRegistro      DateTime @default(now())
-  fechaActualizacion DateTime @updatedAt
-
-  @@map("historial")
 }
 
 enum Rol {
