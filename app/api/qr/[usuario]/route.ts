@@ -8,6 +8,9 @@ export async function GET(request: Request, { params }: { params: { usuario: str
                 usuario: params.usuario
             }
         },
+        include: {
+            producto: true,
+        }
     })
     return NextResponse.json(qr)
 }
