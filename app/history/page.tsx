@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 type QrProductType = (Qr & { producto: Producto })[]
 
-export async function getHistorial(origin: string, usuario: string): Promise<QrProductType> {
+async function getHistorial(origin: string, usuario: string): Promise<QrProductType> {
     const res = await fetch(origin + '/api/qr/' + usuario)
     const data = await res.json()
     return data
