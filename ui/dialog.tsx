@@ -109,7 +109,7 @@ const DialogClose = React.forwardRef<
     <DialogPrimitive.Close
         ref={ref}
         className={clsx(
-            'w-min dark:bg-_dark dark:hover:bg-_primary/[15%] p-2 rounded-full',
+            'w-min dark:bg-_primary/[15%] bg-_primary hover:bg-_primary/80 dark:hover:bg-_primary/30 transition p-2 rounded-full',
             className
         )}
         {...props}
