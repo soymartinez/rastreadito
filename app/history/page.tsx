@@ -13,7 +13,7 @@ async function getHistorial(usuario: string) {
 
     if (!res) throw new Error('No se pudo obtener el historial.')
 
-    return res
+    return JSON.parse(JSON.stringify(res))
 }
 
 export default async function History() {
