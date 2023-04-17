@@ -45,7 +45,7 @@ export default function Tr({
     return (
         <tr
             key={id}
-            className='bg-_white hover:bg-_gray/50 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto'
+            className='bg-_white hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto'
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
@@ -62,8 +62,8 @@ export default function Tr({
             <td className='px-3 py-2 font-semibold whitespace-nowrap relative'>
                 {hover &&
                     <Link href={`/product/${productoId}`}>
-                        <div className='absolute right-0 top-2.5 dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
-                            <Maximize2 size={14} className='dark:text-_primary' />
+                        <div className='absolute right-0 top-2.5 bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+                            <Maximize2 size={14} className='text-_dark dark:text-_primary' />
                         </div>
                     </Link>}
                 {productoNombre}
