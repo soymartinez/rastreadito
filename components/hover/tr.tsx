@@ -1,9 +1,10 @@
 'use client'
 
 import { QrProductType } from '@/types'
-import { Check, Maximize2, Tag, X } from 'lucide-react'
+import { Maximize2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { ActiveButton, DestroyButton, UseButton } from '../status'
 
 interface Props {
     data: QrProductType
@@ -23,24 +24,6 @@ export default function Tr({
     }
 }: Props) {
     const [hover, setHover] = useState(false)
-
-    const ActiveButton = () => (
-        <div className='bg-_primary/[15%] text-_primary flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-            <Check size={18} /> Activo
-        </div>
-    )
-
-    const UseButton = () => (
-        <div className='bg-[#00d0ff]/[15%] text-[#00d0ff] flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-            <Tag size={18} /> Uso
-        </div>
-    )
-
-    const DestroyButton = () => (
-        <div className='bg-_darkText/[15%] text-_darkText dark:bg-_darkText dark:text-_white/70 flex items-center justify-center gap-1 w-min rounded-full px-3 py-1'>
-            <X size={18} /> Destruído
-        </div>
-    )
 
     return (
         <tr
