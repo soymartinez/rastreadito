@@ -19,7 +19,7 @@ export default function ModalPage({ children }: ModalPageProps) {
             defaultOpen
             onOpenChange={(open) => open ? null : back()}
         >
-            <DialogContent className='sm:max-w-3xl sm:h-[600px] overflow-hidden flex flex-col justify-between'>
+            <DialogContent className='sm:max-w-[768px] sm:h-[600px] overflow-hidden flex flex-col justify-between'>
                 <div className='flex justify-between sticky top-0 h-min'>
                     <button
                         onClick={() => window.location.reload()}
@@ -39,9 +39,9 @@ export default function ModalPage({ children }: ModalPageProps) {
                     </button>
                     <DialogClose />
                 </div>
-                <div className='h-full overflow-auto'>
+                {/* <div className='h-full overflow-auto'> */}
                     {children}
-                </div>
+                {/* </div> */}
             </DialogContent>
         </Dialog >
     )
