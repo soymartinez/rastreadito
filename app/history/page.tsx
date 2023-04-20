@@ -54,7 +54,7 @@ export default async function History() {
                     </div>
                 </TabsList>
                 <TabsContent value='all' className='overflow-auto w-full'>
-                    <table className='table-auto text-xs w-full border-separate border-spacing-0 mt-6'>
+                    <table className='table-auto text-xs w-full border-separate border-spacing-0 my-6'>
                         <thead className='text-_grayText uppercase sticky top-0 z-30'>
                             <tr className='text-left'>
                                 <th className='px-3 py-2'>
