@@ -8,7 +8,8 @@ import { prisma } from '@/lib/prisma'
 async function getHistorial(usuario: string) {
     const res = await prisma.qr.findMany({
         where: { producto: { usuario } },
-        include: { producto: true }
+        include: { producto: true },
+        orderBy: { fechaRegistro: 'desc' },
     })
 
     if (!res) throw new Error('No se pudo obtener el historial.')
