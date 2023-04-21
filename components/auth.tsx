@@ -167,7 +167,7 @@ function SignOut() {
         if (!error) router.push('/auth')
     }
     return (
-        <Button onClick={handleSignOut} variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
+        <Button onClick={handleSignOut} type={'button'} variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
             <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
         </Button>
     )
