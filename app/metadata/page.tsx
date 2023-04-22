@@ -26,6 +26,7 @@ export default function Metadata() {
                 <h1 className='font-bold text-xl'>Metadata</h1>
             </div>
             <FormMetadata
+                className='my-8'
                 categorias={categorias}
             />
         </div>
