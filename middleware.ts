@@ -23,6 +23,7 @@ export async function middleware(req: NextRequest) {
         '/',
         '/account',
         '/metadata',
+        '/history',
     ]
     const url = new URL(req.url)
 
