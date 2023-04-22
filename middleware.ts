@@ -24,6 +24,7 @@ export async function middleware(req: NextRequest) {
         '/account',
         '/metadata',
         '/history',
+        '/product',
     ]
     const url = new URL(req.url)
 
