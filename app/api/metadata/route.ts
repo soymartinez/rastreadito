@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     const { user } = await useSupabaseServer()
 
     const {
+        id,
         nombre,
         descripcion,
         categoria,
@@ -30,8 +31,11 @@ export async function POST(req: Request) {
         notas,
     }: Producto = await req.json()
 
-    const res = await prisma.producto.create({
-        data: {
+    const res = await prisma.producto.upsert({
+        where: {
+            id
+        },
+        create: {
             nombre,
             descripcion,
             categoria,
@@ -53,6 +57,28 @@ export async function POST(req: Request) {
             certificado,
             notas,
             usuario: user?.email || '',
+        },
+        update: {
+            nombre,
+            descripcion,
+            categoria,
+            cepa,
+            thc: Number(thc),
+            cbd: Number(cbd),
+            imagen,
+            aroma,
+            efecto,
+            fabricante,
+            pais,
+            proveedor,
+            precio: Number(precio),
+            peso: Number(peso),
+            fechaCosecha: new Date(fechaCosecha || new Date()),
+            fechaEnvasado: new Date(fechaEnvasado || new Date()),
+            fechaCaducidad: new Date(fechaCaducidad || new Date()),
+            lote,
+            certificado,
+            notas,
         },
     })
 
