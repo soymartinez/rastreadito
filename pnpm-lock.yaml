@@ -12,6 +12,7 @@ specifiers:
   '@types/node': 18.14.6
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  '@vercel/analytics': ^1.0.0
   autoprefixer: ^10.4.13
   class-variance-authority: ^0.4.0
   clsx: ^1.2.1
@@ -47,6 +48,7 @@ dependencies:
   '@types/node': 18.14.6
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  '@vercel/analytics': 1.0.0_react@18.2.0
   class-variance-authority: 0.4.0_typescript@4.9.5
   clsx: 1.2.1
   eslint: 8.35.0
@@ -968,6 +970,14 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.57.1
       eslint-visitor-keys: 3.4.0
+    dev: false
+
+  /@vercel/analytics/1.0.0_react@18.2.0:
+    resolution: {integrity: sha512-RQmj7pv82JwGDHrnKeRc6TtSw2U7rWNubc2IH0ernTzWTj02yr9zvIYiYJeztsBzrJtWv7m8Nz6vxxb+cdEtJw==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@zxing/browser/0.0.7_@zxing+library@0.18.6:
