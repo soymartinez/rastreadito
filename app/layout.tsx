@@ -1,5 +1,6 @@
 import './globals.css'
 import { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { Poppins as Font } from 'next/font/google'
 import { ThemeProvider } from '@/components/provider'
 import SupabaseProvider from '@/components/supabase-provider'
@@ -24,7 +25,10 @@ export default async function RootLayout({ children, }: { children: React.ReactN
     <html lang='en' suppressHydrationWarning>
       <body className={`bg-_white text-_dark dark:bg-_dark dark:text-_white ${font.variable} font-sans`}>
         <ThemeProvider>
-          <SupabaseProvider>{children}</SupabaseProvider>
+          <SupabaseProvider>
+            {children}
+            <Analytics />
+          </SupabaseProvider>
         </ThemeProvider>
         <Toast />
       </body>
