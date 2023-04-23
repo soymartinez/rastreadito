@@ -28,7 +28,7 @@
     "eslint-config-next": "13.3.0",
     "framer-motion": "^10.3.1",
     "lucide-react": "^0.122.0",
-    "next": "13.3.1-canary.10",
+    "next": "13.3.1-canary.19",
     "next-themes": "^0.2.1",
     "prisma": "^4.12.0",
     "query-string": "^8.1.0",
