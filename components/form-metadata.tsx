@@ -76,10 +76,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                 success: (producto: Producto) => {
                     return <div>Producto <strong>{producto.nombre}</strong> actualizado</div>
                 },
-                error: (err) => {
-                    console.log(err)
-                    return 'Error al actualizar'
-                },
+                error: 'Error al actualizar',
             })
         } else {
             const res = async () => {
@@ -199,9 +196,9 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                     <Input name='proveedor' labelText='Proveedor' placeholder='Rastreadito Co.' defaultValue={proveedor} required />
                     <Input name='precio' labelText='PRECIO' placeholder='0' variant='currency' defaultValue={precio || 0} />
                     <Input name='peso' labelText='PESO' placeholder='0' variant='weight' defaultValue={peso || 0} />
-                    <Input name='fechaCosecha' labelText='Cosecha' variant='date' defaultValue={fechaCosecha?.toLocaleString().substring(0, 10)} />
-                    <Input name='fechaEnvasado' labelText='Envasado' variant='date' defaultValue={fechaEnvasado?.toLocaleString().substring(0, 10)} />
-                    <Input name='fechaCaducidad' labelText='Caducidad' variant='date' defaultValue={fechaCaducidad?.toLocaleString().substring(0, 10)} />
+                    <Input name='fechaCosecha' labelText='Cosecha' variant='date' defaultValue={fechaCosecha?.toLocaleString('en-CA').substring(0, 10)} />
+                    <Input name='fechaEnvasado' labelText='Envasado' variant='date' defaultValue={fechaEnvasado?.toLocaleString('en-CA').substring(0, 10)} />
+                    <Input name='fechaCaducidad' labelText='Caducidad' variant='date' defaultValue={fechaCaducidad?.toLocaleString('en-CA').substring(0, 10)} />
                     <Input name='lote' labelText='Lote' placeholder='RD-2023-01-01' defaultValue={lote || undefined} />
                     <Input name='certificado' labelText='Certificado' placeholder='URL de analisis de laboratorio' defaultValue={certificado || undefined} />
                     <Textarea name='notas' labelText='Notas' placeholder='Este producto se cosecho 4:20am' defaultValue={notas || undefined} />
