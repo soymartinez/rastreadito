@@ -39,7 +39,7 @@ export default async function Generate() {
         <main className='min-h-screen relative max-w-7xl mx-auto'>
             <div className='px-4'>
                 <div className='flex justify-center items-center py-8 relative'>
-                    <Back className='absolute left-0' />
+                    <Back pushRoute='/' className='absolute left-0' />
                     <h1 className='font-bold text-xl'>QR generado</h1>
                 </div>
                 <div className='flex justify-center items-center mt-2'>
