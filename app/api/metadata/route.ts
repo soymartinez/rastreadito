@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
     const res = await prisma.producto.upsert({
         where: {
-            id
+            id: id !== undefined ? Number(id) : -1,
         },
         create: {
             nombre,
@@ -50,9 +50,9 @@ export async function POST(req: Request) {
             proveedor,
             precio: Number(precio),
             peso: Number(peso),
-            fechaCosecha: new Date(fechaCosecha || new Date()),
-            fechaEnvasado: new Date(fechaEnvasado || new Date()),
-            fechaCaducidad: new Date(fechaCaducidad || new Date()),
+            fechaCosecha: fechaCosecha ? new Date(fechaCosecha) : null,
+            fechaEnvasado: fechaEnvasado ? new Date(fechaEnvasado) : null,
+            fechaCaducidad: fechaCaducidad ? new Date(fechaCaducidad) : null,
             lote,
             certificado,
             notas,
@@ -73,9 +73,9 @@ export async function POST(req: Request) {
             proveedor,
             precio: Number(precio),
             peso: Number(peso),
-            fechaCosecha: new Date(fechaCosecha || new Date()),
-            fechaEnvasado: new Date(fechaEnvasado || new Date()),
-            fechaCaducidad: new Date(fechaCaducidad || new Date()),
+            fechaCosecha: fechaCosecha ? new Date(fechaCosecha) : null,
+            fechaEnvasado: fechaEnvasado ? new Date(fechaEnvasado) : null,
+            fechaCaducidad: fechaCaducidad ? new Date(fechaCaducidad) : null,
             lote,
             certificado,
             notas,
