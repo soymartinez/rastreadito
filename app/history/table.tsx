@@ -12,8 +12,8 @@ export default function Table({ data }: TableProps) {
         <table className='table-auto text-xs w-full border-separate border-spacing-0 my-6'>
             <thead className='text-_grayText uppercase sticky top-0 z-30'>
                 <tr className='text-left'>
-                    <th className='px-3 py-2'>
-                        <div className='flex items-center justify-center'>
+                    <th className='pl-3 pr-1 py-2 flex justify-between'>
+                        <div className='flex items-center justify'>
                             <input type='checkbox' name='select-all' id='select-all' className='w-4 h-4 m-auto accent-_primary rounded-full' />
                         </div>
                     </th>
