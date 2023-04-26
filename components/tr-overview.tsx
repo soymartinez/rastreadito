@@ -36,7 +36,7 @@ export default function TrOverview({
                 <h1 className='font-semibold whitespace-nowrap text-_dark dark:text-_white uppercase'>#{categoria} {id}</h1>
             </td>
             <td className='px-3 py-1'>
-                <h1 className='text-base font-semibold'>{nombre}</h1>
+                <h1 className='text-base font-semibold whitespace-nowrap'>{nombre}</h1>
             </td>
             <td className='px-3 py-1 w-full'>
                 <Button className='h-min hover:bg-_grayText/30 hover:text-_darkText dark:hover:bg-_dark' style={{ padding: '0 8px' }} variant={'outline'} onClick={() => setShowQr(true)}>
