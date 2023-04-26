@@ -3,7 +3,7 @@ import { Scan } from 'lucide-react'
 
 export default function Navbar() {
     return (
-        <nav className='sticky top-0 z-50 bg-white dark:bg-_dark/60 backdrop-blur-[8px]'>
+        <nav className='sticky top-0 z-50 bg-white/60 dark:bg-_dark/60 backdrop-blur-[8px]'>
             <div className='flex justify-between items-center py-6 relative px-4 max-w-7xl mx-auto'>
                 <h1 className='font-black text-2xl uppercase italic'>rastreadito</h1>
                 <div className='flex gap-2'>
