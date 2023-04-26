@@ -103,9 +103,13 @@ function HistorialCard({ data }: { data: any }) {
                 </tr>
             </thead>
             <tbody className='text-_grayText text-base overflow-hidden'>
-                {data && data.map((data: QrProductType) => (
-                    <TrOverview key={data.id} data={data} />
-                ))}
+                {data && data.map((data: QrProductType, index: number) => {
+                    if (index < 6) {
+                        return (
+                            <TrOverview key={data.id} data={data} />
+                        )
+                    }
+                })}
             </tbody>
         </table>
     )
