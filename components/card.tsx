@@ -5,6 +5,7 @@ import { Button } from '@/ui/button'
 import Image from 'next/image'
 import { QrProductType } from '@/types'
 import TrOverview from './tr-overview'
+import { useRouter } from 'next/navigation'
 
 function GeneralCard({ props, layoutGrid }: {
     props: {
@@ -92,26 +93,38 @@ function CategoryCard({
 }
 
 function HistorialCard({ data }: { data: any }) {
+    const { push } = useRouter()
     return (
-        <table className='table-auto text-xs w-full border-separate border-spacing-0'>
-            <thead className='text-_grayText uppercase sticky top-0 z-30'>
-                <tr className='text-left'>
-                    <th className='px-3 py-2 font-medium'>Factura</th>
-                    <th className='px-3 py-2 font-medium'>Nombre</th>
-                    <th className='px-3 py-2 font-medium'>Codigo</th>
-                    <th className='px-3 py-2 font-medium sticky right-0 bg-_white dark:bg-_dark border-l-4 border-_gray dark:border-_darkText'>Estado</th>
-                </tr>
-            </thead>
-            <tbody className='text-_grayText text-base overflow-hidden'>
-                {data && data.map((data: QrProductType, index: number) => {
-                    if (index < 6) {
-                        return (
-                            <TrOverview key={data.id} data={data} />
-                        )
-                    }
-                })}
-            </tbody>
-        </table>
+        <>
+            <div className='overflow-auto w-full'>
+                <table className='table-auto text-xs w-full border-separate border-spacing-0'>
+                    <thead className='text-_grayText uppercase sticky top-0 z-30'>
+                        <tr className='text-left'>
+                            <th className='px-3 py-2 font-medium'>Factura</th>
+                            <th className='px-3 py-2 font-medium'>Nombre</th>
+                            <th className='px-3 py-2 font-medium'>Codigo</th>
+                            <th className='px-3 py-2 font-medium sticky right-0 bg-_white dark:bg-_dark border-l-4 border-_gray dark:border-_darkText'>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-_grayText text-base overflow-hidden'>
+                        {data && data.map((data: QrProductType, index: number) => {
+                            if (index < 6) {
+                                return (
+                                    <TrOverview key={data.id} data={data} />
+                                )
+                            }
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            <div
+                className='p-2 flex justify-center items-center gap-2 text-xs font-semibold text-_grayText hover:bg-_gray/80 dark:text-_darkText cursor-pointer'
+                onClick={() => push('/history')}
+            >
+                <span>Ver mas</span>
+                <span className='text-lg'><PackageOpen /></span>
+            </div>
+        </>
     )
 }
 
@@ -120,4 +133,4 @@ export {
     PricingCard,
     CategoryCard,
     HistorialCard,
-}
+}   
