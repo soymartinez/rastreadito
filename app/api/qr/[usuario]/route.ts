@@ -10,6 +10,9 @@ export async function GET(request: Request, { params }: { params: { usuario: str
         },
         include: {
             producto: true,
+        },
+        orderBy: {
+            fechaRegistro: 'desc',
         }
     })
     return NextResponse.json(qr)
