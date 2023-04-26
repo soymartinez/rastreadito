@@ -64,47 +64,49 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                     </Link>
                 </div>
             </TabsList>
-            <TabsContent value='general'>
-                <div className='flex justify-between items-center pt-6 pb-3'>
-                    <h1 className='font-semibold text-xl'>General</h1>
-                    <button onClick={handleLayoutGrid}
-                        className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
-                        {layoutGrid === 'layout-list'
-                            ? <LayoutGrid />
-                            : <LayoutList />}
-                    </button>
-                </div>
-                <div className={clsx('grid gap-3', {
-                    'grid-cols-1': layoutGrid === 'layout-list',
-                    'grid-cols-2': layoutGrid === 'layout-grid',
-                })}>
-                    <GeneralCard
-                        layoutGrid={layoutGrid}
-                        props={{
-                            title: 'Activo',
-                            description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
-                            number: qrList.active?.length || 0,
-                            icon: 'active',
-                        }}
-                    />
-                    <GeneralCard
-                        layoutGrid={layoutGrid}
-                        props={{
-                            title: 'Uso',
-                            description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
-                            number: qrList.use?.length || 0,
-                            icon: 'use',
-                        }}
-                    />
-                    <GeneralCard
-                        layoutGrid={layoutGrid}
-                        props={{
-                            title: 'Destruido',
-                            description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
-                            number: qrList.destroyed?.length || 0,
-                            icon: 'destroy',
-                        }}
-                    />
+            <TabsContent value='general' className='flex flex-col gap-6 md:gap-8'>
+                <div>
+                    <div className='flex justify-between items-center pt-6 pb-3'>
+                        <h1 className='font-semibold text-xl'>General</h1>
+                        <button onClick={handleLayoutGrid}
+                            className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
+                            {layoutGrid === 'layout-list'
+                                ? <LayoutGrid />
+                                : <LayoutList />}
+                        </button>
+                    </div>
+                    <div className={clsx('grid gap-3', {
+                        'grid-cols-1': layoutGrid === 'layout-list',
+                        'grid-cols-2': layoutGrid === 'layout-grid',
+                    })}>
+                        <GeneralCard
+                            layoutGrid={layoutGrid}
+                            props={{
+                                title: 'Activo',
+                                description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
+                                number: qrList.active?.length || 0,
+                                icon: 'active',
+                            }}
+                        />
+                        <GeneralCard
+                            layoutGrid={layoutGrid}
+                            props={{
+                                title: 'Uso',
+                                description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
+                                number: qrList.use?.length || 0,
+                                icon: 'use',
+                            }}
+                        />
+                        <GeneralCard
+                            layoutGrid={layoutGrid}
+                            props={{
+                                title: 'Destruido',
+                                description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
+                                number: qrList.destroyed?.length || 0,
+                                icon: 'destroy',
+                            }}
+                        />
+                    </div>
                 </div>
 
                 <div>
