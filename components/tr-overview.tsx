@@ -38,7 +38,7 @@ export default function TrOverview({
             <td className='px-3 py-1'>
                 <h1 className='text-base font-semibold whitespace-nowrap'>{nombre}</h1>
             </td>
-            <td className='px-3 py-1 w-full'>
+            <td className='px-3 py-1'>
                 <Button className='h-min hover:bg-_grayText/30 hover:text-_darkText dark:hover:bg-_dark' style={{ padding: '0 8px' }} variant={'outline'} onClick={() => setShowQr(true)}>
                     <h1 className='text-base font-semibold whitespace-nowrap text-_grayText'>Mostar código</h1>
                 </Button>
@@ -48,7 +48,7 @@ export default function TrOverview({
                             <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-full font-semibold pt-8 pb-10'>
-                            <h1 className='font-semibold text-4xl text-center'>{nombre}</h1>
+                            <h1 className='font-semibold text-4xl text-center dark:text-_white'>{nombre}</h1>
                             <Balancer className='text-center dark:text-_grayText'>
                                 {descripcion}
                                 <p>
