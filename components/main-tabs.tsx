@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { LayoutGrid, LayoutList } from 'lucide-react'
-import { CategoryCard, GeneralCard } from '@/components/card'
+import { CategoryCard, GeneralCard, HistorialCard } from '@/components/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
 
@@ -105,6 +105,13 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                             icon: 'destroy',
                         }}
                     />
+                </div>
+
+                <div>
+                    <div className='flex justify-between items-center pt-6 pb-3'>
+                        <h1 className='font-semibold text-xl'>Ultimos códigos</h1>
+                    </div>
+                    <HistorialCard data={qr} />
                 </div>
             </TabsContent>
             <TabsContent value='categories'>
