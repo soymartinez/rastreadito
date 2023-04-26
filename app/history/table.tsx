@@ -1,6 +1,6 @@
 'use client'
 
-import Tr from '@/components/hover/tr'
+import Tr from '@/components/tr'
 import { QrProductType } from '@/types'
 import { useState } from 'react'
 
