@@ -35,9 +35,11 @@ export default async function Home() {
         qr={qr}
       />
       <Link href={'/metadata'} className='rounded-2xl'>
-        <Button className='w-16 fixed xl:absolute right-4 bottom-8'>
-          <QrCode />
-        </Button>
+        <div className='absolute z-30 w-16 right-4'>
+          <Button type='submit' className='w-16 fixed bottom-8'>
+            <QrCode />
+          </Button>
+        </div>
       </Link>
     </main >
   )
