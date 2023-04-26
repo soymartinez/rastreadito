@@ -5,7 +5,7 @@ import { QrProductType } from '@/types'
 import clsx from 'clsx'
 import { Maximize2 } from 'lucide-react'
 import Link from 'next/link'
-import { ActiveButton, DestroyButton, UseButton } from '../status'
+import { ActiveButton, DestroyButton, UseButton } from './status'
 
 interface Props {
     data: QrProductType
