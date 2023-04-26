@@ -50,7 +50,7 @@ export default function Tr({
             onMouseLeave={() => setHover(false)}
         >
             <td className='pl-3 pr-1 py-2 w-20'>
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between items-center w-16'>
                     <div className='flex items-center justify-center'>
                         <input
                             onChange={(e) => handleSelected(e.target.checked)}
@@ -61,12 +61,13 @@ export default function Tr({
                             className='w-4 h-4 m-auto accent-_primary rounded-full' />
                     </div>
                     <div>
-                        {hover &&
-                            <Link href={`/product/${productoId}`}>
-                                <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
-                                    <Maximize2 size={14} className='text-_dark dark:text-_primary' />
-                                </div>
-                            </Link>}
+                        <Link href={`/product/${productoId}`} className={clsx({
+                            'md:hidden ': !hover,
+                        })}>
+                            <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+                                <Maximize2 size={14} className='text-_dark dark:text-_primary' />
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </td>
