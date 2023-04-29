@@ -10,8 +10,8 @@ const buttonVariants = cva(
             variant: {
                 default:
                     'bg-_primary text-_dark hover:bg-_primary/80',
-                destructive:
-                    'bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600',
+                image:
+                    'bg-_gray dark:bg-_darkText rounded-2xl overflow-hidden p-2 h-14 w-14',
                 outline:
                     'border-2 border-_gray dark:border-_darkText',
                 subtle:
@@ -24,6 +24,7 @@ const buttonVariants = cva(
                 default: 'h-16 py-2 px-4',
                 sm: 'h-9 px-2 rounded-md',
                 lg: 'h-11 px-8 rounded-md',
+                nothing: '',
             },
         },
         defaultVariants: {
