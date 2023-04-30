@@ -62,6 +62,7 @@ export default async function Product({ params }: { params: { id: string } }) {
       <div className='flex flex-col gap-12 my-10 relative'>
         <div className='flex flex-col items-center gap-8'>
           <Image
+            className='w-96'
             src={imageExample}
             alt='mango-cart'
           />
