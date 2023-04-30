@@ -1,9 +1,8 @@
-import { headers } from 'next/headers'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 
-import { Back } from '@/ui/back'
-import Image from 'next/image'
 import imageExample from '@/public/cart-mango-96.png'
+import { Back } from '@/ui/back'
 import { Label } from '@/ui/label'
 import { Button } from '@/ui/button'
 
@@ -24,19 +23,31 @@ async function getProduct(id: string) {
   return res
 }
 
-const getCategorias = async (origin: string) => {
-  const res = await fetch(origin + '/api/categorias')
-  const data = await res.json()
-  return data
-}
-
 export default async function Product({ params }: { params: { id: string } }) {
-  const { get } = headers()
-  const origin = get('x-origin') || ''
-  const categorias = await getCategorias(origin)
   const {
-    estatus,
-    producto
+    producto: {
+      nombre,
+      imagen,
+      descripcion,
+      thc,
+      cbd,
+      categoria,
+      aroma,
+      efecto,
+      cepa,
+      fabricante,
+      proveedor,
+      pais,
+      lote,
+      peso,
+      precio,
+      certificado,
+      notas,
+      fechaRegistro,
+      fechaCaducidad,
+      fechaCosecha,
+      fechaEnvasado,
+    },
   } = await getProduct(params.id)
 
   return (
@@ -46,10 +57,10 @@ export default async function Product({ params }: { params: { id: string } }) {
         <h1 className='font-bold text-xl'>Producto</h1>
       </div>
       <div className='py-4'>
-        <h1 className='text-5xl font-bold'>Purple Kush</h1>
+        <h1 className='text-5xl font-bold'>{nombre}</h1>
       </div>
       <div className='flex flex-col gap-12 my-10 relative'>
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col items-center gap-8'>
           <Image
             src={imageExample}
             alt='mango-cart'
@@ -66,37 +77,97 @@ export default async function Product({ params }: { params: { id: string } }) {
             </Button>
           </div>
         </div>
+        <div>
+          <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Descripción</Label>
+          <span className='text-base block'>{descripcion}</span>
+        </div>
         <div className='flex flex-col gap-7'>
-          <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Descripcion</Label>
-            <span className='text-base font-semibold'>Cartucho sabor mango</span>
-          </div>
           <div className='flex flex-col gap-3'>
             <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Porcentaje</Label>
             <div className='flex flex-col gap-3'>
               <div className='flex flex-col gap-1'>
                 <div className='flex justify-between'>
                   <Label className='text-sm font-semibold'>THC</Label>
-                  <span className='text-sm font-semibold'>20%</span>
+                  <span className='text-sm font-semibold'>{thc}%</span>
                 </div>
                 <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
-                  <div className='h-full w-[20%] bg-_primary hover:bg-_primary/80 hover:scale-105 cursor-pointer rounded-full' />
+                  <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${thc}%` }} />
                 </div>
               </div>
               <div className='flex flex-col gap-1'>
                 <div className='flex justify-between'>
                   <Label className='text-sm font-semibold'>CBD</Label>
-                  <span className='text-sm font-semibold'>5%</span>
+                  <span className='text-sm font-semibold'>{cbd}%</span>
                 </div>
                 <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
-                  <div className='h-full w-[5%] bg-_primary hover:bg-_primary/80 hover:scale-105 cursor-pointer rounded-full' />
+                  <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${cbd}%` }} />
                 </div>
               </div>
             </div>
           </div>
           <div className='flex flex-col gap-3'>
             <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Categoria</Label>
-            <span className='text-sm font-semibold'>CARTUCHO</span>
+            <span className='text-base font-semibold'>{categoria}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Aroma</Label>
+            <span className='text-base font-semibold'>{aroma}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Efecto</Label>
+            <span className='text-base font-semibold'>{efecto}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Cepa</Label>
+            <span className='text-base font-semibold'>{cepa}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fabricante</Label>
+            <span className='text-base font-semibold'>{fabricante}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Proveedor</Label>
+            <span className='text-base font-semibold'>{proveedor}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Pais</Label>
+            <span className='text-base font-semibold'>{pais}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Lote</Label>
+            <span className='text-base font-semibold'>{lote ? lote : 'No aplica'}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Precio</Label>
+            <span className='text-base font-semibold'>${precio}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Peso</Label>
+            <span className='text-base font-semibold'>{peso}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Certificado</Label>
+            <span className='text-base font-semibold'>{certificado ? certificado : 'No aplica'}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Notas</Label>
+            <span className='text-base font-semibold'>{notas ? notas : 'No aplica'}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de registro</Label>
+            <span className='text-base font-semibold'>{new Date(fechaRegistro).toLocaleString()}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de caducidad</Label>
+            <span className='text-base font-semibold'>{fechaCaducidad ? new Date(fechaCaducidad).toLocaleString().split(',')[0] : 'No aplica'}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de cosecha</Label>
+            <span className='text-base font-semibold'>{fechaCosecha ? new Date(fechaCosecha).toLocaleString().split(',')[0] : 'No aplica'}</span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de envasado</Label>
+            <span className='text-base font-semibold'>{fechaEnvasado ? new Date(fechaEnvasado).toLocaleString().split(',')[0] : 'No aplica'}</span>
           </div>
         </div>
       </div>
