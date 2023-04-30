@@ -65,6 +65,7 @@ export default async function Product({ params }: { params: { id: string } }) {
             className='w-96'
             src={imageExample}
             alt='mango-cart'
+            priority
           />
           <div className='flex justify-center gap-3'>
             <Button size={'nothing'} variant={'image'}>
