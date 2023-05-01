@@ -51,7 +51,7 @@ export default async function Product({ params }: { params: { codigo: string } }
   } = await getProduct(params.codigo)
 
   return (
-    <main className='px-4 min-h-screen relative sm:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
+    <main className='px-4 min-h-screen relative md:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
       <div className='flex justify-center items-center py-8 relative'>
         <Back className='absolute left-0' />
         <h1 className='font-bold text-xl'>Producto</h1>
@@ -59,56 +59,60 @@ export default async function Product({ params }: { params: { codigo: string } }
       <div className='py-4'>
         <h1 className='text-5xl font-bold'>{nombre}</h1>
       </div>
-      <div className='flex flex-col gap-12 my-10 relative'>
-        <div className='flex flex-col items-center gap-8'>
-          <div className='w-64 h-64 lg:w-80 lg:h-80 relative'>
-            <Image
-              fill
-              src={imagen[0]}
-              alt={nombre}
-              priority
-            />
+      <div className='flex flex-col gap-12 my-10'>
+        <div className='grid md:grid-cols-2 items-center gap-12'>
+          <div className='flex flex-col items-center gap-8'>
+            <div className='w-64 h-64 xl:w-80 xl:h-80 relative'>
+              <Image
+                fill
+                src={imagen[0]}
+                alt={nombre}
+                priority
+              />
+            </div>
+            <div className='flex justify-center gap-3'>
+              <Button size={'nothing'} variant={'image'}>
+                <Image src={imageExample} alt='mango-cart' />
+              </Button>
+              <Button size={'nothing'} variant={'image'}>
+                <Image src={imageExample} alt='mango-cart' />
+              </Button>
+              <Button size={'nothing'} variant={'image'}>
+                <Image src={imageExample} alt='mango-cart' />
+              </Button>
+            </div>
           </div>
-          <div className='flex justify-center gap-3'>
-            <Button size={'nothing'} variant={'image'}>
-              <Image src={imageExample} alt='mango-cart' />
-            </Button>
-            <Button size={'nothing'} variant={'image'}>
-              <Image src={imageExample} alt='mango-cart' />
-            </Button>
-            <Button size={'nothing'} variant={'image'}>
-              <Image src={imageExample} alt='mango-cart' />
-            </Button>
-          </div>
-        </div>
-        <div>
-          <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Descripción</Label>
-          <span className='text-base block'>{descripcion}</span>
-        </div>
-        <div className='flex flex-col gap-7'>
-          <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Porcentaje</Label>
-            <div className='flex flex-col gap-3'>
-              <div className='flex flex-col gap-1'>
-                <div className='flex justify-between'>
-                  <Label className='text-sm font-semibold'>THC</Label>
-                  <span className='text-sm font-semibold'>{thc}%</span>
+          <div className='flex flex-col gap-7'>
+            <div className='md:order-2'>
+              <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Descripción</Label>
+              <span className='text-base block'>{descripcion}</span>
+            </div>
+            <div className='order-1 flex flex-col gap-3'>
+              <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Porcentaje</Label>
+              <div className='flex flex-col gap-3'>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex justify-between'>
+                    <Label className='text-sm font-semibold'>THC</Label>
+                    <span className='text-sm font-semibold'>{thc}%</span>
+                  </div>
+                  <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
+                    <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${thc}%` }} />
+                  </div>
                 </div>
-                <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
-                  <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${thc}%` }} />
-                </div>
-              </div>
-              <div className='flex flex-col gap-1'>
-                <div className='flex justify-between'>
-                  <Label className='text-sm font-semibold'>CBD</Label>
-                  <span className='text-sm font-semibold'>{cbd}%</span>
-                </div>
-                <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
-                  <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${cbd}%` }} />
+                <div className='flex flex-col gap-1'>
+                  <div className='flex justify-between'>
+                    <Label className='text-sm font-semibold'>CBD</Label>
+                    <span className='text-sm font-semibold'>{cbd}%</span>
+                  </div>
+                  <div className='h-2 bg-_gray dark:bg-_darkText rounded-full'>
+                    <div className='h-full bg-_primary hover:bg-_primary/80 hover:animate-pulse cursor-pointer rounded-full transition' style={{ width: `${cbd}%` }} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div className='flex flex-col gap-7'>
           <div className='flex flex-col gap-3'>
             <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Categoria</Label>
             <span className='text-base font-semibold'>{categoria}</span>
