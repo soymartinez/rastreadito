@@ -1,9 +1,7 @@
 'use client'
 
-import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import qs from 'query-string'
 
 import { Info, Save } from 'lucide-react'
 
@@ -92,16 +90,14 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                 return await create.json()
             }
 
-            const qr = async (data: Producto) => {
-                const codigo = generateQuery(data)
-
-                if (!codigo) {
+            const qr = async (producto: Producto) => {
+                if (!data) {
                     throw new Error('Faltan datos para generar código QR')
                 }
 
                 const create = await fetch('/api/qr', {
                     method: 'POST',
-                    body: JSON.stringify({ codigo, idProducto: data.id }),
+                    body: JSON.stringify({ producto }),
                 })
 
                 return await create.json()
@@ -113,9 +109,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                     toast.promise(qr(producto), {
                         loading: 'Generando código QR...',
                         success: (qr: Qr) => {
-                            const data = qs.parseUrl(qr.codigo).query
-                            const url = '/metadata/generate?' + qs.stringify(data)
-                            push(url)
+                            push('/metadata/generate/' + qr.codigo)
                             return <div>Código QR <strong>#{qr.id}</strong> generado</div>
                         },
                         error: 'Error al generar código QR',
@@ -126,22 +120,6 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
             })
         }
     }
-
-    const generateQuery = useCallback((data: Producto) => {
-        const updatedQuery: any = {
-            fecha: data.fechaRegistro,
-            id: data.id,
-            nombre: data.nombre,
-            categoria: data.categoria,
-        }
-
-        const url = qs.stringifyUrl({
-            url: '',
-            query: updatedQuery
-        }, { skipNull: true })
-
-        return url
-    }, [])
 
     return (
         <form onSubmit={handleSubmit} className={clsx('flex flex-col gap-7', className)}>
