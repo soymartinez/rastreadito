@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const searchParams = qs.parseUrl(request.url).query
   const qr = await prisma.qr.findUnique({
     where: {
-      productoId: Number(searchParams.id),
+      codigo: `${searchParams.codigo}`,
     },
     include: {
       producto: true,
@@ -17,16 +17,32 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const {
-    idProducto,
-    codigo,
+    producto
   } = await request.json()
 
   const res = await prisma.qr.create({
     data: {
-      producto: { connect: { id: idProducto } },
-      codigo: 'https://rastreadito.vercel.app/scan/product' + codigo,
+      producto: { connect: { id: producto.id } },
       estatus: 'USADO',
     },
+    include: {
+      producto: true,
+    }
+  }).then(async (res) => {
+    const codigo = (res.producto.categoria + res.id).toLocaleLowerCase()
+
+    const qr = await prisma.qr.update({
+      where: {
+        id: res.id,
+      },
+      data: {
+        codigo,
+        valor: 'https://rastreadito.vercel.app/product/' + codigo,
+      }
+    })
+
+    return qr
   })
+
   return NextResponse.json(res)
 }
