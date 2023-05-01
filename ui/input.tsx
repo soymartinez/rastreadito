@@ -111,6 +111,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                     className
                                 )}
                                 type='number'
+                                step={0.1}
                                 min={0.0}
                                 autoComplete='off'
                                 ref={ref}
