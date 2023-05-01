@@ -17,9 +17,9 @@ export default function Tr({
     data: {
         id,
         estatus,
+        codigo,
         fechaRegistro,
         producto: {
-            id: productoId,
             nombre: productoNombre,
             categoria,
             usuario,
@@ -61,7 +61,7 @@ export default function Tr({
                             className='w-4 h-4 m-auto accent-_primary rounded-full' />
                     </div>
                     <div>
-                        <Link href={`/product/${productoId}`} className={clsx({
+                        <Link href={`/product/${codigo}`} className={clsx({
                             'md:hidden ': !hover,
                         })}>
                             <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
