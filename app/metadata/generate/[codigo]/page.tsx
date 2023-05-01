@@ -12,11 +12,11 @@ import { QrProductType } from '@/types'
 
 interface Params {
     origin: string,
-    search: string,
+    codigo: string,
 }
 
-async function getData({ origin, search }: Params): Promise<QrProductType> {
-    const res = await fetch(`${origin}/api/qr${search}`)
+async function getData({ origin, codigo }: Params): Promise<QrProductType> {
+    const res = await fetch(`${origin}/api/qr?codigo=${codigo}`)
 
     if (!res.ok) {
         throw new Error('Error al obtener el QR')
@@ -25,16 +25,15 @@ async function getData({ origin, search }: Params): Promise<QrProductType> {
     return res.json()
 }
 
-export default async function Generate() {
+export default async function Generate({ params }: { params: { codigo: string } }) {
     const headersList = headers()
-    const search = headersList.get('x-search') || ''
     const origin = headersList.get('x-origin') || ''
 
     const {
         id,
-        codigo,
+        valor,
         producto: { nombre, descripcion, fechaRegistro },
-    } = await getData({ origin, search })
+    } = await getData({ origin, codigo: params.codigo })
     return (
         <main className='min-h-screen relative max-w-7xl mx-auto'>
             <div className='px-4'>
@@ -68,7 +67,7 @@ export default async function Generate() {
                         </Balancer>
                     </div>
                     <div className='rounded-2xl overflow-hidden'>
-                        <GenerateQr value={codigo} />
+                        {valor && <GenerateQr value={valor} />}
                     </div>
                     <div className='flex gap-4 mt-8'>
                         <Button variant={'outline'}
