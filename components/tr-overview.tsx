@@ -17,7 +17,7 @@ export default function TrOverview({
     data: {
         id,
         estatus,
-        codigo,
+        valor,
         fechaRegistro,
         producto: {
             nombre,
@@ -57,7 +57,7 @@ export default function TrOverview({
                             </Balancer>
                         </div>
                         <div className='rounded-2xl overflow-hidden'>
-                            <GenerateQr value={codigo} />
+                            {valor && <GenerateQr value={valor} />}
                         </div>
                     </div>
                 </Modal>}
