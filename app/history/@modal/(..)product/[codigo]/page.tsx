@@ -9,9 +9,9 @@ import {
 } from '@/components/status'
 import FormMetadata from '@/components/form-metadata'
 
-async function getProduct(id: string) {
+async function getProduct(codigo: string) {
     const res = await prisma.qr.findUnique({
-        where: { productoId: Number(id) },
+        where: { codigo },
         include: { producto: true }
     })
 
@@ -26,11 +26,11 @@ const getCategorias = async (origin: string) => {
     return data
 }
 
-export default async function ProductId({ params }: { params: { id: string } }) {
+export default async function ProductId({ params }: { params: { codigo: string } }) {
     const {
         estatus,
         producto,
-    } = await getProduct(params.id)
+    } = await getProduct(params.codigo)
 
     const { get } = headers()
     const origin = get('x-origin') || ''
