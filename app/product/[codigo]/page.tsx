@@ -51,7 +51,7 @@ export default async function Product({ params }: { params: { codigo: string } }
   } = await getProduct(params.codigo)
 
   return (
-    <main className='px-4 min-h-screen relative max-w-7xl mx-auto overflow-hidden'>
+    <main className='px-4 min-h-screen relative sm:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
       <div className='flex justify-center items-center py-8 relative'>
         <Back className='absolute left-0' />
         <h1 className='font-bold text-xl'>Producto</h1>
@@ -61,12 +61,14 @@ export default async function Product({ params }: { params: { codigo: string } }
       </div>
       <div className='flex flex-col gap-12 my-10 relative'>
         <div className='flex flex-col items-center gap-8'>
-          <Image
-            className='w-96'
-            src={imageExample}
-            alt='mango-cart'
-            priority
-          />
+          <div className='w-64 h-64 lg:w-80 lg:h-80 relative'>
+            <Image
+              fill
+              src={imagen[0]}
+              alt={nombre}
+              priority
+            />
+          </div>
           <div className='flex justify-center gap-3'>
             <Button size={'nothing'} variant={'image'}>
               <Image src={imageExample} alt='mango-cart' />
