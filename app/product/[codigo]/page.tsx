@@ -6,10 +6,10 @@ import { Back } from '@/ui/back'
 import { Label } from '@/ui/label'
 import { Button } from '@/ui/button'
 
-async function getProduct(id: string) {
+async function getProduct(codigo: string) {
   const res = await prisma.qr.findUnique({
     where: {
-      productoId: Number(id),
+      codigo,
     },
     include: {
       producto: true,
@@ -23,7 +23,7 @@ async function getProduct(id: string) {
   return res
 }
 
-export default async function Product({ params }: { params: { id: string } }) {
+export default async function Product({ params }: { params: { codigo: string } }) {
   const {
     producto: {
       nombre,
@@ -48,7 +48,7 @@ export default async function Product({ params }: { params: { id: string } }) {
       fechaCosecha,
       fechaEnvasado,
     },
-  } = await getProduct(params.id)
+  } = await getProduct(params.codigo)
 
   return (
     <main className='px-4 min-h-screen relative max-w-7xl mx-auto overflow-hidden'>
