@@ -26,8 +26,9 @@ interface FormMetadataProps {
 }
 
 export default function FormMetadata({ categorias, producto, type = 'normal', className }: FormMetadataProps) {
-    const { push } = useRouter()
+    const { push, refresh } = useRouter()
     const {
+        id,
         nombre,
         descripcion,
         categoria,
@@ -59,7 +60,10 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
             const updateMetadata = async (data: Producto) => {
                 const update = await fetch('/api/metadata', {
                     method: 'POST',
-                    body: JSON.stringify(data),
+                    body: JSON.stringify({
+                        ...data,
+                        id,
+                    }),
                 })
 
                 if (update.status !== 200) {
@@ -72,6 +76,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
             toast.promise(updateMetadata(data), {
                 loading: 'Actualizando...',
                 success: (producto: Producto) => {
+                    refresh()
                     return <div>Producto <strong>{producto.nombre}</strong> actualizado</div>
                 },
                 error: 'Error al actualizar',
