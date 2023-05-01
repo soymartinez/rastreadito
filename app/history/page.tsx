@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import Table from './table'
+import Link from 'next/link'
 
 async function getHistorial(usuario: string) {
     const res = await prisma.qr.findMany({
@@ -54,7 +55,14 @@ export default async function History() {
                     </div>
                 </TabsList>
                 <TabsContent value='all' className='overflow-auto w-full'>
-                    <Table data={historial} />
+                    {historial.length > 0
+                        ? <Table data={historial} />
+                        : <div className='h-96 my-6 flex justify-center items-center gap-1'>
+                            <p>Aún no tienes productos registrados.</p>
+                            <Link href='/metadata'>
+                                <p className='text-_primary hover:underline'>Registra tu primer producto</p>
+                            </Link>
+                        </div>}
                 </TabsContent>
                 <TabsContent value='date'>
 
