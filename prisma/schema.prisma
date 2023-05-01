@@ -29,8 +29,8 @@ model Equipo {
 
 model Qr {
   id                 Int      @id @default(autoincrement())
-  codigo             String   @unique
-  valor              String   @unique
+  codigo             String?  @unique
+  valor              String?  @unique
   estatus            Estatus  @default(ACTIVO)
   productoId         Int      @unique
   fechaRegistro      DateTime @default(now())
