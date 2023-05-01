@@ -23,7 +23,7 @@ export default async function History() {
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
-                <Back className='absolute left-0' />
+                <Back pushRoute='/' className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Historial</h1>
             </div>
             <h1 className='text-5xl font-bold leading-loose truncate'>{usuario?.user_metadata.name}</h1>
