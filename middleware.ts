@@ -21,12 +21,12 @@ export async function middleware(req: NextRequest) {
 
     const url = new URL(req.url)
 
-    if (!session) {
+    if (!session && !url.pathname.startsWith('/auth')) {
         url.pathname = '/auth'
         return NextResponse.redirect(url)
     }
 
-    if (session && req.nextUrl.pathname === '/auth') {
+    if (session && url.pathname.startsWith('/auth')) {
         url.pathname = '/'
         return NextResponse.redirect(url)
     }
