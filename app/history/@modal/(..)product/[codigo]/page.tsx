@@ -38,7 +38,7 @@ export default async function ProductId({ params }: { params: { codigo: string }
 
     return (
         <ModalPage>
-            <div className='sticky top-0 z-50 flex justify-between items-center bg-_white dark:bg-_dark border-b border-_darkText'>
+            <div className='sticky top-0 z-50 flex justify-between items-center bg-_white dark:bg-_dark border-b dark:border-_darkText'>
                 <h1 className='text-5xl font-bold leading-loose truncate'>{producto.nombre}</h1>
                 <div>
                     {estatus === 'ACTIVO' && <ActiveButton />}
