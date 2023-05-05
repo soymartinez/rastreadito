@@ -19,16 +19,9 @@ export async function middleware(req: NextRequest) {
         data: { session },
     } = await supabase.auth.getSession()
 
-    const protectedRoutes = [
-        '/',
-        '/account',
-        '/metadata',
-        '/history',
-        '/product',
-    ]
     const url = new URL(req.url)
 
-    if (!session && protectedRoutes.includes(req.nextUrl.pathname)) {
+    if (!session) {
         url.pathname = '/auth'
         return NextResponse.redirect(url)
     }
@@ -39,4 +32,16 @@ export async function middleware(req: NextRequest) {
     }
 
     return res
+}
+
+export const config = {
+    matcher: [
+        '/',
+        '/auth',
+        '/account',
+        '/metadata',
+        '/metadata/generate/:path*',
+        '/history',
+        '/product/:path*',
+    ],
 }
