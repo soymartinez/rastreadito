@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import clsx from 'clsx'
-import { LayoutGrid, LayoutList } from 'lucide-react'
 import { CategoryCard, GeneralCard, HistorialCard } from '@/components/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
@@ -14,19 +13,11 @@ interface MainTabsProps {
 }
 
 export default function MainTabs({ qr, categories }: MainTabsProps) {
-    const [layoutGrid, setLayoutGrid] = useState<'layout-list' | 'layout-grid'>('layout-list')
     const [qrList] = useState({
         active: qr?.filter(qr => qr.estatus === 'ACTIVO'),
         use: qr?.filter(qr => qr.estatus === 'USADO'),
         destroyed: qr?.filter(qr => qr.estatus === 'DESTRUIDO'),
     })
-
-    const handleLayoutGrid = () => {
-        layoutGrid === 'layout-list'
-            ? setLayoutGrid('layout-grid')
-            : setLayoutGrid('layout-list')
-    }
-
     return (
         <Tabs defaultValue='general'>
             <TabsList className='flex py-2 overflow-x-auto'>
@@ -68,19 +59,9 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                 <div>
                     <div className='flex justify-between items-center pt-6 pb-3'>
                         <h1 className='font-semibold text-xl'>General</h1>
-                        <button onClick={handleLayoutGrid}
-                            className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
-                            {layoutGrid === 'layout-list'
-                                ? <LayoutGrid />
-                                : <LayoutList />}
-                        </button>
                     </div>
-                    <div className={clsx('grid gap-3', {
-                        'grid-cols-1': layoutGrid === 'layout-list',
-                        'grid-cols-2': layoutGrid === 'layout-grid',
-                    })}>
+                    <div className={clsx('grid gap-3')}>
                         <GeneralCard
-                            layoutGrid={layoutGrid}
                             props={{
                                 title: 'Activo',
                                 description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
@@ -89,7 +70,6 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                             }}
                         />
                         <GeneralCard
-                            layoutGrid={layoutGrid}
                             props={{
                                 title: 'Uso',
                                 description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
@@ -98,7 +78,6 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                             }}
                         />
                         <GeneralCard
-                            layoutGrid={layoutGrid}
                             props={{
                                 title: 'Destruido',
                                 description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
@@ -119,17 +98,8 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
             <TabsContent value='categories'>
                 <div className='flex justify-between items-center pt-6 pb-3'>
                     <h1 className='font-semibold text-xl'>Categoria</h1>
-                    <button onClick={handleLayoutGrid}
-                        className='p-2 border-2 border-_gray dark:border-_darkText rounded-full'>
-                        {layoutGrid === 'layout-list'
-                            ? <LayoutGrid />
-                            : <LayoutList />}
-                    </button>
                 </div>
-                <div className={clsx('grid gap-3', {
-                    'grid-cols-1': layoutGrid === 'layout-list',
-                    'grid-cols-2': layoutGrid === 'layout-grid',
-                })}>
+                <div className={clsx('grid gap-3')}>
                     <CategoryCard name='Goteo' icon='dropper' />
                     <CategoryCard name='Ungüento' icon='bottle' />
                     <CategoryCard name='Edible' icon='mortar' />
