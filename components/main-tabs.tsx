@@ -3,7 +3,9 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import clsx from 'clsx'
-import { CategoryCard, GeneralCard, HistorialCard } from '@/components/card'
+import GeneralCard from './card/general'
+import HistorialCard from './card/history'
+import CategoryCard from './card/category'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
 
@@ -57,9 +59,7 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
             </TabsList>
             <TabsContent value='general' className='flex flex-col gap-6 md:gap-8'>
                 <div>
-                    <div className='flex justify-between items-center pt-6 pb-3'>
-                        <h1 className='font-semibold text-xl'>General</h1>
-                    </div>
+                    <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>General</h1>
                     <div className={clsx('grid gap-3')}>
                         <GeneralCard
                             props={{
@@ -89,16 +89,12 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                 </div>
 
                 <div>
-                    <div className='flex justify-between items-center pt-6 pb-3'>
-                        <h1 className='font-semibold text-xl'>Ultimos códigos</h1>
-                    </div>
+                    <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Ultimos códigos</h1>
                     <HistorialCard data={qr} />
                 </div>
             </TabsContent>
             <TabsContent value='categories'>
-                <div className='flex justify-between items-center pt-6 pb-3'>
-                    <h1 className='font-semibold text-xl'>Categoria</h1>
-                </div>
+                <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Categoria</h1>
                 <div className={clsx('grid gap-3')}>
                     <CategoryCard name='Goteo' icon='dropper' />
                     <CategoryCard name='Ungüento' icon='bottle' />
