@@ -57,7 +57,7 @@ export default function Table({ data }: TableProps) {
 
     return (
         <>
-            <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3'>
+            <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3 sticky left-0'>
                 <div className='flex items-center gap-3'>
                     {selectList.length > 0 && (
                         <div
