@@ -1,9 +1,12 @@
 import { Back } from '@/ui/back'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
+import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import Table from './table'
 import Link from 'next/link'
+import TabTrigger from '@/components/tab-trigger'
+import { Categoria } from '@prisma/client'
+import Balancer from 'react-wrap-balancer'
 
 async function getHistorial(usuario: string) {
     const res = await prisma.qr.findMany({
@@ -14,12 +17,35 @@ async function getHistorial(usuario: string) {
 
     if (!res) throw new Error('No se pudo obtener el historial.')
 
-    return JSON.parse(JSON.stringify(res))
+    return res
+}
+
+async function getCategoria() {
+    const res = await prisma.categoria.findMany()
+
+    if (!res) throw new Error('No se pudo obtener las categorias.')
+
+    return res
 }
 
 export default async function History() {
     const usuario = await getCurrentUser()
     const historial = await getHistorial(usuario?.email || '')
+    const categorias = await getCategoria()
+
+    const EmptyHistory = ({ title, description }: { title: string, description: string }) => (
+        <div className='h-96 my-6 flex justify-center items-center'>
+            <Balancer ratio={0.4}>
+                Aún no tienes {title} registrados.{' '}
+                <span className='text-_primary hover:underline'>
+                    <Link href='/metadata'>
+                        Registra tu primer {description}
+                    </Link>
+                </span>
+            </Balancer>
+        </div>
+    )
+
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
@@ -27,34 +53,21 @@ export default async function History() {
                 <h1 className='font-bold text-xl'>Historial</h1>
             </div>
             <h1 className='text-5xl font-bold leading-loose truncate'>{usuario?.user_metadata.name}</h1>
-            <Tabs defaultValue='all'>
+            <Tabs defaultValue='Ver todo'>
                 <TabsList className='py-2 overflow-x-auto'>
                     <div className='flex gap-2 w-min'>
-                        <TabsTrigger
-                            value='all'
-                            className={`w-28 h-12
-                                flex justify-center items-center transition-all
-                                data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-                                dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
-                                bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                                dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
-                        >
-                            Ver todo
-                        </TabsTrigger>
-                        <TabsTrigger
-                            value='date'
-                            className={`w-28 h-12
-                                flex justify-center items-center transition-all
-                                data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-                                dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
-                                bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                                dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
-                        >
-                            Fecha
-                        </TabsTrigger>
+                        <TabTrigger value='Ver todo' label='Ver todo' />
+                        {categorias.map((categoria: Categoria) => (
+                            <TabTrigger
+                                className='capitalize'
+                                value={categoria.acronimo}
+                                label={categoria.acronimo.toLowerCase()}
+                                key={categoria.id}
+                            />
+                        ))}
                     </div>
                 </TabsList>
-                <TabsContent value='all' className='overflow-auto w-full'>
+                <TabsContent value='Ver todo' className='overflow-auto w-full'>
                     {historial.length > 0
                         ? <Table data={historial} />
                         : <div className='h-96 my-6 flex justify-center items-center gap-1'>
@@ -64,9 +77,13 @@ export default async function History() {
                             </Link>
                         </div>}
                 </TabsContent>
-                <TabsContent value='date'>
-
-                </TabsContent>
+                {categorias.map((categoria: Categoria) => (
+                    <TabsContent className='overflow-auto w-full' value={categoria.acronimo} key={categoria.id}>
+                        {historial.filter((qr) => qr.producto.categoria === categoria.acronimo).length > 0
+                            ? <Table data={historial.filter((qr) => qr.producto.categoria === categoria.acronimo)} />
+                            : <EmptyHistory title={categoria.nombre.toLocaleLowerCase()} description={categoria.acronimo.toLowerCase()} />}
+                    </TabsContent>
+                ))}
             </Tabs>
         </div>
     )
