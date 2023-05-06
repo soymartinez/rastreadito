@@ -15,21 +15,31 @@ export default async function loading() {
                 <div className={`
                         w-28 h-12
                         flex justify-center items-center transition-all
-                        bg-_white border-2 border-_gray rounded-full
-                        dark:bg-_primary dark:border-_primary dark:text-_dark
+                        border-2 border-_gray dark:border-_primary 
+                        rounded-full animate-pulse
                     `}
-                >
-                    Ver todo
-                </div>
+                />
                 <div className={`
                         w-28 h-12
                         flex justify-center items-center transition-all
-                        bg-_white border-2 border-_gray rounded-full
-                        dark:bg-_dark dark:border-_darkText
+                        border-2 border-_gray dark:border-_darkText 
+                        rounded-full animate-pulse
                     `}
-                >
-                    Fecha
-                </div>
+                />
+                <div className={`
+                        w-28 h-12
+                        flex justify-center items-center transition-all
+                        border-2 border-_gray dark:border-_darkText 
+                        rounded-full animate-pulse
+                    `}
+                />
+                <div className={`
+                        w-28 h-12
+                        flex justify-center items-center transition-all
+                        border-2 border-_gray dark:border-_darkText 
+                        rounded-full animate-pulse
+                    `}
+                />
             </div>
             <TableLoading />
         </main>
