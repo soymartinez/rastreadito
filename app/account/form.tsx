@@ -61,6 +61,7 @@ export default function FormAccount({ user }: FormAccountProps) {
                 <div className='flex gap-4 justify-between items-center'>
                     <span>Nombre</span>
                     <input
+                        autoComplete='off'
                         name='name'
                         placeholder='Rastreadito'
                         className='w-full text-end focus:outline-none dark:text-_primary bg-transparent'
