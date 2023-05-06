@@ -1,4 +1,4 @@
-import { PricingCard } from '@/components/card'
+import PricingCard from '@/components/card/pricing'
 import { Back } from '@/ui/back'
 import Balancer from 'react-wrap-balancer'
 
