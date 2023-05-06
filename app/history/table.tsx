@@ -11,11 +11,9 @@ interface TableProps {
 }
 
 export default function Table({ data }: TableProps) {
-    const [selectAll, setSelectAll] = useState(false)
     const [selectList, setSelectList] = useState<number[]>([])
 
     const handleSelectedAll = (checked: boolean) => {
-        setSelectAll(checked)
         checked
             ? setSelectList(data.map((item) => item.id))
             : setSelectList([])
@@ -37,7 +35,6 @@ export default function Table({ data }: TableProps) {
         if (!res.ok) throw new Error('Error al eliminar los productos')
 
         setSelectList([])
-        setSelectAll(false)
     }
 
     const handleToast = () => {
@@ -64,7 +61,7 @@ export default function Table({ data }: TableProps) {
                 <div className='flex items-center gap-3'>
                     {selectList.length > 0 && (
                         <X
-                            onClick={() => { setSelectList([]), setSelectAll(false) }}
+                            onClick={() => handleSelectedAll(false)}
                             className='w-4 h-4 bg-_dark text-_white rounded-sm ease-linear duration-700 cursor-pointer hover:bg-_dark/80'
                         />
                     )}
@@ -111,7 +108,7 @@ export default function Table({ data }: TableProps) {
                         <Tr
                             key={data.id}
                             data={data}
-                            defaultChecked={selectAll}
+                            defaultChecked={selectList.length > 0 ? selectList.includes(data.id) : false}
                             isSelected={(id: number) => handleSelected(id)}
                         />
                     ))}
