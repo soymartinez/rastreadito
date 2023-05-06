@@ -19,8 +19,10 @@ async function getHistorial(usuario: string) {
     return res
 }
 
-async function getCategoria() {
-    const res = await prisma.categoria.findMany()
+async function getCategorias() {
+    const res = await prisma.categoria.findMany({
+        orderBy: { id: 'asc' },
+    })
 
     if (!res) throw new Error('No se pudo obtener las categorias.')
 
@@ -30,7 +32,7 @@ async function getCategoria() {
 export default async function History() {
     const usuario = await getCurrentUser()
     const historial = await getHistorial(usuario?.email || '')
-    const categorias = await getCategoria()
+    const categorias = await getCategorias()
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
