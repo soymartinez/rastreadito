@@ -21,12 +21,25 @@ async function getQr(origin: string, email: string,) {
   return res.json()
 }
 
+async function getCategorias(origin: string) {
+  const res = await fetch(origin + '/api/categorias', {
+    next: {
+      revalidate: 10,
+    },
+  })
+  if (!res.ok) {
+    throw new Error('Failed to fetch categorias')
+  }
+  return res.json()
+}
+
 export default async function Home() {
   const headersList = headers()
   const origin = headersList.get('x-origin') || ''
 
   const user = await getCurrentUser()
   const qr = await getQr(origin, user?.email ?? '')
+  const categories = await getCategorias(origin)
   return (
     <main>
       <Navbar />
@@ -34,6 +47,7 @@ export default async function Home() {
         <h1 className='text-5xl font-bold leading-loose truncate'>{user?.user_metadata.name}</h1>
         <MainTabs
           qr={qr}
+          categories={categories}
         />
         <Link href={'/metadata'} className='rounded-2xl'>
           <div className='absolute z-30 w-16 right-4'>
