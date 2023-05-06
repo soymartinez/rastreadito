@@ -21,6 +21,7 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
         use: qr?.filter(qr => qr.estatus === 'USADO'),
         destroyed: qr?.filter(qr => qr.estatus === 'DESTRUIDO'),
     })
+    const [categoryList] = useState(categories)
     return (
         <Tabs defaultValue='general'>
             <TabsList className='flex py-2 overflow-x-auto'>
@@ -99,11 +100,9 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
             <TabsContent value='categories'>
                 <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Categoria</h1>
                 <div className={clsx('grid gap-3')}>
-                    <CategoryCard name='Goteo' icon='dropper' />
-                    <CategoryCard name='Ungüento' icon='bottle' />
-                    <CategoryCard name='Edible' icon='mortar' />
-                    <CategoryCard name='Cartucho' icon='cart' />
-                    <CategoryCard name='Aceite' icon='blood-drop' />
+                    {categoryList?.map((category) => (
+                        <CategoryCard key={category.id} props={category} />
+                    ))}
                 </div>
             </TabsContent>
         </Tabs>
