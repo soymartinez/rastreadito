@@ -11,6 +11,7 @@ model Categoria {
   id          Int        @id @default(autoincrement())
   nombre      String
   acronimo    String     @unique
+  imagen      String
   descripcion String?
   productos   Producto[]
 
