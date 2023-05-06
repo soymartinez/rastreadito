@@ -39,7 +39,7 @@ export default function TrOverview({
                 <h1 className='text-base font-semibold whitespace-nowrap'>{nombre}</h1>
             </td>
             <td className='px-3 py-1'>
-                <Button className='h-min hover:bg-_grayText/30 hover:text-_darkText dark:hover:bg-_dark' style={{ padding: '0 8px' }} variant={'outline'} onClick={() => setShowQr(true)}>
+                <Button className='h-min hover:bg-_grayText/30 hover:text-_darkText dark:hover:bg-_dark transition-none' style={{ padding: '0 8px' }} variant={'outline'} onClick={() => setShowQr(true)}>
                     <h1 className='text-base font-semibold whitespace-nowrap text-_grayText'>Mostar código</h1>
                 </Button>
                 {showQr && <Modal onClose={() => setShowQr(false)}>
