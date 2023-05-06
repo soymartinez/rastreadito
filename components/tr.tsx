@@ -43,7 +43,7 @@ export default function Tr({
     return (
         <tr
             key={id}
-            className={clsx('bg-_white hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto', {
+            className={clsx('hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto', {
                 'bg-_primary/[15%] hover:bg-_primary/[15%] dark:bg-_primary/[15%] dark:hover:bg-_primary/[15%]': checked,
             })}
             onMouseEnter={() => setHover(true)}
