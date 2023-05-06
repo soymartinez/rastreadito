@@ -135,7 +135,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                 </div>
                 <div className='flex flex-col gap-3'>
                     <Input name='nombre' labelText='Nombre' placeholder='Purple Kush' defaultValue={nombre} required />
-                    <Textarea name='descripcion' labelText='Descripción' placeholder='Purple Kush' defaultValue={descripcion} required />
+                    <Textarea name='descripcion' labelText='Descripción' placeholder='Purple Kush' rows={6} defaultValue={descripcion} required />
                     <Select name='categoria' defaultValue={categoria} required>
                         <SelectTrigger labelText='Tipo de producto'>
                             <SelectValue placeholder='Selecciona un tipo de producto' />
