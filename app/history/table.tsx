@@ -60,19 +60,21 @@ export default function Table({ data }: TableProps) {
             <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3'>
                 <div className='flex items-center gap-3'>
                     {selectList.length > 0 && (
-                        <X
+                        <div
+                            className='w-4 h-4 flex justify-center items-center bg-_dark hover:bg-_dark/80 dark:bg-_darkText dark:hover:bg-_white/20 border border-_grayText/30 text-_white rounded-sm cursor-pointer'
                             onClick={() => handleSelectedAll(false)}
-                            className='w-4 h-4 bg-_dark text-_white rounded-sm ease-linear duration-700 cursor-pointer hover:bg-_dark/80'
-                        />
+                        >
+                            <X strokeWidth={3.5} size={18} />
+                        </div>
                     )}
-                    <p>
+                    <p className='whitespace-nowrap'>
                         <span className='font-bold'>{selectList.length > 0 ? selectList.length : data.length}</span>{' '}
                         {selectList.length > 0
                             ? selectList.length > 1 ? 'seleccionados' : 'seleccionado'
                             : selectList.length > 1 ? 'productos' : 'producto'}
                     </p>
                 </div>
-                {selectList.length > 0 && <div className='w-1 h-full bg-_gray' />}
+                {selectList.length > 0 && <div className='w-1 h-full bg-_gray dark:bg-_darkText' />}
                 {selectList.length > 0 && (
                     <button onClick={handleToast} className={`
                             w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
