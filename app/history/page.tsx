@@ -3,10 +3,9 @@ import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import Table from './table'
-import Link from 'next/link'
 import TabTrigger from '@/components/tab-trigger'
 import { Categoria } from '@prisma/client'
-import Balancer from 'react-wrap-balancer'
+import EmptyHistory from '@/components/empty-history'
 
 async function getHistorial(usuario: string) {
     const res = await prisma.qr.findMany({
@@ -32,20 +31,6 @@ export default async function History() {
     const usuario = await getCurrentUser()
     const historial = await getHistorial(usuario?.email || '')
     const categorias = await getCategoria()
-
-    const EmptyHistory = ({ title, description }: { title: string, description: string }) => (
-        <div className='h-96 my-6 flex justify-center items-center'>
-            <Balancer ratio={0.4}>
-                Aún no tienes {title} registrados.{' '}
-                <span className='text-_primary hover:underline'>
-                    <Link href='/metadata'>
-                        Registra tu primer {description}
-                    </Link>
-                </span>
-            </Balancer>
-        </div>
-    )
-
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
@@ -70,12 +55,7 @@ export default async function History() {
                 <TabsContent value='Ver todo' className='overflow-auto w-full'>
                     {historial.length > 0
                         ? <Table data={historial} />
-                        : <div className='h-96 my-6 flex justify-center items-center gap-1'>
-                            <p>Aún no tienes productos registrados.</p>
-                            <Link href='/metadata'>
-                                <p className='text-_primary hover:underline'>Registra tu primer producto</p>
-                            </Link>
-                        </div>}
+                        : <EmptyHistory title='productos' description='producto' />}
                 </TabsContent>
                 {categorias.map((categoria: Categoria) => (
                     <TabsContent className='overflow-auto w-full' value={categoria.acronimo} key={categoria.id}>
