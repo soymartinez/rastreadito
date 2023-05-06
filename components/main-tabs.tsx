@@ -8,6 +8,7 @@ import HistorialCard from './card/history'
 import CategoryCard from './card/category'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
+import EmptyHistory from './empty-history'
 
 interface MainTabsProps {
     qr?: Qr[],
@@ -90,7 +91,9 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
 
                 <div>
                     <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Ultimos códigos</h1>
-                    <HistorialCard data={qr} />
+                    {qr && qr?.length > 0
+                        ? <HistorialCard data={qr} />
+                        : <EmptyHistory height='full' title='productos' description='producto' />}
                 </div>
             </TabsContent>
             <TabsContent value='categories'>
