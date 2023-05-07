@@ -41,7 +41,7 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
     return (
         <>
             <motion.div
-                className='fixed w-full h-screen inset-0 z-30 bg-_dark/80 backdrop-blur-sm'
+                className='fixed w-full h-screen inset-0 z-50 bg-_dark/80 backdrop-blur-sm'
                 initial='hidden'
                 animate='visible'
                 exit='hidden'
@@ -49,7 +49,7 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
                 variants={overlayVariants}
             />
             <motion.div
-                className='fixed min-w-min top-[20%] inset-x-0 z-40 min-h-min rounded-t-[50px] shadow-sm select-none cursor-grab active:cursor-grabbing'
+                className='fixed min-w-min top-[20%] inset-x-0 z-50 min-h-min rounded-t-[50px] shadow-sm select-none cursor-grab active:cursor-grabbing'
                 initial='hidden'
                 animate='visible'
                 exit='hidden'
