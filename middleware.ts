@@ -42,6 +42,5 @@ export const config = {
         '/metadata',
         '/metadata/generate/:path*',
         '/history',
-        '/product/:path*',
     ],
 }
