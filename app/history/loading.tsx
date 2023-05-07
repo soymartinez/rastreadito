@@ -15,7 +15,7 @@ export default async function loading() {
                 <div className={`
                         w-28 h-12
                         flex justify-center items-center transition-all
-                        border-2 border-_gray dark:border-_primary 
+                        border-2 border-_dark dark:border-_primary 
                         rounded-full animate-pulse
                     `}
                 />
