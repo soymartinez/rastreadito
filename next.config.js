@@ -5,6 +5,7 @@ const nextConfig = {
   },
   images: {
     domains: [
+      'zlqiphritvynqxdnnzqr.supabase.co',
       'rastreadito.vercel.app',
       'leafly-public.imgix.net',
       'images.leafly.com',
