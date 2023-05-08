@@ -1,4 +1,3 @@
-import { headers } from 'next/headers'
 import { prisma } from '@/lib/prisma'
 
 import ModalPage from '@/components/modal/modal-page'
@@ -20,10 +19,10 @@ async function getProduct(codigo: string) {
     return res
 }
 
-const getCategorias = async (origin: string) => {
-    const res = await fetch(origin + '/api/categorias')
-    const data = await res.json()
-    return data
+async function getCategorias() {
+    const res = await prisma.categoria.findMany()
+    if (!res) throw new Error('No se pudo obtener las categorias.')
+    return res
 }
 
 export default async function ProductId({ params }: { params: { codigo: string } }) {
@@ -32,10 +31,7 @@ export default async function ProductId({ params }: { params: { codigo: string }
         producto,
     } = await getProduct(params.codigo)
 
-    const { get } = headers()
-    const origin = get('x-origin') || ''
-    const categorias = await getCategorias(origin)
-
+    const categorias = await getCategorias()
     return (
         <ModalPage>
             <div className='sticky top-0 z-50 flex justify-between items-center bg-_white dark:bg-_dark border-b dark:border-_darkText'>
