@@ -3,12 +3,14 @@ export const metadata = {
     description: 'Describe tu producto con la información necesaria para que tus clientes lo conozcan.',
 }
 
-export default async function MetadataLayout({
-    children,
-}: {
-    children: React.ReactNode,
+export default function MetadataLayout(props: {
+    children: React.ReactNode
+    modal: React.ReactNode
 }) {
     return (
-        <main>{children}</main>
+        <main>
+            {props.children}
+            {props.modal}
+        </main>
     )
 }
