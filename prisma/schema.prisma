@@ -7,6 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Galeria {
+  id                 Int        @id @default(autoincrement())
+  nombre             String
+  descripcion        String?
+  url                String
+  usuario            String
+  fechaRegistro      DateTime   @default(now())
+  fechaActualizacion DateTime   @updatedAt
+  categoria          Categoria? @relation(fields: [categoriaAcronimo], references: [acronimo])
+  categoriaAcronimo  String?
+
+  @@map("galeria")
+}
+
 model Categoria {
   id          Int        @id @default(autoincrement())
   nombre      String
@@ -14,6 +28,7 @@ model Categoria {
   imagen      String
   descripcion String?
   productos   Producto[]
+  galeria     Galeria[]
 
   @@map("categoria")
 }
