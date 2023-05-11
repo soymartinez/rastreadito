@@ -33,7 +33,8 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
                             dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
                             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                            dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
+                            dark:bg-_dark dark:text-_white dark:border-_darkText 
+                            dark:hover:bg-_darkText dark:data-[state=active]:hover:bg-_primary`}
                     >
                         Inicio
                     </TabsTrigger>
@@ -44,7 +45,8 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                             data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
                             dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
                             bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                            dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}
+                            dark:bg-_dark dark:text-_white dark:border-_darkText 
+                            dark:hover:bg-_darkText dark:data-[state=active]:hover:bg-_primary`}
                     >
                         Categoría
                     </TabsTrigger>
