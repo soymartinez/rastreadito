@@ -11,7 +11,7 @@ model Galeria {
   id                 Int        @id @default(autoincrement())
   nombre             String
   descripcion        String?
-  url                String
+  url                String[]
   usuario            String
   fechaRegistro      DateTime   @default(now())
   fechaActualizacion DateTime   @updatedAt
