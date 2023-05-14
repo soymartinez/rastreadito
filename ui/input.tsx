@@ -2,13 +2,13 @@ import * as React from 'react'
 
 import clsx from 'clsx'
 
-import { Lock, Mail } from 'lucide-react'
+import { Lock, Mail, Search } from 'lucide-react'
 import { Label } from './label'
 
 interface InputPropsExtended {
     icon?: 'email' | 'password',
     labelText?: string,
-    variant?: 'normal' | 'porcentage' | 'currency' | 'weight' | 'date',
+    variant?: 'normal' | 'porcentage' | 'currency' | 'weight' | 'date' | 'search',
 }
 
 export interface IconProps
@@ -30,14 +30,16 @@ const Icons = React.forwardRef<HTMLDivElement, IconProps>(
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, variant = 'normal', labelText, icon, ...props }, ref) => {
+        const [isFocused, setIsFocused] = React.useState(false)
         const id = React.useId()
         return (
             <div
+                id='input-wrapper'
                 className={clsx(
-                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary disabled:cursor-not-allowed disabled:opacity-50',
-                    className
+                    'flex h-16 items-center gap-3 w-full rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium',
+                    className,
+                    { 'outline-none ring-2 ring-_primary': isFocused }
                 )}
-                ref={ref}
             >
                 {variant === 'normal' && <>
                     {icon &&
@@ -55,6 +57,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 className
                             )}
                             autoComplete='off'
+                            onFocus={() => setIsFocused(true)}
+                            onBlur={() => setIsFocused(false)}
                             ref={ref}
                             {...props}
                         />
@@ -74,6 +78,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 step={0.1}
                                 min={0.0}
                                 autoComplete='off'
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                                 ref={ref}
                                 {...props}
                             />
@@ -93,6 +99,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 type='number'
                                 min={0.0}
                                 autoComplete='off'
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                                 ref={ref}
                                 {...props}
                             />
@@ -113,6 +121,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                                 step={0.1}
                                 min={0.0}
                                 autoComplete='off'
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                                 ref={ref}
                                 {...props}
                             />
@@ -130,10 +140,33 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                             )}
                             type='date'
                             autoComplete='off'
+                            onFocus={() => setIsFocused(true)}
+                            onBlur={() => setIsFocused(false)}
                             ref={ref}
                             {...props}
                         />
                     </div>}
+                {variant === 'search' &&
+                    <>
+                        <label htmlFor={`input-${id}`} className='hidden sm:block'>
+                            <Search className='w-5 h-5' />
+                        </label>
+                        <div className={clsx('w-px bg-_primary h-full rounded-full hidden sm:block', {
+                            'dark:bg-_darkText': !isFocused,
+                        })} />
+                        <div className='flex flex-col w-full'>
+                            <Label htmlFor={`input-${id}`} className='text-_primary text-xs'>{labelText}</Label>
+                            <input
+                                id={`input-${id}`}
+                                className={'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50'}
+                                autoComplete='off'
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
+                                ref={ref}
+                                {...props}
+                            />
+                        </div>
+                    </>}
             </div>
         )
     }
