@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`bg-_white text-_dark dark:bg-_dark dark:text-_white ${font.className}`}>
+      <body className={`
+            scrollbar scrollbar-thumb-_gray dark:scrollbar-thumb-_darkText scrollbar-thumb-rounded-full
+            bg-_white text-_dark dark:bg-_dark dark:text-_white ${font.className}
+          `}>
         <ThemeProvider>
           <SupabaseProvider>
             {children}
