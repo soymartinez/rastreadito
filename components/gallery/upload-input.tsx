@@ -12,35 +12,48 @@ interface UploadInputProps {
     categoria?: string
     urls?: string[]
     className?: string
-    onValue?: (value: File[], index?: number) => void
+    onValue?: (value: { file: File, index: number }[], index?: number) => void
 }
 
 export default function UploadInput({ urls = [], className, onValue }: UploadInputProps) {
-    const [file, setFile] = useState<File[]>([])
+    const [files, setFile] = useState<{ file: File, index: number }[]>([])
     const [hover, setHover] = useState(false)
     const id = useId()
 
     const toggleHover = () => setHover(!hover)
 
+    function cambiarImagen(indice: number, file: File): void {
+        if (indice >= 0 && indice < urls.length) {
+            setFile((prev) => {
+                const newFiles = [...prev]
+                // get the file index where inidice is equal to the index
+                const urlIndex = urls.findIndex((_, index) => index === indice)
+                // add to the new files array the new file and the index
+                newFiles.push({ file, index: urlIndex })
+                // remove the old file from the new files array
+                // newFiles.splice(urlIndex, 1)
+                return newFiles
+            })
+        } else {
+            console.log("Índice inválido");
+        }
+    }
+
     const handlePreview = async (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
         e.preventDefault()
+
+        // TODO: Controlar las imagenes actuales con las nuevas y si estas se estan cambiando o eliminando
 
         const diff = 4 - urls.length
         const currentFiles = e.target.files
         const currentFilesArray = Array.from(currentFiles as FileList)
 
         if (index) {
-            setFile(() => {
-                const newArray = [...file]
-                newArray[index] = currentFilesArray[0]
-                return newArray
-            })
-            console.log({ index })
-            return
+            return cambiarImagen(index, currentFilesArray[0])
         }
 
-        if (file.length + currentFilesArray.length > diff) {
-            toast.error(`Solo puedes subir ${diff} imagenes.`, {
+        if (files.length + currentFilesArray.length > diff) {
+            toast.error(urls.length > 0 ? `Solo puedes subir ${diff} más` : 'Solo puedes subir 4 imagenes', {
                 style: {
                     background: '#F87171',
                 }
@@ -48,29 +61,29 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
             return
         }
 
-        if (file?.length < diff) {
-            return setFile(() => {
-                if ((file.length + currentFilesArray.length) > 4) {
-                    const diff = 4 - file.length
+        if (files?.length < diff) {
+            return setFile((prev) => {
+                if ((prev.length + currentFilesArray.length) > 4) {
+                    const diff = 4 - prev.length
                     const newFiles = currentFilesArray.slice(0, diff)
-                    return [...file, ...newFiles]
+                    return [...prev, ...newFiles.map((file, index) => ({ file, index }))]
                 }
-                return [...file, ...currentFilesArray]
+                return [...prev, ...currentFilesArray.map((file, index) => ({ file, index }))]
             })
         }
 
-        return setFile(currentFilesArray.slice(0, 4))
+        return setFile(currentFilesArray.map((file, index) => ({ file, index })))
     }
 
     useEffect(() => {
-        onValue && onValue(file)
-    }, [file])
+        onValue && onValue(files)
+    }, [files])
 
     return (
         <>
             {urls?.length > 0 && urls.map((url, index) => (
                 <div key={url}>
-                    {`${id}-${index}`}
+                    {`${index}`}
                     <label
                         htmlFor={`${id}-${index}`}
                         className={clsx('rounded-2xl overflow-hidden', className)}
@@ -91,9 +104,9 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                     />
                 </div>
             ))}
-            {file && file?.length > 0 && file.map((file, index) => (
-                <div key={index}>
-                    {`file-${id}-${index}`}
+            {files && files?.length > 0 && files.map(({ file, index }, i) => (
+                <div key={i}>
+                    {`file-${id}-${i}`}
                     <label
                         htmlFor={`file-${id}-${index}`}
                         className={clsx('rounded-2xl overflow-hidden', className)}
