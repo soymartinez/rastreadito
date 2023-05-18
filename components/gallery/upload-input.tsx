@@ -67,7 +67,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
 
     useEffect(() => {
         onValue && onValue(files)
-    }, [files])
+    }, [files, onValue])
 
     return (
         <>
