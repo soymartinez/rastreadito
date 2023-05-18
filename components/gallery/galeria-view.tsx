@@ -23,9 +23,8 @@ export default function GaleriaView({
     categoria,
     galeriaData,
 }: GaleriaProps) {
-    const [galerias, setGalerias] = useState<Galeria[] | undefined>(galeriaData)
+    const [galerias, setGalerias] = useState<Galeria[] | undefined>([])
     const [imagenes, setImagenes] = useState<string[]>([])
-    // const [urls, setUrls] = useState<string[]>([])
     const [loading, setLoading] = useState(false)
     const [uploadImages, setUploadImages] = useState(false)
     const { supabase } = useSupabase()
@@ -63,20 +62,56 @@ export default function GaleriaView({
         })
     }
 
+    const handleDeleteImages = async (url: string, galeriaData: Galeria) => {
+        const { data: { user } } = await supabase.auth.getUser()
+
+        if (user?.email) {
+            const imageName = url.split('/').pop()
+            const path = `${user?.email}/${categoria.acronimo}/${galeriaData.nombre}/${imageName}`
+
+            const remove = async () => {
+                const { error } = await supabase
+                    .storage
+                    .from('galeria')
+                    .remove([path])
+
+                if (error) {
+                    throw new Error(error.message)
+                }
+
+                const { error: errorDelete } = await supabase
+                    .from('galeria')
+                    .delete()
+                    .in('url', [url])
+
+                if (errorDelete) {
+                    throw new Error(errorDelete.message)
+                }
+            }
+
+            toast.promise(remove, {
+                loading: 'Eliminando imagen...',
+                success: () => {
+                    handleGaleria()
+                    return 'Imagen eliminada'
+                },
+                error: (err) => err.message,
+            })
+        }
+    }
+
     const handleUploadFiles = async (files: { file: File, index: number }[], galeriaData: Galeria) => {
         const { data: { user } } = await supabase.auth.getUser()
-        let urls: string[] = []
-
-        console.log(files);
 
         if (files.length && user?.email) {
+            let urls: string[] = galeriaData.url
             const upload = async () => {
-                await Promise.all(
+                const urlImages = await Promise.all(
                     files.map(async ({ file, index }) => {
                         const storage_upload = await supabase
                             .storage
                             .from('galeria')
-                            .upload(`${user?.email}/${categoria.acronimo}/${galeriaData.nombre}/image-${index + 1}`, file, {
+                            .upload(`${user?.email}/${categoria.acronimo}/${galeriaData.nombre}/image-${index}-${new Date().getTime()}`, file, {
                                 cacheControl: '3600',
                                 upsert: true,
                             })
@@ -86,11 +121,34 @@ export default function GaleriaView({
                         }
 
                         const url = supabase.storage.from('galeria').getPublicUrl(storage_upload.data.path).data.publicUrl
-                        urls.push(url)
+
+                        if (urls[index]) {
+                            const imageName = urls[index].split('/').pop()
+                            const path = `${user?.email}/${categoria.acronimo}/${galeriaData.nombre}/${imageName}`
+
+                            const { error } = await supabase
+                                .storage
+                                .from('galeria')
+                                .remove([path])
+
+                            if (error) {
+                                throw new Error('Error al eliminar la previa imagen')
+                            }
+
+                            urls[index] = url
+                        } else {
+                            urls.push(url)
+                        }
+
+                        return url
                     })
                 )
 
-                if (urls.length === files.length) {
+                if (urlImages.length !== files.length) {
+                    throw new Error('Error al subir imágenes')
+                }
+
+                if (urls.length <= 4) {
                     const res = await fetch('/api/galeria', {
                         method: 'POST',
                         body: JSON.stringify({
@@ -106,7 +164,10 @@ export default function GaleriaView({
                         throw new Error('Error al guardar imágenes')
                     }
 
+                    urls = []
                     return res
+                } else {
+                    throw new Error('El número máximo de imágenes es 4')
                 }
             }
 
@@ -116,14 +177,15 @@ export default function GaleriaView({
                     handleGaleria()
                     return `${files.length} imágenes subidas correctamente`
                 },
-                error: (err) => {
-                    console.error(err)
-                    return 'Error al subir imágenes'
-                },
+                error: (err) => err.message,
             })
         }
 
     }
+
+    useEffect(() => {
+        handleGaleria()
+    }, [])
 
     useEffect(() => {
         !galeriaData && handleGaleria()
@@ -164,7 +226,11 @@ export default function GaleriaView({
                             <div key={galeria.id} className='flex flex-col gap-2'>
                                 <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
                                 <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
-                                    <UploadInput urls={galeria.url} onValue={(values) => handleUploadFiles(values, galeria)} />
+                                    <UploadInput
+                                        urls={galeria.url}
+                                        onValue={(values) => handleUploadFiles(values, galeria)}
+                                        onRemove={(url) => handleDeleteImages(url, galeria)}
+                                    />
                                 </div>
                             </div>
                         ))}
