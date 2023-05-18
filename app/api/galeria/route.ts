@@ -46,7 +46,7 @@ export async function POST(req: Request) {
             usuario: user?.email || '',
         },
         where: {
-            id,
+            id: id !== undefined ? Number(id) : -1,
         }
     })
 
