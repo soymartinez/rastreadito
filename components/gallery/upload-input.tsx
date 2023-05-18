@@ -95,7 +95,6 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
             ))}
             {files && files?.length > 0 && files.map(({ file, index }, i) => (
                 <div key={i}>
-                    {`file-${id}-${i}`}
                     <label
                         htmlFor={`file-${id}-${index}`}
                         className={clsx('rounded-2xl overflow-hidden', className)}
@@ -123,7 +122,6 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
                         onMouseLeave={toggleHover}
                         className={clsx('rounded-2xl overflow-hidden', className)}
                     >
-                        {`upload-${id} - ${urls.length + files.length}`}
                         <div className={clsx(`
                                 relative
                                 h-28
