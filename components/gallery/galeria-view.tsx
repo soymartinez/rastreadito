@@ -3,7 +3,7 @@
 import { Button } from '@/ui/button'
 import { Categoria, Galeria } from '@prisma/client'
 import { ImagePlus, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import UploadImages from './new-gallery'
 import { AnimatePresence } from 'framer-motion'
 import { Label } from '@/ui/label'
@@ -29,7 +29,7 @@ export default function GaleriaView({
     const [uploadImages, setUploadImages] = useState(false)
     const { supabase } = useSupabase()
 
-    const handleGaleria = async () => {
+    const handleGaleria = useCallback(async () => {
         setGalerias([])
         setLoading(true)
 
@@ -44,7 +44,7 @@ export default function GaleriaView({
 
         setGalerias(filteredData)
         setLoading(false)
-    }
+    }, [categoria.acronimo])
 
     const handleImages = (url: string) => {
         setImagenes(prev => {
@@ -185,11 +185,11 @@ export default function GaleriaView({
 
     useEffect(() => {
         handleGaleria()
-    }, [])
+    }, [handleGaleria])
 
     useEffect(() => {
         !galeriaData && handleGaleria()
-    }, [categoria])
+    }, [categoria, galeriaData, handleGaleria])
 
     return (
         <main className='flex flex-col gap-4'>
