@@ -51,6 +51,8 @@ export default function ImagePreview({
                 })}
                 src={src}
                 alt={alt}
+                blurDataURL={src}
+                placeholder='blur'
                 width={200}
                 height={200}
             />
