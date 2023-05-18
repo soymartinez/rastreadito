@@ -24,8 +24,7 @@ export default function NewGallery({
     boundary = true,
     onClose
 }: NewGalleryProps) {
-    const [urls, setUrls] = useState<string[]>([])
-    const [file, setFile] = useState<File[]>([])
+    const [files, setFiles] = useState<{ file: File, index: number }[]>([])
 
     const { supabase } = useSupabase()
 
@@ -37,24 +36,32 @@ export default function NewGallery({
 
         const { data: { user } } = await supabase.auth.getUser()
 
-        if (file && user?.email) {
+        if (files && user?.email) {
+            let urls: string[] = []
             const upload = async () => {
-                file.map(async (file, index) => {
-                    const storage_upload = await supabase
-                        .storage
-                        .from('galeria')
-                        .upload(`${user?.email}/${categoria}/${formUpload.nombre?.replace(/[^\w\s]/gi, '')}/${index}`, file, {
-                            cacheControl: '3600',
-                            upsert: true,
-                        })
+                const upload = await Promise.all(
+                    files.map(async ({ file, index }) => {
+                        const storage_upload = await supabase
+                            .storage
+                            .from('galeria')
+                            .upload(`${user?.email}/${categoria}/${formUpload.nombre?.replace(/[^\w\s]/gi, '')}/image-${index}-${new Date().getTime()}`, file, {
+                                cacheControl: '3600',
+                                upsert: true,
+                            })
 
-                    if (storage_upload.error) {
-                        throw new Error(storage_upload.error.message)
-                    }
+                        if (storage_upload.error) {
+                            throw new Error(storage_upload.error.message)
+                        }
 
-                    const { data: { publicUrl } } = supabase.storage.from('galeria').getPublicUrl(storage_upload.data.path)
-                    setUrls((prev) => [...prev, publicUrl])
-                })
+                        const url = supabase.storage.from('galeria').getPublicUrl(storage_upload.data.path).data.publicUrl
+
+                        urls.push(url)
+                    })
+                )
+
+                if (upload.length !== files.length) {
+                    throw new Error('Error al subir imágenes')
+                }
 
                 const res = await fetch('/api/galeria', {
                     method: 'POST',
@@ -109,13 +116,13 @@ export default function NewGallery({
         >
             <form
                 onSubmit={handleSubmit}
-                className='grid md:grid-rows-4 grid-cols-6 gap-4'
+                className='grid md:grid-rows-4 grid-cols-6 gap-4 p-1'
             >
                 <div className='col-span-2 row-span-3 row-start-1'>
                     <div className={clsx('grid h-full', {
-                        'grid-cols-2 grid-rows-2': file?.length > 0,
+                        'grid-cols-2 grid-rows-2': files?.length > 0,
                     })}>
-                        <UploadInput onValue={(files) => setFile(files)} className='w-full h-full' />
+                        <UploadInput onValue={(files) => setFiles(files)} className='w-full h-full' />
                     </div>
                 </div>
                 <Input name='nombre' className='col-span-4 col-start-3 row-start-1' labelText='Nombre' defaultValue={nombre} required />
