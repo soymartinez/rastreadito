@@ -13,9 +13,10 @@ interface UploadInputProps {
     urls?: string[]
     className?: string
     onValue?: (value: { file: File, index: number }[], index?: number) => void
+    onRemove?: (url: string) => void
 }
 
-export default function UploadInput({ urls = [], className, onValue }: UploadInputProps) {
+export default function UploadInput({ urls = [], className, onValue, onRemove }: UploadInputProps) {
     const [files, setFile] = useState<{ file: File, index: number }[]>([])
     const [hover, setHover] = useState(false)
     const id = useId()
@@ -23,17 +24,8 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
     const toggleHover = () => setHover(!hover)
 
     function cambiarImagen(indice: number, file: File): void {
-        if (indice >= 0 && indice < urls.length) {
-            setFile((prev) => {
-                const newFiles = [...prev]
-                // get the file index where inidice is equal to the index
-                const urlIndex = urls.findIndex((_, index) => index === indice)
-                // add to the new files array the new file and the index
-                newFiles.push({ file, index: urlIndex })
-                // remove the old file from the new files array
-                // newFiles.splice(urlIndex, 1)
-                return newFiles
-            })
+        if (indice < urls.length) {
+            setFile(prev => [...prev, { file, index: indice }])
         } else {
             console.log("Índice inválido");
         }
@@ -42,13 +34,11 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
     const handlePreview = async (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
         e.preventDefault()
 
-        // TODO: Controlar las imagenes actuales con las nuevas y si estas se estan cambiando o eliminando
-
         const diff = 4 - urls.length
         const currentFiles = e.target.files
         const currentFilesArray = Array.from(currentFiles as FileList)
 
-        if (index) {
+        if (index !== undefined) {
             return cambiarImagen(index, currentFilesArray[0])
         }
 
@@ -66,13 +56,13 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                 if ((prev.length + currentFilesArray.length) > 4) {
                     const diff = 4 - prev.length
                     const newFiles = currentFilesArray.slice(0, diff)
-                    return [...prev, ...newFiles.map((file, index) => ({ file, index }))]
+                    return [...prev, ...newFiles.map((file, index) => ({ file, index: urls.length + index }))]
                 }
-                return [...prev, ...currentFilesArray.map((file, index) => ({ file, index }))]
+                return [...prev, ...currentFilesArray.map((file, index) => ({ file, index: urls.length + index }))]
             })
         }
 
-        return setFile(currentFilesArray.map((file, index) => ({ file, index })))
+        return setFile(currentFilesArray.map((file, index) => ({ file, index: urls.length + index })))
     }
 
     useEffect(() => {
@@ -82,15 +72,15 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
     return (
         <>
             {urls?.length > 0 && urls.map((url, index) => (
-                <div key={url}>
-                    {`${index}`}
+                <div key={url + index}>
                     <label
                         htmlFor={`${id}-${index}`}
-                        className={clsx('rounded-2xl overflow-hidden', className)}
+                        className={clsx('rounded-2xl overflow-hidden relative', className)}
                     >
                         <ImagePreview
-                            alt={url}
-                            src={url}
+                            alt={`${id}-${index}`}
+                            src={files[index]?.file ? URL.createObjectURL(files[index]?.file) : url}
+                            onRemoveImage={onRemove && (() => onRemove(url))}
                         />
                     </label>
                     <Input
@@ -100,7 +90,6 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                         name='imagen'
                         type={'file'}
                         accept={'image/*'}
-                        required
                     />
                 </div>
             ))}
@@ -123,11 +112,10 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                         name='imagen'
                         type={'file'}
                         accept={'image/*'}
-                        required
                     />
                 </div>
             ))}
-            {urls.length < 4 && (
+            {urls.length + files.length < 4 && (
                 <>
                     <label
                         htmlFor={`upload-${id}`}
@@ -135,7 +123,7 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                         onMouseLeave={toggleHover}
                         className={clsx('rounded-2xl overflow-hidden', className)}
                     >
-                        {`upload-${id}`}
+                        {`upload-${id} - ${urls.length + files.length}`}
                         <div className={clsx(`
                                 relative
                                 h-28
@@ -164,13 +152,13 @@ export default function UploadInput({ urls = [], className, onValue }: UploadInp
                     </label>
                     <Input
                         onChange={handlePreview}
-                        className='hidden'
+                        className='sr-only'
                         id={`upload-${id}`}
                         name='imagen'
                         type={'file'}
                         accept={'image/*'}
                         multiple
-                        required
+                        required={urls.length === 0 ? true : false}
                     />
                 </>
             )}
