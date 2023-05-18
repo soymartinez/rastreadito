@@ -278,7 +278,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                                                     ? url.map((imagenUrl, i) => (
                                                         <ImagePreview
                                                             key={`${nombre}-${i}`}
-                                                            onClick={() => handleImages(imagenUrl)}
+                                                            onChangeImage={() => handleImages(imagenUrl)}
                                                             alt={nombre}
                                                             src={imagenUrl}
                                                             changeIcon={false}
