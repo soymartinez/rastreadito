@@ -32,7 +32,7 @@ export default async function Generate({ params }: { params: { codigo: string } 
     const {
         id,
         valor,
-        producto: { nombre, descripcion, fechaRegistro },
+        producto: { nombre, descripcion, imagen, fechaRegistro },
     } = await getData({ origin, codigo: params.codigo })
     return (
         <main className='min-h-screen relative max-w-7xl mx-auto'>
@@ -55,7 +55,7 @@ export default async function Generate({ params }: { params: { codigo: string } 
             <ModalButton icon='QrCode'>
                 <div className='flex flex-col items-center py-16 px-2'>
                     <div className='w-20 h-20 bg-[#00DB94] rounded-lg flex justify-center items-center object-contain'>
-                        <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
+                        <Image src={imagen[0]} alt='cart-mango-96' width={63} height={63} />
                     </div>
                     <div className='flex flex-col justify-center items-center w-full text-_darkText dark:text-_white font-medium pt-8 pb-10'>
                         <h1 className='font-semibold text-4xl text-center'>{nombre}</h1>
