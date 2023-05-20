@@ -67,6 +67,15 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
         const formData = new FormData(e.target as HTMLFormElement)
         const data = Object.fromEntries(formData.entries()) as object as Producto
 
+        if (imagenes.length === 0) {
+            toast('Selecciona al menos una imagen', {
+                icon: <ImageOff size={18} />,
+            })
+
+            push('/metadata#galeria')
+            return
+        }
+
         if (producto) {
             const updateMetadata = async (data: Producto) => {
                 const update = await fetch('/api/metadata', {
@@ -243,7 +252,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                             ))}
                         </SelectContent>
                     </Select>
-                    <div className='flex flex-col gap-2 px-5 py-3 border border-_gray dark:border-_darkText rounded-2xl'>
+                    <div className='flex flex-col gap-2 px-5 py-3 border border-_gray dark:border-_darkText rounded-2xl' id='galeria'>
                         <div className='flex flex-col justify-between items-start gap-2'>
                             <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>Galeria</Label>
                             {galeria && galeria.length > 0
