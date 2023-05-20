@@ -3,6 +3,7 @@
 import Tr from '@/components/tr'
 import { QrProductType } from '@/types'
 import { AlertCircle, X } from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -34,6 +35,7 @@ export default function Table({ data }: TableProps) {
 
         if (!res.ok) throw new Error('Error al eliminar los productos')
 
+        revalidatePath('/history')
         setSelectList([])
     }
 
