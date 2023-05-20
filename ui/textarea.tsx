@@ -12,11 +12,13 @@ export interface TextareaProps
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ labelText, className, ...props }, ref) => {
         const id = React.useId()
+        const [isFocused, setIsFocused] = React.useState(false)
         return (
             <div
                 className={clsx(
-                    'flex items-center gap-3 w-full rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled focus:outline-none focus:ring-2 focus:ring-_primary disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-_primary',
-                    className
+                    'flex items-center gap-3 w-full rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextDisabled disabled:cursor-not-allowed disabled:opacity-50',
+                    { 'outline-none ring-2 ring-_primary': isFocused },
+                    className,
                 )}
             >
                 <div className='flex flex-col w-full'>
@@ -27,6 +29,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
                             'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                             className
                         )}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                         ref={ref}
                         {...props}
                     />
