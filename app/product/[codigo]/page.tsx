@@ -1,10 +1,7 @@
-import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-
-import imageExample from '@/public/cart-mango-96.png'
 import { Back } from '@/ui/back'
 import { Label } from '@/ui/label'
-import { Button } from '@/ui/button'
+import ImagePreview from './image-preview'
 
 async function getProduct(codigo: string) {
   const res = await prisma.qr.findUnique({
@@ -61,27 +58,7 @@ export default async function Product({ params }: { params: { codigo: string } }
       </div>
       <div className='flex flex-col gap-12 my-10'>
         <div className='grid md:grid-cols-2 items-center gap-12'>
-          <div className='flex flex-col items-center gap-8'>
-            <div className='w-64 h-64 xl:w-80 xl:h-80 relative'>
-              <Image
-                fill
-                src={imagen[0]}
-                alt={nombre}
-                priority
-              />
-            </div>
-            <div className='flex justify-center gap-3'>
-              <Button size={'nothing'} variant={'image'}>
-                <Image src={imageExample} alt='mango-cart' />
-              </Button>
-              <Button size={'nothing'} variant={'image'}>
-                <Image src={imageExample} alt='mango-cart' />
-              </Button>
-              <Button size={'nothing'} variant={'image'}>
-                <Image src={imageExample} alt='mango-cart' />
-              </Button>
-            </div>
-          </div>
+          <ImagePreview imagenes={imagen} alt={nombre} />
           <div className='flex flex-col gap-7'>
             <div className='md:order-2'>
               <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Descripción</Label>
