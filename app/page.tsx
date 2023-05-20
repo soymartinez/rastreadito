@@ -12,7 +12,7 @@ import { headers } from 'next/headers'
 async function getQr(origin: string, email: string,) {
   const res = await fetch(origin + '/api/qr/' + email, {
     next: {
-      revalidate: 10,
+      revalidate: 0,
     },
   })
   if (!res.ok) {
@@ -24,7 +24,7 @@ async function getQr(origin: string, email: string,) {
 async function getCategorias(origin: string) {
   const res = await fetch(origin + '/api/categorias', {
     next: {
-      revalidate: 10,
+      revalidate: 0,
     },
   })
   if (!res.ok) {
