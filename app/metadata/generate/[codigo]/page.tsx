@@ -9,6 +9,7 @@ import ModalButton from '@/components/modal/modal-button'
 import GenerateQr from '@/components/generateQr'
 import { headers } from 'next/headers'
 import { QrProductType } from '@/types'
+import Link from 'next/link'
 
 interface Params {
     origin: string,
@@ -31,6 +32,7 @@ export default async function Generate({ params }: { params: { codigo: string } 
 
     const {
         id,
+        codigo,
         valor,
         producto: { nombre, descripcion, imagen, fechaRegistro },
     } = await getData({ origin, codigo: params.codigo })
@@ -78,10 +80,12 @@ export default async function Generate({ params }: { params: { codigo: string } 
                             className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
                             <Download />
                         </Button>
-                        <Button variant={'outline'}
-                            className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
-                            <Send />
-                        </Button>
+                        <Link href={`/product/${codigo}`}>
+                            <Button variant={'outline'}
+                                className='w-16 h-16 dark:border-[#474747] hover:bg-_primary hover:border-_primary dark:hover:border-_primary hover:text-_dark duration-75'>
+                                <Send />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </ModalButton>
