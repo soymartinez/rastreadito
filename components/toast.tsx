@@ -13,6 +13,7 @@ export default function Toast() {
                     fontWeight: 600,
                 },
             }}
+            position='top-right'
             closeButton
         />
     )
