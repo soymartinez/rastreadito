@@ -6,9 +6,10 @@ import clsx from 'clsx'
 import GeneralCard from './card/general'
 import HistorialCard from './card/history'
 import CategoryCard from './card/category'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs'
+import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
 import EmptyHistory from './empty-history'
+import TabTrigger from './tab-trigger'
 
 interface MainTabsProps {
     qr?: Qr[],
@@ -26,30 +27,14 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
         <Tabs defaultValue='general'>
             <TabsList className='flex py-2 overflow-x-auto'>
                 <div className='flex gap-2 w-min'>
-                    <TabsTrigger
+                    <TabTrigger
+                        label='Inicio'
                         value='general'
-                        className={`w-28 h-12
-                            flex justify-center items-center transition-all
-                            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-                            dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
-                            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                            dark:bg-_dark dark:text-_white dark:border-_darkText 
-                            dark:hover:bg-_darkText dark:data-[state=active]:hover:bg-_primary`}
-                    >
-                        Inicio
-                    </TabsTrigger>
-                    <TabsTrigger
+                    />
+                    <TabTrigger
+                        label='Categoría'
                         value='categories'
-                        className={`w-28 h-12
-                            flex justify-center items-center transition-all
-                            data-[state=active]:bg-[#1b1b1b] data-[state=active]:text-_white data-[state=active]:border-none 
-                            dark:data-[state=active]:bg-_primary dark:data-[state=active]:text-_dark 
-                            bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                            dark:bg-_dark dark:text-_white dark:border-_darkText 
-                            dark:hover:bg-_darkText dark:data-[state=active]:hover:bg-_primary`}
-                    >
-                        Categoría
-                    </TabsTrigger>
+                    />
                     <Link href={'/history'}>
                         <div className={`w-28 h-12
                             flex justify-center items-center transition-all
