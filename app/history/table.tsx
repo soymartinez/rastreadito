@@ -3,9 +3,9 @@
 import Tr from '@/components/tr'
 import { QrProductType } from '@/types'
 import { AlertCircle, X } from 'lucide-react'
-import { revalidatePath } from 'next/cache'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
+import { deleteProduct } from '../actions/delete-product'
 
 interface TableProps {
     data: QrProductType[]
@@ -13,6 +13,7 @@ interface TableProps {
 
 export default function Table({ data }: TableProps) {
     const [selectList, setSelectList] = useState<number[]>([])
+    let [_, startTransition] = useTransition()
 
     const handleSelectedAll = (checked: boolean) => {
         checked
@@ -27,29 +28,22 @@ export default function Table({ data }: TableProps) {
             : setSelectList(selectList.filter((item) => item !== id))
     }
 
-    const handleDelete = async () => {
-        const res = await fetch(`/api/qr/delete`, {
-            method: 'POST',
-            body: JSON.stringify({ ids: selectList }),
-        })
-
-        if (!res.ok) throw new Error('Error al eliminar los productos')
-
-        revalidatePath('/history')
-        setSelectList([])
-    }
-
-    const handleToast = () => {
-        toast('¿Estás seguro de eliminar los productos seleccionados?', {
+    const handleDelete = () => {
+        toast(`¿Estás seguro de eliminar ${selectList.length > 1 ? 'los productos seleccionados' : 'el producto seleccionado'}?`, {
             icon: <AlertCircle size={18} />,
             cancel: { label: 'Cancelar' },
             action: {
                 label: 'Eliminar',
                 onClick: () => {
-                    toast.promise(handleDelete, {
+                    toast.promise(deleteProduct(selectList), {
                         loading: 'Eliminando...',
-                        success: <><strong>{selectList.length}</strong> {selectList.length > 1 ? 'productos eliminados' : 'producto eliminado'}</>,
-                        error: 'Error al eliminar los productos',
+                        success: () => {
+                            setSelectList([])
+                            return <>
+                                <strong>{selectList.length}</strong> {selectList.length > 1 ? 'productos eliminados' : 'producto eliminado'}
+                            </>
+                        },
+                        error: (err) => err.message,
                     },
                     )
                 }
@@ -78,7 +72,7 @@ export default function Table({ data }: TableProps) {
                 </div>
                 {selectList.length > 0 && <div className='w-1 h-full bg-_gray dark:bg-_darkText' />}
                 {selectList.length > 0 && (
-                    <button onClick={handleToast} className={`
+                    <button onClick={() => startTransition(handleDelete)} className={`
                             w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
                             border-_gray font-medium rounded-full dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}>
                         Eliminar <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
