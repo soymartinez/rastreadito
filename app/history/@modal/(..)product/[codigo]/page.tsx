@@ -43,7 +43,7 @@ export default async function ProductId({ params }: { params: { codigo: string }
                 </div>
             </div>
             <FormMetadata
-                className='overflow-auto relative'
+                className='overflow-auto relative p-1'
                 categorias={categorias}
                 producto={producto}
                 type='floating'
