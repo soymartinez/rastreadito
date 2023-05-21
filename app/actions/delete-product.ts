@@ -14,7 +14,7 @@ export async function deleteProduct(ids: number[]) {
         }
     })
 
- 
+    revalidatePath('/')
     revalidatePath('/history')
     return res
 }
