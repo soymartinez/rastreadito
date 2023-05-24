@@ -14,7 +14,13 @@ export const metadata: Metadata = {
   description: 'Rastreadito te permite seguir el rastro de tus productos cannábicos desde su origen hasta tu mano. Descubre su metadata y conoce toda su historia con esta app.',
 }
 
-export default async function RootLayout({ children, }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+  modal
+}: {
+  children: React.ReactNode
+  modal: React.ReactDOM
+}) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`
@@ -23,7 +29,10 @@ export default async function RootLayout({ children, }: { children: React.ReactN
           `}>
         <ThemeProvider>
           <SupabaseProvider>
-            {children}
+            <>
+              {children}
+              {modal}
+            </>
             <Analytics />
           </SupabaseProvider>
         </ThemeProvider>
