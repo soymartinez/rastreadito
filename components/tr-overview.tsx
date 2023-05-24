@@ -23,6 +23,7 @@ export default function TrOverview({
             nombre,
             descripcion,
             categoria,
+            imagen,
         }
     },
 }: Props) {
@@ -45,7 +46,7 @@ export default function TrOverview({
                 {showQr && <Modal onClose={() => setShowQr(false)}>
                     <div className='flex flex-col items-center py-16 px-2 text-_darkText'>
                         <div className='w-20 h-20 bg-[#00DB94] rounded-lg flex justify-center items-center object-contain'>
-                            <Image src='/cart-mango-96.png' alt='cart-mango-96' width={63} height={63} />
+                            <Image src={imagen[0]} alt={nombre} width={63} height={63} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-full font-semibold pt-8 pb-10'>
                             <h1 className='font-semibold text-4xl text-center dark:text-_white'>{nombre}</h1>
