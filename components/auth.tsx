@@ -2,7 +2,7 @@
 
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
-import { LogOut } from 'lucide-react'
+import { Loader, LogOut } from 'lucide-react'
 import { useSupabase } from './supabase-provider'
 import { toast } from 'sonner'
 import { useState } from 'react'
@@ -18,6 +18,7 @@ function SignIn() {
     const router = useRouter()
     const { supabase } = useSupabase()
     const [form, setForm] = useState<Props>({} as Props)
+    const [loading, setLoading] = useState(false)
 
     const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -25,6 +26,7 @@ function SignIn() {
         const form = Object.fromEntries(formData.entries()) as object as Props
 
         const magicLink = async () => {
+            setLoading(true)
             const { error } = await supabase.auth.signInWithOtp({
                 email: form.email,
                 options: {
@@ -40,9 +42,12 @@ function SignIn() {
                 success: 'Código de verificación enviado, revisa tu correo',
                 error: (error) => error.message,
             })
+
+            setLoading(false)
         }
 
         const signIn = async () => {
+            setLoading(true)
             const { error } = await supabase.auth.signInWithPassword({
                 email: form.email,
                 password: form.password,
@@ -59,6 +64,8 @@ function SignIn() {
                 },
                 error: (error) => error.message,
             })
+
+            setLoading(false)
         }
 
         form.email && form.password
@@ -86,8 +93,8 @@ function SignIn() {
                 icon={'password'}
                 labelText='Contraseña'
             />
-            <Button type='submit' className='w-full'>
-                {form.email && form.password ? 'Iniciar sesión' : 'Link mágico'}
+            <Button type='submit' className='w-full gap-2'>
+                {loading && <Loader size={20} className='animate-spin' />} {form.email && form.password ? 'Iniciar sesión' : 'Link mágico'}
             </Button>
         </form>
     )
@@ -121,9 +128,11 @@ function SignInWhitGoogle() {
 
 function SignUp() {
     const { supabase } = useSupabase()
+    const [loading, setLoading] = useState(false)
 
     const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setLoading(true)
         const formData = new FormData(e.target as HTMLFormElement)
         const form = Object.fromEntries(formData.entries()) as object as Props
 
@@ -147,13 +156,17 @@ function SignUp() {
             success: 'Cuenta creada, revisa tu correo para verificarla',
             error: (error) => error.message,
         })
+
+        setLoading(false)
     }
     return (
         <form onSubmit={handleSignUp} className='grid gap-4 mt-10'>
             <Input name='name' placeholder='bee' labelText='Nombre' autoComplete='off' required />
             <Input name='email' placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
             <Input name='password' placeholder='••••••••' type={'password'} labelText='Contraseña' required />
-            <Button type='submit' className='w-full'>Continuar</Button>
+            <Button type='submit' className='w-full'>
+                {loading && <Loader size={20} className='animate-spin' />} Registrarse
+            </Button>
         </form>
     )
 }
