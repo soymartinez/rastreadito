@@ -56,6 +56,7 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                                 description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
                                 number: qrList.active?.length || 0,
                                 icon: 'active',
+                                estatus: 'ACTIVO',
                             }}
                         />
                         <GeneralCard
@@ -64,6 +65,7 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                                 description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
                                 number: qrList.use?.length || 0,
                                 icon: 'use',
+                                estatus: 'USADO',
                             }}
                         />
                         <GeneralCard
@@ -72,6 +74,7 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                                 description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
                                 number: qrList.destroyed?.length || 0,
                                 icon: 'destroy',
+                                estatus: 'DESTRUIDO',
                             }}
                         />
                     </div>
