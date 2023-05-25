@@ -2,10 +2,10 @@ import ModalPage from '@/components/modal/modal-page'
 import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { Estatus } from '@prisma/client'
+import { User } from '@supabase/supabase-js'
 import Image from 'next/image'
 
-const getStatusHistory = async (estatus: Estatus) => {
-    const { user } = await useSupabaseServer()
+const getStatusHistory = async (estatus: Estatus, user: User | null) => {
     const history = await prisma.qr.findMany({
         where: {
             estatus,
@@ -22,7 +22,8 @@ const getStatusHistory = async (estatus: Estatus) => {
 }
 
 export default async function HistoryStatus({ params }: { params: { estatus: string } }) {
-    const history = await getStatusHistory(params.estatus.toUpperCase() as Estatus)
+    const { user } = await useSupabaseServer()
+    const history = await getStatusHistory(params.estatus.toUpperCase() as Estatus, user)
 
     const title = () => {
         const estatus = params.estatus.toUpperCase() as Estatus
