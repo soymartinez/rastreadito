@@ -67,7 +67,7 @@ export default function Table({ data }: TableProps) {
                         <span className='font-bold'>{selectList.length > 0 ? selectList.length : data.length}</span>{' '}
                         {selectList.length > 0
                             ? selectList.length > 1 ? 'seleccionados' : 'seleccionado'
-                            : selectList.length > 1 ? 'productos' : 'producto'}
+                            : data.length > 1 ? 'productos' : 'producto'}
                     </p>
                 </div>
                 {selectList.length > 0 && <div className='w-1 h-full bg-_gray dark:bg-_darkText' />}
