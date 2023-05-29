@@ -8,6 +8,9 @@ import Modal from './modal/modal'
 import GenerateQr from './generateQr'
 import Image from 'next/image'
 import { Button } from '@/ui/button'
+import { ActiveButton, DestroyButton, UseButton } from './status'
+import Link from 'next/link'
+import { Maximize2 } from 'lucide-react'
 
 interface Props {
     data: QrProductType
@@ -18,6 +21,7 @@ export default function TrOverview({
         id,
         estatus,
         valor,
+        codigo,
         fechaRegistro,
         producto: {
             nombre,
@@ -33,6 +37,15 @@ export default function TrOverview({
             key={id}
             className={clsx('bg-_white hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto')}
         >
+            <td className='px-3 py-1'>
+                <div className='w-min'>
+                    <Link href={`/product/${codigo}`}>
+                        <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+                            <Maximize2 size={14} className='text-_dark dark:text-_primary' />
+                        </div>
+                    </Link>
+                </div>
+            </td>
             <td className='px-3 py-1'>
                 <h1 className='font-semibold whitespace-nowrap text-_dark dark:text-_white uppercase'>#{categoria} {id}</h1>
             </td>
@@ -63,22 +76,11 @@ export default function TrOverview({
                     </div>
                 </Modal>}
             </td>
-            <td className='px-3 py-1 sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
-                <div className='flex items-center gap-2'>
-                    <div className='flex justify-center items-center relative'>
-                        <div className={clsx('w-4 h-4 rounded-full', {
-                            'bg-_primary': estatus === 'ACTIVO',
-                            'bg-[#00d0ff]': estatus === 'USADO',
-                            'bg-_darkText': estatus === 'DESTRUIDO',
-                        })} />
-                        <div className={clsx('w-4 h-4 rounded-full absolute animate-ping', {
-                            'bg-_primary': estatus === 'ACTIVO',
-                            'bg-[#00d0ff]': estatus === 'USADO',
-                            'bg-_darkText': estatus === 'DESTRUIDO',
-                        })} />
-                    </div>
-                    <h1 className='text-base font-medium text-_dark dark:text-_white'>{estatus}</h1>
-                </div>
+            <td className='px-3 py-2 font-semibold whitespace-nowrap'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
+            <td className='px-3 py-1 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
+                {estatus === 'ACTIVO' && <ActiveButton />}
+                {estatus === 'USADO' && <UseButton />}
+                {estatus === 'DESTRUIDO' && <DestroyButton />}
             </td>
         </tr>
     )
