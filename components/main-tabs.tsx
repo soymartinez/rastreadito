@@ -1,7 +1,4 @@
-'use client'
-
 import Link from 'next/link'
-import { useState } from 'react'
 import clsx from 'clsx'
 import GeneralCard from './card/general'
 import HistorialCard from './card/history'
@@ -10,19 +7,47 @@ import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
 import EmptyHistory from './empty-history'
 import TabTrigger from './tab-trigger'
+import { Suspense } from 'react'
+import { getCurrentUser } from '@/hooks/auth'
+import { prisma } from '@/lib/prisma'
+import TrOverviewLoading from './loading/tr-overview'
 
-interface MainTabsProps {
-    qr?: Qr[],
-    categories?: Categoria[],
+async function getQr(usuario: string,) {
+    const res = await prisma.qr.findMany({
+        where: {
+            producto: {
+                usuario,
+            }
+        },
+        include: {
+            producto: true,
+        }
+    })
+
+    return res
 }
 
-export default function MainTabs({ qr, categories }: MainTabsProps) {
-    const [qrList] = useState({
-        active: qr?.filter(qr => qr.estatus === 'ACTIVO'),
-        use: qr?.filter(qr => qr.estatus === 'USADO'),
-        destroyed: qr?.filter(qr => qr.estatus === 'DESTRUIDO'),
+async function getCategorias(usuario: string) {
+    const res = await prisma.categoria.findMany({
+        orderBy: {
+            id: 'asc'
+        },
+        include: {
+            galeria: {
+                where: {
+                    usuario,
+                }
+            },
+        },
     })
-    const [categoryList] = useState(categories)
+
+    return res
+}
+
+export default async function MainTabs() {
+    const user = await getCurrentUser()
+    const qr = getQr(user?.email ?? '')
+    const categories = getCategorias(user?.email ?? '')
     return (
         <Tabs defaultValue='general'>
             <TabsList className='flex py-2 overflow-x-auto'>
@@ -50,29 +75,29 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
                 <div>
                     <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>General</h1>
                     <div className={clsx('grid gap-3')}>
+                        {/* @ts-expect-error Async Server Component */}
                         <GeneralCard
                             props={{
                                 title: 'Activo',
                                 description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
-                                number: qrList.active?.length || 0,
                                 icon: 'active',
                                 estatus: 'ACTIVO',
                             }}
                         />
+                        {/* @ts-expect-error Async Server Component */}
                         <GeneralCard
                             props={{
                                 title: 'Uso',
                                 description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
-                                number: qrList.use?.length || 0,
                                 icon: 'use',
                                 estatus: 'USADO',
                             }}
                         />
+                        {/* @ts-expect-error Async Server Component */}
                         <GeneralCard
                             props={{
                                 title: 'Destruido',
                                 description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
-                                number: qrList.destroyed?.length || 0,
                                 icon: 'destroy',
                                 estatus: 'DESTRUIDO',
                             }}
@@ -82,19 +107,41 @@ export default function MainTabs({ qr, categories }: MainTabsProps) {
 
                 <div>
                     <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Ultimos códigos</h1>
-                    {qr && qr?.length > 0
-                        ? <HistorialCard data={qr} />
-                        : <EmptyHistory height='full' title='productos' description='producto' />}
+                    <Suspense fallback={<TrOverviewLoading />}>
+                        {/* @ts-expect-error Async Server Component */}
+                        <Historial data={qr} />
+                    </Suspense>
                 </div>
             </TabsContent>
             <TabsContent value='categories'>
                 <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Categoria</h1>
-                <div className={clsx('grid gap-3')}>
-                    {categoryList?.map((category) => (
-                        <CategoryCard key={category.id} props={category} />
-                    ))}
-                </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                    {/* @ts-expect-error Async Server Component */}
+                    <Categories data={categories} />
+                </Suspense>
             </TabsContent>
         </Tabs>
+    )
+}
+
+export async function Historial({ data }: { data: Promise<Qr[]> }) {
+    const qrList = await data
+    return (
+        <>
+            {qrList && qrList?.length > 0
+                ? <HistorialCard data={qrList} />
+                : <EmptyHistory height='full' title='productos' description='producto' />}
+        </>
+    )
+}
+
+export async function Categories({ data }: { data: Promise<Categoria[]> }) {
+    const categories = await data
+    return (
+        <div className='grid gap-3'>
+            {categories.map((category) => (
+                <CategoryCard key={category.id} props={category} />
+            ))}
+        </div>
     )
 }
