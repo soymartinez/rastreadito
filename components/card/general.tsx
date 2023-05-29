@@ -1,3 +1,5 @@
+import { getCurrentUser } from '@/hooks/auth'
+import { prisma } from '@/lib/prisma'
 import { Estatus } from '@prisma/client'
 import {
     Package,
@@ -5,16 +7,31 @@ import {
     QrCode
 } from 'lucide-react'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
-export default function GeneralCard({ props }: {
+async function getQrCount(estatus: Estatus, user: string) {
+    const res = await prisma.qr.count({
+        where: {
+            estatus,
+            producto: {
+                usuario: user,
+            }
+        }
+    })
+
+    return res
+}
+
+export default async function GeneralCard({ props }: {
     props: {
         title: string
         description: string
-        number: number,
         icon: 'active' | 'use' | 'destroy',
         estatus: Estatus,
     },
 }) {
+    const user = await getCurrentUser()
+    const count = getQrCount(props.estatus, user?.email ?? '')
     return (
         <Link href={`/history/${props.estatus.toLowerCase()}`}>
             <div className={'grid grid-flow-col sm:flex items-center gap-4 bg-_dark dark:bg-_darkText hover:bg-_dark/95 dark:hover:bg-_darkText/80 transition-all cursor-pointer p-4 rounded-2xl'}>
@@ -29,8 +46,16 @@ export default function GeneralCard({ props }: {
                         {props.description}
                     </p>
                 </div>
-                <h1 className={'text-5xl font-semibold text-_white'}>{props.number}</h1>
+                <Suspense fallback={<div className='w-10 h-12 bg-_gray dark:bg-_dark/50 rounded-md animate-pulse' />}>
+                    {/* @ts-expect-error Async Server Component */}
+                    <Count promise={count} />
+                </Suspense>
             </div>
         </Link>
     )
+}
+
+export async function Count({ promise }: { promise: Promise<number> }) {
+    const count = await promise
+    return <h1 className={'text-5xl font-semibold text-_white'}>{count}</h1>
 }
