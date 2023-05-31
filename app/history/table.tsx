@@ -31,7 +31,12 @@ export default function Table({ data }: TableProps) {
     const handleDelete = () => {
         toast(`¿Estás seguro de eliminar ${selectList.length > 1 ? 'los productos seleccionados' : 'el producto seleccionado'}?`, {
             icon: <AlertCircle size={18} />,
-            cancel: { label: 'Cancelar' },
+            cancel: {
+                label: 'Cancelar',
+                onClick: () => {
+                    setSelectList([])
+                },
+            },
             action: {
                 label: 'Eliminar',
                 onClick: () => {
