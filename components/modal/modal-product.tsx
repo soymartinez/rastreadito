@@ -117,7 +117,7 @@ export default function ModalProduct({ data }: { data: Producto }) {
                     </div>
                     <div className='flex flex-col gap-3'>
                         <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de registro</Label>
-                        <span className='text-base font-semibold'>{new Date(fechaRegistro).toLocaleString()}</span>
+                        <span className='text-base font-semibold'>{new Date(fechaRegistro).toLocaleString('es', { hour12: true })}</span>
                     </div>
                     <div className='flex flex-col gap-3'>
                         <Label className='text-xs font-semibold text-_grayTextLight uppercase'>Fecha de caducidad</Label>
