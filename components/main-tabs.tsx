@@ -5,7 +5,7 @@ import HistorialCard from './card/history'
 import CategoryCard from './card/category'
 import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
-import EmptyHistory from './empty-history'
+import Empty from './empty'
 import TabTrigger from './tab-trigger'
 import { Suspense } from 'react'
 import { getCurrentUser } from '@/hooks/auth'
@@ -130,7 +130,7 @@ export async function Historial({ data }: { data: Promise<Qr[]> }) {
         <>
             {qrList && qrList?.length > 0
                 ? <HistorialCard data={qrList} />
-                : <EmptyHistory height='full' title='productos' description='producto' />}
+                : <Empty height='full' title='Aún no tienes productos registrados.' description='Registra tu primer producto' />}
         </>
     )
 }
