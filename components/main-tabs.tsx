@@ -21,7 +21,10 @@ async function getQr(usuario: string,) {
         },
         include: {
             producto: true,
-        }
+        },
+        orderBy: {
+            fechaRegistro: 'desc'
+        },
     })
 
     return res
