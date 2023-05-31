@@ -1,12 +1,14 @@
 import { Categoria } from '@prisma/client'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function CategoryCard({ props: {
     acronimo,
     imagen,
 } }: { props: Categoria }) {
     return (
-        <div
+        <Link
+            href={`/categoria/${acronimo.toLowerCase()}`}
             className='
                 bg-_dark
                 hover:bg-_dark/95
@@ -25,6 +27,6 @@ export default function CategoryCard({ props: {
         >
             <h1 className='text-xl font-semibold text-_white capitalize'>{acronimo.toLowerCase()}</h1>
             <Image src={imagen || ''} alt={acronimo} width={44} height={44} />
-        </div>
+        </Link>
     )
 }
