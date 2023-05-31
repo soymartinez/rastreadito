@@ -11,6 +11,7 @@ import { Button } from '@/ui/button'
 import { ActiveButton, DestroyButton, UseButton } from './status'
 import Link from 'next/link'
 import { Maximize2 } from 'lucide-react'
+import { getRelativeTime } from '@/lib/timeago'
 
 interface Props {
     data: QrProductType
@@ -32,6 +33,7 @@ export default function TrOverview({
     },
 }: Props) {
     const [showQr, setShowQr] = useState(false)
+    const timeAgo = getRelativeTime(fechaRegistro.getTime() / 1000)
     return (
         <tr
             key={id}
@@ -76,7 +78,7 @@ export default function TrOverview({
                     </div>
                 </Modal>}
             </td>
-            <td className='px-3 py-2 font-semibold whitespace-nowrap'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
+            <td className='px-3 py-2 font-semibold whitespace-nowrap'>{timeAgo}</td>
             <td className='px-3 py-1 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
                 {estatus === 'ACTIVO' && <ActiveButton />}
                 {estatus === 'USADO' && <UseButton />}
