@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 import Table from './table'
 import TabTrigger from '@/components/tab-trigger'
 import { Categoria } from '@prisma/client'
-import EmptyHistory from '@/components/empty-history'
+import Empty from '@/components/empty'
 
 async function getHistorial(usuario: string) {
     const res = await prisma.qr.findMany({
@@ -57,13 +57,14 @@ export default async function History() {
                 <TabsContent value='Ver todo' className='overflow-auto w-full'>
                     {historial.length > 0
                         ? <Table data={historial} />
-                        : <EmptyHistory title='productos' description='producto' />}
+                        : <Empty title='Aún no tienes productos registrados.' description='Registra tu primer producto.' />}
                 </TabsContent>
                 {categorias.map((categoria: Categoria) => (
                     <TabsContent className='overflow-auto w-full' value={categoria.acronimo} key={categoria.id}>
                         {historial.filter((qr) => qr.producto.categoria === categoria.acronimo).length > 0
                             ? <Table data={historial.filter((qr) => qr.producto.categoria === categoria.acronimo)} />
-                            : <EmptyHistory title={categoria.nombre.toLocaleLowerCase()} description={categoria.acronimo.toLowerCase()} />}
+                            : <Empty title={`Aún no tienes ${categoria.nombre.toLocaleLowerCase()} registrados.`}
+                                description={`Registra tu primer ${categoria.acronimo.toLowerCase()}.`} />}
                     </TabsContent>
                 ))}
             </Tabs>
