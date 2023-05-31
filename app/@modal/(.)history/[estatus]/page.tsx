@@ -50,7 +50,7 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
                                     className='rounded-xl object-contain border border-_gray dark:border-_darkText'
                                 />
                                 <div>
-                                    <span className='text-xl font-semibold text-_white'>{producto.nombre}</span>
+                                    <span className='text-xl font-semibold'>{producto.nombre}</span>
                                     <span className='line-clamp-2 text-xs font-medium text-_grayText'>{producto.descripcion}</span>
                                 </div>
                             </div>
