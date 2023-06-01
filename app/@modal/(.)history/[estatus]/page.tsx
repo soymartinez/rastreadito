@@ -1,3 +1,4 @@
+import Empty from '@/components/empty'
 import ModalPage from '@/components/modal/modal-page'
 import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
@@ -56,9 +57,7 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
                             </div>
                         ))}
                     </div>
-                    : <div className='h-full flex justify-center items-center'>
-                        <p className='font-medium text-_grayText'>No hay QRs en este estado</p>
-                    </div>}
+                    : <Empty title='Aún no hay productos en este estado.' description='Genera un nuevo QR.' />}
             </section>
         </ModalPage>
     )
