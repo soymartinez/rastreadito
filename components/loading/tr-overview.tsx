@@ -23,24 +23,24 @@ export default function TrOverviewLoading() {
                             <td className='px-3 py-1'>
                                 <div className='w-min'>
                                     <div className='bg-_gray dark:bg-_darkText p-2 rounded-full'>
-                                        <Maximize2 size={14} className='text-_dark dark:text-_dark' />
+                                        <Maximize2 size={14} className='text-_grayText dark:text-_dark' />
                                     </div>
                                 </div>
                             </td>
                             <td className='px-3 py-1'>
-                                <div className='w-20 h-4 dark:bg-_darkText rounded-md animate-pulse' />
+                                <div className='w-20 h-4 bg-_gray dark:bg-_darkText rounded-md animate-pulse' />
                             </td>
                             <td className='px-3 py-1'>
-                                <div className='w-24 h-4 dark:bg-_darkText rounded-md animate-pulse' />
+                                <div className='w-24 h-4 bg-_gray dark:bg-_darkText rounded-md animate-pulse' />
                             </td>
                             <td className='px-3 py-1'>
-                                <div className='w-32 h-6 dark:bg-_darkText rounded-full animate-pulse' />
+                                <div className='w-32 h-6 bg-_gray dark:bg-_darkText rounded-full animate-pulse' />
                             </td>
                             <td className='px-3 py-1 font-semibold whitespace-nowrap'>
-                                <div className='w-44 h-4 dark:bg-_darkText rounded-md animate-pulse' />
+                                <div className='w-44 h-4 bg-_gray dark:bg-_darkText rounded-md animate-pulse' />
                             </td>
                             <td className='px-3 py-1 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
-                                <div className='w-[78px] h-7 dark:bg-_darkText rounded-full animate-pulse' />
+                                <div className='w-[78px] h-7 bg-_gray dark:bg-_darkText rounded-full animate-pulse' />
                             </td>
                         </tr>
                     ))}
