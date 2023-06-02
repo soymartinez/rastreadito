@@ -77,21 +77,40 @@ async function History({ history }: { history: Promise<QrProductType[]> }) {
 }
 
 const FadingLoader = () => (
-    <ContentLoader
-        className='w-full h-96'
-        backgroundColor='#f3f3f3'
-        foregroundColor='#ecebeb'
-    >
-        <rect x='0' y='0' rx='5' ry='5' width='64' height='64' />
-        <rect x='70' y='8' rx='5' ry='5' width='200' height='16' />
-        <rect x='70' y='28' rx='5' ry='5' width='100%' height='26' />
+    <>
+        <ContentLoader
+            className='w-full h-96 dark:hidden'
+            backgroundColor='#f3f3f3'
+            foregroundColor='#ecebeb'
+        >
+            <rect x='0' y='0' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='8' rx='5' ry='5' width='200' height='16' />
+            <rect x='70' y='28' rx='5' ry='5' width='100%' height='26' />
 
-        <rect x='0' y='80' rx='5' ry='5' width='64' height='64' />
-        <rect x='70' y='88' rx='5' ry='5' width='180' height='16' />
-        <rect x='70' y='108' rx='5' ry='5' width='80%' height='26' />
+            <rect x='0' y='80' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='88' rx='5' ry='5' width='180' height='16' />
+            <rect x='70' y='108' rx='5' ry='5' width='80%' height='26' />
 
-        <rect x='0' y='160' rx='5' ry='5' width='64' height='64' />
-        <rect x='70' y='168' rx='5' ry='5' width='210' height='16' />
-        <rect x='70' y='188' rx='5' ry='5' width='70%' height='26' />
-    </ContentLoader>
+            <rect x='0' y='160' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='168' rx='5' ry='5' width='210' height='16' />
+            <rect x='70' y='188' rx='5' ry='5' width='70%' height='26' />
+        </ContentLoader>
+        <ContentLoader
+            className='w-full h-96 hidden dark:block'
+            backgroundColor='#262626'
+            foregroundColor='#212121'
+        >
+            <rect x='0' y='0' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='8' rx='5' ry='5' width='200' height='16' />
+            <rect x='70' y='28' rx='5' ry='5' width='100%' height='26' />
+
+            <rect x='0' y='80' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='88' rx='5' ry='5' width='180' height='16' />
+            <rect x='70' y='108' rx='5' ry='5' width='80%' height='26' />
+
+            <rect x='0' y='160' rx='5' ry='5' width='64' height='64' />
+            <rect x='70' y='168' rx='5' ry='5' width='210' height='16' />
+            <rect x='70' y='188' rx='5' ry='5' width='70%' height='26' />
+        </ContentLoader>
+    </>
 )
