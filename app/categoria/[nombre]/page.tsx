@@ -72,17 +72,31 @@ async function Categorias({ qr }: { qr: Promise<QrProductType[]> }) {
 
 const FadingLoader = () => {
     return (
-        <ContentLoader
-            className='w-full h-96 px-3'
-            backgroundColor="#f3f3f3"
-            foregroundColor="#ecebeb"
-        >
-            <rect x="0" y="0" rx="5" ry="5" width="200" height="20" />
-            <rect x="0" y="48" rx="5" ry="5" width="100%" height="32" />
-            <rect x="0" y="96" rx="5" ry="5" width="100%" height="32" />
-            <rect x="0" y="144" rx="5" ry="5" width="100%" height="32" />
-            <rect x="0" y="192" rx="5" ry="5" width="100%" height="32" />
-            <rect x="0" y="240" rx="5" ry="5" width="100%" height="32" />
-        </ContentLoader>
+        <>
+            <ContentLoader
+                className='w-full h-96 px-3 dark:hidden'
+                backgroundColor='#f3f3f3'
+                foregroundColor='#ecebeb'
+            >
+                <rect x='0' y='0' rx='5' ry='5' width='200' height='20' />
+                <rect x='0' y='48' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='96' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='144' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='192' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='240' rx='5' ry='5' width='100%' height='32' />
+            </ContentLoader>
+            <ContentLoader
+                className='w-full h-96 px-3 dark:block hidden'
+                backgroundColor='#262626'
+                foregroundColor='#212121'
+            >
+                <rect x='0' y='0' rx='5' ry='5' width='200' height='20' />
+                <rect x='0' y='48' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='96' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='144' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='192' rx='5' ry='5' width='100%' height='32' />
+                <rect x='0' y='240' rx='5' ry='5' width='100%' height='32' />
+            </ContentLoader>
+        </>
     )
 }
