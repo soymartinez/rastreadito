@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import ContentLoader from 'react-content-loader'
 
 async function getQrCount(estatus: Estatus, user: string) {
     const res = await prisma.qr.count({
@@ -46,10 +47,12 @@ export default async function GeneralCard({ props }: {
                         {props.description}
                     </p>
                 </div>
-                <Suspense fallback={<div className='w-10 h-12 bg-_gray dark:bg-_dark/50 rounded-md animate-pulse' />}>
-                    {/* @ts-expect-error Async Server Component */}
-                    <Count promise={count} />
-                </Suspense>
+                <div>
+                    <Suspense fallback={<FadingLoader />}>
+                        {/* @ts-expect-error Async Server Component */}
+                        <Count promise={count} />
+                    </Suspense>
+                </div>
             </div>
         </Link>
     )
@@ -59,3 +62,26 @@ export async function Count({ promise }: { promise: Promise<number> }) {
     const count = await promise
     return <h1 className={'text-5xl font-semibold text-_white'}>{count}</h1>
 }
+
+const FadingLoader = () => (
+    <>
+        <ContentLoader
+            width={48}
+            height={48}
+            className='dark:hidden'
+            backgroundColor='#f3f3f3'
+            foregroundColor='#ecebeb'
+        >
+            <rect x='0' y='0' rx='5' ry='5' width='48' height='48' />
+        </ContentLoader>
+        <ContentLoader
+            width={48}
+            height={48}
+            className='hidden dark:block'
+            backgroundColor='#262626'
+            foregroundColor='#212121'
+        >
+            <rect x='0' y='0' rx='5' ry='5' width='48' height='48' />
+        </ContentLoader>
+    </>
+)
