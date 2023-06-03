@@ -6,6 +6,7 @@ import { AlertCircle, X } from 'lucide-react'
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { deleteProduct } from '../actions/delete-product'
+import { destroyProduct } from '../actions/destroy-product'
 
 interface TableProps {
     data: QrProductType[]
@@ -56,9 +57,37 @@ export default function Table({ data }: TableProps) {
         })
     }
 
+    const handleDestroy = () => {
+        toast(`¿Estás seguro de destruir ${selectList.length > 1 ? 'los productos seleccionados' : 'el producto seleccionado'}?`, {
+            icon: <AlertCircle size={18} />,
+            cancel: {
+                label: 'Cancelar',
+                onClick: () => {
+                    setSelectList([])
+                },
+            },
+            action: {
+                label: 'Destruir',
+                onClick: () => {
+                    toast.promise(destroyProduct(selectList), {
+                        loading: 'Destruyendo...',
+                        success: () => {
+                            setSelectList([])
+                            return <>
+                                <strong>{selectList.length}</strong> {selectList.length > 1 ? 'productos destruidos' : 'producto destruido'}
+                            </>
+                        },
+                        error: (err) => err.message,
+                    },
+                    )
+                }
+            },
+        })
+    }
+
     return (
         <>
-            <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3 sticky left-0'>
+            <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3 sticky left-0 overflow-auto'>
                 <div className='flex items-center gap-3'>
                     {selectList.length > 0 && (
                         <div
@@ -76,13 +105,22 @@ export default function Table({ data }: TableProps) {
                     </p>
                 </div>
                 {selectList.length > 0 && <div className='w-1 h-full bg-_gray dark:bg-_darkText' />}
-                {selectList.length > 0 && (
-                    <button onClick={() => startTransition(handleDelete)} className={`
+                <div className='flex gap-2 w-min'>
+                    {selectList.length > 0 && (
+                        <button onClick={() => startTransition(handleDelete)} className={`
                             w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
                             border-_gray font-medium rounded-full dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}>
-                        Eliminar <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
-                    </button>
-                )}
+                            Eliminar <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
+                        </button>
+                    )}
+                    {selectList.length > 0 && (
+                        <button onClick={() => startTransition(handleDestroy)} className={`
+                            w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
+                            border-_gray font-medium rounded-full dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}>
+                            Destruir <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
+                        </button>
+                    )}
+                </div>
             </div>
             <table className='table-auto text-xs w-full border-separate border-spacing-0 my-6'>
                 <thead className='text-_grayText uppercase sticky top-0 z-30'>
