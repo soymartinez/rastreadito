@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { Back } from '@/ui/back'
 import { Label } from '@/ui/label'
+import { Edit } from 'lucide-react'
+import Link from 'next/link'
 import ImagePreview from './image-preview'
 
 async function getProduct(codigo: string) {
@@ -53,8 +55,11 @@ export default async function Product({ params }: { params: { codigo: string } }
         <Back className='absolute left-0' />
         <h1 className='font-bold text-xl'>Producto</h1>
       </div>
-      <div className='py-4'>
+      <div className='flex gap-2 py-4'>
         <h1 className='text-5xl font-bold'>{nombre}</h1>
+        <Link href={`/product/${params.codigo}/edit`}>
+          <Edit className='dark:text-_primary' />
+        </Link>
       </div>
       <div className='flex flex-col gap-12 my-10'>
         <div className='grid md:grid-cols-2 items-center gap-12'>
