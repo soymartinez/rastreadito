@@ -1,3 +1,4 @@
+import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { Back } from '@/ui/back'
 import { Label } from '@/ui/label'
@@ -46,9 +47,10 @@ export default async function Product({ params }: { params: { codigo: string } }
       fechaCaducidad,
       fechaCosecha,
       fechaEnvasado,
+      usuario,
     },
   } = await getProduct(params.codigo)
-
+  const user = await getCurrentUser()
   return (
     <main className='px-4 min-h-screen relative md:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
       <div className='flex justify-center items-center py-8 relative'>
@@ -57,9 +59,10 @@ export default async function Product({ params }: { params: { codigo: string } }
       </div>
       <div className='flex gap-2 py-4'>
         <h1 className='text-5xl font-bold'>{nombre}</h1>
-        <Link href={`/product/${params.codigo}/edit`}>
-          <Edit className='dark:text-_primary' />
-        </Link>
+        {user?.email === usuario &&
+          <Link href={`/product/${params.codigo}/edit`}>
+            <Edit className='dark:text-_primary' />
+          </Link>}
       </div>
       <div className='flex flex-col gap-12 my-10'>
         <div className='grid md:grid-cols-2 items-center gap-12'>
