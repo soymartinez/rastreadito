@@ -37,7 +37,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
                         'hidden': imagenes.length < 2,
                     })}
                 >
-                    <Image src={imagenes[1]} alt={`${alt}-1`} fill />
+                    {imagenes[1] && <Image src={imagenes[1]} alt={`${alt}-1`} fill />}
                 </Button>
                 <Button
                     size={'nothing'}
@@ -47,7 +47,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
                         'hidden': imagenes.length < 3,
                     })}
                 >
-                    <Image src={imagenes[2]} alt={`${alt}-2`} fill />
+                    {imagenes[2] && <Image src={imagenes[2]} alt={`${alt}-2`} fill />}
                 </Button>
                 <Button
                     size={'nothing'}
@@ -57,7 +57,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
                         'hidden': imagenes.length < 4,
                     })}
                 >
-                    <Image src={imagenes[3]} alt={`${alt}-3`} fill />
+                    {imagenes[3] && <Image src={imagenes[3]} alt={`${alt}-3`} fill />}
                 </Button>
             </div>
         </div>
