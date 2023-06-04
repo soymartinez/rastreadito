@@ -1,19 +1,21 @@
 import Empty from '@/components/empty'
 import ModalPage from '@/components/modal/modal-page'
 import { ActiveButton, DestroyButton, UseButton } from '@/components/status'
+import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 
-async function getQr(acronimo: string) {
+async function getQr(acronimo: string, usuario: string | undefined) {
     const res = await prisma.qr.findMany({
         where: {
             producto: {
                 categoria: {
                     contains: acronimo,
-                }
+                },
+                usuario,
             }
         },
         include: {
@@ -25,7 +27,8 @@ async function getQr(acronimo: string) {
 }
 
 export default async function CategoriaNombre({ params }: { params: { nombre: string } }) {
-    const qr = getQr(params.nombre.toUpperCase())
+    const user = await getCurrentUser()
+    const qr = getQr(params.nombre.toUpperCase(), user?.email)
     return (
         <ModalPage>
             <div className='py-4'>
