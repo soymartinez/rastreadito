@@ -20,6 +20,9 @@ async function getQr(acronimo: string, usuario: string | undefined) {
         },
         include: {
             producto: true
+        },
+        orderBy: {
+            fechaActualizacion: 'desc'
         }
     })
 
