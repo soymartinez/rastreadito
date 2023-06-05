@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Categoria } from '@prisma/client'
 
 import { Back } from '@/ui/back'
 import FormMetadata from '@/components/form-metadata'
+import { CategoriaGaleriaType } from '@/types'
 
 export default function Metadata() {
-    const [categorias, setCategorias] = useState<Categoria[]>([])
+    const [categorias, setCategorias] = useState<CategoriaGaleriaType[]>([])
 
     const getCategorias = async () => {
         const res = await fetch('/api/categorias')
