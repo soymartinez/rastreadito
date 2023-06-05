@@ -58,7 +58,7 @@ async function DataTable({ categoriasData, historialData }: { categoriasData: Pr
     const historial = await historialData
     return (
         <>
-            <TabsList className='py-2 overflow-x-auto'>
+            <TabsList className='py-2 overflow-x-auto scrollbar-thin'>
                 <div className='flex gap-2 w-min'>
                     <TabTrigger value='Ver todo' label='Ver todo' />
                     {categorias.map((categoria: Categoria) => (
@@ -72,14 +72,14 @@ async function DataTable({ categoriasData, historialData }: { categoriasData: Pr
                 </div>
             </TabsList>
 
-            <TabsContent value='Ver todo' className='overflow-auto w-full'>
+            <TabsContent value='Ver todo' className='overflow-auto w-full scrollbar-thin'>
                 {historial.length > 0
                     ? <Table data={historial} />
                     : <Empty title='Aún no tienes productos registrados.' description='Registra tu primer producto.' />}
             </TabsContent>
 
             {categorias.map((categoria: Categoria) => (
-                <TabsContent className='overflow-auto w-full' value={categoria.acronimo} key={categoria.id}>
+                <TabsContent className='overflow-auto w-full scrollbar-thin' value={categoria.acronimo} key={categoria.id}>
                     {historial.filter((qr) => qr.producto.categoria === categoria.acronimo).length > 0
                         ? <Table data={historial.filter((qr) => qr.producto.categoria === categoria.acronimo)} />
                         : <Empty title={`Aún no tienes ${categoria.nombre.toLocaleLowerCase()} registrados.`}
