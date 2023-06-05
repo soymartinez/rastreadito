@@ -4,7 +4,7 @@ import { Button } from '@/ui/button'
 import { Categoria, Galeria } from '@prisma/client'
 import { ImagePlus, X } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
-import UploadImages from './new-gallery'
+import NewGallery from './new-gallery'
 import { AnimatePresence } from 'framer-motion'
 import { Label } from '@/ui/label'
 import UploadInput from './upload-input'
@@ -210,7 +210,7 @@ export default function GaleriaView({
 
             <AnimatePresence>
                 {uploadImages &&
-                    <UploadImages
+                    <NewGallery
                         onClose={() => { setUploadImages(false); handleGaleria() }}
                         nombre={categoria.nombreParams}
                         descripcion={categoria.descripcionParams}
