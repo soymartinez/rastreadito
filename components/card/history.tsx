@@ -9,7 +9,7 @@ export default function HistoryCard({ data }: { data: any }) {
     const { push } = useRouter()
     return (
         <>
-            <div className='overflow-auto w-full'>
+            <div className='overflow-auto w-full scrollbar-thin'>
                 <table className='table-auto text-xs w-full border-separate border-spacing-0'>
                     <thead className='text-_grayText/50 uppercase sticky top-0 z-30'>
                         <tr className='text-left'>
