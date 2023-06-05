@@ -27,15 +27,17 @@ import TabTrigger from './tab-trigger'
 import { CategoriaGaleriaType } from '@/types'
 
 interface FormMetadataProps {
-    categorias: CategoriaGaleriaType[]
+    categorias?: CategoriaGaleriaType[]
     producto?: Producto
     type?: 'normal' | 'floating'
     className?: string
+    onEditChange?: () => void
 }
 
-export default function FormMetadata({ categorias, producto, type = 'normal', className }: FormMetadataProps) {
+export default function FormMetadata({ producto, type = 'normal', className, onEditChange }: FormMetadataProps) {
     const { push, refresh } = useRouter()
     const [galeria, setGaleria] = useState<Galeria[]>()
+    const [categorias, setCategorias] = useState<CategoriaGaleriaType[]>([])
     const [imagenes, setImagenes] = useState<string[]>(producto?.imagen || [])
     const [infoImages, setInfoImages] = useState<{ nombre?: string, descripcion?: string }>({ nombre: '', descripcion: '' })
     const [loading, setLoading] = useState(false)
@@ -47,7 +49,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
         id,
         nombre,
         descripcion,
-        categoria,
+        categoria: categoriaProducto,
         cepa,
         thc,
         cbd,
@@ -103,6 +105,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                 loading: 'Actualizando...',
                 success: (producto: Producto) => {
                     refresh()
+                    onEditChange?.()
                     return <div>Producto <strong>{producto.nombre}</strong> actualizado</div>
                 },
                 error: 'Error al actualizar',
@@ -173,6 +176,13 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
         setLoading(false)
     }
 
+    const handleCategoria = async () => {
+        const res = await fetch('/api/categorias')
+        const data = await res.json()
+
+        setCategorias(data)
+    }
+
     const handleImages = (url: string) => {
         setImagenes(prev => {
             const MAX_IMAGES = 4
@@ -197,8 +207,12 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
     }
 
     useEffect(() => {
-        categoria && handleGaleria(categoria)
-    }, [categoria])
+        categoriaProducto && handleGaleria(categoriaProducto)
+    }, [categoriaProducto])
+
+    useEffect(() => {
+        handleCategoria()
+    }, [])
 
     return (
         <>
@@ -224,7 +238,7 @@ export default function FormMetadata({ categorias, producto, type = 'normal', cl
                             onChange={(e) => setInfoImages((info) => ({ ...info, descripcion: e.target.value }))}
                             defaultValue={descripcion}
                             required />
-                        <Select onValueChange={handleGaleria} name='categoria' defaultValue={categoria} required>
+                        <Select onValueChange={handleGaleria} name='categoria' defaultValue={categoriaProducto} required>
                             <SelectTrigger labelText='Tipo de producto'>
                                 <SelectValue placeholder='Selecciona un tipo de producto' />
                             </SelectTrigger>
