@@ -16,7 +16,9 @@ async function getProduct(codigo: string) {
 }
 
 async function getCategorias() {
-  const res = await prisma.categoria.findMany()
+  const res = await prisma.categoria.findMany({
+    include: { galeria: true }
+  })
   return res
 }
 
