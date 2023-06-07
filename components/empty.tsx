@@ -6,7 +6,7 @@ import Balancer from 'react-wrap-balancer'
 
 interface EmptyProps {
     title: string,
-    description: string,
+    description?: string,
     height?: 'default' | 'full',
     className?: string,
 }
@@ -24,11 +24,12 @@ export default function Empty({
         )}>
             <Balancer ratio={0.4}>
                 {title}{' '}
-                <span className='text-_primary hover:underline animate-pulse'>
-                    <Link href='/metadata'>
-                        {description}
-                    </Link>
-                </span>
+                {description &&
+                    <span className='text-_primary hover:underline animate-pulse'>
+                        <Link href='/metadata'>
+                            {description}
+                        </Link>
+                    </span>}
             </Balancer>
         </div>
 
