@@ -55,7 +55,7 @@ async function Categorias({ qr }: { qr: Promise<QrProductType[]> }) {
                     {data.length > 1 ? 'productos registrados' : 'producto registrado'}
                 </div>}
             {data.length === 0
-                ? <Empty title='No hay productos en esta categoría.' description='Registra tu primer producto.' />
+                ? <Empty title='No hay productos en esta categoría.' />
                 : data.map(({ producto, id, codigo, estatus }) => (
                     <Link key={id} href={`/product/${codigo}`}>
                         <div key={id} className='flex justify-between gap-4 px-3 py-2 hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50'>

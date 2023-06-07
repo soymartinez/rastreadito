@@ -71,7 +71,7 @@ async function History({ history }: { history: Promise<QrProductType[]> }) {
                         </div>
                     ))}
                 </div>
-                : <Empty title='Aún no hay productos en este estado.' description='Genera un nuevo QR.' />}
+                : <Empty title='Aún no hay productos en este estado.' />}
         </section>
     )
 }
