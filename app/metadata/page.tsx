@@ -22,7 +22,7 @@ export default function Metadata() {
     return (
         <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
             <div className='flex justify-center items-center py-8 relative'>
-                <Back className='absolute left-0' />
+                <Back pushRoute='/' className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Metadata</h1>
             </div>
             <FormMetadata
