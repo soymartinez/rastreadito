@@ -38,7 +38,7 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
   return (
     <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
       <div className='flex justify-center items-center py-8 relative'>
-        <Back pushRoute='/' className='absolute left-0' />
+        <Back className='absolute left-0' />
         <h1 className='font-bold text-xl'>{title()}</h1>
       </div>
       <div className='py-10'>
