@@ -6,6 +6,7 @@ import { QrProductType } from '@/types'
 import { Estatus } from '@prisma/client'
 import { User } from '@supabase/supabase-js'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 
@@ -55,20 +56,22 @@ async function History({ history }: { history: Promise<QrProductType[]> }) {
         <section>
             {data.length > 0
                 ? <div className='flex flex-col gap-4'>
-                    {data.map(({ id, producto }) => (
-                        <div key={id} className='flex items-center gap-4'>
-                            <Image
-                                src={producto.imagen[0]}
-                                alt={producto.nombre}
-                                width={64}
-                                height={64}
-                                className='rounded-xl object-contain border border-_gray dark:border-_darkText'
-                            />
-                            <div>
-                                <span className='text-xl font-semibold'>{producto.nombre}</span>
-                                <span className='line-clamp-2 text-xs font-medium text-_grayText'>{producto.descripcion}</span>
+                    {data.map(({ id, producto, codigo }) => (
+                        <Link key={id} href={`/product/${codigo}`}>
+                            <div className='flex items-center gap-4 hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50'>
+                                <Image
+                                    src={producto.imagen[0]}
+                                    alt={producto.nombre}
+                                    width={64}
+                                    height={64}
+                                    className='rounded-xl object-contain border border-_gray dark:border-_darkText'
+                                />
+                                <div>
+                                    <span className='text-xl font-semibold'>{producto.nombre}</span>
+                                    <span className='line-clamp-2 text-xs font-medium text-_grayText'>{producto.descripcion}</span>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 : <Empty title='Aún no hay productos en este estado.' />}
