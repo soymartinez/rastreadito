@@ -254,7 +254,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                 ))}
                             </SelectContent>
                         </Select>
-                        <div className='flex flex-col gap-2 px-5 py-3 border border-_gray dark:border-_darkText rounded-2xl' id='galeria'>
+                        <div className='flex flex-col gap-6 px-5 py-3 border border-_gray dark:border-_darkText rounded-2xl' id='galeria'>
                             <div className='flex flex-col justify-between items-start gap-2'>
                                 <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>Galeria</Label>
                                 {galeria && galeria.length > 0
@@ -280,25 +280,32 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             </div>
                             {galeria && galeria.length > 0
                                 ? <div className='flex flex-col gap-6'>
-                                    {galeria.filter(({ nombre }) => filterGaleria(nombre)).length
-                                        ? galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
-                                            <div key={id} className='flex flex-col gap-2'>
-                                                <Label className='text-_darkText dark:text-_white text-xs font-semibold'>{nombre}</Label>
-                                                <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin p-1'>
-                                                    {url.length > 0
-                                                        ? url.map((imagenUrl, i) => (
-                                                            <ImagePreview
-                                                                key={`${nombre}-${i}`}
-                                                                onChangeImage={() => handleImages(imagenUrl)}
-                                                                alt={nombre}
-                                                                src={imagenUrl}
-                                                                changeIcon={false}
-                                                                selected={imagenes.includes(imagenUrl)}
-                                                            />
-                                                        ))
-                                                        : <div
-                                                            title='Galeria vacía'
-                                                            className={`
+                                    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8 2xl:grid-cols-8 gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin p-1'>
+                                        {galeria.filter(({ nombre }) => filterGaleria(nombre)).length
+                                            ? galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
+                                                <div key={id} className='flex flex-col gap-2 overflow-hidden'>
+                                                    <Label className='text-_darkText dark:text-_white text-xs font-semibold truncate'>{nombre}</Label>
+                                                    <div className='w-28 h-28'>
+                                                        {url.length > 0
+                                                            ? url.map((imagenUrl, i) => (
+                                                                <div key={i} className='absolute'>
+                                                                    {i > 0 &&
+                                                                        <div className='w-6 h-6 bg-_dark absolute z-40 rounded-full top-1 left-1 text-_primary flex justify-center items-center'>
+                                                                            <Label className='text-xs'>+{url.length}</Label>
+                                                                        </div>}
+                                                                    <ImagePreview
+                                                                        key={`${nombre}-${i}`}
+                                                                        onChangeImage={() => handleImages(imagenUrl)}
+                                                                        alt={nombre}
+                                                                        src={imagenUrl}
+                                                                        changeIcon={false}
+                                                                        selected={imagenes.includes(imagenUrl)}
+                                                                    />
+                                                                </div>
+                                                            ))
+                                                            : <div
+                                                                title='Galeria vacía'
+                                                                className={`
                                                             relative
                                                             w-28 h-28
                                                             cursor-not-allowed
@@ -311,16 +318,17 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                                             rounded-2xl
                                                             overflow-hidden
                                                         `}
-                                                        >
-                                                            <ImageOff />
-                                                        </div>
-                                                    }
+                                                            >
+                                                                <ImageOff />
+                                                            </div>
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))
-                                        : <div className='h-32 flex justify-center items-center text-sm text-center dark:text-_grayText'>
-                                            <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
-                                        </div>}
+                                            ))
+                                            : <div className='h-32 flex justify-center items-center text-sm text-center dark:text-_grayText'>
+                                                <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
+                                            </div>}
+                                    </div>
                                 </div>
                                 : <div className='text-sm text-center'>
                                     {loading
