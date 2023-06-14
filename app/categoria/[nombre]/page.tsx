@@ -1,12 +1,10 @@
-import Empty from '@/components/empty'
-import { ActiveButton, DestroyButton, UseButton } from '@/components/status'
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
 import { Back } from '@/ui/back'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
+import CategoriasData from './data'
 
 async function getQr(acronimo: string, user: string | undefined) {
     const res = await prisma.qr.findMany({
@@ -46,31 +44,7 @@ export default async function CategoriaNombre({ params }: { params: { nombre: st
 
 async function Categorias({ qr }: { qr: Promise<QrProductType[]> }) {
     const data = await qr
-    return (
-        <div className='overflow-auto scrollbar-thin'>
-            {data.length > 0 &&
-                <div className='whitespace-nowrap px-3 pb-6'>
-                    <span className='font-bold'>{data.length}</span>{' '}
-                    {data.length > 1 ? 'productos registrados' : 'producto registrado'}
-                </div>}
-            {data.length === 0
-                ? <Empty title='No hay productos en esta categoría.' description='Registra tu primer producto.' />
-                : data.map(({ producto, id, codigo, estatus }) => (
-                    <Link key={id} href={`/product/${codigo}`}>
-                        <div key={id} className='flex justify-between gap-4 px-3 py-2 hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50'>
-                            <h1 className='text-xl font-semibold truncate'>
-                                {producto.nombre} <span className='text-_grayText dark:text-_primary text-sm'>#{producto.categoria} {id}</span>
-                            </h1>
-                            <div>
-                                {estatus === 'ACTIVO' && <ActiveButton />}
-                                {estatus === 'USADO' && <UseButton />}
-                                {estatus === 'DESTRUIDO' && <DestroyButton />}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-        </div>
-    )
+    return <CategoriasData data={data} />
 }
 
 const FadingLoader = () => {
