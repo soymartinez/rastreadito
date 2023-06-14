@@ -3,12 +3,14 @@ import ModalPage from '@/components/modal/modal-page'
 import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
+import { Input } from '@/ui/input'
 import { Estatus } from '@prisma/client'
 import { User } from '@supabase/supabase-js'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
+import DataHistoryEstatus from './data'
 
 const getStatusHistory = async (estatus: Estatus, user: User | null) => {
     const history = await prisma.qr.findMany({
@@ -52,31 +54,7 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
 
 async function History({ history }: { history: Promise<QrProductType[]> }) {
     const data = await history
-    return (
-        <section>
-            {data.length > 0
-                ? <div className='flex flex-col gap-4'>
-                    {data.map(({ id, producto, codigo }) => (
-                        <Link key={id} href={`/product/${codigo}`}>
-                            <div className='flex items-center gap-4 hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50'>
-                                <Image
-                                    src={producto.imagen[0]}
-                                    alt={producto.nombre}
-                                    width={64}
-                                    height={64}
-                                    className='rounded-xl object-contain border border-_gray dark:border-_darkText'
-                                />
-                                <div>
-                                    <span className='text-xl font-semibold'>{producto.nombre}</span>
-                                    <span className='line-clamp-2 text-xs font-medium text-_grayText'>{producto.descripcion}</span>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-                : <Empty title='Aún no hay productos en este estado.' />}
-        </section>
-    )
+    return <DataHistoryEstatus data={data} />
 }
 
 const FadingLoader = () => (
