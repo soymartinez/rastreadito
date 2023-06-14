@@ -280,7 +280,13 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             </div>
                             {galeria && galeria.length > 0
                                 ? <div className='flex flex-col gap-6'>
-                                    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8 2xl:grid-cols-8 gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin p-1'>
+                                    <div
+                                        style={{
+                                            display: 'grid',
+                                            gap: '1.25rem',
+                                            gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 112px))',
+                                        }}
+                                    >
                                         {galeria.filter(({ nombre }) => filterGaleria(nombre)).length
                                             ? galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
                                                 <div key={id} className='flex flex-col gap-2 overflow-hidden'>
