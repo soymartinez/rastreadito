@@ -14,6 +14,7 @@ export default function Toast() {
                 },
             }}
             position='top-right'
+            expand={true}
             closeButton
         />
     )
