@@ -264,15 +264,16 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             </div>
                             {galeria && galeria.length > 0
                                 ? <div className='flex flex-col gap-6'>
-                                    <div
-                                        style={{
-                                            display: 'grid',
-                                            gap: '1.25rem',
-                                            gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 112px))',
-                                        }}
-                                    >
-                                        {galeria.filter(({ nombre }) => filterGaleria(nombre)).length
-                                            ? galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
+                                    {galeria.filter(({ nombre }) => filterGaleria(nombre)).length
+                                        ? <div
+                                            style={{
+                                                display: 'grid',
+                                                gap: '1.25rem',
+                                                gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 112px))',
+                                            }}
+                                        >
+                                            {galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
+
                                                 <div key={id} className='flex flex-col gap-2 overflow-hidden'>
                                                     <Label className='text-_darkText dark:text-_white text-xs font-semibold truncate'>{nombre}</Label>
                                                     <div className='w-28 h-28' onClick={() => setImagenes(url)}>
@@ -313,11 +314,11 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                                         }
                                                     </div>
                                                 </div>
-                                            ))
-                                            : <div className='h-32 flex justify-center items-center text-sm text-center dark:text-_grayText'>
-                                                <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
-                                            </div>}
-                                    </div>
+                                            ))}
+                                        </div>
+                                        : <div className='h-32 flex justify-center items-center text-sm text-center dark:text-_grayText'>
+                                            <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
+                                        </div>}
                                 </div>
                                 : <div className='text-sm text-center'>
                                     {loading
@@ -434,10 +435,10 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             </TabsList>
                         </div>
                         <div className='pt-4' style={{ height: 'calc(100% - 144px)' }}>
-                            <div className='overflow-auto h-full'>
+                            <div className='overflow-auto h-full scrollbar-thin'>
                                 {categorias.map((categoria) => (
                                     <TabsContent key={categoria.id} value={categoria.acronimo} className='overflow-auto relative'>
-                                        <div className='flex flex-col gap-2'>
+                                        <div className='flex flex-col gap-2 pr-2'>
                                             <GaleriaView
                                                 categoria={{
                                                     ...categoria,
