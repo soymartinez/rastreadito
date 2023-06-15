@@ -3,13 +3,14 @@
 import { Button } from '@/ui/button'
 import { Categoria, Galeria } from '@prisma/client'
 import { ImagePlus, X } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import NewGallery from './new-gallery'
 import { AnimatePresence } from 'framer-motion'
 import { Label } from '@/ui/label'
 import UploadInput from './upload-input'
 import { toast } from 'sonner'
 import { useSupabase } from '../supabase-provider'
+import { Input } from '@/ui/input'
 
 interface GaleriaProps {
     categoria: Categoria & {
@@ -27,6 +28,7 @@ export default function GaleriaView({
     const [imagenes, setImagenes] = useState<string[]>([])
     const [loading, setLoading] = useState(false)
     const [uploadImages, setUploadImages] = useState(false)
+    const [search, setSearch] = useState('')
     const { supabase } = useSupabase()
 
     const handleGaleria = useCallback(async () => {
@@ -183,6 +185,12 @@ export default function GaleriaView({
 
     }
 
+    const filteredGalerias = useMemo(() => {
+        if (galerias) {
+            return galerias.filter(galeria => galeria.nombre.toLowerCase().includes(search.toLowerCase()))
+        }
+    }, [galerias, search])
+
     useEffect(() => {
         handleGaleria()
     }, [handleGaleria])
@@ -193,7 +201,14 @@ export default function GaleriaView({
 
     return (
         <main className='flex flex-col gap-4'>
-            <div className='flex justify-end items-center p-1'>
+            <div className='flex justify-end items-center p-1 gap-3 h-12 w-full max-w-sm ml-auto'>
+                <Input
+                    variant='search'
+                    name='search'
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder='Buscar por nombre'
+                    className='p-1 h-full border-2'
+                />
                 <Button
                     type='button'
                     onClick={() => setUploadImages(!uploadImages)}
@@ -222,7 +237,7 @@ export default function GaleriaView({
             <div>
                 {galerias && galerias.length > 0
                     ? <div className='flex flex-col gap-6'>
-                        {galerias.map((galeria) => (
+                        {filteredGalerias?.map((galeria) => (
                             <div key={galeria.id} className='flex flex-col gap-2'>
                                 <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
                                 <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
