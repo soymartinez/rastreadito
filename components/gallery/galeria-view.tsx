@@ -2,7 +2,7 @@
 
 import { Button } from '@/ui/button'
 import { Categoria, Galeria } from '@prisma/client'
-import { ImagePlus, X } from 'lucide-react'
+import { AlertCircle, ImagePlus, Trash, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import NewGallery from './new-gallery'
 import { AnimatePresence } from 'framer-motion'
@@ -25,7 +25,6 @@ export default function GaleriaView({
     galeriaData,
 }: GaleriaProps) {
     const [galerias, setGalerias] = useState<Galeria[] | undefined>([])
-    const [imagenes, setImagenes] = useState<string[]>([])
     const [loading, setLoading] = useState(false)
     const [uploadImages, setUploadImages] = useState(false)
     const [search, setSearch] = useState('')
@@ -47,22 +46,6 @@ export default function GaleriaView({
         setGalerias(filteredData)
         setLoading(false)
     }, [categoria.acronimo])
-
-    const handleImages = (url: string) => {
-        setImagenes(prev => {
-            const MAX_IMAGES = 4
-
-            if (prev.includes(url)) {
-                return prev.filter(imagen => imagen !== url)
-            }
-
-            if (prev.length === MAX_IMAGES) {
-                return prev
-            }
-
-            return [...prev, url]
-        })
-    }
 
     const handleDeleteImages = async (url: string, galeriaData: Galeria) => {
         const { data: { user } } = await supabase.auth.getUser()
@@ -99,6 +82,67 @@ export default function GaleriaView({
                 },
                 error: (err) => err.message,
             })
+        }
+    }
+
+    const handleDeleteGaleria = async (galeriaData: Galeria) => {
+        toast(`¿Estás seguro de eliminar la galería ${galeriaData.nombre}?`, {
+            icon: <AlertCircle size={18} />,
+            cancel: {
+                label: 'Cancelar',
+                onClick: () => {
+                    toast.dismiss()
+                },
+            },
+            important: true,
+            action: {
+                label: 'Eliminar',
+                onClick: () => {
+                    toast.promise(deleteGaleria, {
+                        loading: 'Eliminando galería...',
+                        success: () => {
+                            handleGaleria()
+                            return 'Galería eliminada'
+                        },
+                        error: (err) => err.message,
+                    },
+                    )
+                }
+            },
+        })
+
+        const deleteGaleria = async () => {
+            const { data: { user } } = await supabase.auth.getUser()
+
+            if (user?.email) {
+                const remove = async () => {
+                    const { error } = await supabase
+                        .storage
+                        .from('galeria')
+                        .remove([`${user?.email}/${categoria.acronimo}/${galeriaData.nombre}`])
+
+                    if (error) {
+                        throw new Error(error.message)
+                    }
+
+                    const api = await fetch(`/api/galeria/${galeriaData.id}`, {
+                        method: 'DELETE',
+                    })
+
+                    if (!api.ok) {
+                        throw new Error('Error al eliminar la galería')
+                    }
+                }
+
+                toast.promise(remove, {
+                    loading: 'Eliminando galería...',
+                    success: () => {
+                        handleGaleria()
+                        return 'Galería eliminada'
+                    },
+                    error: (err) => err.message,
+                })
+            }
         }
     }
 
@@ -238,7 +282,12 @@ export default function GaleriaView({
                 ? <div className='flex flex-col gap-6'>
                     {filteredGalerias?.map((galeria) => (
                         <div key={galeria.id} className='flex flex-col gap-2'>
-                            <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
+                            <div className='flex justify-between items-center gap-4'>
+                                <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
+                                <button onClick={() => handleDeleteGaleria(galeria)} className='p-1 bg-_darkText w-8 h-8 rounded-md active:scale-90'>
+                                    <Trash className='text-red-400 inline' size={16} />
+                                </button>
+                            </div>
                             <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
                                 <UploadInput
                                     urls={galeria.url}
