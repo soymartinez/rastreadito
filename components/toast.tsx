@@ -1,8 +1,10 @@
 'use client'
 
 import { Toaster } from 'sonner'
+import { useTheme } from 'next-themes'
 
 export default function Toast() {
+    const { resolvedTheme } = useTheme()
     return (
         <Toaster
             toastOptions={{
@@ -14,6 +16,7 @@ export default function Toast() {
                 },
             }}
             position='top-right'
+            theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
             expand={true}
             closeButton
         />
