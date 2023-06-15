@@ -201,7 +201,7 @@ export default function GaleriaView({
 
     return (
         <main className='flex flex-col gap-4'>
-            <div className='flex justify-end items-center p-1 gap-3 h-12 w-full max-w-sm ml-auto'>
+            <div className='flex justify-end items-center p-1 gap-3 h-12 w-full md:max-w-sm ml-auto'>
                 <Input
                     variant='search'
                     name='search'
@@ -234,40 +234,38 @@ export default function GaleriaView({
                     />}
             </AnimatePresence>
 
-            <div>
-                {galerias && galerias.length > 0
-                    ? <div className='flex flex-col gap-6'>
-                        {filteredGalerias?.map((galeria) => (
-                            <div key={galeria.id} className='flex flex-col gap-2'>
-                                <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
-                                <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
-                                    <UploadInput
-                                        urls={galeria.url}
-                                        onValue={(values) => handleUploadFiles(values, galeria)}
-                                        onRemove={(url) => handleDeleteImages(url, galeria)}
-                                    />
-                                </div>
+            {galerias && galerias.length > 0
+                ? <div className='flex flex-col gap-6'>
+                    {filteredGalerias?.map((galeria) => (
+                        <div key={galeria.id} className='flex flex-col gap-2'>
+                            <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
+                            <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
+                                <UploadInput
+                                    urls={galeria.url}
+                                    onValue={(values) => handleUploadFiles(values, galeria)}
+                                    onRemove={(url) => handleDeleteImages(url, galeria)}
+                                />
                             </div>
-                        ))}
-                    </div>
-                    : <>
-                        {loading
-                            ? <div className='grid grid-flow-row grid-cols-2 sm:grid-cols-4 md:grid-cols-5 justify-center items-center gap-5'>
-                                {[...Array(9)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className={'relative bg-_gray dark:bg-_darkText animate-pulse rounded-2xl w-28 h-28 m-auto'}
-                                    />
-                                ))}
-                            </div>
-                            : <div className='flex justify-center items-center h-52'>
-                                {galerias
-                                    ? <span>No hay imágenes en esta categoría.</span>
-                                    : <span>Selecciona una categoría para ver las imágenes.</span>}
-                            </div>}
-                    </>
-                }
-            </div>
+                        </div>
+                    ))}
+                </div>
+                : <>
+                    {loading
+                        ? <div className='grid grid-flow-row grid-cols-2 sm:grid-cols-4 md:grid-cols-5 justify-center items-center gap-5'>
+                            {[...Array(9)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className={'relative bg-_gray dark:bg-_darkText animate-pulse rounded-2xl w-28 h-28 m-auto'}
+                                />
+                            ))}
+                        </div>
+                        : <div className='flex justify-center items-center h-52'>
+                            {galerias
+                                ? <span>No hay imágenes en esta categoría.</span>
+                                : <span>Selecciona una categoría para ver las imágenes.</span>}
+                        </div>}
+                </>
+            }
         </main>
     )
 }
