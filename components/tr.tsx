@@ -3,9 +3,12 @@
 import { useEffect, useState } from 'react'
 import { QrProductType } from '@/types'
 import clsx from 'clsx'
-import { Maximize2 } from 'lucide-react'
+import { Maximize2, QrCode } from 'lucide-react'
 import Link from 'next/link'
 import { ActiveButton, DestroyButton, UseButton } from './status'
+import ModalDialog from './modal/modal-dialog'
+import GenerateQr from './generateQr'
+import Balancer from 'react-wrap-balancer'
 
 interface Props {
     data: QrProductType
@@ -18,9 +21,11 @@ export default function Tr({
         id,
         estatus,
         codigo,
+        valor,
         fechaRegistro,
         producto: {
             nombre: productoNombre,
+            descripcion: productoDescripcion,
             categoria,
             usuario,
         }
@@ -30,6 +35,7 @@ export default function Tr({
 }: Props) {
     const [checked, setChecked] = useState(false)
     const [hover, setHover] = useState(false)
+    const [show, setShow] = useState(false)
 
     const handleSelected = (checkedInput: boolean) => {
         setChecked(checkedInput)
@@ -49,8 +55,8 @@ export default function Tr({
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <td className='pl-3 pr-1 py-2 w-20'>
-                <div className='flex justify-between items-center w-16'>
+            <td className='pl-3 pr-1 py-2 w-28'>
+                <div className='flex justify-between items-center w-[100px]'>
                     <div className='flex items-center justify-center'>
                         <input
                             onChange={(e) => handleSelected(e.target.checked)}
@@ -60,7 +66,7 @@ export default function Tr({
                             checked={checked}
                             className='w-4 h-4 m-auto accent-_primary rounded-full' />
                     </div>
-                    <div>
+                    <div className='flex gap-2'>
                         <Link href={`/product/${codigo}`} className={clsx({
                             'md:hidden ': !hover,
                         })}>
@@ -68,6 +74,32 @@ export default function Tr({
                                 <Maximize2 size={14} className='text-_dark dark:text-_primary' />
                             </div>
                         </Link>
+                        <button
+                            onClick={() => { setShow(true); setHover(false) }}
+                            className={clsx({ 'md:hidden ': !hover })}
+                        >
+                            <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+                                <QrCode size={14} className='text-_dark dark:text-_primary' />
+                            </div>
+                        </button>
+                        {show && (
+                            <ModalDialog onOpenChange={setShow}>
+                                <div className='flex flex-col items-center justify-center h-full'>
+                                    <div className='flex flex-col justify-center items-center gap-6 w-full text-_darkText dark:text-_white font-medium pt-8 pb-10'>
+                                        <h1 className='font-semibold text-4xl md:text-5xl text-center'>{productoNombre}</h1>
+                                        <div className='rounded-2xl overflow-hidden'>
+                                            {valor && <GenerateQr value={valor} />}
+                                        </div>
+                                        <Balancer className='text-center dark:text-_grayText'>
+                                            {productoDescripcion}
+                                            <p className='text-_white'>
+                                                Fecha: <span className='font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</span>
+                                            </p>
+                                        </Balancer>
+                                    </div>
+                                </div>
+                            </ModalDialog>
+                        )}
                     </div>
                 </div>
             </td>
