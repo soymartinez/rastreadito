@@ -432,7 +432,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                         handleGaleria(currentCategoria || '')
                     }}
                 >
-                    <Tabs defaultValue={currentCategoria}>
+                    <Tabs className='overflow-hidden' defaultValue={currentCategoria}>
                         <div className='sticky top-0 z-50 flex flex-col bg-_white dark:bg-_dark'>
                             <div className='py-4'>
                                 <h1 className='text-5xl font-bold'>Galeria</h1>
@@ -450,8 +450,8 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                 </div>
                             </TabsList>
                         </div>
-                        <div className='overflow-auto'>
-                            <div className='py-4'>
+                        <div className='pt-4' style={{ height: 'calc(100% - 144px)' }}>
+                            <div className='overflow-auto h-full'>
                                 {categorias.map((categoria) => (
                                     <TabsContent key={categoria.id} value={categoria.acronimo} className='overflow-auto relative'>
                                         <div className='flex flex-col gap-2'>
