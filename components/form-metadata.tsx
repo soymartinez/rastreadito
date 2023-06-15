@@ -183,22 +183,6 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
         setCategorias(data)
     }
 
-    const handleImages = (url: string) => {
-        setImagenes(prev => {
-            const MAX_IMAGES = 4
-
-            if (prev.includes(url)) {
-                return prev.filter(imagen => imagen !== url)
-            }
-
-            if (prev.length === MAX_IMAGES) {
-                return prev
-            }
-
-            return [...prev, url]
-        })
-    }
-
     const filterGaleria = (galeriaNombre: string) => {
         const nombre = galeriaNombre.toLowerCase()
         const search = searchGaleria.toLowerCase()
@@ -291,7 +275,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                             ? galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
                                                 <div key={id} className='flex flex-col gap-2 overflow-hidden'>
                                                     <Label className='text-_darkText dark:text-_white text-xs font-semibold truncate'>{nombre}</Label>
-                                                    <div className='w-28 h-28'>
+                                                    <div className='w-28 h-28' onClick={() => setImagenes(url)}>
                                                         {url.length > 0
                                                             ? url.map((imagenUrl, i) => (
                                                                 <div key={i} className='absolute'>
@@ -301,7 +285,6 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                                                         </div>}
                                                                     <ImagePreview
                                                                         key={`${nombre}-${i}`}
-                                                                        onChangeImage={() => handleImages(imagenUrl)}
                                                                         alt={nombre}
                                                                         src={imagenUrl}
                                                                         changeIcon={false}
