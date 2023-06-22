@@ -33,7 +33,7 @@ export default async function RootLayout({
               {children}
               {modal}
             </>
-            <Analytics />
+            {/* <Analytics /> */}
           </SupabaseProvider>
         </ThemeProvider>
         <Toast />
