@@ -1,15 +1,17 @@
 import Link from 'next/link'
-
 import { QrCode } from 'lucide-react'
-
 import { getCurrentUser } from '@/hooks/auth'
 
 import Navbar from '@/components/navbar'
 import MainTabs from '@/components/main-tabs'
 import { Button } from '@/ui/button'
+import LandingPage from './landing-page'
 
 export default async function Home() {
   const user = await getCurrentUser()
+
+  if (!user) return <LandingPage />
+
   return (
     <main>
       <Navbar />
