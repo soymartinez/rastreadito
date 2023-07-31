@@ -177,7 +177,7 @@ function SignOut() {
 
     const handleSignOut = async () => {
         const { error } = await supabase.auth.signOut()
-        if (!error) router.push('/auth')
+        if (!error) router.push('/')
     }
     return (
         <Button onClick={handleSignOut} type={'button'} variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
