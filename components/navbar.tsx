@@ -13,17 +13,24 @@ export default function Navbar({ isAuth = true }: NavbarProps) {
                 <h1 className='font-black text-2xl uppercase italic'>rastreadito</h1>
                 <div className='flex items-center gap-2'>
                     <Link href={'/scan'} className='rounded-full'>
-                        <Button variant={'ghost'} size='sm' className='h-[44px] border-2 border-_gray dark:border-_darkText rounded-[50px]'>
+                        <Button
+                            variant={'ghost'}
+                            size={'icon'}
+                            className='border-2 border-_gray dark:border-_darkText'
+                        >
                             <Scan className='dark:text-_white' />
                         </Button>
                     </Link>
                     <Link href={isAuth ? '/account' : '/auth'} className='rounded-full'>
                         {isAuth
                             ? <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText bg-_primary rounded-full' />
-                            : <Button size='sm' className='rounded-[50px] md:px-4 h-[44px] text-[14px] border-2 dark:border-_darkText whitespace-nowrap'>
-                                <span className='hidden md:block'>Iniciar sesión</span>
-                                <Fingerprint className='md:hidden' />
-                            </Button>}
+                            : <Button
+                                size='icon'
+                                className='text-[14px] border-2 dark:border-_darkText whitespace-nowrap'
+                            >
+                                <Fingerprint />
+                            </Button>
+                        }
                     </Link>
                 </div>
             </div>
