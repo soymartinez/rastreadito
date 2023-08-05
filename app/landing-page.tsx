@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
 import { ChevronRight } from 'lucide-react'
 
 import LayoutBoundary from '@/components/layout'
 import Navbar from '@/components/navbar'
+import Brands from '@/components/looper/brands'
+import { InfiniteLooper } from '@/components/looper/infinite-looper'
 import { Button } from '@/ui/button'
 
 export default function LandingPage() {
@@ -39,18 +40,14 @@ export default function LandingPage() {
                         Impulsando los mejores equipos de productos cannábicos
                     </Balancer>
                 </p>
-                <div className='flex justify-between items-center max-w-[600px] md:w-full mx-auto'>
-                    <div className='relative w-16 h-16 mx-4'>
-                        <Image src={'/brands/sundial.svg'} alt={'Sundial'} fill />
+                <div className='flex justify-center items-center max-w-[600px] w-full mx-auto relative'>
+                    <div className='hidden sm:flex justify-between w-full'>
+                        <Brands />
                     </div>
-                    <div className='relative w-36 h-16 mx-4'>
-                        <Image src={'/brands/grasslands.svg'} alt={'Grasslands'} fill />
-                    </div>
-                    <div className='relative w-16 h-16 mx-4'>
-                        <Image src={'/brands/beehigh.svg'} alt={'Beehigh'} fill />
-                    </div>
-                    <div className='relative w-32 h-16 mx-4'>
-                        <Image src={'/brands/versus.svg'} alt={'Versus'} fill />
+                    <div className='sm:hidden brands w-full'>
+                        <InfiniteLooper speed={10} direction='left'>
+                            <Brands />
+                        </InfiniteLooper>
                     </div>
                 </div>
             </section>
