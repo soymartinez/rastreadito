@@ -37,7 +37,7 @@ export default async function Generate({ params }: { params: { codigo: string } 
         producto: { nombre, descripcion, imagen, fechaRegistro },
     } = await getData({ origin, codigo: params.codigo })
     return (
-        <main className='min-h-screen relative max-w-7xl mx-auto'>
+        <>
             <div className='px-4'>
                 <div className='flex justify-center items-center py-8 relative'>
                     <Back pushRoute='/' className='absolute left-0' />
@@ -89,6 +89,6 @@ export default async function Generate({ params }: { params: { codigo: string } 
                     </div>
                 </div>
             </ModalButton>
-        </main>
+        </>
     )
 }

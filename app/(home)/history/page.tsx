@@ -37,7 +37,7 @@ export default async function History() {
     const historial = getHistorial(usuario?.email || '')
     const categorias = getCategorias()
     return (
-        <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
+        <div>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back pushRoute='/' className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Historial</h1>

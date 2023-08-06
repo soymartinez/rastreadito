@@ -25,7 +25,7 @@ async function getProduct(codigo: string) {
 export default async function Product({ params }: { params: { codigo: string } }) {
   const product = getProduct(params.codigo)
   return (
-    <main className='px-4 min-h-screen relative md:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
+    <main className='md:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
       <div className='flex justify-center items-center py-8 relative'>
         <Back className='absolute left-0' />
         <h1 className='font-bold text-xl'>Producto</h1>

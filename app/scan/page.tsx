@@ -10,7 +10,7 @@ export default function Scan() {
     const router = useRouter()
 
     const handleScan = (result: string | null) => {
-        if (!result?.startsWith('https://rastreadito.vercel.app')) {
+        if (!result?.startsWith('https://rastreadito.vercel.app/product/')) {
             toast.error('QR no válido', {
                 style: {
                     background: '#F87171',
@@ -19,7 +19,11 @@ export default function Scan() {
             return
         }
 
-        router.push(result)
+        const push = process.env.NODE_ENV === 'development'
+            ? result.replace('https://rastreadito.vercel.app', 'http://localhost:3000')
+            : result
+
+        router.push(push)
     }
 
     const corner = {
@@ -29,7 +33,7 @@ export default function Scan() {
 
     return (
         <>
-            <main className='px-4 overflow-hidden h-screen relative'>
+            <main className='overflow-hidden h-screen relative'>
                 <div className='absolute inset-x-0 px-4 max-w-7xl mx-auto'>
                     <div className='flex justify-center items-center py-8 relative text-_white'>
                         <Back className='absolute left-0 text-_white' />

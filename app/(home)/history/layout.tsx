@@ -5,15 +5,12 @@ export const metadata = {
 
 export default function HistoryLayout({
     children,
-    modal,
 }: {
     children: React.ReactNode;
-    modal: React.ReactNode;
 }) {
     return (
         <main>
             {children}
-            {modal}
         </main>
     )
 }

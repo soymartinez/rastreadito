@@ -16,10 +16,8 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  modal
 }: {
   children: React.ReactNode
-  modal: React.ReactDOM
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
@@ -29,10 +27,7 @@ export default async function RootLayout({
           `}>
         <ThemeProvider>
           <SupabaseProvider>
-            <>
-              {children}
-              {modal}
-            </>
+            {children}
             {/* <Analytics /> */}
           </SupabaseProvider>
         </ThemeProvider>

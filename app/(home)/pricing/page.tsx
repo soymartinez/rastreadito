@@ -4,7 +4,7 @@ import Balancer from 'react-wrap-balancer'
 
 export default function Pricing() {
     return (
-        <main className='px-4 min-h-screen relative max-w-7xl mx-auto'>
+        <main>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Precios</h1>

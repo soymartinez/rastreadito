@@ -50,7 +50,7 @@ export default function FormAccount({ user }: FormAccountProps) {
                 },
                 error: 'Error al guardar',
             })
-        }} className='px-4 min-h-screen relative max-w-7xl mx-auto'>
+        }}>
             <div className='flex justify-center items-center py-8 relative'>
                 <Back pushRoute='/' className='absolute left-0' />
                 <h1 className='font-bold text-xl'>Perfil</h1>

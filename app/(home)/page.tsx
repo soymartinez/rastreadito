@@ -5,7 +5,7 @@ import { getCurrentUser } from '@/hooks/auth'
 import Navbar from '@/components/navbar'
 import MainTabs from '@/components/main-tabs'
 import { Button } from '@/ui/button'
-import LandingPage from './landing-page'
+import LandingPage from '../landing-page'
 
 export default async function Home() {
   const user = await getCurrentUser()
@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <main>
       <Navbar />
-      <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
+      <div>
         <h1 className='text-5xl font-bold leading-loose truncate'>{user?.user_metadata.name}</h1>
         {/* @ts-expect-error Async Server Component */}
         <MainTabs />
