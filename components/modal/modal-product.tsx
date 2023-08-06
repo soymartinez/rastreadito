@@ -1,6 +1,6 @@
 import { Label } from '@/ui/label'
 import { Producto } from '@prisma/client'
-import ImagePreview from '../../app/product/[codigo]/image-preview'
+import ImagePreview from '../../app/(home)/product/[codigo]/image-preview'
 import ModalPage from '../modal/modal-page'
 
 export default function ModalProduct({ data }: { data: Producto }) {
