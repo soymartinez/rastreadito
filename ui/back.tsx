@@ -5,7 +5,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, LucideProps } from 'lucide-react'
 import clsx from 'clsx'
-import { revalidateAction } from '@/app/actions/revalidate'
+import { revalidateAction } from '@/app/(home)/actions/revalidate'
 
 interface BackProps extends LucideProps {
     pushRoute?: string,
