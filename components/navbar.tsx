@@ -9,7 +9,7 @@ interface NavbarProps {
 export default function Navbar({ isAuth = true }: NavbarProps) {
     return (
         <nav className='sticky top-0 z-50 bg-white/60 dark:bg-_dark/60 backdrop-blur-[8px]'>
-            <div className='flex justify-between items-center py-6 relative lg:px-4 max-w-7xl mx-auto'>
+            <div className='flex justify-between items-center py-6 relative max-w-7xl mx-auto'>
                 <h1 className='font-black text-2xl uppercase italic'>rastreadito</h1>
                 <div className='flex items-center gap-2'>
                     <Link href={'/scan'} className='rounded-full'>
