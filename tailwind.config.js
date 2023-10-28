@@ -34,11 +34,23 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
+        blur: {
+          '0%': { filter: 'blur(0)' },
+          '20%': { filter: 'blur(0)' },
+          '30%': { filter: 'blur(4px)' },
+          '90%': { filter: 'blur(4px)' },
+          '100%': { filter: 'blur(0px)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'blur': 'blur 6s infinite ease-in-out',
       },
+      transitionDelay: {
+        '2000': '2000ms',
+        '4000': '4000ms',
+      }
     },
   },
   plugins: [

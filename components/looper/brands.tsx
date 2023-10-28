@@ -1,20 +1,20 @@
-import Image from 'next/image'
 import React from 'react'
+import { Icons } from '../icons'
 
 export default function Brands() {
     return (
         <>
             <div className='relative w-16 h-16 mx-4'>
-                <Image src={'/brands/sundial.svg'} alt={'Sundial'} fill />
+                <Icons.sundial className='dark:text-_primary h-full w-full' />
             </div>
             <div className='relative w-36 h-16 mx-4'>
-                <Image src={'/brands/grasslands.svg'} alt={'Grasslands'} fill />
+                <Icons.grasslands className='dark:text-_primary h-full w-full' />
             </div>
             <div className='relative w-16 h-16 mx-4'>
-                <Image src={'/brands/beehigh.svg'} alt={'Beehigh'} fill />
+                <Icons.beehigh className='dark:text-_primary h-full w-full' />
             </div>
             <div className='relative w-32 h-16 mx-4'>
-                <Image src={'/brands/versus.svg'} alt={'Versus'} fill />
+                <Icons.versus className='dark:text-_primary h-full w-full' />
             </div>
         </>
     )
