@@ -14,8 +14,8 @@ export default async function Home() {
 
   return (
     <main>
-      <Navbar />
-      <div>
+      <Navbar user={user} />
+      <div className='pb-10'>
         <h1 className='text-5xl font-bold leading-loose truncate'>{user?.user_metadata.name}</h1>
         {/* @ts-expect-error Async Server Component */}
         <MainTabs />
@@ -27,6 +27,6 @@ export default async function Home() {
           </div>
         </Link>
       </div>
-    </main >
+    </main>
   )
 }
