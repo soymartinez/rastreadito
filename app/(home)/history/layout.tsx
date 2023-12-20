@@ -3,17 +3,14 @@ export const metadata = {
     description: 'Administra el historial de tus productos.',
 }
 
-export default function HistoryLayout({
-    children,
-    modal
-}: {
+export default function HistoryLayout(props: {
     children: React.ReactNode
     modal: React.ReactNode
 }) {
     return (
         <main>
-            {children}
-            {modal}
+            {props.children}
+            {props.modal}
         </main>
     )
 }
