@@ -17,149 +17,150 @@ interface UploadInputProps {
 }
 
 export default function UploadInput({ urls = [], className, onValue, onRemove }: UploadInputProps) {
-    const [files, setFile] = useState<{ file: File, index: number }[]>([])
-    const [hover, setHover] = useState(false)
-    const id = useId()
+  const [files, setFile] = useState<{ file: File, index: number }[]>([])
+  const [hover, setHover] = useState(false)
+  const id = useId()
 
-    const toggleHover = () => setHover(!hover)
+  const toggleHover = () => setHover(!hover)
 
-    function cambiarImagen(indice: number, file: File): void {
-        if (indice < urls.length) {
-            setFile(prev => [...prev, { file, index: indice }])
-        } else {
-            console.log("Índice inválido");
-        }
+  function cambiarImagen(indice: number, file: File): void {
+    if (indice < urls.length) {
+      setFile(prev => [...prev, { file, index: indice }])
+    } else {
+      console.log("Índice inválido");
+    }
+  }
+
+  const handlePreview = async (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
+    e.preventDefault()
+
+    const diff = 4 - urls.length
+    const currentFiles = e.target.files
+    const currentFilesArray = Array.from(currentFiles as FileList)
+
+    if (index !== undefined) {
+      return cambiarImagen(index, currentFilesArray[0])
     }
 
-    const handlePreview = async (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
-        e.preventDefault()
-
-        const diff = 4 - urls.length
-        const currentFiles = e.target.files
-        const currentFilesArray = Array.from(currentFiles as FileList)
-
-        if (index !== undefined) {
-            return cambiarImagen(index, currentFilesArray[0])
+    if (files.length + currentFilesArray.length > diff) {
+      toast.error(urls.length > 0 ? `Solo puedes subir ${diff} más` : 'Solo puedes subir 4 imagenes', {
+        style: {
+          background: '#F87171',
         }
-
-        if (files.length + currentFilesArray.length > diff) {
-            toast.error(urls.length > 0 ? `Solo puedes subir ${diff} más` : 'Solo puedes subir 4 imagenes', {
-                style: {
-                    background: '#F87171',
-                }
-            })
-            return
-        }
-
-        if (files?.length < diff) {
-            return setFile((prev) => {
-                if ((prev.length + currentFilesArray.length) > 4) {
-                    const diff = 4 - prev.length
-                    const newFiles = currentFilesArray.slice(0, diff)
-                    return [...prev, ...newFiles.map((file, index) => ({ file, index: urls.length + index }))]
-                }
-                return [...prev, ...currentFilesArray.map((file, index) => ({ file, index: urls.length + index }))]
-            })
-        }
-
-        return setFile(currentFilesArray.map((file, index) => ({ file, index: urls.length + index })))
+      })
+      return
     }
 
-    useEffect(() => {
-        onValue && onValue(files)
-    }, [files, onValue])
+    if (files?.length < diff) {
+      return setFile((prev) => {
+        if ((prev.length + currentFilesArray.length) > 4) {
+          const diff = 4 - prev.length
+          const newFiles = currentFilesArray.slice(0, diff)
+          return [...prev, ...newFiles.map((file, index) => ({ file, index: urls.length + index }))]
+        }
+        return [...prev, ...currentFilesArray.map((file, index) => ({ file, index: urls.length + index }))]
+      })
+    }
 
-    return (
+    return setFile(currentFilesArray.map((file, index) => ({ file, index: urls.length + index })))
+  }
+
+  useEffect(() => {
+    onValue && onValue(files)
+  }, [files, onValue])
+
+  return (
+    <>
+      {urls?.length > 0 && urls.map((url, index) => (
+        <div key={url + index}>
+          <label
+            htmlFor={`${id}-${index}`}
+            className={clsx('rounded-2xl overflow-hidden relative', className)}
+          >
+            <ImagePreview
+              alt={`${id}-${index}`}
+              src={files[index]?.file ? URL.createObjectURL(files[index]?.file) : url}
+              onRemoveImage={onRemove && (() => onRemove(url))}
+            />
+          </label>
+          <Input
+            onChange={(e) => handlePreview(e, index)}
+            className='hidden'
+            id={`${id}-${index}`}
+            name='imagen'
+            type={'file'}
+            accept={'image/*'}
+          />
+        </div>
+      ))}
+      {files && files?.length > 0 && files.map(({ file, index }, i) => (
+        <div key={i}>
+          <label
+            htmlFor={`file-${id}-${index}`}
+            className={clsx('rounded-2xl overflow-hidden', className)}
+          >
+            <ImagePreview
+              alt={file.name}
+              src={URL.createObjectURL(file)}
+            />
+          </label>
+          <Input
+            onChange={(e) => handlePreview(e, index)}
+            className='hidden'
+            id={`file-${id}-${index}`}
+            name='imagen'
+            type={'file'}
+            accept={'image/*'}
+          />
+        </div>
+      ))}
+      {urls.length + files.length < 4 && (
         <>
-            {urls?.length > 0 && urls.map((url, index) => (
-                <div key={url + index}>
-                    <label
-                        htmlFor={`${id}-${index}`}
-                        className={clsx('rounded-2xl overflow-hidden relative', className)}
-                    >
-                        <ImagePreview
-                            alt={`${id}-${index}`}
-                            src={files[index]?.file ? URL.createObjectURL(files[index]?.file) : url}
-                            onRemoveImage={onRemove && (() => onRemove(url))}
-                        />
-                    </label>
-                    <Input
-                        onChange={(e) => handlePreview(e, index)}
-                        className='hidden'
-                        id={`${id}-${index}`}
-                        name='imagen'
-                        type={'file'}
-                        accept={'image/*'}
-                    />
-                </div>
-            ))}
-            {files && files?.length > 0 && files.map(({ file, index }, i) => (
-                <div key={i}>
-                    <label
-                        htmlFor={`file-${id}-${index}`}
-                        className={clsx('rounded-2xl overflow-hidden', className)}
-                    >
-                        <ImagePreview
-                            alt={file.name}
-                            src={URL.createObjectURL(file)}
-                        />
-                    </label>
-                    <Input
-                        onChange={(e) => handlePreview(e, index)}
-                        className='hidden'
-                        id={`file-${id}-${index}`}
-                        name='imagen'
-                        type={'file'}
-                        accept={'image/*'}
-                    />
-                </div>
-            ))}
-            {urls.length + files.length < 4 && (
-                <>
-                    <label
-                        htmlFor={`upload-${id}`}
-                        onMouseEnter={toggleHover}
-                        onMouseLeave={toggleHover}
-                        className={clsx('rounded-2xl overflow-hidden', className)}
-                    >
-                        <div className={clsx(`
-                                relative
-                                h-28
-                                w-28
-                                cursor-pointer
-                                flex
-                                justify-center
-                                items-center
-                                border
-                                border-_gray
-                                dark:border-_darkText
-                                hover:bg-_gray
-                                hover:dark:bg-_darkText
-                                rounded-2xl
-                                overflow-hidden
-                                transition
-                            `, className)}
-                        >
-                            <div className={clsx('absolute inset-0 transition flex justify-center items-center', {
-                                'scale-125': hover,
-                                'opacity-100 scale-100': !hover,
-                            })}>
-                                <ImagePlus />
-                            </div>
-                        </div>
-                    </label>
-                    <Input
-                        onChange={handlePreview}
-                        className='sr-only'
-                        id={`upload-${id}`}
-                        name='imagen'
-                        type={'file'}
-                        accept={'image/*'}
-                        multiple
-                        required={urls.length === 0 ? true : false}
-                    />
-                </>
-            )}
+          <label
+            htmlFor={`upload-${id}`}
+            onMouseEnter={toggleHover}
+            onMouseLeave={toggleHover}
+            className={clsx('rounded-2xl overflow-hidden', className)}
+          >
+            <div
+              className={clsx(`
+                relative
+                h-28
+                w-28
+                cursor-pointer
+                flex
+                justify-center
+                items-center
+                border
+                border-_gray
+                dark:border-_darkText
+                hover:bg-_gray
+                hover:dark:bg-_darkText
+                rounded-2xl
+                overflow-hidden
+                transition
+              `, className)}
+            >
+              <div className={clsx('absolute inset-0 transition flex justify-center items-center', {
+                'scale-125': hover,
+                'opacity-100 scale-100': !hover,
+              })}>
+                <ImagePlus />
+              </div>
+            </div>
+          </label>
+          <Input
+            onChange={handlePreview}
+            className='sr-only'
+            id={`upload-${id}`}
+            name='imagen'
+            type={'file'}
+            accept={'image/*'}
+            multiple
+            required={urls.length === 0 ? true : false}
+          />
         </>
-    )
+      )}
+    </>
+  )
 }
