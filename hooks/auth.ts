@@ -2,17 +2,17 @@ import { createServerComponentSupabaseClient, User } from '@supabase/auth-helper
 import { headers, cookies } from 'next/headers'
 
 export const useSupabaseServer = async () => {
-    const supabase = createServerComponentSupabaseClient({
-        headers,
-        cookies,
-    })
+  const supabase = createServerComponentSupabaseClient({
+    headers,
+    cookies,
+  })
 
-    const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
 
-    return {
-        supabase,
-        user,
-    }
+  return {
+    supabase,
+    user,
+  }
 }
 
 interface UserMetadata {
@@ -20,18 +20,18 @@ interface UserMetadata {
 }
 
 export async function getCurrentUser() {
-    try {
-        const { user } = await useSupabaseServer()
+  try {
+    const { user } = await useSupabaseServer()
 
-        if (!user) return null
+    if (!user) return null
 
-        const currentUser = {
-            ...user,
-            user_metadata: user?.user_metadata as UserMetadata,
-        } as User
+    const currentUser = {
+      ...user,
+      user_metadata: user?.user_metadata as UserMetadata,
+    } as User
 
-        return currentUser
-    } catch (error: any) {
-        return null
-    }
+    return currentUser
+  } catch (error: any) {
+    return null
+  }
 }
