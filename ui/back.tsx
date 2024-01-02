@@ -13,23 +13,24 @@ interface BackProps extends LucideProps {
 }
 
 const Back = React.forwardRef<SVGSVGElement, BackProps>(
-    ({ pushRoute, revalidate, className, ...props }, ref) => {
-        const { back, push } = useRouter()
-        return <ChevronLeft
-            ref={ref}
-            className={clsx('text-_dark dark:text-_white mx-3 cursor-pointer', className)}
-            size={32}
-            strokeWidth={3}
-            onClick={async () => {
-                revalidate && await revalidateAction(revalidate)
-                pushRoute && await revalidateAction(pushRoute)
-                pushRoute
-                    ? push(pushRoute)
-                    : back()
-            }}
-            {...props}
-        />
-    }
+  ({ pushRoute, revalidate, className, ...props }, ref) => {
+    const { back, push } = useRouter()
+    return <ChevronLeft
+      ref={ref}
+      className={clsx('text-_dark dark:text-_white mx-3 cursor-pointer', className)}
+      size={32}
+      strokeWidth={3}
+      onClick={async () => {
+        revalidate && await revalidateAction(revalidate)
+        pushRoute && await revalidateAction(pushRoute)
+        pushRoute
+          ? push(pushRoute)
+          : back()
+      }}
+      {...props}
+    />
+  }
 )
+Back.displayName = 'Back'
 
 export { Back }
