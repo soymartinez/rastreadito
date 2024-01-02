@@ -4,37 +4,37 @@ import { Button } from '@/ui/button'
 import { User } from '@supabase/supabase-js'
 
 interface NavbarProps {
-    user?: User | null
+  user?: User | null
 }
 
 export default function Navbar({ user }: NavbarProps) {
-    return (
-        <nav className='sticky top-0 z-50 bg-white/60 dark:bg-_dark/60 backdrop-blur-[8px]'>
-            <div className='flex justify-between items-center py-6 relative max-w-7xl mx-auto'>
-                <h1 className='font-black text-2xl uppercase italic'>rastreadito</h1>
-                <div className='flex items-center gap-2'>
-                    <Link href={'/scan'} className='rounded-full'>
-                        <Button
-                            variant={'ghost'}
-                            size={'icon'}
-                            className='border-2 border-_gray dark:border-_darkText'
-                        >
-                            <Scan className='dark:text-_white' />
-                        </Button>
-                    </Link>
-                    <Link href={user ? '/account' : '/auth'} className='rounded-full'>
-                        {user
-                            ? <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText bg-_primary rounded-full' />
-                            : <Button
-                                size='icon'
-                                className='text-[14px] border-2 dark:border-_darkText whitespace-nowrap'
-                            >
-                                <Fingerprint />
-                            </Button>
-                        }
-                    </Link>
-                </div>
-            </div>
-        </nav>
-    )
+  return (
+    <nav className='sticky top-0 z-50 bg-white/60 dark:bg-_dark/60 backdrop-blur-[8px]'>
+      <div className='flex justify-between items-center py-6 relative max-w-7xl mx-auto'>
+        <h1 className='font-black text-2xl uppercase italic'>rastreadito</h1>
+        <div className='flex items-center gap-2'>
+          <Link href={'/scan'} className='rounded-full'>
+            <Button
+              variant={'ghost'}
+              size={'icon'}
+              className='border-2 border-_gray dark:border-_darkText'
+            >
+              <Scan className='dark:text-_white' />
+            </Button>
+          </Link>
+          <Link href={user ? '/account' : '/auth'} className='rounded-full'>
+            {user
+              ? <div className='w-11 h-11 border-2 border-_gray dark:border-_darkText bg-_primary rounded-full' />
+              : <Button
+                size='icon'
+                className='text-[14px] border-2 dark:border-_darkText whitespace-nowrap'
+              >
+                <Fingerprint />
+              </Button>
+            }
+          </Link>
+        </div>
+      </div>
+    </nav>
+  )
 }

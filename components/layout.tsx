@@ -5,18 +5,18 @@ interface LayoutBoundaryProps {
 }
 
 export default function LayoutBoundary({ children }: LayoutBoundaryProps) {
-    return (
-        <main
-            className='
-                px-4
-                lg:px-8
-                min-h-screen
-                relative
-                max-w-7xl
-                mx-auto
-            '
-        >
-            {children}
-        </main>
-    )
+  return (
+    <main
+      className='
+        px-4
+        lg:px-8
+        min-h-screen
+        relative
+        max-w-7xl
+        mx-auto
+      '
+    >
+      {children}
+    </main>
+  )
 }

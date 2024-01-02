@@ -13,34 +13,34 @@ type SupabaseContext = {
 const Context = createContext<SupabaseContext | undefined>(undefined)
 
 export default function SupabaseProvider({ children }: { children: React.ReactNode }) {
-    const [supabase] = useState(() => createBrowserSupabaseClient())
-    const router = useRouter()
+  const [supabase] = useState(() => createBrowserSupabaseClient())
+  const router = useRouter()
 
-    useEffect(() => {
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange(() => {
-            router.refresh()
-        })
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      router.refresh()
+    })
 
-        return () => {
-            subscription.unsubscribe()
-        }
-    }, [router, supabase])
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [router, supabase])
 
-    return (
-        <Context.Provider value={{ supabase }}>
-            <>{children}</>
-        </Context.Provider>
-    )
+  return (
+    <Context.Provider value={{ supabase }}>
+      <>{children}</>
+    </Context.Provider>
+  )
 }
 
 export const useSupabase = () => {
-    const context = useContext(Context)
+  const context = useContext(Context)
 
-    if (context === undefined) {
-        throw new Error('useSupabase must be used inside SupabaseProvider')
-    }
+  if (context === undefined) {
+    throw new Error('useSupabase must be used inside SupabaseProvider')
+  }
 
-    return context
+  return context
 }

@@ -12,26 +12,26 @@ interface EmptyProps {
 }
 
 export default function Empty({
-    title,
-    description,
-    height = 'default',
-    className,
+  title,
+  description,
+  height = 'default',
+  className,
 }: EmptyProps) {
-    return (
-        <div className={clsx('flex justify-center items-center',
-            height === 'default' && 'h-96 my-6',
-            className,
-        )}>
-            <Balancer ratio={0.4}>
-                {title}{' '}
-                {description &&
-                    <span className='text-_primary hover:underline animate-pulse'>
-                        <Link href='/metadata'>
-                            {description}
-                        </Link>
-                    </span>}
-            </Balancer>
-        </div>
+  return (
+    <div className={clsx('flex justify-center items-center',
+      height === 'default' && 'h-96 my-6',
+      className,
+    )}>
+      <Balancer ratio={0.4}>
+        {title}{' '}
+        {description &&
+            <span className='text-_primary hover:underline animate-pulse'>
+              <Link href='/metadata'>
+                {description}
+              </Link>
+            </span>}
+      </Balancer>
+    </div>
 
-    )
+  )
 }

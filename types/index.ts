@@ -1,8 +1,8 @@
 import {
-    Categoria,
-    Galeria,
-    Producto,
-    Qr
+  Categoria,
+  Galeria,
+  Producto,
+  Qr
 } from '@prisma/client'
 
 export type QrProductType = (Qr & { producto: Producto })
