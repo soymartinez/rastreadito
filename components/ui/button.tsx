@@ -4,27 +4,27 @@ import { VariantProps, cva } from 'class-variance-authority'
 import clsx from 'clsx'
 
 const buttonVariants = cva(
-  'active:scale-95 inline-flex items-center justify-center rounded-2xl text-xl font-semibold backdrop-blur-sm transition-colors focus:outline-none focus:ring-2 focus:ring-_primary disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-_primary',
+  'inline-flex items-center justify-center rounded-2xl text-xl font-semibold backdrop-blur-sm transition-colors data-[state=open]:bg-_primary focus:outline-none focus:ring-2 focus:ring-_primary active:scale-95 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
           'bg-_primary text-_dark hover:bg-_primary/80',
         image:
-          'bg-_gray dark:bg-_darkText border border-_gray dark:border-_darkText hover:bg-_gray/50 dark:hover:bg-_darkText/50 rounded-2xl overflow-hidden p-2 h-14 w-14',
+          'h-14 w-14 overflow-hidden rounded-2xl border border-_gray bg-_gray p-2 hover:bg-_gray/50 dark:border-_darkText dark:bg-_darkText dark:hover:bg-_darkText/50',
         outline:
           'border-2 border-_gray dark:border-_darkText',
         subtle:
           'bg-_gray text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-_gray',
         ghost:
-          'bg-transparent hover:bg-_gray dark:hover:bg-_darkText dark:text-_primary data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent',
-        link: 'bg-transparent dark:bg-transparent underline-offset-4 hover:underline text-slate-900 dark:text-_gray hover:bg-transparent dark:hover:bg-transparent',
+          'bg-transparent data-[state=open]:bg-transparent hover:bg-_gray dark:text-_primary dark:data-[state=open]:bg-transparent dark:hover:bg-_darkText',
+        link: 'bg-transparent text-slate-900 underline-offset-4 hover:bg-transparent hover:underline dark:bg-transparent dark:text-_gray dark:hover:bg-transparent',
       },
       size: {
-        default: 'h-16 py-2 px-4',
-        sm: 'h-9 px-2 rounded-md',
+        default: 'h-16 px-4 py-2',
+        sm: 'h-9 rounded-md px-2',
         icon: 'h-11 w-11 rounded-full',
-        lg: 'h-11 px-8 rounded-md',
+        lg: 'h-11 rounded-md px-8',
         nothing: '',
       },
     },
@@ -36,8 +36,8 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> { }
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  VariantProps<typeof buttonVariants> { }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
