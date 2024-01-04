@@ -4,7 +4,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-} from '@/ui/dialog'
+} from '@/components/ui/dialog'
 import { Maximize2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 

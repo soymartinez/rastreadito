@@ -1,4 +1,4 @@
-import { Label } from '@/ui/label'
+import { Label } from '@/components/ui/label'
 import { Producto } from '@prisma/client'
 import ImagePreview from '../../app/(home)/product/[codigo]/image-preview'
 import ModalPage from '../modal/modal-page'

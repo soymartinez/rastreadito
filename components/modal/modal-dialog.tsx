@@ -2,7 +2,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-} from '@/ui/dialog'
+} from '@/components/ui/dialog'
 
 export default function ModalDialog({ children, onOpenChange }: { children: React.ReactNode, onOpenChange?: (open: boolean) => void }) {
   return (

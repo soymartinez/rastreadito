@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 import { QrCode } from 'lucide-react'
 
 import Modal from './modal'
-import { Button } from '@/ui/button'
+import { Button } from '@/components/ui/button'
 
 interface ModalButtonProps {
     children: React.ReactNode
