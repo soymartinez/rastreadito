@@ -1,16 +1,16 @@
 'use client'
 
-import { Button } from '@/ui/button'
+import { Button } from '@/components/ui/button'
 import { Categoria, Galeria } from '@prisma/client'
 import { AlertCircle, ImagePlus, Trash, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import NewGallery from './new-gallery'
 import { AnimatePresence } from 'framer-motion'
-import { Label } from '@/ui/label'
+import { Label } from '@/components/ui/label'
 import UploadInput from './upload-input'
 import { toast } from 'sonner'
 import { useSupabase } from '../supabase-provider'
-import { Input } from '@/ui/input'
+import { Input } from '@/components/ui/input'
 
 interface GaleriaProps {
     categoria: Categoria & {

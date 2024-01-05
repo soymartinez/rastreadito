@@ -4,7 +4,7 @@ import { useEffect, useId, useState } from 'react'
 import clsx from 'clsx'
 import { toast } from 'sonner'
 import { ImagePlus } from 'lucide-react'
-import { Input } from '@/ui/input'
+import { Input } from '@/components/ui/input'
 import ImagePreview from './image-preview'
 
 interface UploadInputProps {

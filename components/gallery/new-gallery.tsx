@@ -1,11 +1,11 @@
 'use client'
 
-import { Input } from '@/ui/input'
+import { Input } from '@/components/ui/input'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useSupabase } from '../supabase-provider'
 import { toast } from 'sonner'
-import { Button } from '@/ui/button'
+import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import UploadInput from './upload-input'
 
