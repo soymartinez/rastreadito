@@ -11,17 +11,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/ui/select'
-import { Input } from '@/ui/input'
-import { Textarea } from '@/ui/textarea'
-import { Button } from '@/ui/button'
+} from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
 import { Categoria, Galeria, Producto, Qr } from '@prisma/client'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { Label } from '@/ui/label'
+import { Label } from '@/components/ui/label'
 import ImagePreview from './gallery/image-preview'
 import ModalDialog from './modal/modal-dialog'
-import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
+import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs'
 import GaleriaView from './gallery/galeria-view'
 import TabTrigger from './tab-trigger'
 import { CategoriaGaleriaType } from '@/types'
@@ -229,7 +229,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               <SelectContent>
                 {categorias.map(({ nombre, acronimo }) => (
                   <SelectItem
-                    className='first:rounded-t-xl last:rounded-b-xl placeholder:text-_primary'
+                    className='placeholder:text-_primary first:rounded-t-xl last:rounded-b-xl'
                     key={acronimo}
                     value={acronimo}
                   >
@@ -238,17 +238,17 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                 ))}
               </SelectContent>
             </Select>
-            <div className='flex flex-col gap-6 px-5 py-3 border border-_gray dark:border-_darkText rounded-2xl' id='galeria'>
-              <div className='flex flex-col justify-between items-start gap-2'>
-                <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>Galeria</Label>
+            <div className='flex flex-col gap-6 rounded-2xl border border-_gray px-5 py-3 dark:border-_darkText' id='galeria'>
+              <div className='flex flex-col items-start justify-between gap-2'>
+                <Label className='text-xs font-semibold text-_darkText dark:text-_primary'>Galeria</Label>
                 {galeria && galeria.length > 0
-                    && <div className='flex justify-end items-center gap-3 h-11 w-full max-w-sm ml-auto'>
+                    && <div className='ml-auto flex h-11 w-full max-w-sm items-center justify-end gap-3'>
                       <Input
                         variant='search'
                         name='search'
                         onChange={(e) => setSearchGaleria(e.target.value)}
                         placeholder='Buscar por nombre'
-                        className='p-1 h-full border-2'
+                        className='h-full border-2 p-1'
                         defaultValue={infoImages.nombre}
                       />
                       <Button
@@ -275,13 +275,13 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                       {galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
 
                         <div key={id} className='flex flex-col gap-2 overflow-hidden'>
-                          <Label className='text-_darkText dark:text-_white text-xs font-semibold truncate'>{nombre}</Label>
-                          <div className='w-28 h-28' onClick={() => setImagenes(url)}>
+                          <Label className='truncate text-xs font-semibold text-_darkText dark:text-_white'>{nombre}</Label>
+                          <div className='h-28 w-28' onClick={() => setImagenes(url)}>
                             {url.length > 0
                               ? url.map((imagenUrl, i) => (
                                 <div key={i} className='absolute'>
                                   {i > 0 &&
-                                    <div className='w-6 h-6 bg-_dark absolute z-40 rounded-full top-1 left-1 text-_primary flex justify-center items-center'>
+                                    <div className='absolute left-1 top-1 z-40 flex h-6 w-6 items-center justify-center rounded-full bg-_dark text-_primary'>
                                       <Label className='text-xs'>+{url.length}</Label>
                                     </div>}
                                   <ImagePreview
@@ -297,16 +297,16 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                 title='Galeria vacía'
                                 className={`
                                   relative
-                                  w-28 h-28
+                                  flex h-28
+                                  w-28
                                   cursor-not-allowed
-                                  flex
-                                  justify-center 
-                                  items-center
+                                  items-center 
+                                  justify-center
+                                  overflow-hidden
+                                  rounded-2xl
                                   border
                                   border-_gray
                                   dark:border-_darkText
-                                  rounded-2xl
-                                  overflow-hidden
                                 `}
                               >
                                 <ImageOff />
@@ -316,27 +316,27 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                         </div>
                       ))}
                     </div>
-                    : <div className='h-32 flex justify-center items-center text-sm text-center dark:text-_grayText'>
+                    : <div className='flex h-32 items-center justify-center text-center text-sm dark:text-_grayText'>
                       <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
                     </div>}
                 </div>
-                : <div className='text-sm text-center'>
+                : <div className='text-center text-sm'>
                   {loading
                     ? <div className='flex flex-col gap-2'>
-                      <div className='bg-_gray dark:bg-_darkText rounded-xl h-4 w-20 animate-pulse' />
-                      <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin p-1'>
+                      <div className='h-4 w-20 animate-pulse rounded-xl bg-_gray dark:bg-_darkText' />
+                      <div className='grid grid-flow-col justify-start gap-5 overflow-auto p-1 scrollbar-none md:scrollbar-thin'>
                         {[...Array(4)].map((_, i) => (
                           <div
                             key={i}
-                            className={'relative bg-_gray dark:bg-_darkText animate-pulse rounded-2xl w-28 h-28 m-auto'}
+                            className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
                           />
                         ))}
                       </div>
                     </div>
-                    : <div className='h-36 flex justify-center items-center'>
+                    : <div className='flex h-36 items-center justify-center'>
                       {galeria && galeria.length === 0
-                        ? <div className='inline-flex gap-2 items-center justify-center'>
-                          <p className='text-sm text-center dark:text-_grayText'>No hay imágenes en esta categoría.</p>{' '}
+                        ? <div className='inline-flex items-center justify-center gap-2'>
+                          <p className='text-center text-sm dark:text-_grayText'>No hay imágenes en esta categoría.</p>{' '}
                           <Button
                             type='button'
                             onClick={() => setUploadImages(!uploadImages)}
@@ -347,7 +347,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             <ImagePlus />
                           </Button>
                         </div>
-                        : <p className='text-sm text-center dark:text-_grayText'>Selecciona una categoría para ver las imágenes.</p>}
+                        : <p className='text-center text-sm dark:text-_grayText'>Selecciona una categoría para ver las imágenes.</p>}
                     </div>
                   }
                 </div>
@@ -390,8 +390,8 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
 
         {
           type === 'normal' && (
-            <div className='absolute w-16 right-4'>
-              <Button type='submit' className='w-16 fixed bottom-8'>
+            <div className='absolute right-4 w-16'>
+              <Button type='submit' className='fixed bottom-8 w-16'>
                 <Save />
               </Button>
             </div>
@@ -400,8 +400,8 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
 
         {
           type === 'floating' && (
-            <div className='absolute w-16 right-0 bottom-16'>
-              <Button type='submit' className='w-16 fixed'>
+            <div className='absolute bottom-16 right-0 w-16'>
+              <Button type='submit' className='fixed w-16'>
                 <Save />
               </Button>
             </div>
@@ -421,8 +421,8 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               <div className='py-4'>
                 <h1 className='text-5xl font-bold'>Galeria</h1>
               </div>
-              <TabsList className='py-2 overflow-x-auto scrollbar-none sm:scrollbar-thin scrollbar-thumb-_gray dark:scrollbar-thumb-_darkText scrollbar-thumb-rounded-full'>
-                <div className='flex gap-2 w-min'>
+              <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-_gray scrollbar-thumb-rounded-full dark:scrollbar-thumb-_darkText sm:scrollbar-thin'>
+                <div className='flex w-min gap-2'>
                   {categorias.map((categoria: Categoria) => (
                     <TabTrigger
                       key={categoria.id}
@@ -435,9 +435,9 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               </TabsList>
             </div>
             <div className='pt-4' style={{ height: 'calc(100% - 144px)' }}>
-              <div className='overflow-auto h-full scrollbar-thin'>
+              <div className='h-full overflow-auto scrollbar-thin'>
                 {categorias.map((categoria) => (
-                  <TabsContent key={categoria.id} value={categoria.acronimo} className='overflow-auto relative'>
+                  <TabsContent key={categoria.id} value={categoria.acronimo} className='relative overflow-auto'>
                     <div className='flex flex-col gap-2 pr-2'>
                       <GaleriaView
                         categoria={{

@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/ui/button'
-import { Input } from '@/ui/input'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Loader, LogOut } from 'lucide-react'
 import { useSupabase } from './supabase-provider'
 import { toast } from 'sonner'
@@ -74,7 +74,7 @@ function SignIn() {
   }
 
   return (
-    <form onSubmit={handleSignIn} className='grid gap-4 mt-10'>
+    <form onSubmit={handleSignIn} className='mt-10 grid gap-4'>
       <Input
         onChange={(e) => setForm({ ...form, email: e.target.value })}
         name='email'
@@ -110,7 +110,7 @@ function SignInWhitGoogle() {
   }
 
   return (
-    <button onClick={handleSignIn} className='flex justify-center items-center w-12 h-12 rounded-full bg-_gray hover:opacity-80 dark:hover:opacity-90 transition-all'>
+    <button onClick={handleSignIn} className='flex h-12 w-12 items-center justify-center rounded-full bg-_gray transition-all hover:opacity-80 dark:hover:opacity-90'>
       <svg width={16} height={17} viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <mask id='mask0_42_69' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='17'>
           <path d='M15.9034 0H0V17H15.9034V0Z' fill='white' />
@@ -160,7 +160,7 @@ function SignUp() {
     setLoading(false)
   }
   return (
-    <form onSubmit={handleSignUp} className='grid gap-4 mt-10'>
+    <form onSubmit={handleSignUp} className='mt-10 grid gap-4'>
       <Input name='name' placeholder='bee' labelText='Nombre' autoComplete='off' required />
       <Input name='email' placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
       <Input name='password' placeholder='••••••••' type={'password'} labelText='Contraseña' required />
@@ -180,7 +180,7 @@ function SignOut() {
     if (!error) router.push('/')
   }
   return (
-    <Button onClick={handleSignOut} type={'button'} variant={'ghost'} className='h-min flex items-center gap-3 self-end'>
+    <Button onClick={handleSignOut} type={'button'} variant={'ghost'} className='flex h-min items-center gap-3 self-end'>
       <LogOut size={20} /> <span className='text-lg'>Cerrar sesión</span>
     </Button>
   )

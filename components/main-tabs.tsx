@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import GeneralCard from './card/general'
 import HistorialCard from './card/history'
 import CategoryCard from './card/category'
-import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
+import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs'
 import { Categoria, Qr } from '@prisma/client'
 import Empty from './empty'
 import TabTrigger from './tab-trigger'
@@ -53,8 +53,8 @@ export default async function MainTabs() {
   const categories = getCategorias(user?.email ?? '')
   return (
     <Tabs defaultValue='general'>
-      <TabsList className='flex py-2 overflow-x-auto'>
-        <div className='flex gap-2 w-min'>
+      <TabsList className='flex overflow-x-auto py-2'>
+        <div className='flex w-min gap-2'>
           <TabTrigger
             label='Inicio'
             value='general'
@@ -66,10 +66,10 @@ export default async function MainTabs() {
           <Link href={'/history'}>
             <div
               className={`
-                w-28 h-12
-                flex justify-center items-center transition-all
-                bg-_white text-_dark border-2 hover:bg-_gray border-_gray font-[500] rounded-full
-                dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText
+                flex h-12
+                w-28 items-center justify-center rounded-full
+                border-2 border-_gray bg-_white font-[500] text-_dark transition-all hover:bg-_gray
+                dark:border-_darkText dark:bg-_dark dark:text-_white dark:hover:bg-_darkText
               `}
             >
               Historial
@@ -79,7 +79,7 @@ export default async function MainTabs() {
       </TabsList>
       <TabsContent value='general' className='flex flex-col gap-6 md:gap-8'>
         <div>
-          <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>General</h1>
+          <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>General</h1>
           <div className={clsx('grid gap-3')}>
             {/* @ts-expect-error Async Server Component */}
             <GeneralCard
@@ -112,7 +112,7 @@ export default async function MainTabs() {
         </div>
 
         <div>
-          <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Ultimos códigos</h1>
+          <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>Ultimos códigos</h1>
           <Suspense fallback={<TrOverviewLoading />}>
             {/* @ts-expect-error Async Server Component */}
             <Historial data={qr} />
@@ -120,7 +120,7 @@ export default async function MainTabs() {
         </div>
       </TabsContent>
       <TabsContent value='categories'>
-        <h1 className='font-semibold text-xl leading-loose pt-6 pb-3'>Categoria</h1>
+        <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>Categoria</h1>
         <Suspense fallback={<div>Loading...</div>}>
           {/* @ts-expect-error Async Server Component */}
           <Categories data={categories} />

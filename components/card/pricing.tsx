@@ -1,5 +1,5 @@
 import Balancer from 'react-wrap-balancer'
-import { Button } from "@/ui/button";
+import { Button } from '@/components/ui/button'
 import clsx from 'clsx';
 
 export default function PricingCard({
@@ -18,13 +18,13 @@ export default function PricingCard({
     popular?: boolean,
 }) {
   return (
-    <div className='flex flex-col justify-between relative items-center gap-4 p-12 border-2 border-_gray dark:border-_darkText hover:bg-[#fcfcfc] dark:hover:bg-[#232323] rounded-2xl w-full'>
-      {popular && <div className='absolute -top-5 text-xs font-semibold bg-_primary dark:text-_dark px-6 py-3 rounded-full'>Popular</div>}
-      <div className='flex flex-col items-center justify-center gap-4 w-full'>
-        <h1 className='font-semibold text-xl'>{name}</h1>
+    <div className='relative flex w-full flex-col items-center justify-between gap-4 rounded-2xl border-2 border-_gray p-12 hover:bg-[#fcfcfc] dark:border-_darkText dark:hover:bg-[#232323]'>
+      {popular && <div className='absolute -top-5 rounded-full bg-_primary px-6 py-3 text-xs font-semibold dark:text-_dark'>Popular</div>}
+      <div className='flex w-full flex-col items-center justify-center gap-4'>
+        <h1 className='text-xl font-semibold'>{name}</h1>
         <div>
-          <h1 className='font-semibold text-6xl'>{price}</h1>
-          {duration && <h1 className='font-semibold text-base text-end'>{duration}</h1>}
+          <h1 className='text-6xl font-semibold'>{price}</h1>
+          {duration && <h1 className='text-end text-base font-semibold'>{duration}</h1>}
         </div>
         <Balancer className='text-center text-_darkText dark:text-_grayText'>
           {description}
