@@ -18,6 +18,71 @@ body {
     margin: 0;
   }
 
+  /* SCAN CLIP PATH */
+  #clip-path {
+    clip-path: polygon(0% 0%,
+        0% 100%, calc((100% - 230px) / 2) 100%,
+        calc((100% - 230px) / 2) calc((100% - 230px) / 2),
+        calc(((100% - 230px) / 2) + 230px) calc((100% - 230px) / 2),
+        calc(((100% - 230px) / 2) + 230px) calc(((100% - 230px) / 2) + 230px),
+        calc((100% - 230px) / 2) calc(((100% - 230px) / 2) + 230px),
+        calc((100% - 230px) / 2) 100%,
+        100% 100%,
+        100% 0%);
+  }
+
+  .border-corner:before {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 8px solid #00E99E;
+    border-left: 8px solid #00E99E;
+    border-radius: 15px 0;
+  }
+
+  .border-corner:after {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 8px solid #00E99E;
+    border-right: 8px solid #00E99E;
+    border-radius: 0 15px;
+  }
+
+  .border-corner span.border_bottom:before {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 8px solid #00E99E;
+    border-left: 8px solid #00E99E;
+    border-radius: 0 15px;
+  }
+
+  .border-corner span.border_bottom:after {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-bottom: 8px solid #00E99E;
+    border-right: 8px solid #00E99E;
+    border-radius: 15px 0;
+  }
+
   /* INFINITE LOOPER */
 
   @keyframes slideAnimation {
