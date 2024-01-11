@@ -1,4 +1,4 @@
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import { Producto, Qr } from '@prisma/client'
 import { headers } from 'next/headers'
 import Scanned from './scanned'
@@ -29,9 +29,9 @@ export default async function ScannedProduct() {
 
   const qr = await getData({ origin, search })
   return (
-    <main className='min-h-screen relative max-w-7xl mx-auto'>
-      <div className='px-4 py-8 absolute inset-x-0 top-0'>
-        <div className='relative h-7 flex items-center'>
+    <main className='relative mx-auto min-h-screen max-w-7xl'>
+      <div className='absolute inset-x-0 top-0 px-4 py-8'>
+        <div className='relative flex h-7 items-center'>
           <Back className='absolute left-0' />
         </div>
       </div>
