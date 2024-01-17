@@ -1,7 +1,7 @@
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import { Suspense } from 'react'
 import ProductInfo from './product'
 
@@ -25,10 +25,10 @@ async function getProduct(codigo: string) {
 export default async function Product({ params }: { params: { codigo: string } }) {
   const product = getProduct(params.codigo)
   return (
-    <main className='md:max-w-4xl xl:max-w-7xl mx-auto overflow-hidden'>
-      <div className='flex justify-center items-center py-8 relative'>
+    <main className='mx-auto overflow-hidden md:max-w-4xl xl:max-w-7xl'>
+      <div className='relative flex items-center justify-center py-8'>
         <Back className='absolute left-0' />
-        <h1 className='font-bold text-xl'>Producto</h1>
+        <h1 className='text-xl font-bold'>Producto</h1>
       </div>
       <Suspense fallback={<div>loading product...</div>}>
         {/* @ts-expect-error Async Server Component */}

@@ -1,7 +1,7 @@
 import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 import CategoriasData from './data'
@@ -29,11 +29,11 @@ export default async function CategoriaNombre({ params }: { params: { nombre: st
   const qr = getQr(params.nombre.toUpperCase(), user?.email)
   return (
     <div>
-      <div className='flex justify-center items-center py-8 relative'>
+      <div className='relative flex items-center justify-center py-8'>
         <Back className='absolute left-0' />
-        <h1 className='font-bold text-xl'>Categoria</h1>
+        <h1 className='text-xl font-bold'>Categoria</h1>
       </div>
-      <h1 className='text-5xl font-bold leading-loose truncate capitalize'>{params.nombre}</h1>
+      <h1 className='truncate text-5xl font-bold capitalize leading-loose'>{params.nombre}</h1>
       <Suspense fallback={<FadingLoader />}>
         {/* @ts-expect-error Async Server Component */}
         <Categorias qr={qr} />
@@ -51,7 +51,7 @@ const FadingLoader = () => {
   return (
     <>
       <ContentLoader
-        className='w-full h-96 px-3 dark:hidden'
+        className='h-96 w-full px-3 dark:hidden'
         backgroundColor='#f3f3f3'
         foregroundColor='#ecebeb'
       >
@@ -63,7 +63,7 @@ const FadingLoader = () => {
         <rect x='0' y='240' rx='5' ry='5' width='100%' height='32' />
       </ContentLoader>
       <ContentLoader
-        className='w-full h-96 px-3 dark:block hidden'
+        className='hidden h-96 w-full px-3 dark:block'
         backgroundColor='#262626'
         foregroundColor='#212121'
       >

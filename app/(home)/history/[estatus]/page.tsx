@@ -1,7 +1,7 @@
 import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import { Estatus } from '@prisma/client'
 import { User } from '@supabase/supabase-js'
 import { Suspense } from 'react'
@@ -36,10 +36,10 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
   }
 
   return (
-    <div className='px-4 min-h-screen relative max-w-7xl mx-auto'>
-      <div className='flex justify-center items-center py-8 relative'>
+    <div className='relative mx-auto min-h-screen max-w-7xl px-4'>
+      <div className='relative flex items-center justify-center py-8'>
         <Back className='absolute left-0' />
-        <h1 className='font-bold text-xl'>{title()}</h1>
+        <h1 className='text-xl font-bold'>{title()}</h1>
       </div>
       <div className='py-10'>
         <Suspense fallback={<FadingLoader />}>
@@ -61,7 +61,7 @@ async function History({ history }: { history: Promise<QrProductType[]> }) {
 const FadingLoader = () => (
   <>
     <ContentLoader
-      className='w-full h-96 dark:hidden'
+      className='h-96 w-full dark:hidden'
       backgroundColor='#f3f3f3'
       foregroundColor='#ecebeb'
     >
@@ -80,7 +80,7 @@ const FadingLoader = () => (
       <rect x='70' y='264' rx='5' ry='5' width='70%' height='26' />
     </ContentLoader>
     <ContentLoader
-      className='w-full h-96 hidden dark:block'
+      className='hidden h-96 w-full dark:block'
       backgroundColor='#262626'
       foregroundColor='#212121'
     >

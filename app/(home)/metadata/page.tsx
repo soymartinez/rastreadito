@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import FormMetadata from '@/components/form-metadata'
 import { CategoriaGaleriaType } from '@/types'
 
@@ -21,9 +21,9 @@ export default function Metadata() {
 
   return (
     <>
-      <div className='flex justify-center items-center py-8 relative'>
+      <div className='relative flex items-center justify-center py-8'>
         <Back pushRoute='/' className='absolute left-0' />
-        <h1 className='font-bold text-xl'>Metadata</h1>
+        <h1 className='text-xl font-bold'>Metadata</h1>
       </div>
       <FormMetadata
         className='my-8'

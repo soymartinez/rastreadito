@@ -3,7 +3,7 @@
 import Empty from '@/components/empty'
 import { ActiveButton, DestroyButton, UseButton } from '@/components/status'
 import { QrProductType } from '@/types'
-import { Input } from '@/ui/input'
+import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -21,7 +21,7 @@ export default function CategoriasData({ data }: { data: QrProductType[] }) {
             name='search'
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Buscar por nombre'
-            className='p-1 border-2'
+            className='border-2 p-1'
           />
           <div className='overflow-auto scrollbar-thin'>
             {filteredData.length > 0 ? (
@@ -33,8 +33,8 @@ export default function CategoriasData({ data }: { data: QrProductType[] }) {
                 {filteredData.map(({ producto, id, codigo, estatus }) => (
                   <Link key={id} href={`/product/${codigo}`}>
                     <div className='flex justify-between gap-4 px-3 py-2 hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50'>
-                      <h1 className='text-xl font-semibold truncate'>
-                        {producto.nombre} <span className='text-_grayText dark:text-_primary text-sm'>#{producto.categoria} {id}</span>
+                      <h1 className='truncate text-xl font-semibold'>
+                        {producto.nombre} <span className='text-sm text-_grayText dark:text-_primary'>#{producto.categoria} {id}</span>
                       </h1>
                       <div>
                         {estatus === 'ACTIVO' && <ActiveButton />}

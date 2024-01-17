@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/ui/button'
+import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -10,7 +10,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
 
   return (
     <div className='flex flex-col items-center gap-8'>
-      <div className='w-64 h-64 xl:w-80 xl:h-80 relative'>
+      <div className='relative h-64 w-64 xl:h-80 xl:w-80'>
         <Image
           fill
           src={preview}

@@ -3,7 +3,7 @@ import ModalPage from '@/components/modal/modal-page'
 import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
-import { Input } from '@/ui/input'
+import { Input } from '@/components/ui/input'
 import { Estatus } from '@prisma/client'
 import { User } from '@supabase/supabase-js'
 import Image from 'next/image'
@@ -41,8 +41,8 @@ export default async function HistoryStatus({ params }: { params: { estatus: str
 
   return (
     <ModalPage>
-      <div className='sticky top-0 z-50 bg-_white dark:bg-_dark border-b border-_gray dark:border-_darkText'>
-        <h1 className='text-5xl font-bold leading-loose truncate'>{title()}</h1>
+      <div className='sticky top-0 z-50 border-b border-_gray bg-_white dark:border-_darkText dark:bg-_dark'>
+        <h1 className='truncate text-5xl font-bold leading-loose'>{title()}</h1>
       </div>
       <Suspense fallback={<FadingLoader />}>
         {/* @ts-expect-error Async Server Component */}
@@ -60,7 +60,7 @@ async function History({ history }: { history: Promise<QrProductType[]> }) {
 const FadingLoader = () => (
   <>
     <ContentLoader
-      className='w-full h-96 dark:hidden'
+      className='h-96 w-full dark:hidden'
       backgroundColor='#f3f3f3'
       foregroundColor='#ecebeb'
     >
@@ -79,7 +79,7 @@ const FadingLoader = () => (
       <rect x='70' y='264' rx='5' ry='5' width='70%' height='26' />
     </ContentLoader>
     <ContentLoader
-      className='w-full h-96 hidden dark:block'
+      className='hidden h-96 w-full dark:block'
       backgroundColor='#262626'
       foregroundColor='#212121'
     >

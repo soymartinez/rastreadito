@@ -5,39 +5,39 @@ import { useSearchParams } from 'next/navigation'
 import ModalPage from '@/components/modal/modal-page'
 import GaleriaView from '@/components/gallery/galeria-view'
 import { Categoria } from '@prisma/client'
-import { Tabs, TabsContent, TabsList } from '@/ui/tabs'
+import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs'
 import TabTrigger from '@/components/tab-trigger'
 import { CategoriaGaleriaType } from '@/types'
 
 function Loading() {
   return (
-    <div className='flex gap-2 w-min py-2'>
+    <div className='flex w-min gap-2 py-2'>
       <div className={`
-          w-28 h-12
-          flex justify-center items-center transition-all
-          border-2 border-_dark dark:border-_primary 
-          rounded-full animate-pulse
+          flex h-12
+          w-28 animate-pulse items-center justify-center
+          rounded-full border-2 border-_dark 
+          transition-all dark:border-_primary
         `}
       />
       <div className={`
-          w-28 h-12
-          flex justify-center items-center transition-all
-          border-2 border-_gray dark:border-_darkText 
-          rounded-full animate-pulse
+          flex h-12
+          w-28 animate-pulse items-center justify-center
+          rounded-full border-2 border-_gray 
+          transition-all dark:border-_darkText
         `}
       />
       <div className={`
-          w-28 h-12
-          flex justify-center items-center transition-all
-          border-2 border-_gray dark:border-_darkText 
-          rounded-full animate-pulse
+          flex h-12
+          w-28 animate-pulse items-center justify-center
+          rounded-full border-2 border-_gray 
+          transition-all dark:border-_darkText
         `}
       />
       <div className={`
-          w-28 h-12
-          flex justify-center items-center transition-all
-          border-2 border-_gray dark:border-_darkText 
-          rounded-full animate-pulse
+          flex h-12
+          w-28 animate-pulse items-center justify-center
+          rounded-full border-2 border-_gray 
+          transition-all dark:border-_darkText
         `}
       />
     </div>
@@ -69,9 +69,9 @@ export default function CategoriaTipo() {
     <ModalPage>
       <Tabs defaultValue={tipo?.toUpperCase() || 'Ver todo'}>
         <div className='sticky top-0 z-50 flex flex-col bg-_white dark:bg-_dark'>
-          <h1 className='text-5xl font-bold leading-loose truncate'>Galeria</h1>
-          <TabsList className='py-2 overflow-x-auto scrollbar-none sm:scrollbar-thin scrollbar-thumb-_gray dark:scrollbar-thumb-_darkText scrollbar-thumb-rounded-full'>
-            <div className='flex gap-2 w-min'>
+          <h1 className='truncate text-5xl font-bold leading-loose'>Galeria</h1>
+          <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-_gray scrollbar-thumb-rounded-full dark:scrollbar-thumb-_darkText sm:scrollbar-thin'>
+            <div className='flex w-min gap-2'>
               <Suspense fallback={<Loading />}>
                 <TabsData categorias={categorias} />
               </Suspense>
@@ -81,7 +81,7 @@ export default function CategoriaTipo() {
         <div className='overflow-auto'>
           <div className='py-4'>
             {categorias.map((categoria) => (
-              <TabsContent key={categoria.id} value={categoria.acronimo} className='overflow-auto relative'>
+              <TabsContent key={categoria.id} value={categoria.acronimo} className='relative overflow-auto'>
                 <div className='flex flex-col gap-2'>
                   <GaleriaView
                     categoria={{

@@ -1,20 +1,20 @@
 import PricingCard from '@/components/card/pricing'
-import { Back } from '@/ui/back'
+import { Back } from '@/components/ui/back'
 import Balancer from 'react-wrap-balancer'
 
 export default function Pricing() {
   return (
     <main>
-      <div className='flex justify-center items-center py-8 relative'>
+      <div className='relative flex items-center justify-center py-8'>
         <Back className='absolute left-0' />
-        <h1 className='font-bold text-xl'>Precios</h1>
+        <h1 className='text-xl font-bold'>Precios</h1>
       </div>
-      <h1 className='text-center py-8 lg:py-12 max-w-2xl mx-auto'>
-        <Balancer className='text-3xl lg:text-5xl font-bold leading-tight'>
+      <h1 className='mx-auto max-w-2xl py-8 text-center lg:py-12'>
+        <Balancer className='text-3xl font-bold leading-tight lg:text-5xl'>
                     Encuentre un plan que se adapte a sus necesidades.
         </Balancer>
       </h1>
-      <div className='grid lg:grid-cols-3 gap-4 pt-12 pb-3'>
+      <div className='grid gap-4 pb-3 pt-12 lg:grid-cols-3'>
         <PricingCard
           name='Comunidad'
           price='$0'
