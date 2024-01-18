@@ -24,18 +24,18 @@ async function getQrCount(estatus: Estatus, user: string) {
 }
 
 export default async function GeneralCard({ props }: {
-    props: {
-        title: string
-        description: string
-        icon: 'active' | 'use' | 'destroy',
-        estatus: Estatus,
-    },
+  props: {
+    title: string
+    description: string
+    icon: 'active' | 'use' | 'destroy',
+    estatus: Estatus,
+  },
 }) {
   const user = await getCurrentUser()
   const count = getQrCount(props.estatus, user?.email ?? '')
   return (
     <Link href={`/history/${props.estatus.toLowerCase()}`}>
-      <div className={'grid grid-flow-col sm:flex items-center gap-4 bg-_dark dark:bg-_darkText hover:bg-_dark/95 dark:hover:bg-_darkText/80 transition-all cursor-pointer p-4 rounded-2xl'}>
+      <div className={'grid cursor-pointer grid-flow-col items-center gap-4 rounded-2xl bg-_dark p-4 transition-all hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 sm:flex'}>
         <span>
           {props.icon === 'active' && <QrCode size={56} className='text-_primary' />}
           {props.icon === 'use' && <Package size={56} className='text-_primary' />}
