@@ -21,6 +21,7 @@ interface UserMetadata {
 
 export async function getCurrentUser() {
   try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = await useSupabaseServer()
 
     if (!user) return null
