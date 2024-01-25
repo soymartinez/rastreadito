@@ -50,12 +50,15 @@ module.exports = {
       transitionDelay: {
         '2000': '2000ms',
         '4000': '4000ms',
-      }
+      },
+      screens: {
+        'mid': '979px',
+        'xs': '414px',
+      },
     },
   },
   plugins: [
     require('tailwindcss-animate'),
     require('tailwind-scrollbar')({ nocompatible: true }),
-    require('@tailwindcss/line-clamp'),
   ],
 }
