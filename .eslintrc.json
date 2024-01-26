@@ -8,10 +8,15 @@
       "error",
       2
     ],
-    "semi": "off",
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-trailing-spaces": "error",
     "quotes": [
       "error",
       "single"
-    ]
+    ],
+    "react-hooks/exhaustive-deps": "off"
   }
 }
