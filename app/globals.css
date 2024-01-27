@@ -7,7 +7,22 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #1B1B1B;
+  color: #333333;
+}
+
+* {
+  --primary: #00E99E;
+  --primaryLight: #DDFCF2;
+  --white: #FFFFFF;
+  --dark: #1B1B1B;
+  --darkText: #333333;
+  --gray: #F0F0F0;
+  --grayText: #8D8D8D;
+  --grayTextLight: #B3B3B3;
+  --grayTextDisabled: #E0E0E0;
+  --grayBorder: #C5C5C5;
+
+  outline-color: var(--primary);
 }
 
 @layer base {
