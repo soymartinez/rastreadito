@@ -4,6 +4,9 @@ import { Icons } from '../icons'
 export default function Brands() {
   return (
     <>
+      <div className='relative mx-4 h-16 w-24'>
+        <Icons.vacay className='h-full w-full dark:text-_primary' />
+      </div>
       <div className='relative mx-4 h-16 w-16'>
         <Icons.sundial className='h-full w-full dark:text-_primary' />
       </div>
