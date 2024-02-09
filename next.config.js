@@ -1,12 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'zlqiphritvynqxdnnzqr.supabase.co',
-      'rastreadito.vercel.app',
-      'leafly-public.imgix.net',
-      'images.leafly.com',
-      'www.leafly.com',
+    remotePatterns: [
+      {
+        hostname: 'zlqiphritvynqxdnnzqr.supabase.co',
+      },
+      {
+        hostname: 'rastreadito.vercel.app',
+      },
+      {
+        hostname: 'leafly-public.imgix.net',
+      },
+      {
+        hostname: 'images.leafly.com',
+      },
+      {
+        hostname: 'www.leafly.com',
+      },
     ]
   },
   webpack: (config, { isServer }) => {
@@ -17,7 +27,7 @@ const nextConfig = {
       }
     }
 
-    return config;
+    return config
   }
 }
 
