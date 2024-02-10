@@ -11,9 +11,6 @@ export default function LayoutBoundary({ children }: LayoutBoundaryProps) {
         relative
         mx-auto
         min-h-screen
-        max-w-7xl
-        px-4
-        lg:px-6
       '
     >
       {children}
