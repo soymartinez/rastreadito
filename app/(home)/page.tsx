@@ -10,11 +10,11 @@ import LandingPage from '../landing-page'
 export default async function Home() {
   const user = await getCurrentUser()
 
-  // if (!user) return <LandingPage />
+  if (!user) return <LandingPage />
 
   return (
     <main>
-      <Navbar user={user} />
+      <Navbar />
       <div className='pb-10'>
         <h1 className='truncate text-5xl font-bold leading-loose'>{user?.user_metadata.name}</h1>
         {/* @ts-expect-error Async Server Component */}
