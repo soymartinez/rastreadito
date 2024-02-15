@@ -1,7 +1,8 @@
 import { SignIn, SignInWhitGoogle, SignUp } from '@/components/auth'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import React from 'react'
 
-export default async function Auth() {
+export default function LoginAuth() {
   return (
     <section className='flex min-h-screen items-center justify-center px-4 py-16'>
       <Tabs defaultValue='login' className='w-full max-w-md'>
@@ -17,12 +18,12 @@ export default async function Auth() {
           <TabsTrigger
             value='login'
             className='w-full font-semibold text-_dark/50 data-[state=active]:bg-_white data-[state=active]:text-_dark dark:text-_dark/70 dark:data-[state=active]:bg-_dark dark:data-[state=active]:text-_white'>
-                        Iniciar sesión
+            Iniciar sesión
           </TabsTrigger>
           <TabsTrigger
             value='signup'
             className='w-full font-semibold text-_dark/50 data-[state=active]:bg-_white data-[state=active]:text-_dark dark:text-_dark/70 dark:data-[state=active]:bg-_dark dark:data-[state=active]:text-_white'>
-                        Registrarse
+            Registrarse
           </TabsTrigger>
         </TabsList>
         <TabsContent value='login'>
