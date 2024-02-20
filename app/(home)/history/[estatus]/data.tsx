@@ -36,7 +36,7 @@ export default function DataHistoryEstatus({ data }: { data: QrProductType[] }) 
                     />
                     <div>
                       <span className='text-xl font-semibold'>{producto.nombre}</span>
-                      <span className='text-xs font-medium text-_grayText line-clamp-2'>{producto.descripcion}</span>
+                      <span className='line-clamp-2 text-xs font-medium text-_grayText'>{producto.descripcion}</span>
                     </div>
                   </div>
                 </Link>

@@ -10,8 +10,8 @@ export default function ModalDialog({ children, onOpenChange }: { children: Reac
       defaultOpen
       onOpenChange={onOpenChange}
     >
-      <DialogContent className='sm:max-w-3xl h-full sm:h-[90%] overflow-hidden flex flex-col'>
-        <div className='flex justify-end sticky top-0 h-min'>
+      <DialogContent className='flex h-full flex-col overflow-hidden sm:h-[90%] sm:max-w-3xl'>
+        <div className='sticky top-0 flex h-min justify-end'>
           <DialogClose />
         </div>
         {children}

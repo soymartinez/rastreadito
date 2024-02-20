@@ -2,13 +2,13 @@ export default function Loading() {
   return (
     <main
       className='
-        min-h-screen
         flex
-        justify-center
+        min-h-screen
         items-center
+        justify-center
       '
     >
-      <h1 className='font-black text-2xl uppercase italic'>Cargando...</h1>
+      <h1 className='text-2xl font-black uppercase italic'>Cargando...</h1>
     </main>
   )
 }

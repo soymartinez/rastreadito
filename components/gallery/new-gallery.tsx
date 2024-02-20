@@ -110,19 +110,19 @@ export default function NewGallery({
       animate={'animate'}
       exit={'initial'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={clsx('w-full relative dark:bg-_dark rounded-2xl', {
+      className={clsx('relative w-full rounded-2xl dark:bg-_dark', {
         'border border-_gray dark:border-_darkText p-4': boundary,
       })}
     >
       <form
         onSubmit={handleSubmit}
-        className='grid md:grid-rows-4 grid-cols-6 gap-4 p-1'
+        className='grid grid-cols-6 gap-4 p-1 md:grid-rows-4'
       >
         <div className='col-span-2 row-span-3 row-start-1'>
           <div className={clsx('grid h-full', {
             'grid-cols-2 grid-rows-2': files?.length > 0,
           })}>
-            <UploadInput onValue={(files) => setFiles(files)} className='w-full h-full' />
+            <UploadInput onValue={(files) => setFiles(files)} className='h-full w-full' />
           </div>
         </div>
         <Input name='nombre' className='col-span-4 col-start-3 row-start-1' labelText='Nombre' defaultValue={nombre} required />

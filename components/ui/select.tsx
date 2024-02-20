@@ -24,13 +24,13 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={clsx(
-      'flex w-full items-center justify-between rounded-2xl border border-_primary dark:border-_darkText bg-transparent py-3 px-5 text-base font-medium placeholder:text-_grayTextLight focus:outline-none focus:ring-2 focus:ring-_primary disabled:cursor-not-allowed disabled:opacity-50',
+      'flex w-full items-center justify-between rounded-2xl border border-_primary bg-transparent px-5 py-3 text-base font-medium placeholder:text-_grayTextLight focus:outline-none focus:ring-2 focus:ring-_primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-_darkText',
       className
     )}
     {...props}
   >
-    <div className='flex flex-col items-start w-full'>
-      <Label className='text-_primary text-xs'>{labelText}</Label>
+    <div className='flex w-full flex-col items-start'>
+      <Label className='text-xs text-_primary'>{labelText}</Label>
       {children}
     </div>
     <ChevronsUpDown className='h-4 w-4' />
@@ -46,7 +46,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={clsx(
-        'animate-in fade-in-80 relative z-50 min-w-[8rem] overflow-hidden rounded-2xl border border-_primary dark:border-_darkText bg-_white dark:bg-_dark text-_darkText dark:text-_primary shadow-md',
+        'relative z-50 min-w-[8rem] overflow-hidden rounded-2xl border border-_primary bg-_white text-_darkText shadow-md animate-in fade-in-80 dark:border-_darkText dark:bg-_dark dark:text-_primary',
         className
       )}
       {...props}
@@ -66,7 +66,7 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={clsx(
-      'py-1.5 pr-2 pl-8 text-sm font-semibold text-_dark dark:text-_white',
+      'py-1.5 pl-8 pr-2 text-sm font-semibold text-_dark dark:text-_white',
       className
     )}
     {...props}
@@ -81,7 +81,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={clsx(
-      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pr-2 pl-8 text-base font-medium outline-none focus:bg-_gray data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-_darkText',
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-base font-medium outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:bg-_gray dark:focus:bg-_darkText',
       className
     )}
     {...props}

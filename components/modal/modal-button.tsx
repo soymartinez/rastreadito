@@ -23,7 +23,7 @@ export default function ModalButton({
 
   return (
     <>
-      <Button onClick={() => setModal(true)} className='w-16 fixed xl:absolute right-4 bottom-8'>
+      <Button onClick={() => setModal(true)} className='fixed bottom-8 right-4 w-16 xl:absolute'>
         {icon === 'QrCode' && <QrCode />}
       </Button>
       {modal && (

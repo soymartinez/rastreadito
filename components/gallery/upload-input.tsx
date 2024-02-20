@@ -27,7 +27,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
     if (indice < urls.length) {
       setFile(prev => [...prev, { file, index: indice }])
     } else {
-      console.log("Índice inválido");
+      console.log('Índice inválido')
     }
   }
 
@@ -75,7 +75,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
         <div key={url + index}>
           <label
             htmlFor={`${id}-${index}`}
-            className={clsx('rounded-2xl overflow-hidden relative', className)}
+            className={clsx('relative overflow-hidden rounded-2xl', className)}
           >
             <ImagePreview
               alt={`${id}-${index}`}
@@ -97,7 +97,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
         <div key={i}>
           <label
             htmlFor={`file-${id}-${index}`}
-            className={clsx('rounded-2xl overflow-hidden', className)}
+            className={clsx('overflow-hidden rounded-2xl', className)}
           >
             <ImagePreview
               alt={file.name}
@@ -120,28 +120,28 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
             htmlFor={`upload-${id}`}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
-            className={clsx('rounded-2xl overflow-hidden', className)}
+            className={clsx('overflow-hidden rounded-2xl', className)}
           >
             <div
               className={clsx(`
                 relative
+                flex
                 h-28
                 w-28
                 cursor-pointer
-                flex
-                justify-center
                 items-center
+                justify-center
+                overflow-hidden
+                rounded-2xl
                 border
                 border-_gray
-                dark:border-_darkText
-                hover:bg-_gray
-                hover:dark:bg-_darkText
-                rounded-2xl
-                overflow-hidden
                 transition
+                hover:bg-_gray
+                dark:border-_darkText
+                hover:dark:bg-_darkText
               `, className)}
             >
-              <div className={clsx('absolute inset-0 transition flex justify-center items-center', {
+              <div className={clsx('absolute inset-0 flex items-center justify-center transition', {
                 'scale-125': hover,
                 'opacity-100 scale-100': !hover,
               })}>

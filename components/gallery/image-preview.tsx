@@ -37,22 +37,22 @@ export default function ImagePreview({
         onClick={onChangeImage}
         className={clsx(`
             relative
-            min-w-[100px]
-            min-h-[100px]
-            w-28 h-28
-            cursor-pointer
             flex
-            justify-center 
-            items-center
+            h-28
+            min-h-[100px] w-28
+            min-w-[100px]
+            cursor-pointer
+            items-center 
+            justify-center
+            overflow-hidden
+            rounded-2xl
             border
             border-_gray
             dark:border-_darkText
-            rounded-2xl
-            overflow-hidden
         `, className)}
       >
         <Image
-          className={clsx('transition-transform object-contain', {
+          className={clsx('object-contain transition-transform', {
             'scale-105': hover,
             'scale-100': !hover,
           })}
@@ -63,15 +63,15 @@ export default function ImagePreview({
           width={200}
           height={200}
         />
-        <div className={clsx('absolute inset-0 transition flex justify-center items-center rounded-2xl overflow-hidden', {
+        <div className={clsx('absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl transition', {
           'opacity-0 scale-125': !hover,
           'opacity-100 scale-100 bg-_dark/30': hover,
           'hidden': !changeIcon,
         })}>
           <RotateCcw />
         </div>
-        <div className={clsx('absolute inset-0 pointer-events-none', {
-          'bg-_primary bg-opacity-50': selected,
+        <div className={clsx('pointer-events-none absolute inset-0', {
+          'bg-_primary/50': selected,
         })} />
       </div>
       <button
@@ -80,7 +80,7 @@ export default function ImagePreview({
           top: '0.3rem',
           right: '0.3rem',
         }}
-        className={clsx('absolute z-50 transition rounded-full p-1 overflow-hidden bg-_primary text-_dark', {
+        className={clsx('absolute z-50 overflow-hidden rounded-full bg-_primary p-1 text-_dark transition', {
           'opacity-0 scale-125': !hover,
           'opacity-100 scale-100': hover,
           'hidden': !defaultIcon,

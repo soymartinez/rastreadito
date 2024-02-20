@@ -245,13 +245,13 @@ export default function GaleriaView({
 
   return (
     <main className='flex flex-col gap-4'>
-      <div className='flex justify-end items-center p-1 gap-3 h-12 w-full md:max-w-sm ml-auto'>
+      <div className='ml-auto flex h-12 w-full items-center justify-end gap-3 p-1 md:max-w-sm'>
         <Input
           variant='search'
           name='search'
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Buscar por nombre'
-          className='p-1 h-full border-2'
+          className='h-full border-2 p-1'
         />
         <Button
           type='button'
@@ -260,7 +260,7 @@ export default function GaleriaView({
           variant={'outline'}
           size={'nothing'}
         >
-          <h1 className='sr-only text-base font-semibold whitespace-nowrap text-_grayText'>
+          <h1 className='sr-only whitespace-nowrap text-base font-semibold text-_grayText'>
             {uploadImages ? 'Cancelar' : 'Subir imágenes'}
           </h1>
           {uploadImages ? <X size={24} /> : <ImagePlus />}
@@ -282,13 +282,13 @@ export default function GaleriaView({
         ? <div className='flex flex-col gap-6'>
           {filteredGalerias?.map((galeria) => (
             <div key={galeria.id} className='flex flex-col gap-2'>
-              <div className='flex justify-between items-center gap-4'>
-                <Label className='text-_darkText dark:text-_primary text-xs font-semibold'>{galeria.nombre}</Label>
-                <button onClick={() => handleDeleteGaleria(galeria)} className='p-1 bg-_darkText w-8 h-8 rounded-md active:scale-90'>
-                  <Trash className='text-red-400 inline' size={16} />
+              <div className='flex items-center justify-between gap-4'>
+                <Label className='text-xs font-semibold text-_darkText dark:text-_primary'>{galeria.nombre}</Label>
+                <button onClick={() => handleDeleteGaleria(galeria)} className='h-8 w-8 rounded-md bg-_darkText p-1 active:scale-90'>
+                  <Trash className='inline text-red-400' size={16} />
                 </button>
               </div>
-              <div className='grid grid-flow-col gap-5 justify-start overflow-auto scrollbar-none md:scrollbar-thin'>
+              <div className='grid grid-flow-col justify-start gap-5 overflow-auto scrollbar-none md:scrollbar-thin'>
                 <UploadInput
                   urls={galeria.url}
                   onValue={(values) => handleUploadFiles(values, galeria)}
@@ -300,15 +300,15 @@ export default function GaleriaView({
         </div>
         : <>
           {loading
-            ? <div className='grid grid-flow-row grid-cols-2 sm:grid-cols-4 md:grid-cols-5 justify-center items-center gap-5'>
+            ? <div className='grid grid-flow-row grid-cols-2 items-center justify-center gap-5 sm:grid-cols-4 md:grid-cols-5'>
               {[...Array(9)].map((_, i) => (
                 <div
                   key={i}
-                  className={'relative bg-_gray dark:bg-_darkText animate-pulse rounded-2xl w-28 h-28 m-auto'}
+                  className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
                 />
               ))}
             </div>
-            : <div className='flex justify-center items-center h-52'>
+            : <div className='flex h-52 items-center justify-center'>
               {galerias
                 ? <span>No hay imágenes en esta categoría.</span>
                 : <span>Selecciona una categoría para ver las imágenes.</span>}

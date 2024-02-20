@@ -41,7 +41,7 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
   return (
     <>
       <motion.div
-        className='fixed w-full h-screen inset-0 z-50 bg-_dark/80 backdrop-blur-sm'
+        className='fixed inset-0 z-50 h-screen w-full bg-_dark/80 backdrop-blur-sm'
         initial='hidden'
         animate='visible'
         exit='hidden'
@@ -49,7 +49,7 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
         variants={overlayVariants}
       />
       <motion.div
-        className='fixed min-w-min top-[20%] inset-x-0 z-50 min-h-min rounded-t-[50px] shadow-sm select-none cursor-grab active:cursor-grabbing'
+        className='fixed inset-x-0 top-[20%] z-50 min-h-min min-w-min cursor-grab select-none rounded-t-[50px] shadow-sm active:cursor-grabbing'
         initial='hidden'
         animate='visible'
         exit='hidden'
@@ -63,11 +63,11 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
         dragElastic={0.8}
         onDragEnd={handleDragEnd}
       >
-        <div className='w-24 h-[10px] bg-_white dark:bg-_darkText rounded-full mx-auto my-2' />
+        <div className='mx-auto my-2 h-[10px] w-24 rounded-full bg-_white dark:bg-_darkText' />
         <motion.div
           ref={constraintsRef}
           style={{ height: 'calc(100% - 26px)' }}
-          className='bg-_white dark:bg-_darkText rounded-t-[50px] overflow-hidden relative'>
+          className='relative overflow-hidden rounded-t-[50px] bg-_white dark:bg-_darkText'>
           <motion.div
             className='absolute inset-x-0 rounded-t-[50px]'
             drag='y'

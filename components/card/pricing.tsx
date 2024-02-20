@@ -1,6 +1,6 @@
 import Balancer from 'react-wrap-balancer'
 import { Button } from '@/components/ui/button'
-import clsx from 'clsx';
+import clsx from 'clsx'
 
 export default function PricingCard({
   name,

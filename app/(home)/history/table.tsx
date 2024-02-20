@@ -87,11 +87,11 @@ export default function Table({ data }: TableProps) {
 
   return (
     <>
-      <div className='flex justify-start items-center gap-6 h-12 mt-6 px-3 sticky left-0 overflow-auto'>
+      <div className='sticky left-0 mt-6 flex h-12 items-center justify-start gap-6 overflow-auto px-3'>
         <div className='flex items-center gap-3'>
           {selectList.length > 0 && (
             <div
-              className='w-4 h-4 flex justify-center items-center bg-_dark hover:bg-_dark/80 dark:bg-_darkText dark:hover:bg-_white/20 border border-_grayText/30 text-_white rounded-sm cursor-pointer'
+              className='flex h-4 w-4 cursor-pointer items-center justify-center rounded-sm border border-_grayText/30 bg-_dark text-_white hover:bg-_dark/80 dark:bg-_darkText dark:hover:bg-_white/20'
               onClick={() => handleSelectedAll(false)}
             >
               <X strokeWidth={3.5} size={18} />
@@ -104,36 +104,36 @@ export default function Table({ data }: TableProps) {
               : data.length > 1 ? 'productos' : 'producto'}
           </p>
         </div>
-        {selectList.length > 0 && <div className='w-1 h-full bg-_gray dark:bg-_darkText' />}
-        <div className='flex gap-2 w-min'>
+        {selectList.length > 0 && <div className='h-full w-1 bg-_gray dark:bg-_darkText' />}
+        <div className='flex w-min gap-2'>
           {selectList.length > 0 && (
             <button onClick={() => startTransition(handleDelete)} className={`
-                            w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
-                            border-_gray font-medium rounded-full dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}>
+                            flex h-8 w-36 items-center justify-center gap-1 rounded-full border-2 border-_gray bg-_white font-medium 
+                            text-_dark transition-all hover:bg-_gray dark:border-_darkText dark:bg-_dark dark:text-_white dark:hover:bg-_darkText`}>
                             Eliminar <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
             </button>
           )}
           {selectList.length > 0 && (
             <button onClick={() => startTransition(handleDestroy)} className={`
-                            w-36 h-8 flex justify-center items-center gap-1 transition-all bg-_white text-_dark border-2 hover:bg-_gray 
-                            border-_gray font-medium rounded-full dark:bg-_dark dark:text-_white dark:border-_darkText dark:hover:bg-_darkText`}>
+                            flex h-8 w-36 items-center justify-center gap-1 rounded-full border-2 border-_gray bg-_white font-medium 
+                            text-_dark transition-all hover:bg-_gray dark:border-_darkText dark:bg-_dark dark:text-_white dark:hover:bg-_darkText`}>
                             Destruir <span className='font-bold'>{selectList.length}</span> {selectList.length > 1 ? 'filas' : 'fila'}
             </button>
           )}
         </div>
       </div>
-      <table className='table-auto text-xs w-full border-separate border-spacing-0 my-6'>
-        <thead className='text-_grayText uppercase sticky top-0 z-30'>
+      <table className='my-6 w-full table-auto border-separate border-spacing-0 text-xs'>
+        <thead className='sticky top-0 z-30 uppercase text-_grayText'>
           <tr className='text-left'>
-            <th className='pl-3 pr-1 py-2 flex justify-between'>
-              <div className='flex items-center justify'>
+            <th className='flex justify-between py-2 pl-3 pr-1'>
+              <div className='flex items-center justify-center'>
                 <input
                   onChange={(e) => handleSelectedAll(e.target.checked)}
                   type='checkbox'
                   name='select-all'
                   id='select-all'
                   checked={selectList.length === data.length}
-                  className='w-4 h-4 m-auto accent-_primary rounded-full'
+                  className='m-auto h-4 w-4 rounded-full accent-_primary'
                 />
               </div>
             </th>
@@ -141,10 +141,10 @@ export default function Table({ data }: TableProps) {
             <th className='px-3 py-2 font-medium'>Producto</th>
             <th className='px-3 py-2 font-medium'>Cliente</th>
             <th className='px-3 py-2 font-medium'>Fecha</th>
-            <th className='px-3 py-2 font-medium sticky right-0 bg-_white dark:bg-_dark border-l-4 border-_gray dark:border-_darkText'>Estado</th>
+            <th className='sticky right-0 border-l-4 border-_gray bg-_white px-3 py-2 font-medium dark:border-_darkText dark:bg-_dark'>Estado</th>
           </tr>
         </thead>
-        <tbody className='text-_grayText text-base overflow-hidden'>
+        <tbody className='overflow-hidden text-base text-_grayText'>
           {data.map((data: QrProductType) => (
             <Tr
               key={data.id}

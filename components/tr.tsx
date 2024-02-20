@@ -49,14 +49,14 @@ export default function Tr({
   return (
     <tr
       key={id}
-      className={clsx('hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50 overflow-x-auto', {
+      className={clsx('overflow-x-auto hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50', {
         'bg-_primary/[15%] hover:bg-_primary/[15%] dark:bg-_primary/[15%] dark:hover:bg-_primary/[15%]': checked,
       })}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <td className='pl-3 pr-1 py-2 w-28'>
-        <div className='flex justify-between items-center w-[100px]'>
+      <td className='w-28 py-2 pl-3 pr-1'>
+        <div className='flex w-[100px] items-center justify-between'>
           <div className='flex items-center justify-center'>
             <input
               onChange={(e) => handleSelected(e.target.checked)}
@@ -64,13 +64,13 @@ export default function Tr({
               name={`${id}`}
               id={`${id}`}
               checked={checked}
-              className='w-4 h-4 m-auto accent-_primary rounded-full' />
+              className='m-auto h-4 w-4 rounded-full accent-_primary' />
           </div>
           <div className='flex gap-2'>
             <Link href={`/product/${codigo}`} className={clsx({
               'md:hidden ': !hover,
             })}>
-              <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+              <div className='rounded-full bg-_white p-2 transition dark:bg-_dark dark:hover:bg-_primary/[15%]'>
                 <Maximize2 size={14} className='text-_dark dark:text-_primary' />
               </div>
             </Link>
@@ -78,16 +78,16 @@ export default function Tr({
               onClick={() => { setShow(true); setHover(false) }}
               className={clsx({ 'md:hidden ': !hover })}
             >
-              <div className='bg-_white dark:bg-_dark dark:hover:bg-_primary/[15%] transition p-2 rounded-full'>
+              <div className='rounded-full bg-_white p-2 transition dark:bg-_dark dark:hover:bg-_primary/[15%]'>
                 <QrCode size={14} className='text-_dark dark:text-_primary' />
               </div>
             </button>
             {show && (
               <ModalDialog onOpenChange={setShow}>
-                <div className='flex flex-col items-center justify-center h-full'>
-                  <div className='flex flex-col justify-center items-center gap-6 w-full text-_darkText dark:text-_white font-medium pt-8 pb-10'>
-                    <h1 className='font-semibold text-4xl md:text-5xl text-center'>{productoNombre}</h1>
-                    <div className='rounded-2xl overflow-hidden'>
+                <div className='flex h-full flex-col items-center justify-center'>
+                  <div className='flex w-full flex-col items-center justify-center gap-6 pb-10 pt-8 font-medium text-_darkText dark:text-_white'>
+                    <h1 className='text-center text-4xl font-semibold md:text-5xl'>{productoNombre}</h1>
+                    <div className='overflow-hidden rounded-2xl'>
                       {valor && <GenerateQr value={valor} />}
                     </div>
                     <Balancer className='text-center dark:text-_grayText'>
@@ -103,11 +103,11 @@ export default function Tr({
           </div>
         </div>
       </td>
-      <td className='px-3 py-2 font-semibold whitespace-nowrap text-_dark dark:text-_white uppercase'>#{categoria} {id}</td>
-      <td className='px-3 py-2 font-semibold whitespace-nowrap'>{productoNombre}</td>
-      <td className='px-3 py-2 font-semibold whitespace-nowrap'>{usuario}</td>
-      <td className='px-3 py-2 font-semibold whitespace-nowrap'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
-      <td className='px-3 py-2 font-semibold sticky right-0 z-20 bg-inherit backdrop-blur-md border-l-4 border-_gray dark:border-_darkText'>
+      <td className='whitespace-nowrap px-3 py-2 font-semibold uppercase text-_dark dark:text-_white'>#{categoria} {id}</td>
+      <td className='whitespace-nowrap px-3 py-2 font-semibold'>{productoNombre}</td>
+      <td className='whitespace-nowrap px-3 py-2 font-semibold'>{usuario}</td>
+      <td className='whitespace-nowrap px-3 py-2 font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
+      <td className='sticky right-0 z-20 border-l-4 border-_gray bg-inherit px-3 py-2 font-semibold backdrop-blur-md dark:border-_darkText'>
         {estatus === 'ACTIVO' && <ActiveButton />}
         {estatus === 'USADO' && <UseButton />}
         {estatus === 'DESTRUIDO' && <DestroyButton />}

@@ -52,7 +52,7 @@ const FadingLoader = () => {
   return (
     <>
       <ContentLoader
-        className='w-full h-full px-3 dark:hidden'
+        className='h-full w-full px-3 dark:hidden'
         backgroundColor='#f3f3f3'
         foregroundColor='#ecebeb'
       >
@@ -64,7 +64,7 @@ const FadingLoader = () => {
         <rect x='0' y='240' rx='5' ry='5' width='100%' height='32' />
       </ContentLoader>
       <ContentLoader
-        className='w-full h-96 px-3 dark:block hidden'
+        className='hidden h-96 w-full px-3 dark:block'
         backgroundColor='#262626'
         foregroundColor='#212121'
       >

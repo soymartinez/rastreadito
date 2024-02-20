@@ -28,7 +28,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Overlay
     className={clsx(
-      'data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-all duration-100',
+      'fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
       className
     )}
     {...props}
@@ -46,7 +46,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={clsx(
-        'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 w-full gap-4 rounded-b-lg bg-white p-6 sm:rounded-lg',
+        'fixed z-50 w-full gap-4 rounded-b-lg bg-white p-6 animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:rounded-lg sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0',
         'dark:bg-_dark',
         className
       )}
@@ -109,7 +109,7 @@ React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
   <DialogPrimitive.Close
     ref={ref}
     className={clsx(
-      'w-min dark:bg-_primary/[15%] bg-_primary hover:bg-_primary/80 dark:hover:bg-_primary/30 transition p-2 rounded-full',
+      'w-min rounded-full bg-_primary p-2 transition hover:bg-_primary/80 dark:bg-_primary/[15%] dark:hover:bg-_primary/30',
       className
     )}
     {...props}

@@ -18,14 +18,14 @@ export default function Empty({
   className,
 }: EmptyProps) {
   return (
-    <div className={clsx('flex justify-center items-center',
-      height === 'default' && 'h-96 my-6',
+    <div className={clsx('flex items-center justify-center',
+      height === 'default' && 'my-6 h-96',
       className,
     )}>
       <Balancer ratio={0.4}>
         {title}{' '}
         {description &&
-            <span className='text-_primary hover:underline animate-pulse'>
+            <span className='animate-pulse text-_primary hover:underline'>
               <Link href='/metadata'>
                 {description}
               </Link>
