@@ -1,8 +1,16 @@
+import type { Metadata } from 'next'
+import { env } from '@/env.js'
+
 import { SignIn, SignInWhitGoogle, SignUp } from '@/components/auth'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import React from 'react'
 
-export default function LoginAuth() {
+export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  title: 'Inicia sesión',
+  description: 'Inicia sesión en tu cuenta',
+}
+
+export default function LoginPage() {
   return (
     <section className='flex min-h-screen items-center justify-center px-4 py-16'>
       <Tabs defaultValue='login' className='w-full max-w-md'>
