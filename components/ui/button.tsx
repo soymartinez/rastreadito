@@ -11,7 +11,7 @@ const buttonVariants = cva(
         default:
           'bg-_primary text-_dark hover:bg-_primary/80',
         image:
-          'h-14 w-14 overflow-hidden rounded-2xl border border-_gray bg-_gray p-2 hover:bg-_gray/50 dark:border-_darkText dark:bg-_darkText dark:hover:bg-_darkText/50',
+          'size-14 overflow-hidden rounded-2xl border border-_gray bg-_gray p-2 hover:bg-_gray/50 dark:border-_darkText dark:bg-_darkText dark:hover:bg-_darkText/50',
         outline:
           'border-2 border-_gray dark:border-_darkText',
         subtle:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
       size: {
         default: 'h-16 px-4 py-2',
         sm: 'h-9 rounded-md px-2',
-        icon: 'h-11 w-11 rounded-full',
+        icon: 'size-11 rounded-full',
         lg: 'h-11 rounded-md px-8',
         nothing: '',
       },
