@@ -1,8 +1,8 @@
-import { getCurrentUser } from '@/hooks/auth'
+import { getUser } from '@/hooks/auth'
 import FormAccount from './form'
 
 export async function generateMetadata() {
-  const user = await getCurrentUser()
+  const user = await getUser()
 
   return {
     title: user?.user_metadata.name,
@@ -13,6 +13,6 @@ export async function generateMetadata() {
 export const revalidate = 0
 
 export default async function Account() {
-  const user = await getCurrentUser()
+  const user = await getUser()
   return <FormAccount user={user} />
 }

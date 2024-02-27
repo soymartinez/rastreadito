@@ -12,7 +12,7 @@ import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
 interface FormAccountProps {
-    user: User | null
+  user: User | null
 }
 
 export default function FormAccount({ user }: FormAccountProps) {
@@ -72,7 +72,7 @@ export default function FormAccount({ user }: FormAccountProps) {
           <span>Plan</span>
           <Link href={'/pricing'}>
             <span className='text-_darkText underline underline-offset-4 hover:text-_primary dark:text-_primary'>
-                            Comunidad
+              Comunidad
             </span>
           </Link>
         </div>
