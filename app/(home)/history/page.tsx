@@ -1,6 +1,5 @@
 import { Back } from '@/components/ui/back'
 import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs'
-import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import Table from './table'
 import TabTrigger from '@/components/tab-trigger'
@@ -9,6 +8,7 @@ import Empty from '@/components/empty'
 import { QrProductType } from '@/types'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
+import { createClient } from '@/utils/supabase/server'
 
 async function getHistorial(usuario: string) {
   const res = await prisma.qr.findMany({
@@ -33,8 +33,11 @@ async function getCategorias() {
 }
 
 export default async function History() {
-  const usuario = await getCurrentUser()
-  const historial = getHistorial(usuario?.email || '')
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+
+  const historial = getHistorial(data.user?.email || '')
   const categorias = getCategorias()
   return (
     <div>
@@ -42,7 +45,7 @@ export default async function History() {
         <Back pushRoute='/' className='absolute left-0' />
         <h1 className='text-xl font-bold'>Historial</h1>
       </div>
-      <h1 className='truncate text-5xl font-bold leading-loose'>{usuario?.user_metadata.name}</h1>
+      <h1 className='truncate text-5xl font-bold leading-loose'>{data.user?.user_metadata.name}</h1>
       <Tabs defaultValue='Ver todo'>
         <Suspense fallback={<Loading />}>
           {/* @ts-expect-error Async Server Component */}
@@ -150,7 +153,7 @@ function Loading() {
         <thead className='sticky top-0 z-30 uppercase text-_grayText'>
           <tr className='text-left'>
             <th className='px-3 py-2'>
-              <div className='h-4 w-4 animate-pulse rounded-sm bg-_darkText/[15%] dark:bg-_darkText' />
+              <div className='size-4 animate-pulse rounded-sm bg-_darkText/[15%] dark:bg-_darkText' />
             </th>
             <th className='px-3 py-2 font-medium'>Factura</th>
             <th className='px-3 py-2 font-medium'>Producto</th>
@@ -163,7 +166,7 @@ function Loading() {
           {Array.from({ length: 5 }).map((_, i) => (
             <tr key={i} className='bg-_white dark:bg-_dark'>
               <td className='w-24 px-3 py-2'>
-                <div className='h-4 w-4 animate-pulse rounded-sm bg-_darkText/[15%] dark:bg-_darkText' />
+                <div className='size-4 animate-pulse rounded-sm bg-_darkText/[15%] dark:bg-_darkText' />
               </td>
               <td className='px-3 py-2'>
                 <CardLoading />

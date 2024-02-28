@@ -91,7 +91,7 @@ export default function Table({ data }: TableProps) {
         <div className='flex items-center gap-3'>
           {selectList.length > 0 && (
             <div
-              className='flex h-4 w-4 cursor-pointer items-center justify-center rounded-sm border border-_grayText/30 bg-_dark text-_white hover:bg-_dark/80 dark:bg-_darkText dark:hover:bg-_white/20'
+              className='flex size-4 cursor-pointer items-center justify-center rounded-sm border border-_grayText/30 bg-_dark text-_white hover:bg-_dark/80 dark:bg-_darkText dark:hover:bg-_white/20'
               onClick={() => handleSelectedAll(false)}
             >
               <X strokeWidth={3.5} size={18} />
@@ -133,7 +133,7 @@ export default function Table({ data }: TableProps) {
                   name='select-all'
                   id='select-all'
                   checked={selectList.length === data.length}
-                  className='m-auto h-4 w-4 rounded-full accent-_primary'
+                  className='m-auto size-4 rounded-full accent-_primary'
                 />
               </div>
             </th>

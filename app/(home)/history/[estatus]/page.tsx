@@ -1,17 +1,17 @@
-import { useSupabaseServer } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
 import { Back } from '@/components/ui/back'
-import { Estatus } from '@prisma/client'
+import { Status } from '@prisma/client'
 import { User } from '@supabase/supabase-js'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 import DataHistoryEstatus from './data'
+import { createClient } from '@/utils/supabase/server'
 
-const getStatusHistory = async (estatus: Estatus, user: User | null) => {
+const getStatusHistory = async (estatus: Status, user: User | null) => {
   const history = await prisma.qr.findMany({
     where: {
-      estatus,
+      estatus: estatus,
       producto: {
         usuario: user?.email
       }
@@ -25,14 +25,14 @@ const getStatusHistory = async (estatus: Estatus, user: User | null) => {
 }
 
 export default async function HistoryStatus({ params }: { params: { estatus: string } }) {
-  const { user } = await useSupabaseServer()
-  const history = getStatusHistory(params.estatus.toUpperCase() as Estatus, user)
+  const { user } = (await createClient().auth.getUser()).data
+  const history = await getStatusHistory(params.estatus.toUpperCase() as Status, user) ?? []
 
   const title = () => {
-    const estatus = params.estatus.toUpperCase() as Estatus
-    if (estatus === Estatus.ACTIVO) return 'Activos'
-    if (estatus === Estatus.USADO) return 'En uso'
-    if (estatus === Estatus.DESTRUIDO) return 'Destruidos'
+    const estatus = params.estatus.toUpperCase() as Status
+    if (estatus === Status.active) return 'Activos'
+    if (estatus === Status.inactive) return 'En uso'
+    if (estatus === Status.destroied) return 'Destruidos'
   }
 
   return (

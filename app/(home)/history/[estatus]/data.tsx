@@ -28,7 +28,7 @@ export default function DataHistoryEstatus({ data }: { data: QrProductType[] }) 
                 <Link href={`/product/${codigo}`} key={id}>
                   <div className='flex items-center gap-4'>
                     <Image
-                      src={producto.imagen[0]}
+                      src={producto.imagen[0] ?? ''}
                       alt={producto.nombre}
                       width={64}
                       height={64}
