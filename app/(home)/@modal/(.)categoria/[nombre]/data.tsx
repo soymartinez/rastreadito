@@ -37,9 +37,9 @@ export default function CategoriasData({ data }: { data: QrProductType[] }) {
                         {producto.nombre} <span className='text-sm text-_grayText dark:text-_primary'>#{producto.categoria} {id}</span>
                       </h1>
                       <div>
-                        {estatus === 'ACTIVO' && <ActiveButton />}
-                        {estatus === 'USADO' && <UseButton />}
-                        {estatus === 'DESTRUIDO' && <DestroyButton />}
+                        {estatus === 'active' && <ActiveButton />}
+                        {estatus === 'inactive' && <UseButton />}
+                        {estatus === 'destroied' && <DestroyButton />}
                       </div>
                     </div>
                   </Link>

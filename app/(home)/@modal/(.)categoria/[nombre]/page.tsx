@@ -1,10 +1,10 @@
 import ModalPage from '@/components/modal/modal-page'
-import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import { QrProductType } from '@/types'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 import CategoriasData from './data'
+import { createClient } from '@/utils/supabase/server'
 
 async function getQr(acronimo: string, usuario: string | undefined) {
   const res = await prisma.qr.findMany({
@@ -28,7 +28,8 @@ async function getQr(acronimo: string, usuario: string | undefined) {
 }
 
 export default async function CategoriaNombre({ params }: { params: { nombre: string } }) {
-  const user = await getCurrentUser()
+  const { auth: { getUser } } = createClient()
+  const user = (await getUser()).data.user
   const qr = getQr(params.nombre.toUpperCase(), user?.email)
   return (
     <ModalPage>
@@ -52,7 +53,7 @@ const FadingLoader = () => {
   return (
     <>
       <ContentLoader
-        className='h-full w-full px-3 dark:hidden'
+        className='size-full px-3 dark:hidden'
         backgroundColor='#f3f3f3'
         foregroundColor='#ecebeb'
       >
