@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 export async function destroyProduct(ids: number[]) {
   const res = await prisma.qr.updateMany({
     data: {
-      estatus: 'DESTRUIDO',
+      estatus: 'destroied',
     },
     where: {
       id: {
