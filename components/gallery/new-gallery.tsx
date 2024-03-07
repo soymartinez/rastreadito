@@ -3,11 +3,11 @@
 import { Input } from '@/components/ui/input'
 import clsx from 'clsx'
 import { useState } from 'react'
-import { useSupabase } from '../supabase-provider'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import UploadInput from './upload-input'
+import { createClient } from '@/utils/supabase/client'
 
 interface NewGalleryProps {
     nombre?: string
@@ -26,7 +26,7 @@ export default function NewGallery({
 }: NewGalleryProps) {
   const [files, setFiles] = useState<{ file: File, index: number }[]>([])
 
-  const { supabase } = useSupabase()
+  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -122,7 +122,7 @@ export default function NewGallery({
           <div className={clsx('grid h-full', {
             'grid-cols-2 grid-rows-2': files?.length > 0,
           })}>
-            <UploadInput onValue={(files) => setFiles(files)} className='h-full w-full' />
+            <UploadInput onValue={(files) => setFiles(files)} className='size-full' />
           </div>
         </div>
         <Input name='nombre' className='col-span-4 col-start-3 row-start-1' labelText='Nombre' defaultValue={nombre} required />

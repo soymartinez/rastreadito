@@ -9,8 +9,8 @@ import { AnimatePresence } from 'framer-motion'
 import { Label } from '@/components/ui/label'
 import UploadInput from './upload-input'
 import { toast } from 'sonner'
-import { useSupabase } from '../supabase-provider'
 import { Input } from '@/components/ui/input'
+import { createClient } from '@/utils/supabase/client'
 
 interface GaleriaProps {
     categoria: Categoria & {
@@ -28,7 +28,7 @@ export default function GaleriaView({
   const [loading, setLoading] = useState(false)
   const [uploadImages, setUploadImages] = useState(false)
   const [search, setSearch] = useState('')
-  const { supabase } = useSupabase()
+  const supabase = createClient()
 
   const handleGaleria = useCallback(async () => {
     setGalerias([])
@@ -169,7 +169,7 @@ export default function GaleriaView({
             const url = supabase.storage.from('galeria').getPublicUrl(storage_upload.data.path).data.publicUrl
 
             if (urls[index]) {
-              const imageName = urls[index].split('/').pop()
+              const imageName = urls?.[index]?.split('/').pop()
               const path = `${user?.email}/${categoria.acronimo}/${galeriaData.nombre}/${imageName}`
 
               const { error } = await supabase
@@ -284,7 +284,7 @@ export default function GaleriaView({
             <div key={galeria.id} className='flex flex-col gap-2'>
               <div className='flex items-center justify-between gap-4'>
                 <Label className='text-xs font-semibold text-_darkText dark:text-_primary'>{galeria.nombre}</Label>
-                <button onClick={() => handleDeleteGaleria(galeria)} className='h-8 w-8 rounded-md bg-_darkText p-1 active:scale-90'>
+                <button onClick={() => handleDeleteGaleria(galeria)} className='size-8 rounded-md bg-_darkText p-1 active:scale-90'>
                   <Trash className='inline text-red-400' size={16} />
                 </button>
               </div>
@@ -304,7 +304,7 @@ export default function GaleriaView({
               {[...Array(9)].map((_, i) => (
                 <div
                   key={i}
-                  className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
+                  className={'relative m-auto size-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
                 />
               ))}
             </div>
