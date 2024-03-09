@@ -1,6 +1,6 @@
-import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
-import { Estatus } from '@prisma/client'
+import { createClient } from '@/utils/supabase/server'
+import { Status } from '@prisma/client'
 import {
   Package,
   PackageOpen,
@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import ContentLoader from 'react-content-loader'
 
-async function getQrCount(estatus: Estatus, user: string) {
+async function getQrCount(estatus: Status, user: string) {
   const res = await prisma.qr.count({
     where: {
       estatus,
@@ -27,19 +27,22 @@ export default async function GeneralCard({ props }: {
   props: {
     title: string
     description: string
-    icon: 'active' | 'use' | 'destroy',
-    estatus: Estatus,
+    icon: Status,
+    estatus: Status,
   },
 }) {
-  const user = await getCurrentUser()
-  const count = getQrCount(props.estatus, user?.email ?? '')
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+
+  const count = getQrCount(props.estatus, data.user?.email!)
   return (
     <Link href={`/history/${props.estatus.toLowerCase()}`}>
       <div className={'grid cursor-pointer grid-flow-col items-center gap-4 rounded-2xl bg-_dark p-4 transition-all hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 sm:flex'}>
         <span>
           {props.icon === 'active' && <QrCode size={56} className='text-_primary' />}
-          {props.icon === 'use' && <Package size={56} className='text-_primary' />}
-          {props.icon === 'destroy' && <PackageOpen size={56} className='text-_primary' />}
+          {props.icon === 'inactive' && <Package size={56} className='text-_primary' />}
+          {props.icon === 'destroied' && <PackageOpen size={56} className='text-_primary' />}
         </span>
         <div className={'w-full'}>
           <h1 className='text-xl font-semibold text-_white'>{props.title}</h1>
