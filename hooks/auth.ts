@@ -1,38 +1,12 @@
-import { createServerComponentSupabaseClient, User } from '@supabase/auth-helpers-nextjs'
-import { headers, cookies } from 'next/headers'
+import { createClient } from '@/utils/supabase/server'
 
-export const useSupabaseServer = async () => {
-  const supabase = createServerComponentSupabaseClient({
-    headers,
-    cookies,
-  })
+export const getUser = async () => {
+  const supabase = createClient()
 
-  const { data: { user } } = await supabase.auth.getUser()
-
-  return {
-    supabase,
-    user,
-  }
-}
-
-interface UserMetadata {
-    name: string
-}
-
-export async function getCurrentUser() {
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { user } = await useSupabaseServer()
-
-    if (!user) return null
-
-    const currentUser = {
-      ...user,
-      user_metadata: user?.user_metadata as UserMetadata,
-    } as User
-
-    return currentUser
-  } catch (error: any) {
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
     return null
   }
+
+  return data.user
 }
