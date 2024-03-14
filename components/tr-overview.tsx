@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { QrProductType } from '@/types'
 import clsx from 'clsx'
-import Balancer from 'react-wrap-balancer'
 import Modal from './modal/modal'
 import GenerateQr from './generateQr'
 import Image from 'next/image'
@@ -60,17 +59,17 @@ export default function TrOverview({
         </Button>
         {showQr && <Modal onClose={() => setShowQr(false)}>
           <div className='flex flex-col items-center px-2 py-16 text-_darkText'>
-            <div className='flex h-20 w-20 items-center justify-center rounded-lg bg-[#00DB94] object-contain'>
-              <Image src={imagen[0]} alt={nombre} width={63} height={63} />
+            <div className='flex size-20 items-center justify-center rounded-lg bg-[#00DB94] object-contain'>
+              <Image src={imagen?.[0] ?? ''} alt={nombre} width={63} height={63} />
             </div>
             <div className='flex w-full flex-col items-center justify-center pb-10 pt-8 font-semibold'>
               <h1 className='text-center text-4xl font-semibold dark:text-_white'>{nombre}</h1>
-              <Balancer className='text-center dark:text-_grayText'>
+              <p className='text-balance text-center dark:text-_grayText'>
                 {descripcion}
                 <p>
                   Fecha: <span className='font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</span>
                 </p>
-              </Balancer>
+              </p>
             </div>
             <div className='overflow-hidden rounded-2xl'>
               {valor && <GenerateQr value={valor} />}
@@ -80,9 +79,9 @@ export default function TrOverview({
       </td>
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{timeAgo}</td>
       <td className='sticky right-0 z-20 border-l-4 border-_gray bg-inherit px-3 py-1 font-semibold backdrop-blur-md dark:border-_darkText'>
-        {estatus === 'ACTIVO' && <ActiveButton />}
-        {estatus === 'USADO' && <UseButton />}
-        {estatus === 'DESTRUIDO' && <DestroyButton />}
+        {estatus === 'active' && <ActiveButton />}
+        {estatus === 'inactive' && <UseButton />}
+        {estatus === 'destroied' && <DestroyButton />}
       </td>
     </tr>
   )

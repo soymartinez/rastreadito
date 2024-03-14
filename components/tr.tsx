@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { ActiveButton, DestroyButton, UseButton } from './status'
 import ModalDialog from './modal/modal-dialog'
 import GenerateQr from './generateQr'
-import Balancer from 'react-wrap-balancer'
 
 interface Props {
   data: QrProductType
@@ -64,7 +63,7 @@ export default function Tr({
               name={`${id}`}
               id={`${id}`}
               checked={checked}
-              className='m-auto h-4 w-4 rounded-full accent-_primary' />
+              className='m-auto size-4 rounded-full accent-_primary' />
           </div>
           <div className='flex gap-2'>
             <Link href={`/product/${codigo}`} className={clsx({
@@ -90,12 +89,12 @@ export default function Tr({
                     <div className='overflow-hidden rounded-2xl'>
                       {valor && <GenerateQr value={valor} />}
                     </div>
-                    <Balancer className='text-center dark:text-_grayText'>
+                    <p className='text-balance text-center dark:text-_grayText'>
                       {productoDescripcion}
                       <p className='text-_white'>
                                                 Fecha: <span className='font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</span>
                       </p>
-                    </Balancer>
+                    </p>
                   </div>
                 </div>
               </ModalDialog>
@@ -108,9 +107,9 @@ export default function Tr({
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{usuario}</td>
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
       <td className='sticky right-0 z-20 border-l-4 border-_gray bg-inherit px-3 py-2 font-semibold backdrop-blur-md dark:border-_darkText'>
-        {estatus === 'ACTIVO' && <ActiveButton />}
-        {estatus === 'USADO' && <UseButton />}
-        {estatus === 'DESTRUIDO' && <DestroyButton />}
+        {estatus === 'active' && <ActiveButton />}
+        {estatus === 'inactive' && <UseButton />}
+        {estatus === 'destroied' && <DestroyButton />}
       </td>
     </tr>
   )
