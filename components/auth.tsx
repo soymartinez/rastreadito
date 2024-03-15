@@ -3,10 +3,10 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Loader, LogOut } from 'lucide-react'
-import { useSupabase } from './supabase-provider'
 import { toast } from 'sonner'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
 
 interface Props {
     name?: string
@@ -14,9 +14,9 @@ interface Props {
     password: string
 }
 
-function SignIn() {
+export function SignIn() {
   const router = useRouter()
-  const { supabase } = useSupabase()
+  const supabase = createClient()
   const [form, setForm] = useState<Props>({} as Props)
   const [loading, setLoading] = useState(false)
 
@@ -101,7 +101,7 @@ function SignIn() {
 }
 
 function SignInWhitGoogle() {
-  const { supabase } = useSupabase()
+  const supabase = createClient()
 
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({
@@ -110,7 +110,7 @@ function SignInWhitGoogle() {
   }
 
   return (
-    <button onClick={handleSignIn} className='flex h-12 w-12 items-center justify-center rounded-full bg-_gray transition-all hover:opacity-80 dark:hover:opacity-90'>
+    <button onClick={handleSignIn} className='flex size-12 items-center justify-center rounded-full bg-_gray transition-all hover:opacity-80 dark:hover:opacity-90'>
       <svg width={16} height={17} viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <mask id='mask0_42_69' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='17'>
           <path d='M15.9034 0H0V17H15.9034V0Z' fill='white' />
@@ -127,7 +127,7 @@ function SignInWhitGoogle() {
 }
 
 function SignUp() {
-  const { supabase } = useSupabase()
+  const supabase = createClient()
   const [loading, setLoading] = useState(false)
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -173,7 +173,7 @@ function SignUp() {
 
 function SignOut() {
   const router = useRouter()
-  const { supabase } = useSupabase()
+  const supabase = createClient()
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut()
@@ -187,7 +187,6 @@ function SignOut() {
 }
 
 export {
-  SignIn,
   SignInWhitGoogle,
   SignUp,
   SignOut,
