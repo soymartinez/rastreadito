@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Balancer from 'react-wrap-balancer'
 import { ChevronRight } from 'lucide-react'
 
 import Navbar from '@/components/navbar'
@@ -7,11 +6,14 @@ import Brands from '@/components/looper/brands'
 import { InfiniteLooper } from '@/components/looper/infinite-looper'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
+import { createClient } from '@/utils/supabase/server'
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
   return (
     <main>
-      <Navbar />
+      <Navbar user={user} />
 
       {/* MAIN TEXT */}
       <header className='relative flex h-[400px] w-auto flex-col items-center justify-center px-4 md:h-[550px] lg:h-[600px]'>
@@ -71,7 +73,7 @@ export default function LandingPage() {
               -left-0
               top-[5px]
               size-[25px]
-              md:left-[0px]
+              md:left-0
             '
           />
 

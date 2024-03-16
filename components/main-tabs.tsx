@@ -8,9 +8,9 @@ import { Categoria, Qr } from '@prisma/client'
 import Empty from './empty'
 import TabTrigger from './tab-trigger'
 import { Suspense } from 'react'
-import { getCurrentUser } from '@/hooks/auth'
 import { prisma } from '@/lib/prisma'
 import TrOverviewLoading from './loading/tr-overview'
+import { createClient } from '@/utils/supabase/server'
 
 async function getQr(usuario: string,) {
   const res = await prisma.qr.findMany({
@@ -48,9 +48,12 @@ async function getCategorias(usuario: string) {
 }
 
 export default async function MainTabs() {
-  const user = await getCurrentUser()
-  const qr = getQr(user?.email ?? '')
-  const categories = getCategorias(user?.email ?? '')
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+
+  const qr = getQr(data.user?.email ?? '')
+  const categories = getCategorias(data.user?.email ?? '')
   return (
     <Tabs defaultValue='general'>
       <TabsList className='flex overflow-x-auto py-2'>
@@ -87,7 +90,7 @@ export default async function MainTabs() {
                 title: 'Activo',
                 description: 'El código aún no ha sido escaneado y utilizado para su propósito previsto.',
                 icon: 'active',
-                estatus: 'ACTIVO',
+                estatus: 'active',
               }}
             />
             {/* @ts-expect-error Async Server Component */}
@@ -95,8 +98,8 @@ export default async function MainTabs() {
               props={{
                 title: 'Uso',
                 description: 'El código ha sido utilizado y ya no es válido. Evitar el fraude o la duplicación de códigos.',
-                icon: 'use',
-                estatus: 'USADO',
+                icon: 'inactive',
+                estatus: 'inactive',
               }}
             />
             {/* @ts-expect-error Async Server Component */}
@@ -104,8 +107,8 @@ export default async function MainTabs() {
               props={{
                 title: 'Destruido',
                 description: 'Un QR destruido no puede ser utilizado y su estado indica que ha sido anulado.',
-                icon: 'destroy',
-                estatus: 'DESTRUIDO',
+                icon: 'destroied',
+                estatus: 'destroied',
               }}
             />
           </div>
