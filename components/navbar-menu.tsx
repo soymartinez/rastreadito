@@ -1,18 +1,23 @@
+import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 
-import Link from 'next/link'
-import { Button, buttonVariants } from './ui/button'
-import { X } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/config/site'
+import { X } from 'lucide-react'
 import clsx from 'clsx'
 
+import { Button, buttonVariants } from './ui/button'
+import { User } from '@supabase/supabase-js'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { SignOut } from './auth'
+
 interface NavbarMenuProps {
+  user: User | null
   setIsActive: (value: boolean) => void
 }
 
-export default function NavbarMenu({ setIsActive }: NavbarMenuProps) {
+export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
   const pathname = usePathname()
   const [selectedIndicator, setSelectedIndicator] = useState(pathname)
 
@@ -101,7 +106,7 @@ export default function NavbarMenu({ setIsActive }: NavbarMenuProps) {
 
           <div className='mx-auto w-full max-w-6xl px-4'>
             {/* MENU */}
-            {siteConfig.mainNav[0].items.map((data, index) => {
+            {siteConfig.mainNav[0]?.items.map((data, index) => {
               return (
                 <LinkMenu
                   key={index}
@@ -112,6 +117,20 @@ export default function NavbarMenu({ setIsActive }: NavbarMenuProps) {
                 ></LinkMenu>
               )
             })}
+
+            {/* USER */}
+            {user && (
+              <LinkMenu
+                data={{
+                  href: '/account',
+                  title: 'Cuenta',
+                  index: siteConfig.mainNav[0]?.items.length!
+                }}
+                isActive={selectedIndicator == '/account'}
+                setSelectedIndicator={setSelectedIndicator}
+                setIsActive={setIsActive}
+              ></LinkMenu>
+            )}
           </div>
         </div>
 
@@ -123,27 +142,42 @@ export default function NavbarMenu({ setIsActive }: NavbarMenuProps) {
             </p>
           </div>
 
-          {/* SOCIAL */}
-          <div className='flex items-center justify-center gap-3'>
-            <Link
-              href='/login'
-              className={clsx(buttonVariants({
-                size: 'sm',
-                className: '!text-sm px-4 h-[30px] !font-medium bg-transparent hover:bg-black/5'
-              }))}
-            >
-              Iniciar sesión
-            </Link>
-            <Link
-              href='/register'
-              className={clsx(buttonVariants({
-                size: 'sm',
-                className: 'px-4 h-[30px] !font-medium !bg-_darkText !text-_white',
-              }))}
-            >
-              Registrate
-            </Link>
-          </div>
+          {/* SOCIAL / ACCOUNT */}
+          {user
+            ? (
+              <div className='flex items-center justify-center gap-2'>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>{user.role}</AvatarFallback>
+                </Avatar>
+
+                <Button
+                  size='sm'
+                  onClick={SignOut}
+                >Cerrar sesión</Button>
+              </div>
+            ) : (
+              <div className='flex items-center justify-center gap-3'>
+                <Link
+                  href='/login'
+                  className={clsx(buttonVariants({
+                    size: 'sm',
+                    className: '!text-sm px-4 h-[30px] !font-medium bg-transparent hover:bg-black/5'
+                  }))}
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href='/register'
+                  className={clsx(buttonVariants({
+                    size: 'sm',
+                    className: 'px-4 h-[30px] !font-medium !bg-_darkText !text-_white',
+                  }))}
+                >
+                  Registrate
+                </Link>
+              </div>
+            )}
         </div>
       </div>
       <Curve />
@@ -192,7 +226,8 @@ function LinkMenu(props: {
     href: string
     index: number
   },
-  isActive: boolean, setSelectedIndicator: React.Dispatch<React.SetStateAction<string>>
+  isActive: boolean,
+  setSelectedIndicator: React.Dispatch<React.SetStateAction<string>>
   setIsActive: (value: boolean) => void
 }) {
   const { title, href, index } = props.data
