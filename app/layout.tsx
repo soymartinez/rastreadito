@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 // import { Analytics } from '@vercel/analytics/react'
 import { font } from '@/lib/font'
 import { ThemeProvider } from '@/components/provider'
-import SupabaseProvider from '@/components/supabase-provider'
 import Toast from '@/components/toast'
 import { siteConfig } from '@/config/site'
 
@@ -36,10 +35,8 @@ export default async function RootLayout({
         `}
       >
         <ThemeProvider>
-          <SupabaseProvider>
-            {children}
-            {/* <Analytics /> */}
-          </SupabaseProvider>
+          {children}
+          {/* <Analytics /> */}
         </ThemeProvider>
         <Toast />
       </body>
