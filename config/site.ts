@@ -19,7 +19,7 @@ export const siteConfig = {
   links,
   mainNav: [
     {
-      title: 'Landing',
+      title: 'Lobby',
       items: [
         {
           title: 'Inicio',
@@ -42,17 +42,6 @@ export const siteConfig = {
         {
           title: 'Precios',
           href: '/pricing',
-          description: '',
-          items: [],
-        },
-      ],
-    },
-    {
-      title: 'Lobby',
-      items: [
-        {
-          title: 'Cuenta',
-          href: '/account',
           description: '',
           items: [],
         },
