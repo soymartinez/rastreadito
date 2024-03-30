@@ -10,7 +10,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
 
   return (
     <div className='flex flex-col items-center gap-8'>
-      <div className='relative h-64 w-64 xl:h-80 xl:w-80'>
+      <div className='relative size-64 xl:size-80'>
         <Image
           fill
           src={preview}
@@ -23,7 +23,7 @@ export default function ImagePreview({ imagenes, alt }: { imagenes: string[], al
           size={'nothing'}
           variant={'image'}
           onClick={() => setPreview(imagenes[0])}
-          className={clsx({
+          className={clsx('relative', {
             'ring-2 ring-_primary': imagenes[0] === preview,
           })}
         >
