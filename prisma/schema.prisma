@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Galeria {
@@ -47,7 +48,7 @@ model Qr {
   id                 Int      @id @default(autoincrement())
   codigo             String?  @unique
   valor              String?  @unique
-  estatus            Estatus  @default(ACTIVO)
+  estatus            Status   @default(inactive)
   productoId         Int      @unique
   fechaRegistro      DateTime @default(now())
   fechaActualizacion DateTime @updatedAt
@@ -87,17 +88,89 @@ model Producto {
   @@map("producto")
 }
 
-enum Rol {
-  ADMIN
-  USUARIO
+model User {
+  id            String             @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name          String
+  last_name     String?
+  email         String             @unique
+  avatar        String?
+  bio           String?            @default("")
+  created_at    DateTime           @default(now()) @db.Timestamptz(6)
+  organizations UserOrganization[]
 
-  @@map("rol")
+  @@map("users")
 }
 
-enum Estatus {
-  ACTIVO
-  USADO
-  DESTRUIDO
+model Organization {
+  id          String             @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name        String
+  description String?
+  users       UserOrganization[]
+  created_at  DateTime           @default(now()) @db.Timestamptz(6)
 
-  @@map("estatus")
+  @@map("organizations")
+}
+
+model UserOrganization {
+  id             String       @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  role           Role
+  userId         String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@map("userOrganizations")
+}
+
+model Category {
+  id            String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name          String
+  description   String?
+  icon          String?
+  subcategories Json[]   @db.Json
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("categories")
+}
+
+model Gallery {
+  id          String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name        String
+  description String?
+  url         String?
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("galleries")
+}
+
+model Product {
+  id          String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name        String
+  description String?
+  images      String[]
+  qrs         Code?
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("products")
+}
+
+model Code {
+  id         String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  value      String
+  status     Status   @default(inactive)
+  products   Product  @relation(fields: [id], references: [id], onDelete: Cascade)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("qrs")
+}
+
+enum Role {
+  admin
+  user
+}
+
+enum Status {
+  active
+  inactive
+  destroied
 }
