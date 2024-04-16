@@ -28,7 +28,7 @@ const TabsTrigger = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Trigger
     className={clsx(
-      'inline-flex min-w-[100px] items-center justify-center rounded-[14px] p-3 text-base text-_dark transition-all disabled:pointer-events-none disabled:opacity-50',
+      'inline-flex min-w-[100px] items-center justify-center rounded-[14px] p-3 text-base text-dark transition-all disabled:pointer-events-none disabled:opacity-50',
       className
     )}
     {...props}

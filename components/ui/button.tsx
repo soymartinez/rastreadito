@@ -4,21 +4,21 @@ import { VariantProps, cva } from 'class-variance-authority'
 import clsx from 'clsx'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-semibold ring-offset-2 transition-colors data-[state=open]:bg-_primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-_primary active:scale-[99%] disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-semibold ring-offset-2 transition-colors data-[state=open]:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[99%] disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
-          'bg-_primary text-_dark hover:bg-_primary/80',
+          'bg-primary text-dark hover:bg-primary/80',
         image:
-          'size-14 overflow-hidden rounded-2xl border border-_gray bg-_gray p-2 hover:bg-_gray/50 dark:border-_darkText dark:bg-_darkText dark:hover:bg-_darkText/50',
+          'size-14 overflow-hidden rounded-2xl border border-gray bg-gray p-2 hover:bg-gray/50 dark:border-darkText dark:bg-darkText dark:hover:bg-darkText/50',
         outline:
-          'border-2 border-_gray dark:border-_darkText',
+          'border-2 border-gray dark:border-darkText',
         subtle:
-          'bg-_gray text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-_gray',
+          'bg-gray text-dark hover:bg-darkText dark:bg-gray dark:text-gray',
         ghost:
-          'bg-transparent data-[state=open]:bg-transparent hover:bg-_gray dark:text-_primary dark:data-[state=open]:bg-transparent dark:hover:bg-_darkText',
-        link: 'bg-transparent text-slate-900 underline-offset-4 hover:bg-transparent hover:underline dark:bg-transparent dark:text-_gray dark:hover:bg-transparent',
+          'bg-transparent data-[state=open]:bg-transparent hover:bg-gray dark:text-primary dark:data-[state=open]:bg-transparent dark:hover:bg-darkText',
+        link: 'bg-transparent text-dark underline-offset-4 hover:bg-transparent hover:underline dark:bg-transparent dark:text-gray dark:hover:bg-transparent',
       },
       size: {
         default: 'h-16 px-4 py-2',

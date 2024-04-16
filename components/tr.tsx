@@ -48,8 +48,8 @@ export default function Tr({
   return (
     <tr
       key={id}
-      className={clsx('overflow-x-auto hover:bg-_gray/80 dark:bg-_dark dark:hover:bg-_darkText/50', {
-        'bg-_primary/[15%] hover:bg-_primary/[15%] dark:bg-_primary/[15%] dark:hover:bg-_primary/[15%]': checked,
+      className={clsx('overflow-x-auto hover:bg-gray/80 dark:bg-dark dark:hover:bg-darkText/50', {
+        'bg-primary/[15%] hover:bg-primary/[15%] dark:bg-primary/[15%] dark:hover:bg-primary/[15%]': checked,
       })}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -63,35 +63,35 @@ export default function Tr({
               name={`${id}`}
               id={`${id}`}
               checked={checked}
-              className='m-auto size-4 rounded-full accent-_primary' />
+              className='m-auto size-4 rounded-full accent-primary' />
           </div>
           <div className='flex gap-2'>
             <Link href={`/product/${codigo}`} className={clsx({
               'md:hidden ': !hover,
             })}>
-              <div className='rounded-full bg-_white p-2 transition dark:bg-_dark dark:hover:bg-_primary/[15%]'>
-                <Maximize2 size={14} className='text-_dark dark:text-_primary' />
+              <div className='rounded-full bg-white p-2 transition dark:bg-dark dark:hover:bg-primary/[15%]'>
+                <Maximize2 size={14} className='text-dark dark:text-primary' />
               </div>
             </Link>
             <button
               onClick={() => { setShow(true); setHover(false) }}
               className={clsx({ 'md:hidden ': !hover })}
             >
-              <div className='rounded-full bg-_white p-2 transition dark:bg-_dark dark:hover:bg-_primary/[15%]'>
-                <QrCode size={14} className='text-_dark dark:text-_primary' />
+              <div className='rounded-full bg-white p-2 transition dark:bg-dark dark:hover:bg-primary/[15%]'>
+                <QrCode size={14} className='text-dark dark:text-primary' />
               </div>
             </button>
             {show && (
               <ModalDialog onOpenChange={setShow}>
                 <div className='flex h-full flex-col items-center justify-center'>
-                  <div className='flex w-full flex-col items-center justify-center gap-6 pb-10 pt-8 font-medium text-_darkText dark:text-_white'>
+                  <div className='flex w-full flex-col items-center justify-center gap-6 pb-10 pt-8 font-medium text-darkText dark:text-white'>
                     <h1 className='text-center text-4xl font-semibold md:text-5xl'>{productoNombre}</h1>
                     <div className='overflow-hidden rounded-2xl'>
                       {valor && <GenerateQr value={valor} />}
                     </div>
-                    <p className='text-balance text-center dark:text-_grayText'>
+                    <p className='text-balance text-center dark:text-grayText'>
                       {productoDescripcion}
-                      <p className='text-_white'>
+                      <p className='text-white'>
                                                 Fecha: <span className='font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</span>
                       </p>
                     </p>
@@ -102,11 +102,11 @@ export default function Tr({
           </div>
         </div>
       </td>
-      <td className='whitespace-nowrap px-3 py-2 font-semibold uppercase text-_dark dark:text-_white'>#{categoria} {id}</td>
+      <td className='whitespace-nowrap px-3 py-2 font-semibold uppercase text-dark dark:text-white'>#{categoria} {id}</td>
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{productoNombre}</td>
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{usuario}</td>
       <td className='whitespace-nowrap px-3 py-2 font-semibold'>{new Date(fechaRegistro).toLocaleString(undefined, { hour12: true })}</td>
-      <td className='sticky right-0 z-20 border-l-4 border-_gray bg-inherit px-3 py-2 font-semibold backdrop-blur-md dark:border-_darkText'>
+      <td className='sticky right-0 z-20 border-l-4 border-gray bg-inherit px-3 py-2 font-semibold backdrop-blur-md dark:border-darkText'>
         {estatus === 'active' && <ActiveButton />}
         {estatus === 'inactive' && <UseButton />}
         {estatus === 'destroied' && <DestroyButton />}

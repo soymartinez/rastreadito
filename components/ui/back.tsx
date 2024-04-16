@@ -17,7 +17,7 @@ const Back = React.forwardRef<SVGSVGElement, BackProps>(
     const { back, push } = useRouter()
     return <ChevronLeft
       ref={ref}
-      className={clsx('mx-3 cursor-pointer text-_dark dark:text-_white', className)}
+      className={clsx('mx-3 cursor-pointer text-dark dark:text-white', className)}
       size={32}
       strokeWidth={3}
       onClick={async () => {

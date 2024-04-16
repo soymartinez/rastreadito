@@ -34,8 +34,8 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
         z-50
         h-screen
         w-screen
-        bg-_primary
-        text-_darkText
+        bg-primary
+        text-darkText
       '
     >
       <div
@@ -70,7 +70,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
               mb-4
               w-full
               max-w-6xl
-              text-_white
+              text-white
             '
           >
             <div
@@ -88,7 +88,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
             >
               {/* LOGO */}
               <div className='flex items-center'>
-                <Link href={'/'} className='z-10 text-2xl font-black uppercase italic text-_darkText'>
+                <Link href={'/'} className='z-10 text-2xl font-black uppercase italic text-darkText'>
                   rastreadito
                 </Link>
               </div>
@@ -171,7 +171,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
                   href='/register'
                   className={clsx(buttonVariants({
                     size: 'sm',
-                    className: 'px-4 h-[30px] !font-medium !bg-_darkText !text-_white',
+                    className: 'px-4 h-[30px] !font-medium !bg-darkText !text-white',
                   }))}
                 >
                   Registrate
@@ -211,7 +211,7 @@ function Curve() {
         top-0
         h-full
         w-[100px]
-        !fill-_primary
+        !fill-primary
         stroke-none
       '
     >
@@ -254,7 +254,7 @@ function LinkMenu(props: {
           left-[-20px]
           size-[10px]
           rounded-full
-          bg-_darkText
+          bg-darkText
           mid:left-[-30px]
         '
       />

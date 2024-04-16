@@ -29,21 +29,21 @@ export default function Scan() {
   return (
     <main className='relative h-screen overflow-hidden'>
       <div className='absolute inset-x-0 mx-auto max-w-7xl px-4'>
-        <div className='relative flex items-center justify-center py-8 text-_white'>
-          <Back className='absolute left-0 text-_white' />
+        <div className='relative flex items-center justify-center py-8 text-white'>
+          <Back className='absolute left-0 text-white' />
           <h1 className='text-xl font-bold'>Escanear</h1>
         </div>
       </div>
-      <div id='clip-path' className='absolute inset-0 -z-20 bg-_dark/50 backdrop-blur-sm' />
+      <div id='clip-path' className='absolute inset-0 -z-20 bg-dark/50 backdrop-blur-sm' />
       <div className='absolute inset-0 -z-10 flex items-center justify-center'>
-        <div className='border-corner relative h-60 w-60'>
+        <div className='border-corner relative size-60'>
           <span className='border_bottom' />
         </div>
       </div>
       <div className='flex h-full flex-col items-center justify-center space-y-[380px]'>
         <Balancer className='text-center'>
-          <h1 className='text-4xl font-bold text-_white'>Escanea</h1>
-          <p className='font-medium text-_grayTextLight'>Encuéntralo en la parte inferior de tu producto</p>
+          <h1 className='text-4xl font-bold text-white'>Escanea</h1>
+          <p className='font-medium text-grayTextLight'>Encuéntralo en la parte inferior de tu producto</p>
         </Balancer>
         <div />
       </div>

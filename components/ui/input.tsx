@@ -39,24 +39,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         id='input-wrapper'
         className={clsx(
-          'flex h-16 w-full items-center gap-3 rounded-2xl border border-_primary bg-transparent px-5 py-3 text-base font-medium dark:border-_darkText',
+          'flex h-16 w-full items-center gap-3 rounded-2xl border border-primary bg-transparent px-5 py-3 text-base font-medium dark:border-darkText',
           className,
-          { 'outline-none ring-2 ring-_primary': isFocused }
+          { 'outline-none ring-2 ring-primary': isFocused }
         )}
       >
         {variant === 'normal' && <>
           {icon &&
             <>
-              <Icons icon={icon} className={'mx-2 text-_dark dark:text-_white'} />
-              <div className='h-10 w-px rounded-full bg-_primary dark:bg-_darkText' />
+              <Icons icon={icon} className={'mx-2 text-dark dark:text-white'} />
+              <div className='h-10 w-px rounded-full bg-primary dark:bg-darkText' />
             </>
           }
           <div className='flex w-full flex-col'>
-            <Label htmlFor={`input-${id}`} className='text-xs text-_primary'>{labelText}</Label>
+            <Label htmlFor={`input-${id}`} className='text-xs text-primary'>{labelText}</Label>
             <input
               id={`input-${id}`}
               className={clsx(
-                'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                'flex w-full bg-transparent text-base font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                 className
               )}
               autoComplete='off'
@@ -69,12 +69,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </>}
         {variant === 'porcentage' &&
           <div className='flex w-full items-center gap-2'>
-            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-_darkText dark:text-_white'>{labelText}</Label>
+            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-darkText dark:text-white'>{labelText}</Label>
             <div className='flex w-full items-center justify-end gap-2'>
               <input
                 id={`input-${id}`}
                 className={clsx(
-                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                   className
                 )}
                 type='number'
@@ -86,17 +86,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ref={ref}
                 {...props}
               />
-              <span className='text-lg font-medium text-_primary'>%</span>
+              <span className='text-lg font-medium text-primary'>%</span>
             </div>
           </div>}
         {variant === 'currency' &&
           <div className='flex w-full items-center gap-2'>
-            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-_darkText dark:text-_white'>{labelText}</Label>
+            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-darkText dark:text-white'>{labelText}</Label>
             <div className='flex w-full items-center justify-end gap-2'>
               <input
                 id={`input-${id}`}
                 className={clsx(
-                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                   className
                 )}
                 type='number'
@@ -107,17 +107,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ref={ref}
                 {...props}
               />
-              <span className='text-lg font-medium text-_primary'>$</span>
+              <span className='text-lg font-medium text-primary'>$</span>
             </div>
           </div>}
         {variant === 'weight' &&
           <div className='flex w-full items-center gap-2'>
-            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-_darkText dark:text-_white'>{labelText}</Label>
+            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold text-darkText dark:text-white'>{labelText}</Label>
             <div className='flex w-full items-center justify-end gap-2'>
               <input
                 id={`input-${id}`}
                 className={clsx(
-                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                  'flex w-full bg-transparent text-end text-[17px] font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                   className
                 )}
                 type='number'
@@ -129,16 +129,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ref={ref}
                 {...props}
               />
-              <span className='text-lg font-medium text-_primary'>g</span>
+              <span className='text-lg font-medium text-primary'>g</span>
             </div>
           </div>}
         {variant === 'date' &&
           <div className='flex w-full items-center justify-between gap-2'>
-            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold uppercase text-_darkText dark:text-_white'>{labelText}</Label>
+            <Label htmlFor={`input-${id}`} className='text-[17px] font-semibold uppercase text-darkText dark:text-white'>{labelText}</Label>
             <input
               id={`input-${id}`}
               className={clsx(
-                'flex w-min bg-transparent text-end text-[17px] font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                'flex w-min bg-transparent text-end text-[17px] font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                 className
               )}
               type='date'
@@ -152,16 +152,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {variant === 'search' &&
           <>
             <label htmlFor={`input-${id}`} className='hidden sm:block'>
-              <Search className='h-5 w-5' />
+              <Search className='size-5' />
             </label>
-            <div className={clsx('hidden h-full w-px rounded-full bg-_primary sm:block', {
-              'dark:bg-_darkText': !isFocused,
+            <div className={clsx('hidden h-full w-px rounded-full bg-primary sm:block', {
+              'dark:bg-darkText': !isFocused,
             })} />
             <div className='flex w-full flex-col'>
-              <Label htmlFor={`input-${id}`} className='text-xs text-_primary'>{labelText}</Label>
+              <Label htmlFor={`input-${id}`} className='text-xs text-primary'>{labelText}</Label>
               <input
                 id={`input-${id}`}
-                className={'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50'}
+                className={'flex w-full bg-transparent text-base font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50'}
                 autoComplete='off'
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}

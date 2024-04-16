@@ -229,7 +229,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               <SelectContent>
                 {categorias.map(({ nombre, acronimo }) => (
                   <SelectItem
-                    className='placeholder:text-_primary first:rounded-t-xl last:rounded-b-xl'
+                    className='placeholder:text-primary first:rounded-t-xl last:rounded-b-xl'
                     key={acronimo}
                     value={acronimo}
                   >
@@ -238,9 +238,9 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                 ))}
               </SelectContent>
             </Select>
-            <div className='flex flex-col gap-6 rounded-2xl border border-_gray px-5 py-3 dark:border-_darkText' id='galeria'>
+            <div className='flex flex-col gap-6 rounded-2xl border border-gray px-5 py-3 dark:border-darkText' id='galeria'>
               <div className='flex flex-col items-start justify-between gap-2'>
-                <Label className='text-xs font-semibold text-_darkText dark:text-_primary'>Galeria</Label>
+                <Label className='text-xs font-semibold text-darkText dark:text-primary'>Galeria</Label>
                 {galeria && galeria.length > 0
                     && <div className='ml-auto flex h-11 w-full max-w-sm items-center justify-end gap-3'>
                       <Input
@@ -275,13 +275,13 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                       {galeria.filter(({ nombre }) => filterGaleria(nombre)).map(({ id, nombre, url }) => (
 
                         <div key={id} className='flex flex-col gap-2 overflow-hidden'>
-                          <Label className='truncate text-xs font-semibold text-_darkText dark:text-_white'>{nombre}</Label>
+                          <Label className='truncate text-xs font-semibold text-darkText dark:text-white'>{nombre}</Label>
                           <div className='h-28 w-28' onClick={() => setImagenes(url)}>
                             {url.length > 0
                               ? url.map((imagenUrl, i) => (
                                 <div key={i} className='absolute'>
                                   {i > 0 &&
-                                    <div className='absolute left-1 top-1 z-40 flex h-6 w-6 items-center justify-center rounded-full bg-_dark text-_primary'>
+                                    <div className='absolute left-1 top-1 z-40 flex h-6 w-6 items-center justify-center rounded-full bg-dark text-primary'>
                                       <Label className='text-xs'>+{url.length}</Label>
                                     </div>}
                                   <ImagePreview
@@ -305,8 +305,8 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                   overflow-hidden
                                   rounded-2xl
                                   border
-                                  border-_gray
-                                  dark:border-_darkText
+                                  border-gray
+                                  dark:border-darkText
                                 `}
                               >
                                 <ImageOff />
@@ -316,19 +316,19 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                         </div>
                       ))}
                     </div>
-                    : <div className='flex h-32 items-center justify-center text-center text-sm dark:text-_grayText'>
+                    : <div className='flex h-32 items-center justify-center text-center text-sm dark:text-grayText'>
                       <span><strong>{searchGaleria}</strong> no coincide con ningún resultado.</span>
                     </div>}
                 </div>
                 : <div className='text-center text-sm'>
                   {loading
                     ? <div className='flex flex-col gap-2'>
-                      <div className='h-4 w-20 animate-pulse rounded-xl bg-_gray dark:bg-_darkText' />
+                      <div className='h-4 w-20 animate-pulse rounded-xl bg-gray dark:bg-darkText' />
                       <div className='grid grid-flow-col justify-start gap-5 overflow-auto p-1 scrollbar-none md:scrollbar-thin'>
                         {[...Array(4)].map((_, i) => (
                           <div
                             key={i}
-                            className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
+                            className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-gray dark:bg-darkText'}
                           />
                         ))}
                       </div>
@@ -336,7 +336,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                     : <div className='flex h-36 items-center justify-center'>
                       {galeria && galeria.length === 0
                         ? <div className='inline-flex items-center justify-center gap-2'>
-                          <p className='text-center text-sm dark:text-_grayText'>No hay imágenes en esta categoría.</p>{' '}
+                          <p className='text-center text-sm dark:text-grayText'>No hay imágenes en esta categoría.</p>{' '}
                           <Button
                             type='button'
                             onClick={() => setUploadImages(!uploadImages)}
@@ -347,7 +347,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             <ImagePlus />
                           </Button>
                         </div>
-                        : <p className='text-center text-sm dark:text-_grayText'>Selecciona una categoría para ver las imágenes.</p>}
+                        : <p className='text-center text-sm dark:text-grayText'>Selecciona una categoría para ver las imágenes.</p>}
                     </div>
                   }
                 </div>
@@ -417,11 +417,11 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
           }}
         >
           <Tabs className='overflow-hidden' defaultValue={currentCategoria}>
-            <div className='sticky top-0 z-50 flex flex-col bg-_white dark:bg-_dark'>
+            <div className='sticky top-0 z-50 flex flex-col bg-white dark:bg-dark'>
               <div className='py-4'>
                 <h1 className='text-5xl font-bold'>Galeria</h1>
               </div>
-              <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-_gray scrollbar-thumb-rounded-full dark:scrollbar-thumb-_darkText sm:scrollbar-thin'>
+              <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-gray scrollbar-thumb-rounded-full dark:scrollbar-thumb-darkText sm:scrollbar-thin'>
                 <div className='flex w-min gap-2'>
                   {categorias.map((categoria: Categoria) => (
                     <TabTrigger

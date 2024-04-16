@@ -23,7 +23,7 @@ export default function Empty({
     )}>
       {title}{' '}
       {description &&
-        <span className='animate-pulse text-_primary hover:underline'>
+        <span className='animate-pulse text-primary hover:underline'>
           <Link href='/metadata'>
             {description}
           </Link>

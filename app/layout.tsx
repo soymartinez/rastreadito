@@ -23,14 +23,14 @@ export default async function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={`
-          bg-_white
-          text-_darkText
+          bg-white
+          text-darkText
           scrollbar-thin
-          scrollbar-thumb-_gray
+          scrollbar-thumb-gray
           scrollbar-thumb-rounded-full
-          dark:bg-_dark
-          dark:text-_white
-          dark:scrollbar-thumb-_darkText 
+          dark:bg-dark
+          dark:text-white
+          dark:scrollbar-thumb-darkText
           ${font.className}
         `}
       >

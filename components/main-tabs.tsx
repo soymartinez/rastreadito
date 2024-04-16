@@ -71,8 +71,8 @@ export default async function MainTabs() {
               className={`
                 flex h-12
                 w-28 items-center justify-center rounded-full
-                border-2 border-_gray bg-_white font-[500] text-_dark transition-all hover:bg-_gray
-                dark:border-_darkText dark:bg-_dark dark:text-_white dark:hover:bg-_darkText
+                border-2 border-gray bg-white font-[500] text-dark transition-all hover:bg-gray
+                dark:border-darkText dark:bg-dark dark:text-white dark:hover:bg-darkText
               `}
             >
               Historial
@@ -84,7 +84,6 @@ export default async function MainTabs() {
         <div>
           <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>General</h1>
           <div className={clsx('grid gap-3')}>
-            {/* @ts-expect-error Async Server Component */}
             <GeneralCard
               props={{
                 title: 'Activo',
@@ -93,7 +92,6 @@ export default async function MainTabs() {
                 estatus: 'active',
               }}
             />
-            {/* @ts-expect-error Async Server Component */}
             <GeneralCard
               props={{
                 title: 'Uso',
@@ -102,7 +100,6 @@ export default async function MainTabs() {
                 estatus: 'inactive',
               }}
             />
-            {/* @ts-expect-error Async Server Component */}
             <GeneralCard
               props={{
                 title: 'Destruido',
@@ -117,7 +114,6 @@ export default async function MainTabs() {
         <div>
           <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>Ultimos códigos</h1>
           <Suspense fallback={<TrOverviewLoading />}>
-            {/* @ts-expect-error Async Server Component */}
             <Historial data={qr} />
           </Suspense>
         </div>
