@@ -110,8 +110,8 @@ export default function NewGallery({
       animate={'animate'}
       exit={'initial'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={clsx('relative w-full rounded-2xl dark:bg-_dark', {
-        'border border-_gray dark:border-_darkText p-4': boundary,
+      className={clsx('relative w-full rounded-2xl dark:bg-dark', {
+        'border border-gray dark:border-darkText p-4': boundary,
       })}
     >
       <form

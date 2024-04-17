@@ -126,19 +126,18 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
               className={clsx(`
                 relative
                 flex
-                h-28
-                w-28
+                size-28
                 cursor-pointer
                 items-center
                 justify-center
                 overflow-hidden
                 rounded-2xl
                 border
-                border-_gray
+                border-gray
                 transition
-                hover:bg-_gray
-                dark:border-_darkText
-                hover:dark:bg-_darkText
+                hover:bg-gray
+                dark:border-darkText
+                hover:dark:bg-darkText
               `, className)}
             >
               <div className={clsx('absolute inset-0 flex items-center justify-center transition', {

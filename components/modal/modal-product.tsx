@@ -38,19 +38,19 @@ export default function ModalProduct({ data }: { data: Producto }) {
           <ImagePreview imagenes={imagen} alt={nombre} />
           <div className='flex flex-col gap-7 p-2'>
             <div className='md:order-2'>
-              <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Descripción</Label>
+              <Label className='text-xs font-semibold uppercase text-grayTextLight'>Descripción</Label>
               <span className='block text-base'>{descripcion}</span>
             </div>
             <div className='order-1 flex flex-col gap-3'>
-              <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Porcentaje</Label>
+              <Label className='text-xs font-semibold uppercase text-grayTextLight'>Porcentaje</Label>
               <div className='flex flex-col gap-3'>
                 <div className='flex flex-col gap-1'>
                   <div className='flex justify-between'>
                     <Label className='text-sm font-semibold'>THC</Label>
                     <span className='text-sm font-semibold'>{thc}%</span>
                   </div>
-                  <div className='h-2 rounded-full bg-_gray dark:bg-_darkText'>
-                    <div className='h-full cursor-pointer rounded-full bg-_primary transition hover:animate-pulse hover:bg-_primary/80' style={{ width: `${thc}%` }} />
+                  <div className='h-2 rounded-full bg-gray dark:bg-darkText'>
+                    <div className='h-full cursor-pointer rounded-full bg-primary transition hover:animate-pulse hover:bg-primary/80' style={{ width: `${thc}%` }} />
                   </div>
                 </div>
                 <div className='flex flex-col gap-1'>
@@ -58,8 +58,8 @@ export default function ModalProduct({ data }: { data: Producto }) {
                     <Label className='text-sm font-semibold'>CBD</Label>
                     <span className='text-sm font-semibold'>{cbd}%</span>
                   </div>
-                  <div className='h-2 rounded-full bg-_gray dark:bg-_darkText'>
-                    <div className='h-full cursor-pointer rounded-full bg-_primary transition hover:animate-pulse hover:bg-_primary/80' style={{ width: `${cbd}%` }} />
+                  <div className='h-2 rounded-full bg-gray dark:bg-darkText'>
+                    <div className='h-full cursor-pointer rounded-full bg-primary transition hover:animate-pulse hover:bg-primary/80' style={{ width: `${cbd}%` }} />
                   </div>
                 </div>
               </div>
@@ -68,67 +68,67 @@ export default function ModalProduct({ data }: { data: Producto }) {
         </div>
         <div className='flex flex-col gap-7'>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Categoria</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Categoria</Label>
             <span className='text-base font-semibold'>{categoria}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Aroma</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Aroma</Label>
             <span className='text-base font-semibold'>{aroma}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Efecto</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Efecto</Label>
             <span className='text-base font-semibold'>{efecto}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Cepa</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Cepa</Label>
             <span className='text-base font-semibold'>{cepa}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Fabricante</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Fabricante</Label>
             <span className='text-base font-semibold'>{fabricante}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Proveedor</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Proveedor</Label>
             <span className='text-base font-semibold'>{proveedor}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Pais</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Pais</Label>
             <span className='text-base font-semibold'>{pais}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Lote</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Lote</Label>
             <span className='text-base font-semibold'>{lote ? lote : 'No aplica'}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Precio</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Precio</Label>
             <span className='text-base font-semibold'>${precio}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Peso</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Peso</Label>
             <span className='text-base font-semibold'>{peso}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Certificado</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Certificado</Label>
             <span className='text-base font-semibold'>{certificado ? certificado : 'No aplica'}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Notas</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Notas</Label>
             <span className='text-base font-semibold'>{notas ? notas : 'No aplica'}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Fecha de registro</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Fecha de registro</Label>
             <span className='text-base font-semibold'>{new Date(fechaRegistro).toLocaleString('es', { hour12: true })}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Fecha de caducidad</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Fecha de caducidad</Label>
             <span className='text-base font-semibold'>{fechaCaducidad ? new Date(fechaCaducidad).toLocaleString().split(',')[0] : 'No aplica'}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Fecha de cosecha</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Fecha de cosecha</Label>
             <span className='text-base font-semibold'>{fechaCosecha ? new Date(fechaCosecha).toLocaleString().split(',')[0] : 'No aplica'}</span>
           </div>
           <div className='flex flex-col gap-3'>
-            <Label className='text-xs font-semibold uppercase text-_grayTextLight'>Fecha de envasado</Label>
+            <Label className='text-xs font-semibold uppercase text-grayTextLight'>Fecha de envasado</Label>
             <span className='text-base font-semibold'>{fechaEnvasado ? new Date(fechaEnvasado).toLocaleString().split(',')[0] : 'No aplica'}</span>
           </div>
         </div>

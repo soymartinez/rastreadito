@@ -38,17 +38,16 @@ export default function ImagePreview({
         className={clsx(`
             relative
             flex
-            h-28
-            min-h-[100px] w-28
-            min-w-[100px]
+            size-28
+            min-h-[100px] min-w-[100px]
             cursor-pointer
-            items-center 
-            justify-center
+            items-center
+            justify-center 
             overflow-hidden
             rounded-2xl
             border
-            border-_gray
-            dark:border-_darkText
+            border-gray
+            dark:border-darkText
         `, className)}
       >
         <Image
@@ -65,13 +64,13 @@ export default function ImagePreview({
         />
         <div className={clsx('absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl transition', {
           'opacity-0 scale-125': !hover,
-          'opacity-100 scale-100 bg-_dark/30': hover,
+          'opacity-100 scale-100 bg-dark/30': hover,
           'hidden': !changeIcon,
         })}>
           <RotateCcw />
         </div>
         <div className={clsx('pointer-events-none absolute inset-0', {
-          'bg-_primary/50': selected,
+          'bg-primary/50': selected,
         })} />
       </div>
       <button
@@ -80,7 +79,7 @@ export default function ImagePreview({
           top: '0.3rem',
           right: '0.3rem',
         }}
-        className={clsx('absolute z-50 overflow-hidden rounded-full bg-_primary p-1 text-_dark transition', {
+        className={clsx('absolute z-50 overflow-hidden rounded-full bg-primary p-1 text-dark transition', {
           'opacity-0 scale-125': !hover,
           'opacity-100 scale-100': hover,
           'hidden': !defaultIcon,
