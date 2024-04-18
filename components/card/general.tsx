@@ -38,21 +38,20 @@ export default async function GeneralCard({ props }: {
   const count = getQrCount(props.estatus, data.user?.email!)
   return (
     <Link href={`/history/${props.estatus.toLowerCase()}`}>
-      <div className={'grid cursor-pointer grid-flow-col items-center gap-4 rounded-2xl bg-_dark p-4 transition-all hover:bg-_dark/95 dark:bg-_darkText dark:hover:bg-_darkText/80 sm:flex'}>
+      <div className={'grid cursor-pointer grid-flow-col items-center gap-4 rounded-2xl bg-dark p-4 transition-all hover:bg-dark/95 sm:flex dark:bg-darkText dark:hover:bg-darkText/80'}>
         <span>
-          {props.icon === 'active' && <QrCode size={56} className='text-_primary' />}
-          {props.icon === 'inactive' && <Package size={56} className='text-_primary' />}
-          {props.icon === 'destroied' && <PackageOpen size={56} className='text-_primary' />}
+          {props.icon === 'active' && <QrCode size={56} className='text-primary' />}
+          {props.icon === 'inactive' && <Package size={56} className='text-primary' />}
+          {props.icon === 'destroied' && <PackageOpen size={56} className='text-primary' />}
         </span>
         <div className={'w-full'}>
-          <h1 className='text-xl font-semibold text-_white'>{props.title}</h1>
-          <p className='text-xs font-medium text-_grayText'>
+          <h1 className='text-xl font-semibold text-white'>{props.title}</h1>
+          <p className='text-xs font-medium text-grayText'>
             {props.description}
           </p>
         </div>
         <div>
           <Suspense fallback={<FadingLoader />}>
-            {/* @ts-expect-error Async Server Component */}
             <Count promise={count} />
           </Suspense>
         </div>
@@ -63,7 +62,7 @@ export default async function GeneralCard({ props }: {
 
 export async function Count({ promise }: { promise: Promise<number> }) {
   const count = await promise
-  return <h1 className={'text-5xl font-semibold text-_white'}>{count}</h1>
+  return <h1 className={'text-5xl font-semibold text-white'}>{count}</h1>
 }
 
 const FadingLoader = () => (
