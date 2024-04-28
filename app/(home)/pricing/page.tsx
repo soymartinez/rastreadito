@@ -1,6 +1,5 @@
 import PricingCard from '@/components/card/pricing'
 import { Back } from '@/components/ui/back'
-import Balancer from 'react-wrap-balancer'
 
 export default function Pricing() {
   return (
@@ -9,11 +8,11 @@ export default function Pricing() {
         <Back className='absolute left-0' />
         <h1 className='text-xl font-bold'>Precios</h1>
       </div>
-      <h1 className='mx-auto max-w-2xl py-8 text-center lg:py-12'>
-        <Balancer className='text-3xl font-bold leading-tight lg:text-5xl'>
-                    Encuentre un plan que se adapte a sus necesidades.
-        </Balancer>
-      </h1>
+      <div className='mx-auto max-w-2xl py-8 text-center lg:py-12'>
+        <h1 className='text-3xl font-bold leading-tight lg:text-5xl'>
+          Encuentre un plan que se adapte a sus necesidades.
+        </h1>
+      </div>
       <div className='grid gap-4 pb-3 pt-12 lg:grid-cols-3'>
         <PricingCard
           name='Comunidad'
