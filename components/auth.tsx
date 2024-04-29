@@ -59,6 +59,7 @@ export function SignIn() {
       }, {
         loading: 'Iniciando sesión...',
         success: () => {
+          router.refresh()
           router.push('/')
           return 'Sesión iniciada'
         },
@@ -110,7 +111,7 @@ function SignInWhitGoogle() {
   }
 
   return (
-    <button onClick={handleSignIn} className='flex size-12 items-center justify-center rounded-full bg-_gray transition-all hover:opacity-80 dark:hover:opacity-90'>
+    <button onClick={handleSignIn} className='flex size-12 items-center justify-center rounded-full bg-gray transition-all hover:opacity-80 dark:hover:opacity-90'>
       <svg width={16} height={17} viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <mask id='mask0_42_69' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='17'>
           <path d='M15.9034 0H0V17H15.9034V0Z' fill='white' />
