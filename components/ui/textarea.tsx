@@ -16,17 +16,17 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div
         className={clsx(
-          'flex w-full items-center gap-3 rounded-2xl border border-_primary bg-transparent px-5 py-3 text-base font-medium placeholder:text-_grayTextDisabled disabled:cursor-not-allowed disabled:opacity-50 dark:border-_darkText',
-          { 'outline-none ring-2 ring-_primary': isFocused },
+          'flex w-full items-center gap-3 rounded-2xl border border-primary bg-transparent px-5 py-3 text-base font-medium placeholder:text-grayText disabled:cursor-not-allowed disabled:opacity-50 dark:border-darkText',
+          { 'outline-none ring-2 ring-primary': isFocused },
           className,
         )}
       >
         <div className='flex w-full flex-col'>
-          <Label htmlFor={`textarea-${id}`} className='text-xs text-_primary'>{labelText}</Label>
+          <Label htmlFor={`textarea-${id}`} className='text-xs text-primary'>{labelText}</Label>
           <textarea
             id={`textarea-${id}`}
             className={clsx(
-              'flex w-full bg-transparent text-base font-medium placeholder:text-_grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+              'flex w-full bg-transparent text-base font-medium placeholder:text-grayTextLight focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
               className
             )}
             onFocus={() => setIsFocused(true)}
