@@ -18,13 +18,14 @@ body {
   --grayTextLight: #B3B3B3;
   --red: #F22E41;
   --violet: #444CF7;
+  --border: #E7E7E7;
 
   outline-color: var(--primary);
 }
 
 @layer base {
   * {
-    /* @apply border-border; */
+    @apply border-border;
   }
 
   body {
@@ -162,46 +163,5 @@ body {
     border-bottom: 8px solid #00E99E;
     border-right: 8px solid #00E99E;
     border-radius: 15px 0;
-  }
-
-  /* INFINITE LOOPER */
-
-  @keyframes slideAnimation {
-    from {
-      transform: translateX(0%);
-    }
-
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  .looper {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .looper_list {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-  }
-
-  .looper_list_instance {
-    display: flex;
-    width: max-content;
-
-    animation: slideAnimation linear infinite;
-  }
-
-  .looper_list[data-animate='true'] .looper_list_instance {
-    animation: slideAnimation linear infinite;
-  }
-
-  .looper_list_instance {
-    display: flex;
-    width: max-content;
-
-    animation: none;
   }
 }
