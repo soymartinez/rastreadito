@@ -5,6 +5,7 @@
 html,
 body {
   color: #333333;
+  letter-spacing: -0.3px;
 }
 
 * {
