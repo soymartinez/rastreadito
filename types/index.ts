@@ -37,6 +37,20 @@ export type MainNavItem = NavItemWithOptionalChildren
 
 export type SidebarNavItem = NavItemWithChildren
 
+export interface Option {
+  label: string
+  value: string
+  icon?: React.ComponentType<{ className?: string }>
+  withCount?: boolean
+}
+
+export interface DataTableFilterField<TData> {
+  label: string
+  value: keyof TData
+  placeholder?: string
+  options?: Option[]
+}
+
 export type QrProductType = (Qr & { producto: Producto })
 
 export type CategoriaGaleriaType = (Categoria & { galeria: Galeria[] })
