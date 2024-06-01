@@ -1,9 +1,10 @@
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/site/navbar'
 import Brands from '@/components/looper/brands'
 import { InfiniteLooper } from '@/components/looper/infinite-looper'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { createClient } from '@/utils/supabase/server'
+import Footer from '@/components/site/footer'
 
 export default async function LandingPage() {
   const supabase = createClient()
@@ -110,6 +111,8 @@ export default async function LandingPage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   )
 }
