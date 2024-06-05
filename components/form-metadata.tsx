@@ -276,12 +276,12 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
 
                         <div key={id} className='flex flex-col gap-2 overflow-hidden'>
                           <Label className='truncate text-xs font-semibold text-darkText dark:text-white'>{nombre}</Label>
-                          <div className='h-28 w-28' onClick={() => setImagenes(url)}>
+                          <div className='size-28' onClick={() => setImagenes(url)}>
                             {url.length > 0
                               ? url.map((imagenUrl, i) => (
                                 <div key={i} className='absolute'>
                                   {i > 0 &&
-                                    <div className='absolute left-1 top-1 z-40 flex h-6 w-6 items-center justify-center rounded-full bg-dark text-primary'>
+                                    <div className='absolute left-1 top-1 z-40 flex size-6 items-center justify-center rounded-full bg-dark text-primary'>
                                       <Label className='text-xs'>+{url.length}</Label>
                                     </div>}
                                   <ImagePreview
@@ -297,11 +297,10 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                                 title='Galeria vacía'
                                 className={`
                                   relative
-                                  flex h-28
-                                  w-28
+                                  flex size-28
                                   cursor-not-allowed
-                                  items-center 
-                                  justify-center
+                                  items-center
+                                  justify-center 
                                   overflow-hidden
                                   rounded-2xl
                                   border
@@ -328,7 +327,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                         {[...Array(4)].map((_, i) => (
                           <div
                             key={i}
-                            className={'relative m-auto h-28 w-28 animate-pulse rounded-2xl bg-gray dark:bg-darkText'}
+                            className={'relative m-auto size-28 animate-pulse rounded-2xl bg-gray dark:bg-darkText'}
                           />
                         ))}
                       </div>
@@ -421,7 +420,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               <div className='py-4'>
                 <h1 className='text-5xl font-bold'>Galeria</h1>
               </div>
-              <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-gray scrollbar-thumb-rounded-full dark:scrollbar-thumb-darkText sm:scrollbar-thin'>
+              <TabsList className='overflow-x-auto py-2 scrollbar-none scrollbar-thumb-gray scrollbar-thumb-rounded-full sm:scrollbar-thin dark:scrollbar-thumb-darkText'>
                 <div className='flex w-min gap-2'>
                   {categorias.map((categoria: Categoria) => (
                     <TabTrigger

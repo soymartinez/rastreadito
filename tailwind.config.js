@@ -33,6 +33,7 @@ module.exports = {
       blue: '#008FFF',
       transparent: 'transparent',
       current: 'current',
+      inherit: 'inherit',
 
       input: 'var(--input)',
       ring: 'var(--gray)',

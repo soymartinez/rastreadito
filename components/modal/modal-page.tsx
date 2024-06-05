@@ -34,7 +34,7 @@ export default function ModalPage({ children }: ModalPageProps) {
               dark:hover:bg-primary/30
             '
           >
-            <Maximize2 className='h-4 w-4 dark:text-primary' />
+            <Maximize2 className='size-4 dark:text-primary' />
           </button>
           <DialogClose />
         </div>

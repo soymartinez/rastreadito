@@ -2,19 +2,18 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import Balancer from 'react-wrap-balancer'
 import clsx from 'clsx'
 import { ArrowRight } from 'lucide-react'
 import { Producto, Qr } from '@prisma/client'
 
 enum STEPS {
-    PREVIEW = 0,
-    SABOR = 1,
-    FULL = 2,
+  PREVIEW = 0,
+  SABOR = 1,
+  FULL = 2,
 }
 
 type Props = Qr & {
-    producto: Producto
+  producto: Producto
 }
 
 export default function Scanned({
@@ -34,26 +33,26 @@ export default function Scanned({
   const goStep = () => setStep(currentStep => currentStep === 2 ? 0 : currentStep + 1)
 
   const steps = [
-    <Balancer key='0' className='space-y-3 text-center'>
+    <div key='0' className='space-y-3 text-center'>
       <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{nombre}</h1>
       <p className='max-w-2xl text-base font-semibold'>
         {descripcion}
       </p>
-    </Balancer>,
-    <Balancer key='1' className='space-y-3 text-center'>
+    </div>,
+    <div key='1' className='space-y-3 text-center'>
       <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{categoria} / {cepa}</h1>
       <p className='max-w-2xl text-base font-semibold'>
         {aroma} / {efecto}
       </p>
-    </Balancer>,
-    <Balancer key='2' className='space-y-3 text-center'>
+    </div>,
+    <div key='2' className='space-y-3 text-center'>
       <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{nombre}</h1>
       <p className='max-w-2xl text-base font-semibold'>
-                Si eres fanático de los sabores cítricos, este cartucho te encantará.
-                Disfruta de una explosiva mezcla de mango maduro en este cartucho con un sabor
-                intenso y un efecto duradero.
+        Si eres fanático de los sabores cítricos, este cartucho te encantará.
+        Disfruta de una explosiva mezcla de mango maduro en este cartucho con un sabor
+        intenso y un efecto duradero.
       </p>
-    </Balancer>,
+    </div>,
   ]
   return (
     <>
@@ -71,7 +70,7 @@ export default function Scanned({
             justify-center
             rounded-[40px]
             border
-            border-grayBorder
+            border-border
             bg-gray
             px-9
             py-20
@@ -98,7 +97,7 @@ export default function Scanned({
             <button
               onClick={() => setStep(2)}
               className='text-sm font-semibold underline underline-offset-2 hover:opacity-80'>
-                Omitir
+              Omitir
             </button>}
         </div>
       </div>

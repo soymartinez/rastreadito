@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingPage from '../home/page'
+import LandingPage from '../(landing)/home/page'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function page() {

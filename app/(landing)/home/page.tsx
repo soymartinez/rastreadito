@@ -1,18 +1,12 @@
-import Navbar from '@/components/site/navbar'
+import Marquee from 'react-fast-marquee'
+
 import Brands from '@/components/looper/brands'
-import { InfiniteLooper } from '@/components/looper/infinite-looper'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
-import { createClient } from '@/utils/supabase/server'
-import Footer from '@/components/site/footer'
 
 export default async function LandingPage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
   return (
     <main>
-      <Navbar user={user} />
-
       {/* MAIN TEXT */}
       <header className='relative flex h-[400px] w-auto flex-col items-center justify-center px-4 md:h-[550px] lg:h-[600px]'>
         <h1
@@ -89,30 +83,31 @@ export default async function LandingPage() {
       </header>
 
       {/* BRANDS */}
-      <section className='mx-auto mt-16 max-w-4xl px-4 mid:mt-0'>
-        <div className='mx-auto flex max-w-sm items-center justify-between'>
-          <div className='h-0.5 w-9 bg-primary' />
-          <h1 className='text-center text-xs font-bold'>MARCAS INCREÍBLES CONFÍAN EN NOSOTROS</h1>
-          <div className='h-0.5 w-9 bg-primary' />
-        </div>
+      <section className='my-16 px-4 mid:mt-0'>
+        <div className='mx-auto max-w-4xl'>
+          <div className='mx-auto flex max-w-sm items-center justify-between'>
+            <div className='h-0.5 w-9 bg-primary' />
+            <h1 className='text-center text-xs font-bold'>MARCAS INCREÍBLES CONFÍAN EN NOSOTROS</h1>
+            <div className='h-0.5 w-9 bg-primary' />
+          </div>
 
-        <div className='mt-8 flex rounded-xl bg-darkText/5 p-4'>
-          <div className='relative mx-auto flex w-full max-w-[600px] items-center justify-center'>
-            <div className='hidden w-full justify-between sm:flex'>
-              <Brands />
-            </div>
-            <div className='relative w-full sm:hidden'>
-              <div className='absolute left-0 top-0 z-10 -mx-1 h-16 w-24 bg-gradient-to-r from-[#f5f5f5]' />
-              <InfiniteLooper speed={15} direction='left'>
+          <div className='mt-8 flex rounded-xl bg-darkText/5 p-4'>
+            <div className='relative mx-auto flex w-full max-w-[600px] items-center justify-center'>
+              <div className='hidden w-full justify-between sm:flex'>
                 <Brands />
-              </InfiniteLooper>
-              <div className='absolute right-0 top-0 z-10 -mx-1 h-16 w-24 bg-gradient-to-l from-[#f5f5f5]' />
+              </div>
+              <div className='relative w-full sm:hidden'>
+                <Marquee
+                  gradient
+                  gradientColor='#f0f0f0'
+                >
+                  <Brands />
+                </Marquee>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   )
 }

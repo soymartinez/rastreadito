@@ -285,7 +285,7 @@ export default function GaleriaView({
               <div className='flex items-center justify-between gap-4'>
                 <Label className='text-xs font-semibold text-darkText dark:text-primary'>{galeria.nombre}</Label>
                 <button onClick={() => handleDeleteGaleria(galeria)} className='size-8 rounded-md bg-darkText p-1 active:scale-90'>
-                  <Trash className='text-red-400 inline' size={16} />
+                  <Trash className='inline text-red' size={16} />
                 </button>
               </div>
               <div className='grid grid-flow-col justify-start gap-5 overflow-auto scrollbar-none md:scrollbar-thin'>
