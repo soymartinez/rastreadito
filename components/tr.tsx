@@ -7,7 +7,7 @@ import { Maximize2, QrCode } from 'lucide-react'
 import Link from 'next/link'
 import { ActiveButton, DestroyButton, UseButton } from './status'
 import ModalDialog from './modal/modal-dialog'
-import GenerateQr from './generateQr'
+import GenerateQr from './generate-qr'
 
 interface Props {
   data: QrProductType
