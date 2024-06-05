@@ -3,7 +3,6 @@
 import { Back } from '@/components/ui/back'
 import { useRouter } from 'next/navigation'
 import { QrReader } from 'react-qr-reader'
-import Balancer from 'react-wrap-balancer'
 import { toast } from 'sonner'
 
 export default function Scan() {
@@ -41,10 +40,10 @@ export default function Scan() {
         </div>
       </div>
       <div className='flex h-full flex-col items-center justify-center space-y-[380px]'>
-        <Balancer className='text-center'>
+        <div className='text-balance text-center'>
           <h1 className='text-4xl font-bold text-white'>Escanea</h1>
           <p className='font-medium text-grayTextLight'>Encuéntralo en la parte inferior de tu producto</p>
-        </Balancer>
+        </div>
         <div />
       </div>
       <QrReader

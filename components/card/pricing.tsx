@@ -1,4 +1,3 @@
-import Balancer from 'react-wrap-balancer'
 import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
 
@@ -26,9 +25,9 @@ export default function PricingCard({
           <h1 className='text-6xl font-semibold'>{price}</h1>
           {duration && <h1 className='text-end text-base font-semibold'>{duration}</h1>}
         </div>
-        <Balancer className='text-center text-darkText dark:text-grayText'>
+        <span className='text-balance text-center text-darkText dark:text-grayText'>
           {description}
-        </Balancer>
+        </span>
       </div>
       <Button variant={'outline'} className={clsx('mt-4 w-full', {
         'bg-primary border-primary dark:text-dark hover:border-none': popular,
