@@ -2,8 +2,8 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // darkMode: ['selector', '[data-theme="dark"]'],
-  darkMode: ['selector'],
+  darkMode: ['selector', '[data-theme="dark"]'],
+  // darkMode: ['selector'],
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -29,6 +29,8 @@ module.exports = {
       grayTextLight: '#B3B3B3',
       red: '#F22E41',
       violet: '#444CF7',
+      border: '#E7E7E7',
+      blue: '#008FFF',
       transparent: 'transparent',
       current: 'current',
 
@@ -92,6 +94,7 @@ module.exports = {
         '4000': '4000ms',
       },
       screens: {
+        'desktop': '1200px',
         'mid': '979px',
         'xs': '414px',
       },
@@ -101,7 +104,7 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        mid: '0 0 0 1px rgba(0,0,0,.08),0px 1px 1px rgba(0,0,0,.02),0px 4px 8px -4px rgba(0,0,0,.04),0px 16px 24px -8px rgba(0,0,0,.06)',
+        mid: '0px 4px 24px 0px #00000005',
       },
       keyframes: {
         'accordion-down': {
