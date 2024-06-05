@@ -1,7 +1,6 @@
 import React from 'react'
 import LandingPage from '../home/page'
 import { createClient } from '@/utils/supabase/server'
-import Navbar from '@/components/navbar'
 
 export default async function page() {
   const supabase = createClient()
@@ -11,7 +10,6 @@ export default async function page() {
 
   return (
     <main>
-      <Navbar user={user} variant='HOME' />
     </main>
   )
 }
