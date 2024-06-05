@@ -121,7 +121,6 @@ export default async function MainTabs() {
       <TabsContent value='categories'>
         <h1 className='pb-3 pt-6 text-xl font-semibold leading-loose'>Categoria</h1>
         <Suspense fallback={<div>Loading...</div>}>
-          {/* @ts-expect-error Async Server Component */}
           <Categories data={categories} />
         </Suspense>
       </TabsContent>

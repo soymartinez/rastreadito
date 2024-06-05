@@ -209,7 +209,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
           <div className='flex flex-col gap-3'>
             <Input
               name='nombre'
-              labelText='Nombre'
+              // labelText='Nombre'
               placeholder='Purple Kush'
               onChange={(e) => setInfoImages((info) => ({ ...info, nombre: e.target.value }))}
               defaultValue={nombre}
@@ -223,7 +223,9 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
               defaultValue={descripcion}
               required />
             <Select onValueChange={handleGaleria} name='categoria' defaultValue={categoriaProducto} required>
-              <SelectTrigger labelText='Tipo de producto'>
+              <SelectTrigger
+                // labelText='Tipo de producto'
+              >
                 <SelectValue placeholder='Selecciona un tipo de producto' />
               </SelectTrigger>
               <SelectContent>
@@ -244,7 +246,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                 {galeria && galeria.length > 0
                     && <div className='ml-auto flex h-11 w-full max-w-sm items-center justify-end gap-3'>
                       <Input
-                        variant='search'
+                        // variant='search'
                         name='search'
                         onChange={(e) => setSearchGaleria(e.target.value)}
                         placeholder='Buscar por nombre'
@@ -256,7 +258,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                         onClick={() => setUploadImages(!uploadImages)}
                         className='p-2'
                         variant={'outline'}
-                        size={'nothing'}
+                        // size={'nothing'}
                       >
                         <ImagePlus />
                       </Button>
@@ -341,7 +343,7 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
                             onClick={() => setUploadImages(!uploadImages)}
                             className='p-2'
                             variant={'outline'}
-                            size={'nothing'}
+                            // size={'nothing'}
                           >
                             <ImagePlus />
                           </Button>
@@ -360,11 +362,43 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
             <Info />
           </div>
           <div className='flex flex-col gap-3'>
-            <Input name='cepa' labelText='Cepa' placeholder='Purple Kush' defaultValue={cepa} required />
-            <Input name='thc' labelText='THC' placeholder='0.0' required variant='porcentage' defaultValue={thc} />
-            <Input name='cbd' labelText='CBD' placeholder='0.0' required variant='porcentage' defaultValue={cbd} />
-            <Input name='aroma' labelText='Aroma' placeholder='Tierra, pino, dulce' required defaultValue={aroma} />
-            <Input name='efecto' labelText='Efectos' placeholder='Relajante, calmante, eufórico' defaultValue={efecto} required />
+            <Input
+              name='cepa'
+              // labelText='Cepa'
+              placeholder='Purple Kush'
+              defaultValue={cepa}
+              required
+            />
+            <Input
+              name='thc'
+              // labelText='THC'
+              placeholder='0.0'
+              required
+              // variant='porcentage'
+              defaultValue={thc}
+            />
+            <Input
+              name='cbd'
+              // labelText='CBD'
+              placeholder='0.0'
+              required
+              // variant='porcentage'
+              defaultValue={cbd}
+            />
+            <Input
+              name='aroma'
+              // labelText='Aroma'
+              placeholder='Tierra, pino, dulce'
+              required
+              defaultValue={aroma}
+            />
+            <Input
+              name='efecto'
+              // labelText='Efectos'
+              placeholder='Relajante, calmante, eufórico'
+              defaultValue={efecto}
+              required
+            />
           </div>
         </div>
         <div className='flex flex-col gap-4'>
@@ -373,17 +407,77 @@ export default function FormMetadata({ producto, type = 'normal', className, onE
             <Info />
           </div>
           <div className='flex flex-col gap-3'>
-            <Input name='fabricante' labelText='Fabricante' placeholder='Rastreadito' defaultValue={fabricante} required />
-            <Input name='pais' labelText='País' placeholder='México' defaultValue={pais} required />
-            <Input name='proveedor' labelText='Proveedor' placeholder='Rastreadito Co.' defaultValue={proveedor} required />
-            <Input name='precio' labelText='PRECIO' placeholder='0' variant='currency' defaultValue={precio || 0} />
-            <Input name='peso' labelText='PESO' placeholder='0' variant='weight' defaultValue={peso || 0} />
-            <Input name='fechaCosecha' labelText='Cosecha' variant='date' defaultValue={fechaCosecha?.toLocaleString('en-CA').substring(0, 10)} />
-            <Input name='fechaEnvasado' labelText='Envasado' variant='date' defaultValue={fechaEnvasado?.toLocaleString('en-CA').substring(0, 10)} />
-            <Input name='fechaCaducidad' labelText='Caducidad' variant='date' defaultValue={fechaCaducidad?.toLocaleString('en-CA').substring(0, 10)} />
-            <Input name='lote' labelText='Lote' placeholder='RD-2023-01-01' defaultValue={lote || undefined} />
-            <Input name='certificado' labelText='Certificado' placeholder='URL de analisis de laboratorio' defaultValue={certificado || undefined} />
-            <Textarea name='notas' labelText='Notas' placeholder='Este producto se cosecho 4:20am' defaultValue={notas || undefined} />
+            <Input
+              name='fabricante'
+              // labelText='Fabricante'
+              placeholder='Rastreadito'
+              defaultValue={fabricante}
+              required
+            />
+            <Input
+              name='pais'
+              // labelText='País'
+              placeholder='México'
+              defaultValue={pais}
+              required
+            />
+            <Input
+              name='proveedor'
+              // labelText='Proveedor'
+              placeholder='Rastreadito Co.'
+              defaultValue={proveedor}
+              required
+            />
+            <Input
+              name='precio'
+              // labelText='PRECIO'
+              placeholder='0'
+              // variant='currency'
+              defaultValue={precio || 0}
+            />
+            <Input
+              name='peso'
+              // labelText='PESO'
+              placeholder='0'
+              // variant='weight'
+              defaultValue={peso || 0}
+            />
+            <Input
+              name='fechaCosecha'
+              // labelText='Cosecha'
+              // variant='date'
+              defaultValue={fechaCosecha?.toLocaleString('en-CA').substring(0, 10)}
+            />
+            <Input
+              name='fechaEnvasado'
+              // labelText='Envasado'
+              // variant='date'
+              defaultValue={fechaEnvasado?.toLocaleString('en-CA').substring(0, 10)}
+            />
+            <Input
+              name='fechaCaducidad'
+              // labelText='Caducidad'
+              // variant='date'
+              defaultValue={fechaCaducidad?.toLocaleString('en-CA').substring(0, 10)}
+            />
+            <Input
+              name='lote'
+              // labelText='Lote'
+              placeholder='RD-2023-01-01'
+              defaultValue={lote || undefined}
+            />
+            <Input
+              name='certificado'
+              // labelText='Certificado'
+              placeholder='URL de analisis de laboratorio'
+              defaultValue={certificado || undefined}
+            />
+            <Textarea
+              name='notas'
+              labelText='Notas'
+              placeholder='Este producto se cosecho 4:20am'
+              defaultValue={notas || undefined}
+            />
           </div>
         </div>
 

@@ -39,7 +39,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
     const currentFilesArray = Array.from(currentFiles as FileList)
 
     if (index !== undefined) {
-      return cambiarImagen(index, currentFilesArray[0])
+      return cambiarImagen(index, currentFilesArray[0] as File)
     }
 
     if (files.length + currentFilesArray.length > diff) {
@@ -79,7 +79,7 @@ export default function UploadInput({ urls = [], className, onValue, onRemove }:
           >
             <ImagePreview
               alt={`${id}-${index}`}
-              src={files[index]?.file ? URL.createObjectURL(files[index]?.file) : url}
+              src={files[index]?.file ? URL.createObjectURL(files[index]?.file as File) : url}
               onRemoveImage={onRemove && (() => onRemove(url))}
             />
           </label>

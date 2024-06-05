@@ -247,7 +247,7 @@ export default function GaleriaView({
     <main className='flex flex-col gap-4'>
       <div className='ml-auto flex h-12 w-full items-center justify-end gap-3 p-1 md:max-w-sm'>
         <Input
-          variant='search'
+          // variant='search'
           name='search'
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Buscar por nombre'
@@ -258,7 +258,7 @@ export default function GaleriaView({
           onClick={() => setUploadImages(!uploadImages)}
           className='p-2'
           variant={'outline'}
-          size={'nothing'}
+          // size={'nothing'}
         >
           <h1 className='sr-only whitespace-nowrap text-base font-semibold text-grayText'>
             {uploadImages ? 'Cancelar' : 'Subir imágenes'}

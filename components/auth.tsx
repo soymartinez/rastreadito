@@ -9,9 +9,9 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 
 interface Props {
-    name?: string
-    email: string
-    password: string
+  name?: string
+  email: string
+  password: string
 }
 
 export function SignIn() {
@@ -81,8 +81,8 @@ export function SignIn() {
         name='email'
         placeholder='bee@example.com'
         type={'email'}
-        icon={'email'}
-        labelText='Correo electrónico'
+        // icon={'email'}
+        // labelText='Correo electrónico'
         autoComplete='off'
         required
       />
@@ -91,8 +91,8 @@ export function SignIn() {
         name='password'
         placeholder='••••••••'
         type={'password'}
-        icon={'password'}
-        labelText='Contraseña'
+      // icon={'password'}
+      // labelText='Contraseña'
       />
       <Button type='submit' className='w-full gap-2'>
         {loading && <Loader size={20} className='animate-spin' />} {form.email && form.password ? 'Iniciar sesión' : 'Link mágico'}
@@ -162,9 +162,28 @@ function SignUp() {
   }
   return (
     <form onSubmit={handleSignUp} className='mt-10 grid gap-4'>
-      <Input name='name' placeholder='bee' labelText='Nombre' autoComplete='off' required />
-      <Input name='email' placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
-      <Input name='password' placeholder='••••••••' type={'password'} labelText='Contraseña' required />
+      <Input
+        name='name'
+        placeholder='bee'
+        // labelText='Nombre'
+        autoComplete='off'
+        required
+      />
+      <Input
+        name='email'
+        placeholder='bee@example.com'
+        type={'email'}
+        // labelText='Correo electrónico'
+        autoComplete='off'
+        required
+      />
+      <Input
+        name='password'
+        placeholder='••••••••'
+        type={'password'}
+        // labelText='Contraseña'
+        required
+      />
       <Button type='submit' className='w-full'>
         {loading && <Loader size={20} className='animate-spin' />} Registrarse
       </Button>

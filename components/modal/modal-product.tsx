@@ -1,6 +1,6 @@
 import { Label } from '@/components/ui/label'
 import { Producto } from '@prisma/client'
-import ImagePreview from '../../app/(home)/product/[codigo]/image-preview'
+// import ImagePreview from '../../app/(home)/product/[codigo]/image-preview'
 import ModalPage from '../modal/modal-page'
 
 export default function ModalProduct({ data }: { data: Producto }) {
@@ -35,7 +35,7 @@ export default function ModalProduct({ data }: { data: Producto }) {
       </div>
       <div className='flex flex-col gap-12 overflow-auto scrollbar-thin'>
         <div className='grid items-center gap-12'>
-          <ImagePreview imagenes={imagen} alt={nombre} />
+          {/* <ImagePreview imagenes={imagen} alt={nombre} /> */}
           <div className='flex flex-col gap-7 p-2'>
             <div className='md:order-2'>
               <Label className='text-xs font-semibold uppercase text-grayTextLight'>Descripción</Label>
