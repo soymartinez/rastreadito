@@ -247,7 +247,7 @@ export default function GaleriaView({
     <main className='flex flex-col gap-4'>
       <div className='ml-auto flex h-12 w-full items-center justify-end gap-3 p-1 md:max-w-sm'>
         <Input
-          variant='search'
+          // variant='search'
           name='search'
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Buscar por nombre'
@@ -258,9 +258,9 @@ export default function GaleriaView({
           onClick={() => setUploadImages(!uploadImages)}
           className='p-2'
           variant={'outline'}
-          size={'nothing'}
+          // size={'nothing'}
         >
-          <h1 className='sr-only whitespace-nowrap text-base font-semibold text-_grayText'>
+          <h1 className='sr-only whitespace-nowrap text-base font-semibold text-grayText'>
             {uploadImages ? 'Cancelar' : 'Subir imágenes'}
           </h1>
           {uploadImages ? <X size={24} /> : <ImagePlus />}
@@ -283,9 +283,9 @@ export default function GaleriaView({
           {filteredGalerias?.map((galeria) => (
             <div key={galeria.id} className='flex flex-col gap-2'>
               <div className='flex items-center justify-between gap-4'>
-                <Label className='text-xs font-semibold text-_darkText dark:text-_primary'>{galeria.nombre}</Label>
-                <button onClick={() => handleDeleteGaleria(galeria)} className='size-8 rounded-md bg-_darkText p-1 active:scale-90'>
-                  <Trash className='inline text-red-400' size={16} />
+                <Label className='text-xs font-semibold text-darkText dark:text-primary'>{galeria.nombre}</Label>
+                <button onClick={() => handleDeleteGaleria(galeria)} className='size-8 rounded-md bg-darkText p-1 active:scale-90'>
+                  <Trash className='inline text-red' size={16} />
                 </button>
               </div>
               <div className='grid grid-flow-col justify-start gap-5 overflow-auto scrollbar-none md:scrollbar-thin'>
@@ -304,7 +304,7 @@ export default function GaleriaView({
               {[...Array(9)].map((_, i) => (
                 <div
                   key={i}
-                  className={'relative m-auto size-28 animate-pulse rounded-2xl bg-_gray dark:bg-_darkText'}
+                  className={'relative m-auto size-28 animate-pulse rounded-2xl bg-gray dark:bg-darkText'}
                 />
               ))}
             </div>

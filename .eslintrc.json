@@ -17,6 +17,7 @@
       "error",
       "single"
     ],
+    "no-multi-spaces": "error",
     "react-hooks/exhaustive-deps": "off"
   }
 }

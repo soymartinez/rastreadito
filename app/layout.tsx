@@ -2,7 +2,7 @@ import './globals.css'
 import { Metadata } from 'next'
 // import { Analytics } from '@vercel/analytics/react'
 import { font } from '@/lib/font'
-import { ThemeProvider } from '@/components/provider'
+import { ThemeProvider } from '@/components/theme-provider'
 import Toast from '@/components/toast'
 import { siteConfig } from '@/config/site'
 
@@ -23,18 +23,26 @@ export default async function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={`
-          bg-_white
-          text-_darkText
+          min-h-screen
+          bg-white2
+          text-darkText
+          antialiased
           scrollbar-thin
-          scrollbar-thumb-_gray
+          scrollbar-thumb-gray
           scrollbar-thumb-rounded-full
-          dark:bg-_dark
-          dark:text-_white
-          dark:scrollbar-thumb-_darkText 
+          selection:bg-primary
+          dark:bg-dark
+          dark:text-white
+          dark:scrollbar-thumb-darkText
           ${font.className}
         `}
       >
-        <ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
           {/* <Analytics /> */}
         </ThemeProvider>

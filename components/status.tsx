@@ -1,7 +1,7 @@
 import { Check, Tag, X } from 'lucide-react'
 
 export const ActiveButton = () => (
-  <div className='flex w-min items-center justify-center gap-1 rounded-full bg-_primary/[15%] px-3 py-1 text-_primary'>
+  <div className='flex w-min items-center justify-center gap-1 rounded-full bg-primary/[15%] px-3 py-1 text-primary'>
     <Check size={18} /> Activo
   </div>
 )
@@ -13,7 +13,7 @@ export const UseButton = () => (
 )
 
 export const DestroyButton = () => (
-  <div className='flex w-min items-center justify-center gap-1 rounded-full bg-_darkText/[15%] px-3 py-1 text-_darkText dark:bg-_darkText dark:text-_white/70'>
+  <div className='flex w-min items-center justify-center gap-1 rounded-full bg-darkText/[15%] px-3 py-1 text-darkText dark:bg-darkText dark:text-white/70'>
     <X size={18} /> Destruído
   </div>
 )

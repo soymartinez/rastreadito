@@ -110,8 +110,8 @@ export default function NewGallery({
       animate={'animate'}
       exit={'initial'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={clsx('relative w-full rounded-2xl dark:bg-_dark', {
-        'border border-_gray dark:border-_darkText p-4': boundary,
+      className={clsx('relative w-full rounded-2xl dark:bg-dark', {
+        'border border-gray dark:border-darkText p-4': boundary,
       })}
     >
       <form
@@ -125,9 +125,27 @@ export default function NewGallery({
             <UploadInput onValue={(files) => setFiles(files)} className='size-full' />
           </div>
         </div>
-        <Input name='nombre' className='col-span-4 col-start-3 row-start-1' labelText='Nombre' defaultValue={nombre} required />
-        <Input name='descripcion' className='col-span-4 col-start-3 row-start-2' labelText='Descripción' defaultValue={descripcion} />
-        <Input name='categoria' className='col-span-4 col-start-3 row-start-3' labelText='Categoría' defaultValue={categoria} disabled={categoria ? true : false} required />
+        <Input
+          name='nombre'
+          className='col-span-4 col-start-3 row-start-1'
+          // labelText='Nombre'
+          defaultValue={nombre}
+          required
+        />
+        <Input
+          name='descripcion'
+          className='col-span-4 col-start-3 row-start-2'
+          // labelText='Descripción'
+          defaultValue={descripcion}
+        />
+        <Input
+          name='categoria'
+          className='col-span-4 col-start-3 row-start-3'
+          // labelText='Categoría'
+          defaultValue={categoria}
+          disabled={categoria ? true : false}
+          required
+        />
         <Button variant='default' className='col-span-4 col-start-3 row-start-4'>Subir</Button>
       </form>
     </motion.div>

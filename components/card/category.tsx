@@ -17,15 +17,15 @@ export default function CategoryCard({ props: {
         gap-4
         overflow-auto
         rounded-2xl
-        bg-_dark
+        bg-dark
         p-4
         transition-all
-        hover:bg-_dark/95
-        dark:bg-_darkText
-        dark:hover:bg-_darkText/80
+        hover:bg-dark/95
+        dark:bg-darkText
+        dark:hover:bg-darkText/80
       '
     >
-      <h1 className='text-xl font-semibold capitalize text-_white'>{acronimo.toLowerCase()}</h1>
+      <h1 className='text-xl font-semibold capitalize text-white'>{acronimo.toLowerCase()}</h1>
       <Image src={imagen || ''} alt={acronimo} width={44} height={44} />
     </Link>
   )

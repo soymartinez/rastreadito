@@ -9,9 +9,9 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 
 interface Props {
-    name?: string
-    email: string
-    password: string
+  name?: string
+  email: string
+  password: string
 }
 
 export function SignIn() {
@@ -59,6 +59,7 @@ export function SignIn() {
       }, {
         loading: 'Iniciando sesión...',
         success: () => {
+          router.refresh()
           router.push('/')
           return 'Sesión iniciada'
         },
@@ -80,8 +81,8 @@ export function SignIn() {
         name='email'
         placeholder='bee@example.com'
         type={'email'}
-        icon={'email'}
-        labelText='Correo electrónico'
+        // icon={'email'}
+        // labelText='Correo electrónico'
         autoComplete='off'
         required
       />
@@ -90,8 +91,8 @@ export function SignIn() {
         name='password'
         placeholder='••••••••'
         type={'password'}
-        icon={'password'}
-        labelText='Contraseña'
+      // icon={'password'}
+      // labelText='Contraseña'
       />
       <Button type='submit' className='w-full gap-2'>
         {loading && <Loader size={20} className='animate-spin' />} {form.email && form.password ? 'Iniciar sesión' : 'Link mágico'}
@@ -110,7 +111,7 @@ function SignInWhitGoogle() {
   }
 
   return (
-    <button onClick={handleSignIn} className='flex size-12 items-center justify-center rounded-full bg-_gray transition-all hover:opacity-80 dark:hover:opacity-90'>
+    <button onClick={handleSignIn} className='flex size-12 items-center justify-center rounded-full bg-gray transition-all hover:opacity-80 dark:hover:opacity-90'>
       <svg width={16} height={17} viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <mask id='mask0_42_69' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='17'>
           <path d='M15.9034 0H0V17H15.9034V0Z' fill='white' />
@@ -161,9 +162,28 @@ function SignUp() {
   }
   return (
     <form onSubmit={handleSignUp} className='mt-10 grid gap-4'>
-      <Input name='name' placeholder='bee' labelText='Nombre' autoComplete='off' required />
-      <Input name='email' placeholder='bee@example.com' type={'email'} labelText='Correo electrónico' autoComplete='off' required />
-      <Input name='password' placeholder='••••••••' type={'password'} labelText='Contraseña' required />
+      <Input
+        name='name'
+        placeholder='bee'
+        // labelText='Nombre'
+        autoComplete='off'
+        required
+      />
+      <Input
+        name='email'
+        placeholder='bee@example.com'
+        type={'email'}
+        // labelText='Correo electrónico'
+        autoComplete='off'
+        required
+      />
+      <Input
+        name='password'
+        placeholder='••••••••'
+        type={'password'}
+        // labelText='Contraseña'
+        required
+      />
       <Button type='submit' className='w-full'>
         {loading && <Loader size={20} className='animate-spin' />} Registrarse
       </Button>

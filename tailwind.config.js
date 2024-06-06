@@ -2,7 +2,8 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: ['selector', '[data-theme="dark"]'],
+  // darkMode: ['selector'],
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -17,19 +18,53 @@ module.exports = {
         '2xl': '1400px',
       },
     },
-    extend: {
-      colors: {
-        _primary: '#00E99E',
-        _primaryLight: '#DDFCF2',
-        _white: '#FFFFFF',
-        _dark: '#1B1B1B',
-        _darkText: '#333333',
-        _gray: '#F0F0F0',
-        _grayText: '#8D8D8D',
-        _grayTextLight: '#B3B3B3',
-        _grayTextDisabled: '#E0E0E0',
-        _grayBorder: '#C5C5C5',
+    colors: {
+      primary: '#00E99E',
+      white: '#FFFFFF',
+      white2: '#FAFAFA',
+      dark: '#1B1B1B',
+      darkText: '#333333',
+      gray: '#EDEDED',
+      grayText: '#8D8D8D',
+      grayTextLight: '#B3B3B3',
+      red: '#F22E41',
+      violet: '#444CF7',
+      border: '#E7E7E7',
+      blue: '#008FFF',
+      transparent: 'transparent',
+      current: 'current',
+      inherit: 'inherit',
+
+      input: 'var(--input)',
+      ring: 'var(--gray)',
+      background: 'var(--background)',
+      foreground: 'var(--foreground)',
+      secondary: {
+        DEFAULT: 'var(--secondary)',
+        foreground: 'var(--secondary-foreground)',
       },
+      destructive: {
+        DEFAULT: 'var(--destructive)',
+        foreground: 'var(--destructive-foreground)',
+      },
+      muted: {
+        DEFAULT: 'var(--muted)',
+        foreground: 'var(--muted-foreground)',
+      },
+      accent: {
+        DEFAULT: 'var(--accent)',
+        foreground: 'var(--accent-foreground)',
+      },
+      popover: {
+        DEFAULT: 'var(--white)',
+        foreground: 'var(--popover-foreground)',
+      },
+      card: {
+        DEFAULT: 'var(--card)',
+        foreground: 'var(--card-foreground)',
+      },
+    },
+    extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
@@ -60,48 +95,17 @@ module.exports = {
         '4000': '4000ms',
       },
       screens: {
+        'desktop': '1200px',
         'mid': '979px',
         'xs': '414px',
-      },
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      boxShadow: {
+        mid: '0px 4px 24px 0px #00000005',
       },
       keyframes: {
         'accordion-down': {

@@ -18,10 +18,11 @@ export const getRelativeTime = (epochTime: number) => {
   for (const unit in DATE_UNITS) {
     const absoluteElapsed = Math.abs(elapsed)
 
-    if (absoluteElapsed > DATE_UNITS[unit] || unit === 'second') {
+    const unitValue = DATE_UNITS[unit as keyof typeof DATE_UNITS]
+    if (unitValue !== undefined && (absoluteElapsed > unitValue || unit === 'second')) {
       return rtf.format(
-        Math.round(elapsed / DATE_UNITS[unit]),
-                unit as Intl.RelativeTimeFormatUnit
+        Math.round(elapsed / unitValue),
+        unit as Intl.RelativeTimeFormatUnit
       )
     }
   }

@@ -3,11 +3,8 @@ import type { FooterItem, MainNavItem } from '@/types'
 export type SiteConfig = typeof siteConfig
 
 const links = {
-  x: 'https://twitter.com/rastreadito',
-  github: 'https://github.com/omgismartinez/rastreadito',
-  githubAccount: 'https://github.com/omgismartinez',
-  discord: 'https://discord.com/users/rastreadito',
-  calDotCom: 'https://cal.com/rastreadito',
+  x: 'https://x.com/rastreadito',
+  ig: 'https://instagram.com/rastreadito',
 }
 
 export const siteConfig = {
@@ -113,18 +110,8 @@ export const siteConfig = {
           external: true,
         },
         {
-          title: 'GitHub',
-          href: links.githubAccount,
-          external: true,
-        },
-        {
-          title: 'Discord',
-          href: links.discord,
-          external: true,
-        },
-        {
-          title: 'cal.com',
-          href: links.calDotCom,
+          title: 'Instagram',
+          href: links.ig,
           external: true,
         },
       ],

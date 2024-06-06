@@ -5,7 +5,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, LucideProps } from 'lucide-react'
 import clsx from 'clsx'
-import { revalidateAction } from '@/app/(home)/actions/revalidate'
+// import { revalidateAction } from '@/app/(home)/actions/revalidate'
 
 interface BackProps extends LucideProps {
     pushRoute?: string,
@@ -17,12 +17,12 @@ const Back = React.forwardRef<SVGSVGElement, BackProps>(
     const { back, push } = useRouter()
     return <ChevronLeft
       ref={ref}
-      className={clsx('mx-3 cursor-pointer text-_dark dark:text-_white', className)}
+      className={clsx('mx-3 cursor-pointer text-dark dark:text-white', className)}
       size={32}
       strokeWidth={3}
       onClick={async () => {
-        revalidate && await revalidateAction(revalidate)
-        pushRoute && await revalidateAction(pushRoute)
+        // revalidate && await revalidateAction(revalidate)
+        // pushRoute && await revalidateAction(pushRoute)
         pushRoute
           ? push(pushRoute)
           : back()

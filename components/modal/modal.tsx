@@ -41,7 +41,7 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
   return (
     <>
       <motion.div
-        className='fixed inset-0 z-50 h-screen w-full bg-_dark/80 backdrop-blur-sm'
+        className='fixed inset-0 z-50 h-screen w-full bg-dark/80 backdrop-blur-sm'
         initial='hidden'
         animate='visible'
         exit='hidden'
@@ -63,11 +63,11 @@ export default function Modal({ children, onClose }: { children: React.ReactNode
         dragElastic={0.8}
         onDragEnd={handleDragEnd}
       >
-        <div className='mx-auto my-2 h-[10px] w-24 rounded-full bg-_white dark:bg-_darkText' />
+        <div className='mx-auto my-2 h-[10px] w-24 rounded-full bg-white dark:bg-darkText' />
         <motion.div
           ref={constraintsRef}
           style={{ height: 'calc(100% - 26px)' }}
-          className='relative overflow-hidden rounded-t-[50px] bg-_white dark:bg-_darkText'>
+          className='relative overflow-hidden rounded-t-[50px] bg-white dark:bg-darkText'>
           <motion.div
             className='absolute inset-x-0 rounded-t-[50px]'
             drag='y'

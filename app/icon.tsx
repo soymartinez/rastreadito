@@ -13,7 +13,7 @@ export default function Icon() {
     (
       // ImageResponse JSX element
       <div
-        tw="flex items-center justify-center bg-_primary text-[24px] leading-8 text-white rounded-full italic uppercase"
+        tw='flex items-center justify-center bg-[#00E99E] text-[24px] leading-8 rounded-full italic uppercase'
         style={{
           width: 32,
           height: 32,
