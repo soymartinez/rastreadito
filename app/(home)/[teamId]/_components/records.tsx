@@ -41,35 +41,56 @@ export const records: Record[] = [
   },
   {
     id: 'rd101',
-    key: 'RD-200ER CART',
+    key: 'RD-201ER CART',
     status: 'active',
     description: 'Rastreos realizados',
     date: new Date(new Date().setMinutes(-1))
   },
   {
     id: 'rd102',
-    key: 'RD-200ER CART',
+    key: 'RD-202ER CART',
     status: 'inactive',
     description: 'Rastreos realizados',
     date: new Date(new Date().setHours(-1))
   },
   {
     id: 'rd103',
-    key: 'RD-200ER CART',
+    key: 'RD-203ER CART',
     status: 'destroyed',
     description: 'Rastreos realizados',
     date: new Date(new Date().setMonth(-1))
   },
   {
     id: 'rd104',
-    key: 'RD-200ER CART',
+    key: 'RD-204ER CART',
     status: 'inactive',
     description: 'Rastreos realizados',
     date: new Date(new Date().setHours(-1))
   },
   {
     id: 'rd105',
-    key: 'RD-200ER CART',
+    key: 'RD-205ER CART',
+    status: 'inactive',
+    description: 'Rastreos realizados',
+    date: new Date(new Date().setHours(-1))
+  },
+  {
+    id: 'rd106',
+    key: 'RD-206ER CART',
+    status: 'destroyed',
+    description: 'Rastreos realizados',
+    date: new Date(new Date().setMonth(-1))
+  },
+  {
+    id: 'rd107',
+    key: 'RD-207ER CART',
+    status: 'inactive',
+    description: 'Rastreos realizados',
+    date: new Date(new Date().setHours(-1))
+  },
+  {
+    id: 'rd108',
+    key: 'RD-208ER CART',
     status: 'inactive',
     description: 'Rastreos realizados',
     date: new Date(new Date().setHours(-1))
