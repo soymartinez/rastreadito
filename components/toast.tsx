@@ -15,7 +15,7 @@ export default function Toast() {
           fontWeight: 600,
         },
       }}
-      position='top-right'
+      position='bottom-right'
       theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
       expand={true}
       closeButton
