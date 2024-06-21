@@ -41,6 +41,7 @@ import {
 import DynamicModal from '@/components/modal/dynamic-modal'
 import GenerateQr from '@/components/generate-qr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface RecordsTableProps {
   data: Record[]
@@ -108,20 +109,49 @@ export function RecordsTable({
         header: 'Estatus',
         cell({ row }) {
           const status = row.original.status
+          const date = row.original.date.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })
+          const time = row.original.date.toLocaleTimeString('es-MX', { hour: 'numeric', minute: 'numeric' })
           return (
-            <Button
-              className={clsx('hover:bg-current/80 flex h-5 items-center p-2 text-[12px] font-medium', {
-                'bg-primary': status === 'active',
-                'bg-gray': status === 'inactive',
-                'bg-red text-white': status === 'destroyed',
-              })}
-            >
-              <Dot className='-ml-2 -mr-1' />
+            <TooltipProvider delayDuration={150}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    className={clsx('hover:bg-current/80 flex h-5 items-center p-2 text-[12px] font-medium', {
+                      'bg-primary': status === 'active',
+                      'bg-gray': status === 'inactive',
+                      'bg-violet text-white': status === 'destroyed',
+                    })}
+                  >
+                    <Dot className='-ml-2 -mr-1' />
 
-              {status === 'active' && 'Activo'}
-              {status === 'inactive' && 'Inactivo'}
-              {status === 'destroyed' && 'Destruido'}
-            </Button>
+                    {status === 'active' && 'Activo'}
+                    {status === 'inactive' && 'Inactivo'}
+                    {status === 'destroyed' && 'Canjeado'}
+                  </Button>
+
+                </TooltipTrigger>
+                <TooltipContent className='w-[280px] border bg-white/90 text-xs backdrop-blur-sm'>
+                  {status === 'active' && (
+                    <span>
+                      El producto fue activado el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                  {status === 'inactive' && (
+                    <span>
+                      El producto está inactivo desde el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                  {status === 'destroyed' && (
+                    <span>
+                      El producto fue escaneado/canjeado el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )
         },
       },
