@@ -18,6 +18,14 @@ const menu = [
     href: '/historial'
   },
   {
+    label: 'Usuarios',
+    href: '/usuarios'
+  },
+  {
+    label: 'Actividades',
+    href: '/actividades'
+  },
+  {
     label: 'Recompensas',
     href: '/recompensas'
   },
