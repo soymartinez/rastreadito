@@ -68,7 +68,7 @@ export default function TrafficSources({ className }: Props) {
       </div>
 
       {/* BODY */}
-      <div className='space-y-4'>
+      <div className='space-y-4 last:mb-4'>
         {data.map((traffic, index) => (
           <div key={index}>
             <div className='flex justify-between text-sm font-semibold text-grayText'>
