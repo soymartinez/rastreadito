@@ -1,6 +1,5 @@
 'use client'
 
-import clsx from 'clsx'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 
@@ -49,7 +48,7 @@ export default function StackMenu() {
             // TODO: mejorar menu activo + animaciones
             className={'group border-b-2 border-white px-3 py-4 text-sm font-normal leading-none data-[selected="true"]:border-dark'}
           >
-            <span className='group-data-[selected="true"]:font-medium'>
+            <span className='text-grayText group-data-[selected="true"]:font-medium group-data-[selected="true"]:text-dark'>
               {item.label}
             </span>
           </Link>
