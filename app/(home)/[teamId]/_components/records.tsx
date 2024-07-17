@@ -16,16 +16,6 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { RecordsTable } from '@/components/tables/records/records-table'
 import { Record } from '@/types/record'
-import { ColumnDef } from '@tanstack/react-table'
-import { getRelativeTime } from '@/lib/timeago'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 
 interface Props {
   className?: string
