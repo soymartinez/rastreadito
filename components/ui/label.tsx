@@ -5,10 +5,15 @@ import * as LabelPrimitive from '@radix-ui/react-label'
 
 import clsx from 'clsx'
 
+export interface LabelProps
+  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+  required?: boolean
+}
+
 const Label = React.forwardRef<
-React.ElementRef<typeof LabelPrimitive.Root>,
-React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => (
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  LabelProps
+>(({ className, required, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
     className={clsx(
@@ -16,7 +21,10 @@ React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
       className
     )}
     {...props}
-  />
+  >
+    {props.children}{' '}
+    {required && <span className='text-red'>*</span>}
+  </LabelPrimitive.Root>
 ))
 Label.displayName = LabelPrimitive.Root.displayName
 
