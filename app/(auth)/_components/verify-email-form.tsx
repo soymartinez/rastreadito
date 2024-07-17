@@ -26,8 +26,6 @@ interface Props {
 }
 
 export function VerifyEmailForm({ onSucceded }: Props) {
-  const email = localStorage.getItem('email-to-verify')
-
   const [loading, setLoading] = React.useState(false)
 
   const form = useForm<Inputs>({
@@ -41,7 +39,7 @@ export function VerifyEmailForm({ onSucceded }: Props) {
     setLoading(true)
     const res = await fetch('/api/auth/register/verify-otp', {
       method: 'POST',
-      body: JSON.stringify({ email, code: data.code }),
+      body: JSON.stringify({ email: localStorage.getItem('email-to-verify'), code: data.code }),
     })
 
     if (res.status === 200) {

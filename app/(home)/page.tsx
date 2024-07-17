@@ -3,7 +3,7 @@ import LandingPage from '../(landing)/home/page'
 import { createClient } from '@/utils/supabase/server'
 import { env } from '@/env'
 
-export default async function page(req: Request) {
+export default async function page() {
   const supabase = createClient()
   const { data } = await supabase.auth.getUser()
   const userId = data.user?.user_metadata.id

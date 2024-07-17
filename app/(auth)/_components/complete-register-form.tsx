@@ -10,14 +10,12 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Loader } from 'lucide-react'
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
 import { Input } from '@/components/ui/input'
 import { AuthError } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'

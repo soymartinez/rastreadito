@@ -102,7 +102,7 @@ export function ProductsTable({
         accessorKey: 'key',
         header: 'Cargo No',
         cell({ row }) {
-          return <h1 className='whitespace-nowrap text-sm font-semibold'>{row.original.key}</h1>
+          return <h1 className='whitespace-nowrap text-sm font-semibold'>{row.original.id}</h1>
         },
       },
       {
@@ -132,7 +132,7 @@ export function ProductsTable({
 
                 </TooltipTrigger>
                 <TooltipContent className='w-[280px] border bg-white/90 text-xs backdrop-blur-sm'>
-                  {status === 'active' && (
+                  {/* {status === 'active' && (
                     <span>
                       El producto fue activado el <b className='font-semibold'>{date}</b>{' '}
                       a las <b className='font-semibold'>{time}</b>
@@ -149,7 +149,7 @@ export function ProductsTable({
                       El producto fue escaneado/canjeado el <b className='font-semibold'>{date}</b>{' '}
                       a las <b className='font-semibold'>{time}</b>
                     </span>
-                  )}
+                  )} */}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -160,15 +160,15 @@ export function ProductsTable({
         accessorKey: 'description',
         header: 'Descriptión',
         cell({ row }) {
-          return <h1 className='text-sm font-medium'>{row.original.description}</h1>
+          // return <h1 className='text-sm font-medium'>{row.original.description}</h1>
         },
       },
       {
         accessorKey: 'date',
         header: 'Registro',
         cell({ row }) {
-          const dateFormated = getRelativeTime(row.original.date.getTime() / 1000)
-          return <span className='text-sm font-medium'>{dateFormated}</span>
+          // const dateFormated = getRelativeTime(row.original.date.getTime() / 1000)
+          // return <span className='text-sm font-medium'>{dateFormated}</span>
         },
       },
       {

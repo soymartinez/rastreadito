@@ -1,7 +1,7 @@
 import { ProductsTable } from '@/components/tables/products-table'
 import { Product } from '@/types/product'
 
-export const data: Product[] = [
+const data: Product[] = [
   {
     id: 'rd100',
     code: 'RD-200ER CART',
@@ -12,7 +12,7 @@ export const data: Product[] = [
     stock: 3,
     thc: 23,
     unitPrice: 234,
-  },
+  }
 ]
 
 export default function Products() {

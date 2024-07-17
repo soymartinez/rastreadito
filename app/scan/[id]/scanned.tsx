@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { ArrowRight } from 'lucide-react'
-import { Producto, Qr } from '@prisma/client'
+import { Product, Qr } from '@prisma/client'
 
 enum STEPS {
   PREVIEW = 0,
@@ -13,20 +13,11 @@ enum STEPS {
 }
 
 type Props = Qr & {
-  producto: Producto
+  product: Product
 }
 
 export default function Scanned({
-  producto: {
-    nombre,
-    descripcion,
-    categoria,
-    cepa,
-    thc,
-    cbd,
-    aroma,
-    efecto,
-  },
+  product
 }: Props) {
   const [step, setStep] = useState(STEPS.PREVIEW)
 
@@ -34,19 +25,19 @@ export default function Scanned({
 
   const steps = [
     <div key='0' className='space-y-3 text-center'>
-      <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{nombre}</h1>
+      <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{product.name}</h1>
       <p className='max-w-2xl text-base font-semibold'>
-        {descripcion}
+        {product.description}
       </p>
     </div>,
     <div key='1' className='space-y-3 text-center'>
-      <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{categoria} / {cepa}</h1>
+      {/* <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{categoria} / {cepa}</h1>
       <p className='max-w-2xl text-base font-semibold'>
         {aroma} / {efecto}
-      </p>
+      </p> */}
     </div>,
     <div key='2' className='space-y-3 text-center'>
-      <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{nombre}</h1>
+      <h1 className='text-4xl font-bold uppercase text-dark dark:text-white'>{product.name}</h1>
       <p className='max-w-2xl text-base font-semibold'>
         Si eres fanático de los sabores cítricos, este cartucho te encantará.
         Disfruta de una explosiva mezcla de mango maduro en este cartucho con un sabor
