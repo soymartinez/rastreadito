@@ -1,10 +1,4 @@
 import { Icons } from '@/components/icons'
-import {
-  Categoria,
-  Galeria,
-  Producto,
-  Qr
-} from '@prisma/client'
 
 export interface NavItem {
   title: string
@@ -50,7 +44,3 @@ export interface DataTableFilterField<TData> {
   placeholder?: string
   options?: Option[]
 }
-
-export type QrProductType = (Qr & { producto: Producto })
-
-export type CategoriaGaleriaType = (Categoria & { galeria: Galeria[] })

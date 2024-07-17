@@ -1,96 +1,86 @@
 'use client'
 
 import { toast } from 'sonner'
-import { FileBarChart2 } from 'lucide-react'
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Dot, FileBarChart2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
 
-// TODO: ONLY FOR TEST
-type ChartData = Array<{
-  date: string,
-  Activo: number,
-  Inactivo: number,
-  Destruido: number
-}>
-
-const chartdata: ChartData = [
+const data = [
   {
-    date: 'Enero',
-    Activo: 2890,
-    Inactivo: 2338,
-    Destruido: 3253
+    'fecha': 'Enero',
+    'Inactivo': 400,
+    'Activo': 0,
+    'Canjeado': 0
   },
   {
-    date: 'Febrero',
-    Activo: 2890,
-    Inactivo: 2342,
-    Destruido: 1342
+    'fecha': 'Febrero',
+    'Inactivo': 400,
+    'Activo': 0,
+    'Canjeado': 0
   },
   {
-    date: 'Marzo',
-    Activo: 4452,
-    Inactivo: 3234,
-    Destruido: 4234
+    'fecha': 'Marzo',
+    'Inactivo': 200,
+    'Activo': 400,
+    'Canjeado': 100
   },
   {
-    date: 'Abril',
-    Activo: 1729,
-    Inactivo: 234,
-    Destruido: 2222
+    'fecha': 'Abril',
+    'Inactivo': 150,
+    'Activo': 500,
+    'Canjeado': 150
   },
   {
-    date: 'Mayo',
-    Activo: 4352,
-    Inactivo: 3234,
-    Destruido: 4034
+    'fecha': 'Mayo',
+    'Inactivo': 100,
+    'Activo': 550,
+    'Canjeado': 100
   },
   {
-    date: 'Junio',
-    Activo: 3452,
-    Inactivo: 3234,
-    Destruido: 4234
+    'fecha': 'Junio',
+    'Inactivo': 50,
+    'Activo': 700,
+    'Canjeado': 100
   },
   {
-    date: 'Julio',
-    Activo: 2389,
-    Inactivo: 234,
-    Destruido: 5346
+    'fecha': 'Julio',
+    'Inactivo': 80,
+    'Activo': 750,
+    'Canjeado': 70
   },
   {
-    date: 'Agosto',
-    Activo: 4345,
-    Inactivo: 234,
-    Destruido: 5323
+    'fecha': 'Agosto',
+    'Inactivo': 60,
+    'Activo': 800,
+    'Canjeado': 90
   },
   {
-    date: 'Septiembre',
-    Activo: 5345,
-    Inactivo: 2233,
-    Destruido: 2342
+    'fecha': 'Septiembre',
+    'Inactivo': 90,
+    'Activo': 850,
+    'Canjeado': 60
   },
   {
-    date: 'Octubre',
-    Activo: 1234,
-    Inactivo: 5235,
-    Destruido: 6455
+    'fecha': 'Octubre',
+    'Inactivo': 100,
+    'Activo': 800,
+    'Canjeado': 200
   },
   {
-    date: 'Noviembre',
-    Activo: 23,
-    Inactivo: 525,
-    Destruido: 3443
+    'fecha': 'Noviembre',
+    'Inactivo': 80,
+    'Activo': 950,
+    'Canjeado': 300
   },
   {
-    date: 'Diciembre',
-    Activo: 6434,
-    Inactivo: 233,
-    Destruido: 639
+    'fecha': 'Diciembre',
+    'Inactivo': 100,
+    'Activo': 800,
+    'Canjeado': 500
   },
 ]
-
-const dataFormatter = (number: number) =>
-  `$${Intl.NumberFormat('us').format(number).toString()}`
 
 interface Props {
   className?: string
@@ -113,25 +103,81 @@ export default function ReportRecords({ className }: Props) {
       </div>
 
       {/* GRAPH */}
-      <div>
-        {/* <AreaChart
-          className="h-[270px]"
-          data={chartdata}
-          index="date"
-          showYAxis={false}
-          showAnimation
-          showGradient
-          showGridLines
-          showLegend
-          showTooltip
-          suppressHydrationWarning
-          categories={['Activo', 'Inactivo', 'Destruido']}
-          colors={['primary', '', 'violet']}
-          valueFormatter={dataFormatter}
-          yAxisWidth={60}
-          onValueChange={(v) => console.log(v)}
-        /> */}
-      </div>
+      <ResponsiveContainer className={'max-h-[248px] w-full'}>
+        <AreaChart
+          data={data}
+          margin={{ top: 0, right: 0, left: 0, bottom: 5 }}
+        >
+          <defs>
+            <linearGradient id='colorTotal' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='violet' stopOpacity={0.5} />
+              <stop offset='95%' stopColor='violet' stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id='colorActive' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#00E99E' stopOpacity={0.5} />
+              <stop offset='95%' stopColor='#00E99E' stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id='colorInactive' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#d3d7de' stopOpacity={0.5} />
+              <stop offset='95%' stopColor='#d3d7de' stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id='colorDestroyed' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#444CF7' stopOpacity={0.5} />
+              <stop offset='95%' stopColor='#444CF7' stopOpacity={0} />
+            </linearGradient>
+          </defs>
+
+          <XAxis
+            interval={'preserveStartEnd'}
+            dataKey='fecha'
+            tick={{
+              fill: '#8D8D8D',
+              fontSize: 12,
+              fontWeight: 600,
+            }}
+            tickFormatter={(value) => value.slice(0, 3)}
+            tickMargin={16}
+            axisLine={{ display: 'none' }}
+            tickLine={{ display: 'none' }}
+          />
+
+          <CartesianGrid strokeDasharray='0' vertical={false} stroke='#EDEDED50' strokeWidth={2} />
+
+          <Tooltip
+            cursor={{ stroke: 'var(--primary)', strokeWidth: 2 }}
+            content={({ active, payload, label }) => {
+              if (active && payload && payload.length) {
+                return (
+                  <div className='rounded-xl border bg-white/70 px-4 py-2 shadow-lg backdrop-blur-sm'>
+                    <p className='text-sm font-normal'>{label}</p>
+                    {payload
+                      .map((data) => (
+                        <div
+                          key={data.dataKey}
+                          className='flex items-center gap-2'
+                        >
+                          <Dot className={clsx('-ml-2 -mr-1 stroke-[6]', {
+                            'text-primary': data.dataKey === 'Activo',
+                            'text-gray': data.dataKey === 'Inactivo',
+                            'text-violet': data.dataKey === 'Canjeado',
+                          })} />
+                          <p className='text-sm'>
+                            {data.name}: <span className='font-medium'>{data.value} qr</span>
+                          </p>
+                        </div>
+                      ))}
+                  </div>
+                )
+              }
+
+              return null
+            }}
+          />
+          <Area type='monotone' dataKey='Activo' stroke='#00E99E' strokeWidth={2} fillOpacity={1} fill='url(#colorActive)' />
+          <Area type='monotone' dataKey='Inactivo' stroke='#b3b3b3' strokeWidth={2} fillOpacity={1} fill='url(#colorInactive)' />
+          <Area type='monotone' dataKey='Canjeado' stroke='#444CF7' strokeWidth={2} fillOpacity={1} fill='url(#colorDestroyed)' />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   )
 }

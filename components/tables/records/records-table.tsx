@@ -16,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useDataTable } from '@/hooks/use-data-table'
 import { Button } from '@/components/ui/button'
 import { ArrowDownToLine, Box, Dot, MoreHorizontal, QrCode } from 'lucide-react'
 import { getRelativeTime } from '@/lib/timeago'
@@ -30,13 +29,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
-import { Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from '@/components/ui/drawer'
+import {
+  Pagination,
+  PaginationButton,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/ui/pagination'
 import DynamicModal from '@/components/modal/dynamic-modal'
 import GenerateQr from '@/components/generate-qr'
-import { getRandomValues } from 'crypto'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface RecordsTableProps {
   data: Record[]
@@ -52,6 +57,11 @@ export function RecordsTable({
   data,
   filter,
 }: RecordsTableProps) {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+
+  // OPEN DYNAMIC MODAL (QR SHOW)
   const [selected, setSelected] = React.useState<RecordSelected>({
     open: false,
   })
@@ -99,20 +109,49 @@ export function RecordsTable({
         header: 'Estatus',
         cell({ row }) {
           const status = row.original.status
+          const date = row.original.date.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })
+          const time = row.original.date.toLocaleTimeString('es-MX', { hour: 'numeric', minute: 'numeric' })
           return (
-            <Button
-              className={clsx('hover:bg-current/80 flex h-5 items-center p-2 text-[12px] font-medium', {
-                'bg-primary': status === 'active',
-                'bg-gray': status === 'inactive',
-                'bg-red text-white': status === 'destroyed',
-              })}
-            >
-              <Dot className='-ml-2 -mr-1' />
+            <TooltipProvider delayDuration={150}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    className={clsx('hover:bg-current/80 flex h-5 items-center p-2 text-[12px] font-medium', {
+                      'bg-primary': status === 'active',
+                      'bg-gray': status === 'inactive',
+                      'bg-violet text-white': status === 'destroyed',
+                    })}
+                  >
+                    <Dot className='-ml-2 -mr-1' />
 
-              {status === 'active' && 'Activo'}
-              {status === 'inactive' && 'Inactivo'}
-              {status === 'destroyed' && 'Destruido'}
-            </Button>
+                    {status === 'active' && 'Activo'}
+                    {status === 'inactive' && 'Inactivo'}
+                    {status === 'destroyed' && 'Canjeado'}
+                  </Button>
+
+                </TooltipTrigger>
+                <TooltipContent className='w-[280px] border bg-white/90 text-xs backdrop-blur-sm'>
+                  {status === 'active' && (
+                    <span>
+                      El producto fue activado el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                  {status === 'inactive' && (
+                    <span>
+                      El producto está inactivo desde el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                  {status === 'destroyed' && (
+                    <span>
+                      El producto fue escaneado/canjeado el <b className='font-semibold'>{date}</b>{' '}
+                      a las <b className='font-semibold'>{time}</b>
+                    </span>
+                  )}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )
         },
       },
@@ -142,7 +181,7 @@ export function RecordsTable({
                 onClick={() => {
                   setSelected({
                     ...row.original,
-                    open: true
+                    open: true,
                   })
                 }}
               >
@@ -168,16 +207,37 @@ export function RecordsTable({
         },
       },
     ],
-    [data]
+    []
   )
 
+  // PAGINATION
+  const itemsPerPage = 6
+  const currentPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1
+
+  const paginatedData = React.useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return data
+      .filter((item) => {
+        if (!filter) return item
+        return Object.entries(filter).every(([key, value]) => {
+          return item[key as keyof Record] === value
+        })
+      })
+      .slice(startIndex, endIndex)
+  }, [data, currentPage, filter])
+
+  const pageCount = Math.ceil(data.length / itemsPerPage)
+
+  const changePage = (newPage: number) => {
+    const params = new URLSearchParams(searchParams)
+    params.set('page', newPage.toString())
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
+  // DATA TABLE
   const table = useReactTable({
-    data: data.filter((item) => {
-      if (filter) {
-        return item.status === filter?.status
-      }
-      return true
-    }),
+    data: paginatedData,
     columns,
     getCoreRowModel: getCoreRowModel()
   })
@@ -233,19 +293,31 @@ export function RecordsTable({
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious className='!size-8 border p-0' href="" />
+              <PaginationPrevious
+                className='!size-8 border p-0'
+                onClick={() => changePage(currentPage - 1)}
+                disabled={currentPage === 1}
+              />
             </PaginationItem>
-            <PaginationItem>
-              <PaginationLink className='size-8 bg-primary hover:bg-primary/80' href="">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink className='size-8' href="">2</PaginationLink>
-            </PaginationItem>
+            {[...Array(pageCount)].map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationButton
+                  className={clsx('size-8', { 'bg-primary hover:bg-primary/80': index + 1 === currentPage })}
+                  onClick={() => changePage(index + 1)}
+                >
+                  {index + 1}
+                </PaginationButton>
+              </PaginationItem>
+            ))}
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext className='!size-8 border p-0' href="" />
+              <PaginationNext
+                className='!size-8 border p-0'
+                onClick={() => changePage(currentPage + 1)}
+                disabled={currentPage === pageCount}
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

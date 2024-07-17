@@ -1,10 +1,10 @@
 import { Back } from '@/components/ui/back'
-import { Producto, Qr } from '@prisma/client'
+import { Product, Qr } from '@prisma/client'
 import { headers } from 'next/headers'
 import Scanned from './scanned'
 
 type GetDataType = Qr & {
-    producto: Producto
+    producto: Product
 }
 
 interface Params {
@@ -35,7 +35,7 @@ export default async function ScannedProduct() {
           <Back className='absolute left-0' />
         </div>
       </div>
-      <Scanned {...qr} />
+      {/* <Scanned {...qr} /> */}
     </main>
   )
 }

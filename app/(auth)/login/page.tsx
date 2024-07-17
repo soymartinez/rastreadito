@@ -1,56 +1,153 @@
-import type { Metadata } from 'next'
-import { env } from '@/env.js'
+'use client'
 
-import { SignIn, SignInWhitGoogle, SignUp } from '@/components/auth'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useState } from 'react'
+import { Loader } from 'lucide-react'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
-export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  title: 'Inicia sesión',
-  description: 'Inicia sesión en tu cuenta',
-}
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+
+import { authLoginSchema } from '@/lib/validations/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { AuthError, User } from '@supabase/supabase-js'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/use-auth'
 
 export default function LoginPage() {
+  const router = useRouter()
+  const [isLoading, setLoading] = useState(false)
+  const { signInStore } = useAuth()
+
+  const form = useForm<z.infer<typeof authLoginSchema>>({
+    resolver: zodResolver(authLoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof authLoginSchema>) {
+    // const magicLink = async () => {
+    //   setLoading(true)
+    //   const { data, error } = await supabase.auth.signInWithOtp({
+    //     email: values.email,
+    //     options: {
+    //       shouldCreateUser: false,
+    //       emailRedirectTo: 'https://rastreadito.com/confirm'
+    //     }
+    //   })
+
+    //   toast.promise(() => {
+    //     if (error) return Promise.reject(error)
+    //     return Promise.resolve(data)
+    //   }, {
+    //     loading: 'Enviando código de verificación...',
+    //     success: 'Código de verificación enviado, revisa tu correo',
+    //     error: (error) => error.message,
+    //   })
+    //   setLoading(false)
+    // }
+
+    const signIn = async () => {
+      setLoading(true)
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      })
+      setLoading(false)
+
+      if (!res.ok) {
+        const error = await res.json()
+        throw new Error(error.error)
+      }
+
+      const user = await res.json() as User
+
+      signInStore(user.user_metadata.id)
+      router.refresh()
+      router.push('/')
+
+      return user
+    }
+
+    toast.promise(signIn(), {
+      loading: 'Iniciando sesión...',
+      success: 'Sesión iniciada',
+      error: (error: AuthError) => {
+        const message = error.message
+        switch (message) {
+        case 'Invalid login credentials':
+          return 'Credenciales inválidas o no hay una cuenta asociada a este correo electrónico.'
+        default:
+          return error.message
+        }
+      },
+    })
+  }
+
   return (
-    <section className='flex min-h-screen items-center justify-center px-4 py-16'>
-      <Tabs defaultValue='login' className='w-full max-w-md'>
-        <TabsContent value='login'>
+    <main className='flex min-h-screen items-center justify-center px-4'>
+      <div className='mx-auto w-full max-w-sm space-y-6'>
+        <div>
           <h1 className='text-center text-3xl font-semibold leading-normal'>Bienvenido</h1>
-          <h3 className='text-center font-semibold text-grayText'>Por favor ingrese sus datos</h3>
-        </TabsContent>
-        <TabsContent value='signup'>
-          <h1 className='text-center text-3xl font-semibold leading-normal'>Crear una cuenta</h1>
-          <h3 className='text-center font-semibold text-grayText'>Por favor ingrese sus datos</h3>
-        </TabsContent>
-        <TabsList className='mt-7 inline-flex w-full bg-primary p-1'>
-          <TabsTrigger
-            value='login'
-            className='w-full font-semibold text-dark/50 data-[state=active]:bg-white data-[state=active]:text-dark dark:text-dark/70 dark:data-[state=active]:bg-dark dark:data-[state=active]:text-white'>
-            Iniciar sesión
-          </TabsTrigger>
-          <TabsTrigger
-            value='signup'
-            className='w-full font-semibold text-dark/50 data-[state=active]:bg-white data-[state=active]:text-dark dark:text-dark/70 dark:data-[state=active]:bg-dark dark:data-[state=active]:text-white'>
-            Registrarse
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value='login'>
-          <SignIn />
-        </TabsContent>
-        <TabsContent value='signup'>
-          <SignUp />
-        </TabsContent>
-        <section>
-          <div className='my-8 flex items-center gap-6'>
-            <div className='h-px w-full rounded-full bg-primary' />
-            <span className='whitespace-nowrap font-medium text-grayText'>O Continúa con</span>
-            <div className='h-px w-full rounded-full bg-primary' />
-          </div>
-          <div className='flex items-center justify-center gap-4'>
-            <SignInWhitGoogle />
-          </div>
-        </section>
-      </Tabs>
-    </section>
+          <h3 className='text-center text-sm font-normal text-grayText'>Por favor, introduzca sus datos.</h3>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
+            <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required>Correo electrónico</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete='off'
+                      placeholder='hola@rastreadito.com'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='password'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required>Contraseña</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='password'
+                      placeholder='••••••••'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className='flex justify-end'>
+              <Link href='/registro' className='-mx-2 px-2 text-sm underline'>Registrate</Link>
+            </div>
+
+            <Button type='submit' className='!mt-6 w-full'>
+              {isLoading && <Loader size={20} className='mr-2 animate-spin' />}
+              Iniciar sesión
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </main>
   )
 }

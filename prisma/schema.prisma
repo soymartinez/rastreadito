@@ -8,169 +8,151 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Galeria {
-  id                 Int        @id @default(autoincrement())
-  nombre             String
-  descripcion        String?
-  fechaRegistro      DateTime   @default(now())
-  fechaActualizacion DateTime   @updatedAt
-  categoriaAcronimo  String?
-  usuario            String
-  url                String[]
-  categoria          Categoria? @relation(fields: [categoriaAcronimo], references: [acronimo])
-
-  @@map("galeria")
-}
-
-model Categoria {
-  id          Int        @id @default(autoincrement())
-  nombre      String
-  acronimo    String     @unique
-  descripcion String?
-  imagen      String
-  galeria     Galeria[]
-  productos   Producto[]
-
-  @@map("categoria")
-}
-
-model Equipo {
-  id                 Int      @id @default(autoincrement())
-  nombre             String
-  descripcion        String?
-  fechaRegistro      DateTime @default(now())
-  fechaActualizacion DateTime @updatedAt
-
-  @@map("equipo")
-}
-
-model Qr {
-  id                 Int      @id @default(autoincrement())
-  codigo             String?  @unique
-  valor              String?  @unique
-  estatus            Status   @default(inactive)
-  productoId         Int      @unique
-  fechaRegistro      DateTime @default(now())
-  fechaActualizacion DateTime @updatedAt
-  producto           Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
-
-  @@map("qr")
-}
-
-model Producto {
-  id                 Int       @id @default(autoincrement())
-  nombre             String
-  descripcion        String
-  categoria          String
-  cepa               String
-  thc                Float
-  cbd                Float
-  imagen             String[]
-  aroma              String
-  efecto             String
-  fabricante         String
-  pais               String
-  proveedor          String
-  precio             Float?
-  peso               Float?
-  fechaCosecha       DateTime?
-  fechaEnvasado      DateTime?
-  fechaCaducidad     DateTime?
-  lote               String?
-  certificado        String?
-  notas              String?
-  usuario            String
-  fechaRegistro      DateTime  @default(now())
-  fechaActualizacion DateTime  @updatedAt
-  categoria_         Categoria @relation(fields: [categoria], references: [acronimo], onDelete: Cascade)
-  qr                 Qr?
-
-  @@map("producto")
-}
-
 model User {
-  id            String             @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  name          String
-  last_name     String?
-  email         String             @unique
-  avatar        String?
-  bio           String?            @default("")
-  created_at    DateTime           @default(now()) @db.Timestamptz(6)
-  organizations UserOrganization[]
+  id                   String               @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name                 String
+  email                String               @unique
+  profile_picture      String?
+  created_at           DateTime             @default(now())
+  updated_at           DateTime             @updatedAt
+  role                 UserRole             @default(USER)
+  organization_members OrganizationMember[]
+  activities           Activity[]
 
   @@map("users")
 }
 
 model Organization {
-  id          String             @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  name        String
-  description String?
-  users       UserOrganization[]
-  created_at  DateTime           @default(now()) @db.Timestamptz(6)
+  id                String               @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name              String
+  description       String?
+  subscription_plan SubscriptionPlan
+  created_at        DateTime             @default(now())
+  updated_at        DateTime             @updatedAt
+  members           OrganizationMember[]
+  products          Product[]
+  rewards           Reward[]
+  subscription      Subscription?
 
   @@map("organizations")
 }
 
-model UserOrganization {
-  id             String       @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  role           Role
-  userId         String
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  user           User         @relation(fields: [userId], references: [id])
+model OrganizationMember {
+  id              String           @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  user_id         String
+  organization_id String
+  role            OrganizationRole @default(MEMBER)
+  joined_at       DateTime         @default(now())
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
 
-  @@map("userOrganizations")
-}
+  user         User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
 
-model Category {
-  id            String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  name          String
-  description   String?
-  icon          String?
-  subcategories Json[]   @db.Json
-  created_at    DateTime @default(now()) @db.Timestamptz(6)
-
-  @@map("categories")
-}
-
-model Gallery {
-  id          String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  name        String
-  description String?
-  url         String?
-  created_at  DateTime @default(now()) @db.Timestamptz(6)
-
-  @@map("galleries")
+  @@unique([user_id, organization_id])
+  @@map("organization_members")
 }
 
 model Product {
-  id          String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  name        String
-  description String?
-  images      String[]
-  qrs         Code?
-  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  id              String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  name            String
+  description     String?
+  category        String
+  organization_id String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  qrs             Qr[]
+
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
 
   @@map("products")
 }
 
-model Code {
+model Qr {
   id         String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
-  value      String
-  status     Status   @default(inactive)
-  products   Product  @relation(fields: [id], references: [id], onDelete: Cascade)
-  created_at DateTime @default(now()) @db.Timestamptz(6)
+  product_id String
+  code       String   @unique
+  status     QrStatus
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
 
   @@map("qrs")
 }
 
-enum Role {
-  admin
-  user
+model Reward {
+  id              String   @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  organization_id String
+  description     String?
+  points_required Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
+
+  @@map("rewards")
 }
 
-enum Status {
-  active
-  inactive
-  destroied
+model Activity {
+  id         String       @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  user_id    String
+  type       ActivityType
+  details    Json?
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
+
+model Subscription {
+  id              String             @id @default(dbgenerated("nanoid()")) @db.Char(12)
+  organization_id String             @unique
+  plan            SubscriptionPlan
+  status          SubscriptionStatus
+  start_date      DateTime
+  end_date        DateTime?
+  created_at      DateTime           @default(now())
+  updated_at      DateTime           @updatedAt
+
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+enum UserRole {
+  USER
+  SUPER_ADMIN
+}
+
+enum OrganizationRole {
+  ADMIN
+  MEMBER
+  EDITOR
+}
+
+enum QrStatus {
+  ACTIVE
+  INACTIVE
+  REDEEMED
+}
+
+enum ActivityType {
+  SCAN
+  REDEEM
+  TRANSFER
+}
+
+enum SubscriptionPlan {
+  HOBBY
+  PRO
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELLED
 }

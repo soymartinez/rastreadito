@@ -7,10 +7,9 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { AnimatePresence } from 'framer-motion'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
-import { ChevronsUpDown, Menu, PlusCircle } from 'lucide-react'
+import { ChevronsUpDown, ExternalLink, Menu, PlusCircle } from 'lucide-react'
 import { siteConfig } from '@/config/site'
 import { usePathname, useRouter } from 'next/navigation'
-import { User } from '@supabase/supabase-js'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
   DropdownMenu,
@@ -42,6 +41,7 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '../ui/drawer'
+import { useAuth } from '@/hooks/use-auth'
 
 const options = [
   {
@@ -72,26 +72,26 @@ const options = [
 
 interface NavbarProps {
   variant?: 'LANDING' | 'HOME'
-  user: User | null
 }
 
-export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
+export default function Navbar({ variant = 'LANDING' }: NavbarProps) {
   const supabase = createClient()
+  const { user, isLoading, signOut } = useAuth()
 
   const pathname = usePathname()
   const router = useRouter()
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setActive] = useState(false)
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 640px)')
 
   useEffect(() => {
-    if (isActive) setIsActive(false)
+    if (isActive) setActive(false)
   }, [pathname])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
       if (event.keyCode === 27) {
-        setIsActive(false)
+        setActive(false)
       }
     }
 
@@ -106,7 +106,7 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
     <nav className='sticky top-0 z-50 bg-white/60 backdrop-blur-md dark:bg-dark/60'>
       <div className='relative mx-auto flex h-16 max-w-full items-center justify-between px-4'>
         <div className='flex items-center gap-3'>
-          <Link href='/' className='z-10 -mx-0.5 hidden p-0.5 text-2xl font-black uppercase italic sm:block'>
+          <Link href='/' className='z-10 -mx-0.5 p-0.5 text-2xl font-black uppercase italic'>
             rastreadito
           </Link>
 
@@ -256,17 +256,17 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
         )}
 
         <div className='z-50'>
-          {user
+          {user && !isLoading
             ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className='hidden mid:block'>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>{user.user_metadata.name}</AvatarFallback>
+                    <AvatarImage src='' alt="@shadcn" />
+                    <AvatarFallback className='bg-primary'></AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align='end'>
-                  <DropdownMenuLabel>{user.user_metadata.name}</DropdownMenuLabel>
+                  <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem onClick={() => router.push('/account')}>
@@ -307,11 +307,20 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>GitHub</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => router.push('/home')}
+                  >
+                    Inicio
+                    <DropdownMenuShortcut>
+                      <ExternalLink className='size-4' />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
                   <DropdownMenuItem disabled>API</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={async () => {
                       await supabase.auth.signOut()
+                      signOut()
                       router.refresh()
                     }}
                   >
@@ -320,7 +329,7 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
+            ) : !isLoading && (
               <div className='hidden items-center gap-2 mid:flex'>
                 <Link
                   href='/login'
@@ -332,7 +341,7 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
                   Iniciar sesión
                 </Link>
                 <Link
-                  href='/register'
+                  href='/registro'
                   className={clsx(buttonVariants({
                     size: 'sm',
                     className: 'px-4 h-[30px] !font-medium !bg-darkText !text-white',
@@ -345,7 +354,7 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
         </div>
 
         <Button
-          onClick={() => setIsActive(!isActive)}
+          onClick={() => setActive(!isActive)}
           className='h-min rounded-sm bg-transparent !p-1 hover:bg-darkText/5 mid:hidden'
         >
           <Menu className='size-7' />
@@ -354,7 +363,7 @@ export default function Navbar({ user, variant = 'LANDING' }: NavbarProps) {
 
       {/* MENU */}
       <AnimatePresence mode='wait'>
-        {isActive && <NavbarMenu user={user} setIsActive={setIsActive} />}
+        {isActive && <NavbarMenu setActive={setActive} />}
       </AnimatePresence>
     </nav >
   )

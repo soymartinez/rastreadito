@@ -1,6 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 
 import { siteConfig } from '@/config/site'
@@ -8,17 +10,21 @@ import { X } from 'lucide-react'
 import clsx from 'clsx'
 
 import { Button, buttonVariants } from '../ui/button'
-import { User } from '@supabase/supabase-js'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { SignOut } from '../auth'
+import { createClient } from '@/utils/supabase/client'
+import { useAuth } from '@/hooks/use-auth'
 
 interface NavbarMenuProps {
-  user: User | null
-  setIsActive: (value: boolean) => void
+  setActive: (value: boolean) => void
 }
 
-export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
+export default function NavbarMenu({ setActive }: NavbarMenuProps) {
   const pathname = usePathname()
+  const supabase = createClient()
+  const router = useRouter()
+  const { user, signOut } = useAuth()
+
+
   const [selectedIndicator, setSelectedIndicator] = useState(pathname)
 
   return (
@@ -95,7 +101,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
 
               <div className='flex items-center'>
                 <Button
-                  onClick={() => setIsActive(false)}
+                  onClick={() => setActive(false)}
                   className='h-min rounded-sm bg-transparent !p-1 !outline-white'
                 >
                   <X className='size-7' />
@@ -113,7 +119,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
                   data={{ ...data, index }}
                   isActive={selectedIndicator == data.href}
                   setSelectedIndicator={setSelectedIndicator}
-                  setIsActive={setIsActive}
+                  setActive={setActive}
                 ></LinkMenu>
               )
             })}
@@ -128,7 +134,7 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
                 }}
                 isActive={selectedIndicator == '/account'}
                 setSelectedIndicator={setSelectedIndicator}
-                setIsActive={setIsActive}
+                setActive={setActive}
               ></LinkMenu>
             )}
           </div>
@@ -153,29 +159,44 @@ export default function NavbarMenu({ user, setIsActive }: NavbarMenuProps) {
 
                 <Button
                   size='sm'
-                  onClick={SignOut}
+                  onClick={async () => {
+                    await supabase.auth.signOut()
+                    signOut()
+                    setActive(false)
+                    router.refresh()
+                  }}
                 >Cerrar sesión</Button>
               </div>
             ) : (
               <div className='flex items-center justify-center gap-3'>
-                <Link
-                  href='/login'
+                <Button
+                  onClick={() => {
+                    setActive(false)
+                    setTimeout(() => {
+                      router.push('/login')
+                    }, 800)
+                  }}
                   className={clsx(buttonVariants({
                     size: 'sm',
                     className: '!text-sm px-4 h-[30px] !font-medium bg-transparent hover:bg-black/5'
                   }))}
                 >
                   Iniciar sesión
-                </Link>
-                <Link
-                  href='/register'
+                </Button>
+                <Button
+                  onClick={() => {
+                    setActive(false)
+                    setTimeout(() => {
+                      router.push('/register')
+                    }, 800)
+                  }}
                   className={clsx(buttonVariants({
                     size: 'sm',
                     className: 'px-4 h-[30px] !font-medium !bg-darkText !text-white',
                   }))}
                 >
                   Registrate
-                </Link>
+                </Button>
               </div>
             )}
         </div>
@@ -228,7 +249,7 @@ function LinkMenu(props: {
   },
   isActive: boolean,
   setSelectedIndicator: React.Dispatch<React.SetStateAction<string>>
-  setIsActive: (value: boolean) => void
+  setActive: (value: boolean) => void
 }) {
   const { title, href, index } = props.data
   return (
@@ -239,7 +260,7 @@ function LinkMenu(props: {
         items-center
       '
       onMouseEnter={() => { props.setSelectedIndicator(href) }}
-      onClick={() => props.setIsActive(false)}
+      onClick={() => props.setActive(false)}
       custom={index}
       variants={slide}
       initial="initial"
