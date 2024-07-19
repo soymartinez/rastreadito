@@ -114,7 +114,7 @@ export function RecordsTable({
           return (
             <TooltipProvider delayDuration={150}>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <Button
                     className={clsx('hover:bg-current/80 flex h-5 items-center p-2 text-[12px] font-medium', {
                       'bg-primary': status === 'active',
